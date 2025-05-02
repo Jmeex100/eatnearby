@@ -1,22 +1,24 @@
 module.exports = {
-  darkMode: 'class', // or 'media' for system preference
+  darkMode: 'class',
   content: [
     './sim/templates/**/*.html',
-    './sim/static/js/**/*.js',
     './auths/templates/**/*.html',
-    './auths/static/js/**/*.js',
-    './cart/templates/**/*.html', // Added cart templates
-    './cart/static/js/**/*.js',
-    './templates/**/*.html', // Include the base templates directory
-    './templates/js/**/*.js',
-    './**/templates/**/*.html', // Catch all templates in subdirectories
-    './**/static/js/**/*.js', // Catch all js in subdirectories
-    './**/static/css/**/*.css', // In case you have tailwind classes in css files
-    './*.html', // if you have html files in root
-    './*.js', // if you have js files in root
+    './cart/templates/**/*.html',
+    './templates/**/*.html',
+    './**/*.html',
+    './**/*.js',
+    './**/static/css/**/*.css'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'food-orange': '#FF6B35',
+        'food-green': '#4CAF50',
+        'food-cream': '#FFF8E1',
+        'food-dark': '#1A3C34',
+        'food-gray': '#4A5568'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

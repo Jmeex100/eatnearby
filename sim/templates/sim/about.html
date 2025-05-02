@@ -1,102 +1,249 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}About Us{% endblock %}
 
+{% block head %}
+<!-- Tailwind CSS CDN with custom configuration -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'food-orange': '#FF6B35',
+                    'food-green': '#4CAF50',
+                    'food-cream': '#FFF8E1',
+                    'food-dark': '#1A3C34',
+                    'food-gray': '#4A5568',
+                },
+            },
+        },
+    };
+</script>
+<!-- Animate.css CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-food-cream bg-opacity-10 rounded-md">
     <!-- About Us Section -->
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 my-10 text-center ">About Us</h1>
-    <p class="text-gray-700 mb-4">
-        Welcome to Eat-NEAR-BY! We are committed to offering top-quality dining experiences in your neighborhood. Our mission is to bring you delicious, freshly prepared meals while supporting local communities and practicing sustainability.
-    </p>
-    <p class="text-gray-700 mb-4">
-        Since our inception, we have focused on creating a place where food lovers can enjoy a wide variety of dishes made from the finest ingredients. Whether you're craving something hearty or something light, we've got you covered.
-    </p>
-    <p class="text-gray-700 mb-8">
-        At Eat-NEAR-BY, we prioritize sustainable sourcing, minimizing waste, and maintaining the highest standards of service. We invite you to be a part of our journey as we continue to serve and grow in our community.
-    </p>
-
-    <!-- Message from the CEO -->
-    <div class="mb-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">A Message from Our CEO</h2>
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <p class="text-gray-700 mb-4">
-                "At Eat-NEAR-BY, our goal is to create a dining experience that goes beyond just a meal. We aim to build a community around our food, where every dish tells a story and every customer feels like part of our family. Our commitment to quality, service, and sustainability is at the core of everything we do. Thank you for being a part of our journey."
+    <div class="text-center m-8 mb-12">
+        <h1 class="text-3xl my-10 md:text-4xl font-bold text-food-dark mb-6 mt-10 animate__animated animate__fadeInUp">
+            About <span class="text-food-orange">Eat</span><span class="text-green-500">Nearby</span>
+        </h1>
+        <div class="max-w-3xl mx-auto">
+            <p class="text-food-gray mb-4 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-1s">
+                Welcome to <strong class="text-food-dark">Eat Nearby</strong> – your digital bridge between hungry customers and local restaurants. We are a web-based food ordering platform focused on connecting diners with nearby eateries while fostering community-driven engagement.
             </p>
-            <p class="text-right text-gray-800 font-semibold">- CEO, John Doe</p>
-        </div>
-    </div>
-
-    <!-- Goals Section -->
-    <div class="mb-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Our Business Goals</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Excellence in Service</h3>
-                <p class="text-gray-700">We aim to provide an unparalleled dining experience through attentive service, welcoming environments, and a dedication to customer satisfaction.</p>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Community Engagement</h3>
-                <p class="text-gray-700">Our business thrives on strong community ties. We support local farmers, engage in community events, and foster relationships with our customers.</p>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Innovation in Cuisine</h3>
-                <p class="text-gray-700">Our chefs are constantly exploring new culinary techniques and ingredients to bring innovative and exciting dishes to our menu.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Top Customers Section -->
-    <div class="mb-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Top Customers</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white shadow-md rounded-lg p-6 text-center">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">John Doe</h3>
-                <p class="text-gray-700">"Eat-NEAR-BY is my favorite restaurant! The food is always delicious, and the service is top-notch. I highly recommend it to anyone looking for a great dining experience."</p>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6 text-center">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Jane Smith</h3>
-                <p class="text-gray-700">"The variety on the menu is fantastic. Every dish I've tried has been full of flavor and beautifully presented."</p>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6 text-center">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Mike Johnson</h3>
-                <p class="text-gray-700">"I appreciate the focus on sustainability at Eat-NEAR-BY. It's great to know that the food I'm enjoying is also good for the planet."</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Testimonials Section -->
-    <div class="mb-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <p class="text-gray-700 italic mb-4">"Eat-NEAR-BY offers a dining experience like no other. The food is consistently excellent, and the atmosphere is perfect for a relaxing meal."</p>
-                <p class="text-right text-gray-800 font-semibold">- Sarah Williams</p>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <p class="text-gray-700 italic mb-4">"I love coming here with my family. The kids enjoy the food just as much as we do, and the service is always friendly and accommodating."</p>
-                <p class="text-right text-gray-800 font-semibold">- David Lee</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms and Conditions Section -->
-    <div class="mb-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Terms and Conditions</h2>
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <p class="text-gray-700 mb-4">
-                By dining at Eat-NEAR-BY, you agree to our terms and conditions. We are committed to ensuring a pleasant and safe dining experience for all our customers. Please be aware of the following:
+            <p class="text-food-gray mb-4 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-2s">
+                Inspired by the vibrant food scene around Evelyn Hone College, Eat Nearby was created to simplify food ordering, enhance customer loyalty, and provide clear, accessible information about local dining options.
             </p>
-            <ul class="list-disc list-inside text-gray-700 mb-4">
-                <li>Reservations are recommended, especially during peak hours, to ensure availability.</li>
-                <li>Allergies: Please inform your server of any food allergies or dietary restrictions. We will do our best to accommodate your needs.</li>
-                <li>Returns and Refunds: Food and beverage purchases are final. If you are not satisfied with your meal, please let us know, and we will make it right.</li>
-                <li>Privacy: Your personal information is kept confidential and used only for purposes of providing the best service possible.</li>
+            <p class="text-food-gray mb-8 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-3s">
+                Our system supports mobile-friendly access, AI-powered restaurant recommendations, and multiple payment options including Cash, Mobile Money, and cards. With real-time location mapping and user reviews, Eat Nearby is redefining the dining experience.
+            </p>
+        </div>
+    </div>
+
+    <!-- Mission and Objectives Section -->
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- Our Mission -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+                <div class="p-2 rounded-full bg-food-orange bg-opacity-20 mr-4">
+                    <svg class="w-6 h-6 text-food-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-food-dark">Our Mission</h2>
+            </div>
+            <p class="text-food-gray pl-12">
+                To empower restaurants with a stronger online presence and create a trusted community where food lovers can connect, explore, and engage. We aim to simplify the ordering process and enhance customer retention through a tech-driven, user-centric platform.
+            </p>
+        </div>
+
+        <!-- Our Objectives -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+                <div class="p-2 rounded-full bg-food-green bg-opacity-20 mr-4">
+                    <svg class="w-6 h-6 text-food-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-food-dark">Our Objectives</h2>
+            </div>
+            <ul class="list-none space-y-2 text-food-gray pl-12">
+                <li class="flex items-start">
+                    <span class="text-food-green mr-2">✓</span>
+                    <span>Create an intuitive web platform showcasing restaurant locations</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-food-green mr-2">✓</span>
+                    <span>Integrate Google Maps for real-time navigation</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-food-green mr-2">✓</span>
+                    <span>Facilitate customer engagement through reviews</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-food-green mr-2">✓</span>
+                    <span>Support seamless multi-method payment gateways</span>
+                </li>
             </ul>
-            <p class="text-gray-700">
-                For full terms and conditions, please visit our website or contact us directly.
-            </p>
+        </div>
+    </div>
+
+    <!-- Core Features Section -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-food-dark mb-8 text-center">Core Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Feature 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-food-orange mb-4">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-food-dark mb-3">Restaurant Discovery</h3>
+                <p class="text-food-gray">Easily find nearby restaurants with our integrated map and detailed business profiles.</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-food-green mb-4">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-food-dark mb-3">Community Engagement</h3>
+                <p class="text-food-gray">Build connections through reviews, shared experiences, and digital loyalty interactions.</p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div class="text-food-orange mb-4">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-food-dark mb-3">Smart Personalization</h3>
+                <p class="text-food-gray">Receive tailored restaurant suggestions through AI-powered recommendations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security and Payments Section -->
+    <div class="mb-12 bg-gradient-to-r from-food-cream to-white p-8 rounded-lg">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-food-dark mb-6 text-center">Security & Payment Options</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-food-gray mb-6 text-lg">
+                        Eat Nearby prioritizes data protection and secure transactions. We employ Python-based security measures to safeguard user information and payment processes.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-food-green bg-opacity-10 text-food-green px-4 py-2 rounded-full text-sm font-medium">Cash on Delivery</span>
+                        <span class="bg-food-orange bg-opacity-10 text-food-orange px-4 py-2 rounded-full text-sm font-medium">Mobile Money</span>
+                        <span class="bg-food-dark bg-opacity-10 text-food-dark px-4 py-2 rounded-full text-sm font-medium">Card Payments</span>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2451/2451981.png" alt="Secure Payments" class="w-48 h-48 object-contain">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-food-dark mb-8 text-center">Meet The Team</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Team Member 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+                    <img src="{% static 'images/people/ceo.png' %}" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-semibold text-food-dark">Sarah Lungu</h3>
+                <p class="text-food-orange text-sm mb-2">CEO & Founder</p>
+                <p class="text-food-gray text-sm">Food tech enthusiast with 10+ years in the industry</p>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+                    <img src="{% static 'images/people/richard.png' %}" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-food-dark">Richman Mushanga</h3>
+                <p class="text-food-orange text-sm mb-2">CTO</p>
+                <p class="text-food-gray text-sm">Full-stack developer and security expert</p>
+            </div>
+            
+            <!-- Team Member 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+                    <img src="{% static 'images/people/judth.png' %}" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-semibold text-food-dark">judth banda</h3>
+                <p class="text-food-orange text-sm mb-2">Marketing Director</p>
+                <p class="text-food-gray text-sm">Digital marketing and community growth specialist</p>
+            </div>
+            
+            <!-- Team Member 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+                    <img src="{% static 'images/people/richard2.png' %}" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-semibold text-food-dark">David Mwila</h3>
+                <p class="text-food-orange text-sm mb-2">Product Manager</p>
+                <p class="text-food-gray text-sm">UX designer and product development lead</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center my-12 bg-food-dark p-8 rounded-lg">
+        <h2 class="text-2xl font-bold text-white mb-4">Join Our Community</h2>
+        <p class="text-food-cream mb-6 max-w-2xl mx-auto">
+            Whether you're a restaurant owner or a food enthusiast, Eat Nearby is here to enhance your culinary experience. Join us and be a part of a growing digital food community.
+        </p>
+        <div class="flex justify-center space-x-4">
+            <a href="#" class="bg-food-orange hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300 inline-flex items-center">
+                <span>For Restaurants</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+            <a href="#" class="bg-white hover:bg-gray-100 text-food-dark font-semibold py-3 px-6 rounded-full transition duration-300 inline-flex items-center">
+                <span>For Customers</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Custom list bullet styling */
+    .list-none li::before {
+        content: '🍴';
+        position: absolute;
+        left: 0;
+        top: 0.25rem;
+    }
+
+    /* Gradient text for h1 */
+    h1 {
+        background: linear-gradient(to right, #FF6B35, #4CAF50);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    /* Smooth transitions */
+    .transition-all {
+        transition-property: all;
+    }
+</style>
 {% endblock %}
