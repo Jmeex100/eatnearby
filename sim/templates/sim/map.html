@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Eat Nearby - Our Location{% endblock %}
+
+{% block content %}
+
+<div class="min-h-screen py-10 bg-gray-50">
+    <!-- Hero Section with Map -->
+    <section class="bg-gray-100 py-12">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold my-10 text-gray-800 text-center mb-6">Our Location</h1>
+            <p class="text-lg text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+                Visit us at Eat Nearby, conveniently located in the heart of Lusaka. Explore the map below to find us or get directions!
+            </p>
+
+            <!-- Embedded Google Map -->
+            <div class="flex justify-center">
+                <iframe
+                    class="w-full max-w-4xl h-96 md:h-[500px] rounded-lg shadow-lg"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.757146158556!2d28.2823938!3d-15.4210035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x23c7bcf1ea663c57!2sEvelyn%20Hone%20College%20of%20Applied%20Arts%20and%20Commerce!5e0!3m2!1sen!2szm!4v1646479493326!5m2!1sen!2szm"
+                    style="border:0;"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Details Section -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">Visit Us</h2>
+            <div class="space-y-4 text-gray-700">
+                <p><strong class="font-medium">Address:</strong> ZRA Road, Lusaka, Zambia</p>
+                <p><strong class="font-medium">Phone:</strong> <a href="tel:+260211123456" class="text-blue-500 hover:underline">+260 211 123 456</a></p>
+                <p><strong class="font-medium">Email:</strong> <a href="mailto:reservations@eatnearby.com" class="text-blue-500 hover:underline">reservations@eatnearby.com</a></p>
+            </div>
+
+            <!-- Opening Hours -->
+            <div class="mt-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Opening Hours</h3>
+                <ul class="text-gray-700 space-y-2">
+                    <li><span class="font-medium">Monday - Friday:</span> 10:00 AM - 10:00 PM</li>
+                    <li><span class="font-medium">Saturday:</span> 11:00 AM - 11:00 PM</li>
+                    <li><span class="font-medium">Sunday:</span> 11:00 AM - 9:00 PM</li>
+                </ul>
+            </div>
+
+            <!-- Directions Button -->
+            <div class="mt-8 flex justify-center">
+                <a href="https://www.google.com/maps/dir//Evelyn+Hone+College+of+Applied+Arts+and+Commerce,+Lusaka,+Zambia" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                    Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+<footer class="bg-gray-800 text-white py-8 mt-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- About Section -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Eat Nearby</h3>
+                <p class="text-gray-400">
+                    Enjoy delicious meals in the heart of Lusaka. We’re here to serve you with the best dining experience.
+                </p>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="{% url 'home' %}" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="{% url 'menu' %}" class="text-gray-400 hover:text-white transition">Menu</a></li>
+                    <li><a href="{% url 'location' %}" class="text-gray-400 hover:text-white transition">Location</a></li>
+                    <li><a href="{% url 'contact' %}" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                <p class="text-gray-400">ZRA Road, Lusaka, Zambia</p>
+                <p class="text-gray-400">Phone: <a href="tel:+260211123456" class="hover:text-white">+260 211 123 456</a></p>
+                <p class="text-gray-400">Email: <a href="mailto:reservations@eatnearby.com" class="hover:text-white">reservations@eatnearby.com</a></p>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-gray-400">
+            &copy; {% now "Y" %} Eat Nearby. All rights reserved.
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold my-10 text-gray-800 mb-6">Your Shopping Cart</h1>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-{{ message.tags }}-100 border-{{ message.tags }}-500 text-{{ message.tags }}-700 p-4 mb-4 rounded" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <div class="bg-white shadow-md rounded-lg p-6">
+        {% for item in items %}
+        <div class="cart-item flex items-center justify-between py-4 border-b" data-item-id="{{ item.product.product_id }}">
+            <div class="flex items-center">
+                <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="w-16 h-16 object-cover mr-4">
+                <div>
+                    <h3 class="text-lg font-semibold">{{ item.product.name }}</h3>
+                    <p class="text-gray-600">Quality: {{ item.quality|title }}</p>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <span class="quantity mr-4">Qty: {{ item.quantity }}</span>
+                <span class="subtotal mr-4">K{{ item.subtotal }}</span>
+                <a href="{% url 'remove_from_cart' item.product.product_id %}" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-500">Remove</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-gray-600">Your cart is empty</p>
+        {% endfor %}
+        
+        {% if items %}
+        <div class="mt-6 text-right">
+            <p class="text-xl font-bold">Total Items: {{ total_items }}</p>
+            <p class="text-xl font-bold">Total: K{{ total_price }}</p>
+            <a href="{% url 'orders' %}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500">Continue Shopping</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

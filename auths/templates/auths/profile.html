@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Eat Nearby - My Profile{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <h1 class="text-3xl md:text-4xl font-bold my-10 text-gray-800 mb-8 text-center">My Profile</h1>
+
+        <!-- Profile Card -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="flex flex-col items-center mb-6">
+                <!-- Profile Image or Initials -->
+                {% if user.image and user.image.url != '/media/auths/images/empty.png' %}
+                    <img 
+                        src="{{ user.image.url }}" 
+                        alt="Profile Image" 
+                        style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;"
+                        onmouseover="this.style.transform='scale(1.05)'"
+                        onmouseout="this.style.transform='scale(1)'"
+                    >
+                {% else %}
+                    <div 
+                        style="width: 100px; height: 100px; background-color: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #4b5563; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;"
+                        onmouseover="this.style.transform='scale(1.05)'"
+                        onmouseout="this.style.transform='scale(1)'"
+                    >
+                        {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                    </div>
+                    <a href="{% url 'settings' %}" style="margin-top: 8px; color: #2563eb; text-decoration: underline; font-size: 0.875rem;">Add Profile Image</a>
+                {% endif %}
+                <!-- User Name and Type -->
+                <h2 style="margin-top: 16px; font-size: 1.5rem; font-weight: 600; color: #1f2937;">{{ full_name }}</h2>
+                <p style="color: #4b5563; font-size: 1.125rem;">{{ user_type }}</p>
+            </div>
+
+            <!-- User Details -->
+            <div style="display: flex; flex-direction: column; gap: 16px; color: #374151;">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email|default:"Not provided" }}</p>
+                <p><strong>Gender:</strong> {{ gender_prefix|default:"Not specified" }}</p>
+                <p><strong>Phone Number:</strong> {{ user.phone_number|default:"Not provided" }}</p>
+                <p><strong>Joined:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+            </div>
+
+            <!-- Edit Settings Button -->
+            <div style="margin-top: 32px; text-align: center;">
+                <a 
+                    href="{% url 'settings' %}" 
+                    style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease, box-shadow 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='#1d4ed8'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.15)'"
+                    onmouseout="this.style.backgroundColor='#2563eb'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)'"
+                >
+                    Edit Settings
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

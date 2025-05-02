@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 pt-16 pb-8">
+    <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Your Shopping Cart</h1>
+        
+        <div class="bg-white shadow-sm rounded-lg overflow-hidden">
+            {% if cart_items %}
+            <!-- Cart Items -->
+            <div class="divide-y divide-gray-100">
+                {% for item in cart_items %}
+                <div class="cart-item p-4" data-item-id="{{ item.id }}">
+                    <div class="flex items-start justify-between gap-3">
+                        <!-- Product Image -->
+                        <img src="{{ item.get_product.image_url }}" alt="{{ item.get_product.name }}" 
+                             class="w-16 h-16 object-cover rounded-md border border-gray-200 flex-shrink-0">
+                        
+                        <!-- Product Details -->
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-medium text-gray-900 truncate">{{ item.get_product.name }}</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">K{{ item.get_product.price|floatformat:2 }}</p>
+                            
+                            <!-- Quantity Controls -->
+                            <div class="mt-2 flex items-center">
+                                <button class="quantity-btn w-6 h-6 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 
+                                            flex items-center justify-center" 
+                                        data-action="decrement" data-item-id="{{ item.id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                    </svg>
+                                </button>
+                                <input type="number" class="quantity w-10 text-center border-0 bg-transparent text-sm font-medium text-gray-900 mx-1" 
+                                       value="{{ item.quantity }}" min="1" data-item-id="{{ item.id }}">
+                                <button class="quantity-btn w-6 h-6 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 
+                                            flex items-center justify-center" 
+                                        data-action="increment" data-item-id="{{ item.id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Subtotal and Remove -->
+                        <div class="flex flex-col items-end ml-2">
+                            <span class="subtotal text-sm font-medium text-gray-900">K{{ item.subtotal|floatformat:2 }}</span>
+                            <a href="{% url 'cart:remove_from_cart' item.id %}" class="mt-2 text-red-500 hover:text-red-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="p-4 border-t border-gray-100 bg-gray-50">
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Subtotal</span>
+                        <span class="text-sm font-medium text-gray-900">K{{ total|floatformat:2 }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-base font-bold text-gray-900">Total</span>
+                        <span class="text-base font-bold text-gray-900" id="cart-total">K{{ total|floatformat:2 }}</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-3">
+                    <a href="{% url 'orders' %}" 
+                       class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-center">
+                        Continue Shopping
+                    </a>
+                    <a href="{% url 'payments:checkout' %}" 
+                       class="block w-full px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-center">
+                        Proceed to Checkout
+                    </a>
+                </div>
+            </div> 
+            {% else %}
+            <!-- Empty Cart -->
+            <div class="p-8 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <p class="mt-2 text-sm text-gray-600">Your cart is empty</p>
+                <a href="{% url 'orders' %}" 
+                   class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Start Shopping
+                </a>
+            </div>
+            {% endif %}
+        </div> 
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Function to update cart via AJAX
+    function updateCart(itemId, quantity) {
+        $.ajax({
+            url: '{% url "cart:update_cart" %}',
+            method: 'POST',
+            data: JSON.stringify({
+                item_id: itemId,
+                quantity: quantity
+            }),
+            contentType: 'application/json',
+            headers: {'X-CSRFToken': '{{ csrf_token }}'},
+            success: function(response) {
+                if (response.success) {
+                    if (quantity <= 0) {
+                        $(`.cart-item[data-item-id="${itemId}"]`).remove();
+                    } else {
+                        $(`.cart-item[data-item-id="${itemId}"] .subtotal`).text('K' + response.subtotal.toFixed(2));
+                    }
+                    $('#cart-total').text('K' + response.cart_total.toFixed(2));
+                    
+                    // If cart is empty, show empty cart message
+                    if (response.cart_count === 0) {
+                        $('.bg-white').html(`
+                            <div class="p-8 text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <p class="mt-2 text-sm text-gray-600">Your cart is empty</p>
+                                <a href="{% url 'orders' %}" 
+                                   class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    Start Shopping
+                                </a>
+                            </div>
+                        `);
+                    }
+                }
+            }
+        });
+    }
+
+    // Handle increment/decrement buttons
+    $('.quantity-btn').click(function() {
+        const itemId = $(this).data('item-id');
+        const action = $(this).data('action');
+        const $quantityInput = $(`.quantity[data-item-id="${itemId}"]`);
+        let quantity = parseInt($quantityInput.val());
+
+        if (action === 'increment') {
+            quantity += 1;
+        } else if (action === 'decrement' && quantity > 1) {
+            quantity -= 1;
+        }
+
+        $quantityInput.val(quantity);
+        updateCart(itemId, quantity);
+    });
+
+    // Handle direct input changes
+    $('.quantity').change(function() {
+        const itemId = $(this).data('item-id');
+        let quantity = parseInt($(this).val());
+        if (quantity >= 1) {
+            updateCart(itemId, quantity);
+        } else {
+            $(this).val(1); // Reset to minimum if invalid
+        }
+    });
+});
+</script>
+{% endblock %}

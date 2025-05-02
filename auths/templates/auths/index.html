@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body class="bg-gray-100">
+    <!-- Slideshow -->
+    <div class="relative">
+        <div class="absolute inset-0">
+            <img id="slideshowImage" class="w-full h-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105" src="{{ restaurant_photos.0 }}" alt="Slideshow Image">
+        </div>
+        <div class="relative bg-gray-900 text-white bg-opacity-50 text-center py-12">
+            <h1 id="typingText" class="text-4xl font-bold transition-colors duration-300 ease-in-out mt-8">
+                <span></span> <!-- Placeholder for typing effect -->
+            </h1>
+            <hr class="mt-4 border-t-2 border-white w-1/2 mx-auto">
+            <p class="mt-4 text-lg hover:text-yellow-200 transition-colors duration-300 ease-in-out">Discover our delicious menu and enjoy a wonderful dining experience.</p>
+        </div>
+    </div>
+
+    <!-- Order Now Button -->
+    <div class="flex justify-center items-center mt-3">
+        <a href="{% url 'orders' %}" class="hidden md:inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300">Order Now</a>
+    </div>
+
+    <!-- Restaurant Photos -->
+    <hr class="mt-4 border-t-2 border-white w-1/2 mx-auto">
+    <div class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-white mb-6 rounded text-center hover:text-blue-500 transition-colors duration-300 p-3 bg-gray-700 ease-in-out">Discover Our Restaurant</h2>
+        <hr class="mt-4 mb-6 border-t-2 border-gray-300 w-1/2 mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {% for photo in restaurant_photos %}
+            <div class="relative group">
+                <img class="w-full h-48 object-cover rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out hover:scale-105" src="{{ photo }}" alt="Restaurant Photo">
+                <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-center justify-center">
+                    <p class="text-white text-lg">Order This</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Fast Food Photos -->
+    <div class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-white mb-6 rounded text-center hover:text-blue-500 transition-colors duration-300 p-3 bg-gray-700 ease-in-out">Our Fast Food</h2>
+        <hr class="mt-4 mb-6 border-t-2 border-gray-300 w-1/2 mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {% for photo in fastfood_photos %}
+            <div class="relative group">
+                <img class="w-full h-48 object-cover rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out hover:scale-105" src="{{ photo }}" alt="Fast Food Photo">
+                <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-center justify-center">
+                    <p class="text-white text-lg">Order This</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Drinks Photos -->
+    <div class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-white mb-6 rounded text-center hover:text-blue-500 transition-colors duration-300 p-3 bg-gray-700 ease-in-out">Our Drinks</h2>
+        <hr class="mt-4 mb-6 border-t-2 border-gray-300 w-1/2 mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {% for photo in drinks_photos %}
+            <div class="relative group">
+                <img class="w-full h-48 object-cover rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out hover:scale-105" src="{{ photo }}" alt="Drink Photo">
+                <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-center justify-center">
+                    <p class="text-white text-lg">Order This</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Join Us Section -->
+    <div class="bg-gradient-to-r from-blue-100 via-blue-200 to-blue-100 shadow-md rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-bold text-white mb-6 rounded text-center hover:text-blue-500 transition-colors duration-300 p-3 bg-gray-700 ease-in-out">How to Join or Contact Us</h2>
+        <p class="text-gray-700 mb-4 text-center">
+            Interested in becoming a part of Eat-NEAR-BY? <br>
+            <span class='text-black-50'>Here's how you can get started</span>
+        </p>
+        <ol class="list-decimal list-inside text-gray-700 mb-4">
+            <li class="relative pl-14">
+                <div class="absolute left-0 top-1/2 transform -translate-y-1/2 h-10 w-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-md">
+                    1
+                </div><br><br>
+                <span class="ml-12">Contact us through any of the channels listed above—phone, WhatsApp, email, or visit us in person.</span>
+            </li>
+            <li class="relative pl-14 mt-4">
+                <div class="absolute left-0 top-1/2 transform -translate-y-1/2 h-10 w-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-md">
+                    2
+                </div><br><br>
+                <span class="ml-12">Speak with one of our staff members to express your interest in joining or learning more about our services.</span>
+            </li>
+            <li class="relative pl-14 mt-4">
+                <div class="absolute left-0 top-1/2 transform -translate-y-1/2 h-10 w-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-md">
+                    3
+                </div><br><br>
+                <span class="ml-12">Provide your contact information for registration purposes.</span>
+            </li>
+            <li class="relative pl-14 mt-4">
+                <div class="absolute left-0 top-1/2 transform -translate-y-1/2 h-10 w-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-md">
+                    4
+                </div><br><br>
+                <span class="ml-12 p-4">Wait for a confirmation message, which will be sent to you via email or phone.</span>
+            </li>
+        </ol>
+        <p class="text-gray-700 text-center font-bold mt-6">
+            We're excited to welcome you to our community and look forward to serving you!
+        </p>
+    </div>
+
+    <!-- JavaScript for Slideshow and Typing Effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Typing Effect for Welcome Message
+            const textElement = document.getElementById("typingText").querySelector("span");
+            const genderPrefix = "{{ gender_prefix|escapejs }}";  // Use gender_prefix from context
+            const userName = "{{ user_name|escapejs }}";  // Escape for JavaScript safety
+            const fullText = `Welcome ${genderPrefix} ${userName}`;  // Dynamic welcome message
+            let index = 0;
+
+            function typeText() {
+                if (index < fullText.length) {
+                    textElement.textContent += fullText.charAt(index);
+                    index++;
+                    setTimeout(typeText, 100); // Adjust typing speed
+                }
+            }
+
+            typeText(); // Start typing effect
+
+            // Slideshow Functionality
+            const slideshowImages = [
+                {% for photo in restaurant_photos %}
+                    "{{ photo }}",
+                {% endfor %}
+            ];
+            let currentIndex = 0;
+            const slideshowImage = document.getElementById('slideshowImage');
+
+            function changeSlide() {
+                slideshowImage.src = slideshowImages[currentIndex];
+                currentIndex = (currentIndex + 1) % slideshowImages.length;
+            }
+
+            setInterval(changeSlide, 10000); // Change slide every 10 seconds
+        });
+    </script>
+</body>
+{% endblock content %}

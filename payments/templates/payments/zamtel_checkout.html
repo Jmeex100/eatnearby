@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Zamtel Mobile Money Checkout{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 pt-16 pb-8">
+    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8 text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Zamtel Mobile Money Payment</h1>
+        <div class="flex justify-center mb-6">
+            <img src="https://www.zamtel.zm/images/logo.png" alt="Zamtel Logo" class="h-16 w-auto">
+        </div>
+        <p class="text-gray-700 mb-4">Please confirm your payment details below:</p>
+        
+        <div class="text-left max-w-md mx-auto mb-6">
+            <div class="flex justify-between py-2 border-b">
+                <span class="text-gray-600">Payment Amount:</span>
+                <span class="font-semibold text-gray-800">K{{ total_zmw|floatformat:2 }} ZMW</span>
+            </div>
+            <div class="flex justify-between py-2 border-b">
+                <span class="text-gray-600">Registered Mobile Number:</span>
+                <span class="font-semibold text-gray-800">{{ phone_number }}</span>
+            </div>
+            {% if secondary_phone_number %}
+            <div class="flex justify-between py-2 border-b">
+                <span class="text-gray-600">Secondary Phone Number:</span>
+                <span class="font-semibold text-gray-800">{{ secondary_phone_number }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <form method="post" action="{% url 'payments:payment_success' %}" class="mb-6">
+            {% csrf_token %}
+            <div class="text-left max-w-md mx-auto">
+                <label for="zamtel_number" class="block text-sm font-medium text-gray-700 mb-2">Enter Zamtel Number for Payment:</label>
+                <input type="text" name="zamtel_number" id="zamtel_number" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+26095..." value="{{ phone_number }}">
+                <p class="text-gray-500 text-sm mt-2">Enter the Zamtel Mobile Money number where the payment request will be sent. This can be different from your registered number.</p>
+            </div>
+            <button type="submit" class="mt-4 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">Confirm Payment</button>
+        </form>
+        
+        <a href="{% url 'payments:payment_cancelled' %}" class="inline-block bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300">Cancel Payment</a>
+    </div>
+</div>
+{% endblock %}

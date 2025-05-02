@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<section class="h-screen flex items-center justify-center">
+    <div class="container mx-auto px-6 py-24">
+        <div class="flex flex-wrap items-center justify-center">
+            <!-- Right column container with form -->
+            <div class="md:w-8/12 lg:w-5/12">
+                <!-- Form start -->
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <!-- Username input -->
+                    <div class="relative mb-6">
+                        <input
+                            type="text"
+                            name="username"
+                            class="peer block w-full rounded border-0 bg-transparent px-3 py-2 leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
+                            id="username"
+                            placeholder="Username"
+                            value="{{ form.username.value|default:'' }}" />
+                        <label
+                            for="username"
+                            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-2 leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary dark:text-black dark:peer-focus:text-primary">
+                            Username
+                        </label>
+                        {% if form.username.errors %}
+                            <div class="text-red-600 mt-2">{{ form.username.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="relative mb-6">
+                        <input
+                            type="password"
+                            name="password"
+                            class="peer block w-full rounded border-0 bg-transparent px-3 py-2 leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
+                            id="password"
+                            placeholder="Password" />
+                        <label
+                            for="password"
+                            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-2 leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary dark:text-neutral-400 dark:peer-focus:text-primary">
+                            Password
+                        </label>
+                        {% if form.password.errors %}
+                            <div class="text-red-600 mt-2">{{ form.password.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit button -->
+                    <button
+                        type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        data-twe-ripple-init
+                        data-twe-ripple-color="light">
+                        <h3>Sign in</h3>
+                    </button>
+
+                    <!-- Divider -->
+                    <a href="{% url 'register' %}" class="font-bold hover:text-yellow-400 transition-colors duration-300 ease-in-out mt-8">
+                        I don't have an account
+                    </a>
+                </form>
+                <!-- Form end -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

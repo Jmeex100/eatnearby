@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body class="bg-gray-100">
+
+    <!-- Slideshow -->
+    <div class="relative">
+        <div class="absolute inset-0">
+            <img id="slideshowImage" class="w-full h-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105" src="{{ slide1_image }}" alt="Slideshow Image"> <!-- Hover effect on slideshow image -->
+        </div>
+        <div class="relative bg-gray-900 bg-opacity-50 text-white text-center py-12 ">
+            <h1 class="text-4xl font-bold hover:text-yellow-400 transition-colors duration-300 ease-in-out mt-8">Welcome to Our Restaurant</h1> <!-- Hover effect on title -->
+            <hr class="mt-4 border-t-2 border-white w-1/2 mx-auto">
+            <p class="mt-4 text-lg hover:text-yellow-200 transition-colors duration-300 ease-in-out">Discover our delicious menu and enjoy a wonderful dining experience.</p> <!-- Hover effect on description -->
+        </div>
+    </div>
+
+    <!-- Order Now  -->
+    <div class="flex justify-center items-center mt-3">
+        <a href="{% url 'login' %}" class="hidden md:inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300">Order Now</a>
+          
+    </div>
+
+    <!-- Restaurant Photos -->
+    <hr class="mt-4 border-t-2 border-white w-1/2 mx-auto">
+    <div class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-white mb-6 rounded text-center hover:text-blue-500 transition-colors duration-300 p-3 bg-gray-700 ease-in-out">Discover Our Restaurant</h2> <!-- Hover effect on section title -->
+        <hr class="mt-4 mb-6 border-t-2 border-gray-300 w-1/2 mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {% for photo in restaurant_photos %}
+            <div class="relative group">
+                <img class="w-full h-auto rounded-lg shadow-lg transform transition-transform duration-500 ease-in-out hover:scale-105" src="{{ photo }}" alt="Restaurant Photo"> <!-- Hover effect on images -->
+                <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-center justify-center">
+                    <p class="text-white text-lg mt-9">Order This</p>
+                </div> <!-- Hover overlay effect -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 shadow-lg rounded-xl p-8 mb-12 mx-4 md:mx-auto max-w-4xl">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">How to Join or Contact Us</h2>
+        <p class="text-gray-700 mb-8 text-center text-lg">
+            Interested in becoming a part of Eat-NEAR-BY? <br>
+            <span class="text-gray-600">Here's how you can get started:</span>
+        </p>
+        <ol class="space-y-6">
+            <!-- Step 1 -->
+            <li class="relative pl-16">
+                <div class="absolute left-0 top-0 h-12 w-12 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
+                    1
+                </div>
+                <p class="text-gray-700 text-lg ml-16">Contact us through any of the channels listed above—phone, WhatsApp, email, or visit us in person.</p>
+            </li>
+            <!-- Step 2 -->
+            <li class="relative pl-16">
+                <div class="absolute left-0 top-0 h-12 w-12 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
+                    2
+                </div>
+                <p class="text-gray-700 text-lg ml-16">Speak with one of our staff members to express your interest in joining or learning more about our services.</p>
+            </li>
+            <!-- Step 3 -->
+            <li class="relative pl-16">
+                <div class="absolute left-0 top-0 h-12 w-12 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
+                    3
+                </div>
+                <p class="text-gray-700 text-lg ml-16">Provide your contact information for registration purposes.</p>
+            </li>
+            <!-- Step 4 -->
+            <li class="relative pl-16">
+                <div class="absolute left-0 top-0 h-12 w-12 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
+                    4
+                </div>
+                <p class="text-gray-700 text-lg ml-16">Wait for a confirmation message, which will be sent to you via email or phone.</p>
+            </li>
+        </ol>
+        <p class="text-gray-700 text-center font-bold mt-8 text-lg">
+            We're excited to welcome you to our community and look forward to serving you! 🎉
+        </p>
+    </div>
+
+    <!-- JavaScript for Slideshow -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slideshowImages = [
+                {% for photo in restaurant_photos %}
+                    "{{ photo }}",
+                {% endfor %}
+            ];
+            let currentIndex = 0;
+            const slideshowImage = document.getElementById('slideshowImage');
+
+            function changeSlide() {
+                slideshowImage.src = slideshowImages[currentIndex];
+                currentIndex = (currentIndex + 1) % slideshowImages.length;
+            }
+
+            setInterval(changeSlide, 10000); // Change slide every 10 seconds (10000 milliseconds)
+        });
+    </script>
+
+</body> 
+{% endblock content %}

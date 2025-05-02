@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 pt-16 pb-8">
+    <!-- PC View (Hidden on Mobile) -->
+    <div class="hidden md:block">
+        <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Checkout</h1>
+            <!-- Countdown Timer -->
+            <div id="countdown-pc" class="bg-orange-500 text-white text-center p-4 rounded-lg mb-6">
+                <p class="text-lg font-semibold">Complete Your Order Within:</p>
+                <div class="text-2xl font-bold mt-2">
+                    <span id="days-pc">00</span> : <span id="hours-pc">00</span> : <span id="minutes-pc">00</span> : <span id="seconds-pc">00</span>
+                </div>
+                <p class="text-sm mt-2">days : hours : minutes : seconds</p>
+            </div>
+
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Your Cart</h2>
+                <div class="space-y-4">
+                    {% for item in cart.cartitem_set.all %}
+                    <div class="flex justify-between text-gray-600">
+                        <span>{{ item.get_product.name }} (x{{ item.quantity }})</span>
+                        <span>K{{ item.subtotal|floatformat:2 }}</span>
+                    </div>
+                    {% empty %}
+                    <p class="text-gray-600">No items in cart.</p>
+                    {% endfor %}
+                    <div class="border-t pt-2 flex justify-between font-bold text-gray-800">
+                        <span>Total</span>
+                        <span>K{{ cart.total|floatformat:2 }} (~${{ total_usd|floatformat:2 }} USD)</span>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="predefined_address_pc">Delivery Location</label>
+                    <select name="predefined_address" id="predefined_address_pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select a predefined location</option>
+                        {% for value, label in delivery_points %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="address" placeholder="Or enter custom address" class="w-full mt-2 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="payment-method-pc">Payment Method</label>
+                    <select name="payment_method" id="payment-method-pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="toggleProvider('pc')">
+                        {% for value, label in payment_methods %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="payment-provider-div-pc" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="payment-provider-pc">Payment Provider</label>
+                    <select name="payment_provider" id="payment-provider-pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select a provider</option>
+                        <optgroup label="Mobile Money" id="mobile-money-options-pc" class="hidden">
+                            {% for value, label in mobile_money_providers %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </optgroup>
+                        <optgroup label="Card" id="card-options-pc" class="hidden">
+                            {% for value, label in card_providers %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="phone_number_pc">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number_pc" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="secondary_phone_number_pc">Secondary Phone Number (Optional)</label>
+                    <input type="text" name="secondary_phone_number" id="secondary_phone_number_pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile View (Hidden on PC) -->
+    <div class="md:hidden">
+        <div class="bg-white shadow-lg rounded-lg p-4 mx-2">
+            <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Checkout</h1>
+            <!-- Countdown Timer -->
+            <div id="countdown-mobile" class="bg-orange-500 text-white text-center p-4 rounded-lg mb-4">
+                <p class="text-base font-semibold">Complete Your Order Within:</p>
+                <div class="text-xl font-bold mt-2">
+                    <span id="days-mobile">00</span> : <span id="hours-mobile">00</span> : <span id="minutes-mobile">00</span> : <span id="seconds-mobile">00</span>
+                </div>
+                <p class="text-xs mt-2">days : hours : minutes : seconds</p>
+            </div>
+
+            <div class="mb-4">
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">Your Cart</h2>
+                <div class="space-y-2">
+                    {% for item in cart.cartitem_set.all %}
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>{{ item.get_product.name }} (x{{ item.quantity }})</span>
+                        <span>K{{ item.subtotal|floatformat:2 }}</span>
+                    </div>
+                    {% empty %}
+                    <p class="text-gray-600">No items in cart.</p>
+                    {% endfor %}
+                    <div class="border-t pt-2 flex justify-between font-bold text-gray-800 text-sm">
+                        <span>Total</span>
+                        <span>K{{ cart.total|floatformat:2 }} (~${{ total_usd|floatformat:2 }} USD)</span>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="predefined_address_mobile">Delivery Location</label>
+                    <select name="predefined_address" id="predefined_address_mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select a location</option>
+                        {% for value, label in delivery_points %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="address" placeholder="Or custom address" class="w-full mt-2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="payment-method-mobile">Payment Method</label>
+                    <select name="payment_method" id="payment-method-mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="toggleProvider('mobile')">
+                        {% for value, label in payment_methods %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="payment-provider-div-mobile" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="payment-provider-mobile">Payment Provider</label>
+                    <select name="payment_provider" id="payment-provider-mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select a provider</option>
+                        <optgroup label="Mobile Money" id="mobile-money-options-mobile" class="hidden">
+                            {% for value, label in mobile_money_providers %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </optgroup>
+                        <optgroup label="Card" id="card-options-mobile" class="hidden">
+                            {% for value, label in card_providers %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="phone_number_mobile">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number_mobile" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="secondary_phone_number_mobile">Secondary Phone (Optional)</label>
+                    <input type="text" name="secondary_phone_number" id="secondary_phone_number_mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">Place Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleProvider(view) {
+    const prefix = view === 'pc' ? '-pc' : '-mobile';
+    const methodSelect = document.getElementById(`payment-method${prefix}`);
+    const providerDiv = document.getElementById(`payment-provider-div${prefix}`);
+    const mobileOptions = document.getElementById(`mobile-money-options${prefix}`);
+    const cardOptions = document.getElementById(`card-options${prefix}`);
+
+    providerDiv.classList.add('hidden');
+    mobileOptions.classList.add('hidden');
+    cardOptions.classList.add('hidden');
+
+    const method = methodSelect.value;
+    if (method === 'mobile_money') {
+        providerDiv.classList.remove('hidden');
+        mobileOptions.classList.remove('hidden');
+    } else if (method === 'card') {
+        providerDiv.classList.remove('hidden');
+        cardOptions.classList.remove('hidden');
+    }
+}
+
+function startCountdown(view) {
+    const prefix = view === 'pc' ? '-pc' : '-mobile';
+    const daysEl = document.getElementById(`days${prefix}`);
+    const hoursEl = document.getElementById(`hours${prefix}`);
+    const minutesEl = document.getElementById(`minutes${prefix}`);
+    const secondsEl = document.getElementById(`seconds${prefix}`);
+
+    // Set the countdown to 2 hours from now
+    const countdownDuration = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+    const endTime = new Date().getTime() + countdownDuration;
+
+    const countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = endTime - now;
+
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+            alert('Time is up! Please restart your checkout process.');
+            window.location.href = '{% url "cart:cart_view" %}'; // Redirect to cart if time runs out
+            return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+    }, 1000);
+}
+
+// Initialize on page load for both views
+toggleProvider('pc');
+toggleProvider('mobile');
+startCountdown('pc');
+startCountdown('mobile');
+</script>
+{% endblock %}

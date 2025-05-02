@@ -1,0 +1,127 @@
+<!-- contact.html -->
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4 my-10">Contact Us</h1>
+    <p class="text-gray-700 mb-8">Get in touch with us using the information below:</p>
+
+    <ul class="list-disc list-inside mb-8">
+        <li class="flex items-center text-gray-700 hover:text-blue-500">
+            <i class="fa-solid fa-map-location-dot mr-2"></i>
+            <a href="{% url 'map' %}" class="hover:underline">123 Main Street, City, Country</a>
+        </li>
+        <li class="flex items-center text-gray-700 hover:text-blue-500">
+            <i class="fa-solid fa-phone mr-2"></i>
+            Phone: +260 456 7890
+        </li>
+        <li class="flex items-center text-gray-700 hover:text-blue-500">
+            <i class="fa-brands fa-whatsapp mr-2"></i>
+            <a href="https://wa.me/2604567890" class="hover:underline">WhatsApp</a>
+        </li>
+        <li class="flex items-center text-gray-700 hover:text-blue-500">
+            <i class="fa-brands fa-facebook mr-2"></i>
+            <a href="https://www.facebook.com/yourpage" class="hover:underline">Facebook</a>
+        </li>
+        <li class="flex items-center text-gray-700 hover:text-blue-500">
+            <i class="fa-regular fa-envelope mr-2"></i>
+            Email: <a href="mailto:info@restaurant.com" class="hover:underline">info@restaurant.com</a>
+        </li>
+    </ul>
+
+   <!-- Join Us Section -->
+<div class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 shadow-lg rounded-xl p-8 mb-10">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-6 text-center tracking-tight">How to Join or Contact Us</h2>
+    <p class="text-gray-600 mb-6 text-center text-lg leading-relaxed">
+        Interested in becoming a part of Eat-NEAR-BY? <br>
+        <span class="text-gray-800 font-medium">Here’s how you can get started</span>
+    </p>
+    <ol class="space-y-8 text-gray-700">
+        <li class="relative pl-14 flex items-start">
+            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-transform hover:scale-110">
+                1
+            </div>
+            <span class="ml-4 text-base leading-relaxed">
+                Contact us through any of the channels listed above—phone, WhatsApp, email, or visit us in person.
+            </span>
+        </li>
+        <li class="relative pl-14 flex items-start">
+            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-transform hover:scale-110">
+                2
+            </div>
+            <span class="ml-4 text-base leading-relaxed">
+                Speak with one of our staff members to express your interest in joining or learning more about our services.
+            </span>
+        </li>
+        <li class="relative pl-14 flex items-start">
+            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-transform hover:scale-110">
+                3
+            </div>
+            <span class="ml-4 text-base leading-relaxed">
+                Provide your contact information for registration purposes.
+            </span>
+        </li>
+        <li class="relative pl-14 flex items-start">
+            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-transform hover:scale-110">
+                4
+            </div>
+            <span class="ml-4 text-base leading-relaxed">
+                Wait for a confirmation message, which will be sent to you via email or phone.
+            </span>
+        </li>
+    </ol>
+    <p class="text-gray-800 text-center font-semibold mt-8 text-lg">
+        We’re excited to welcome you to our community and look forward to serving you!
+    </p>
+</div>
+
+    <!-- Contact Form -->
+    <div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Send Us a Message</h2>
+        <form action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {% if form.name.errors %}
+                <div class="text-red-600 text-sm mt-2">
+                    {{ form.name.errors }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="text-red-600 text-sm mt-2">
+                    {{ form.email.errors }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-6">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+                {% if form.message.errors %}
+                <div class="text-red-600 text-sm mt-2">
+                    {{ form.message.errors }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Submit button -->
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+                    data-twe-ripple-init data-twe-ripple-color="light">
+                    Send Message
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
