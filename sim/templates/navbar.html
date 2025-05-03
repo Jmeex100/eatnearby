@@ -7,18 +7,20 @@
             <div class="flex items-center">
                 <a href="{% url 'home' %}" class="text-xl font-bold flex items-center">
                     <span class="logo-red">Eat-NEAR</span><span class="logo-green">-BY</span>
-                    <svg class="ml-2 w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20c-4.418 0-8-3.582-8-8 0-2.155.863-4.107 2.268-5.518a3 3 0 10-1.135-4.77 8.014 8.014 0 015.403 4.17 4.993 4.993 0 011.732-.002 8.014 8.014 0 015.403-4.168 3 3 0 10-1.135 4.77A7.965 7.965 0 0020 12c0 4.418-3.582 8-8 8z" />
-                    </svg>
+                    <img 
+                src="{% static 'images/logo/icon-192x192.png' %}" 
+                alt="Eat-NEAR-BY Logo" 
+                title="Eat-NEAR-BY" 
+                class="w-10 h-10 rounded-full">
                 </a>
-            </div>
+                            </div>
 
             <!-- Centered Menu -->
             <div class="hidden md:flex space-x-4 absolute left-1/2 transform -translate-x-1/2">
                 {% if user.is_authenticated %}
                     <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
                     <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
-                    <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
+                <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
                     <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
                 {% else %}
                     <a href="{% url 'home' %}" class="hover:font-bold">Home</a>

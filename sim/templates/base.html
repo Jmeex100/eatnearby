@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light" id="html"> <!-- Add class="light" here -->
+<html lang="en" id="html"> <!-- Add class="light" here -->
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/output.css' %}" type="text/css">
@@ -21,8 +21,9 @@
         }
     </script>
 </head>
-<body class="bg-white dark:bg-dark-background text-gray-800 dark:text-dark-text">
+<body class="dark:bg-dark-background text-gray-800 dark:text-dark-text">
     {% include "navbar.html" %}
+    <br>
     <main class="flex-grow">
         {% block content %}
         {% endblock content %}

@@ -5,10 +5,14 @@ module.exports = {
     './auths/templates/**/*.html',
     './cart/templates/**/*.html',
     './templates/**/*.html',
-    './**/*.html',
-    './**/*.js',
-    './**/static/css/**/*.css'
-  ],
+    './sim/static/js/**/*.js',
+    './auths/static/js/**/*.js',
+    './cart/static/js/**/*.js',
+    './**/static/css/**/*.css',
+    './payments/templates/**/*.html',
+   './payments/static/js/**/*.js',
+  ]
+  ,
   theme: {
     extend: {
       colors: {

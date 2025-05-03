@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from ..models import FastFood, Food, Drink, Category
-# C:\Users\Surecode\Documents\GitHub\django\coreEat\auths\views\product_views.py
+
 def orders(request):
     query = request.GET.get('q')
     min_price = request.GET.get('min_price')
@@ -14,27 +14,39 @@ def orders(request):
     foods = Food.objects.all()
     drinks = Drink.objects.all()
 
-    # Apply search query
-    if query:
+    # Apply search query only if it's not empty or None
+    if query and query.strip():  # Check for non-empty and non-None query
         fast_foods = fast_foods.filter(Q(name__icontains=query) | Q(description__icontains=query))
         foods = foods.filter(Q(name__icontains=query) | Q(description__icontains=query))
         drinks = drinks.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
     # Apply price range filtering
     if min_price:
-        fast_foods = fast_foods.filter(price__gte=min_price)
-        foods = foods.filter(price__gte=min_price)
-        drinks = drinks.filter(price__gte=min_price)
+        try:
+            min_price = float(min_price)
+            fast_foods = fast_foods.filter(price__gte=min_price)
+            foods = foods.filter(price__gte=min_price)
+            drinks = drinks.filter(price__gte=min_price)
+        except ValueError:
+            pass  # Ignore invalid min_price
     if max_price:
-        fast_foods = fast_foods.filter(price__lte=max_price)
-        foods = foods.filter(price__lte=max_price)
-        drinks = drinks.filter(price__lte=max_price)
+        try:
+            max_price = float(max_price)
+            fast_foods = fast_foods.filter(price__lte=max_price)
+            foods = foods.filter(price__lte=max_price)
+            drinks = drinks.filter(price__lte=max_price)
+        except ValueError:
+            pass  # Ignore invalid max_price
 
     # Apply category filtering
     if category_id:
-        fast_foods = fast_foods.filter(category_id=category_id)
-        foods = foods.filter(category_id=category_id)
-        drinks = drinks.filter(category_id=category_id)
+        try:
+            category_id = int(category_id)
+            fast_foods = fast_foods.filter(category_id=category_id)
+            foods = foods.filter(category_id=category_id)
+            drinks = drinks.filter(category_id=category_id)
+        except ValueError:
+            pass  # Ignore invalid category_id
 
     # Apply sorting
     if sort == 'price_asc':
@@ -61,7 +73,7 @@ def orders(request):
         'fast_foods': fast_foods,
         'foods': foods,
         'drinks': drinks,
-        'query': query,
+        'query': query or '',  # Ensure query is an empty string if None
         'categories': categories,
         'selected_category': int(category_id) if category_id else None,
         'min_price': min_price,
@@ -70,7 +82,7 @@ def orders(request):
     }
     return render(request, 'auths/orders.html', context)
 
-# ✅ Product Detail View
+# Product Detail View
 def order(request, item_id, category):
     model_map = {
         'fastfood': FastFood,
@@ -80,7 +92,6 @@ def order(request, item_id, category):
     product = get_object_or_404(model_map.get(category), product_id=item_id)
     return render(request, 'auths/order_detail.html', {'product': product})
 
-# ✅ Products View
+# Products View
 def products(request):
     return render(request, 'auths/products.html')
-# auths/views/product_views.py
