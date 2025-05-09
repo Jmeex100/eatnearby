@@ -63,10 +63,12 @@ class User(AbstractUser):
         ('staff', 'Staff'),
     ]
     GENDER_TYPE_CHOICES = [
-        ('male', 'Mr.'),
-        ('female', 'Mrs.'),
-        ('other', 'Other'),
+    ('mr', 'Mr.'),
+    ('mrs', 'Mrs.'),
+    ('miss', 'Miss'),
+    ('ms', 'Ms.'),
     ]
+
 
     def user_directory_path(instance, filename):
         # File will be uploaded to MEDIA_ROOT/profile_images/<username>/<filename>
