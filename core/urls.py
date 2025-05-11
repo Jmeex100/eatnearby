@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('auths.urls')),
     path('cart/', include('cart.urls')),
     path('payments/', include('payments.urls')),
+     path('staffs/', include('staffs.urls', namespace='staffs')),
     path('paypal/', include('paypal.standard.ipn.urls')),  # Matches /paypal/
     path('', include('pwa.urls')),  # Add PWA URLs
 ]

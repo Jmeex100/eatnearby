@@ -1,0 +1,74 @@
+{% extends 'staffs_base.html' %}
+{% block title %}My Deliveries - Eat Nearby{% endblock %}
+{% block content %}
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">My Deliveries</h2>
+
+    <!-- Active Deliveries Section -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Active Deliveries</h3>
+        
+        {% if active_deliveries %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Delivery ID</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Address</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Status</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Assigned At</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800">
+                        {% for delivery in active_deliveries %}
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.id }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.get_predefined_address_display }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.get_delivery_status_display }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.assigned_at }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.get_payment_method_display }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-gray-500 dark:text-gray-400">You have no active deliveries at the moment.</p>
+        {% endif %}
+    </div>
+
+    <!-- Completed Deliveries Section -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Completed Deliveries</h3>
+
+        {% if completed_deliveries %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Delivery ID</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Address</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Status</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Assigned At</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900 dark:text-white">Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800">
+                        {% for delivery in completed_deliveries %}
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.id }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.get_predefined_address_display }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.get_delivery_status_display }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.assigned_at }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">{{ delivery.delivery.get_payment_method_display }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-gray-500 dark:text-gray-400">No completed deliveries found.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'staffs_base.html' %}
+
+{% block title %}Staff Availability - {{ staff.first_name }}{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-extrabold text-gray-900 dark:text-white mb-4">Staff Availability</h1>
+
+<p class="text-gray-700 dark:text-gray-300">Viewing details for {{ staff.first_name }} {{ staff.last_name }}</p>
+
+<div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md">
+  <h2 class="text-xl font-bold">{{ staff.first_name }}'s Status</h2>
+  <p class="text-gray-700 dark:text-gray-300">Role: {{ staff.role }}</p>
+  <p class="text-gray-700 dark:text-gray-300">Status: 
+    {% if staff.status == 'delivering' %}
+      <span class="text-orange-500">Delivering</span>
+    {% elif staff.status == 'present' %}
+      <span class="text-green-500">Present</span>
+    {% else %}
+      <span class="text-red-500">Not at Work</span>
+    {% endif %}
+  </p>
+</div>
+
+<a href="{% url 'staffs:staff_availability_all' %}" class="text-blue-500 hover:text-blue-700">Back to Staff List</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+┌─[surecode@surecode-hpprobook11g2]─[~/Documents/GitHub/django/eatnearby]
+└──╼ $python3 manage.py startapp staffs^C
+┌─[✗]─[surecode@surecode-hpprobook11g2]─[~/Documents/GitHub/django/eatnearby]
+└──╼ $
+
+    
+    
+]
+
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'sim',
+    'auths',
+    'cart',
+    'payments.apps.PaymentsConfig',
+    'paypal.standard.ipn',
+    'pwa',
+  from django.contrib import admin
+from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('sim.urls')),
+    path('', include('auths.urls')),
+    path('cart/', include('cart.urls')),
+    path('payments/', include('payments.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),  # Matches /paypal/
+    path('', include('pwa.urls')),  # Add PWA URLs
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  i want to make  a staffs app to handle  derivary  part of  Project Proposal: Eat Nearby  PROJECT
+1.Project Title:
+Eat Nearby -   Online food ordering APP
+2.Project Background:
+After observing the restaurant businesses near Evelyn Hone College and identifying opportunities for improving online customer engagement, this project aims to address the challenges restaurants face in securing customer loyalty. Many institutions and individuals frequently purchase meals from various restaurants without a clear system for ordering or engagement. Having personally experienced the inconvenience of being directed to order food from different restaurants, this project is designed to bridge the gap between customers and restaurants by leveraging online presence and customer retention strategies.
+3. Introduction:
+Eat Nearby is a web-based system designed to help restaurants lock in customers by creating a sense of closeness and fostering a community-driven dining experience. This project involves the development of a dedicated webpage that provides essential information about restaurant locations, contact details, and operating hours. The goal is to enhance accessibility, customer lock in, and engagement among diners and food providers.
+3.1 Problem:
+Many restaurants struggle to retain customers due to a lack of direct engagement and digital presence. Customers often face difficulties finding reliable restaurant information, leading to confusion and inconvenience. Additionally, there is a need for a trusted community where food lovers can interact with restaurants, share experiences, and build long-term connections with their favorite dining spots.
+ that me project so lets setup base for staff admin and basic sturcture first

@@ -10,9 +10,10 @@ module.exports = {
     './cart/static/js/**/*.js',
     './**/static/css/**/*.css',
     './payments/templates/**/*.html',
-   './payments/static/js/**/*.js',
-  ]
-  ,
+    './payments/static/js/**/*.js',
+    './staffs/templates/**/*.html',
+    './staffs/static/js/**/*.js',
+  ],
   theme: {
     extend: {
       colors: {
@@ -20,9 +21,18 @@ module.exports = {
         'food-green': '#4CAF50',
         'food-cream': '#FFF8E1',
         'food-dark': '#1A3C34',
-        'food-gray': '#4A5568'
+        'food-gray': '#4A5568',
       }
     }
   },
-  plugins: []
+  variants: {
+    extend: {
+      backgroundColor: ['dark'],
+      textColor: ['white'],
+      borderColor: ['dark'],
+      boxShadow: ['dark'],
+      opacity: ['dark'],
+    },
+  },
+  plugins: [],
 }

@@ -1,0 +1,54 @@
+{% extends 'staffs_base.html' %}
+{% block title %}Assign Delivery - Eat Nearby{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-extrabold text-gray-900 mb-4 flex items-center gap-2">🚚 Assign Delivery</h1>
+<p class="mb-6 text-gray-700">Assign deliveries to available staff members quickly and efficiently.</p>
+
+<form method="post" class="max-w-lg bg-white rounded-lg shadow p-6">
+  {% csrf_token %}
+  <div class="mb-5">
+    <label for="order" class="block text-sm font-medium text-gray-700 mb-1">Select Order</label>
+    <select id="order" name="order" required
+      class="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      <option value="" disabled selected>-- Choose an order --</option>
+      {% for order in orders %}
+        <option value="{{ order.id }}">#{{ order.id }} - {{ order.customer_name }} - {{ order.status|capfirst }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-5">
+    <label for="staff" class="block text-sm font-medium text-gray-700 mb-1">Select Staff Member</label>
+    <select id="staff" name="staff" required
+      class="block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      <option value="" disabled selected>-- Choose a staff member --</option>
+      {% for staff in available_staff %}
+        <option value="{{ staff.id }}">{{ staff.name }} - {{ staff.role }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <button type="submit"
+      class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      Assign Delivery
+    </button>
+  </div>
+
+  {% if form.errors %}
+    <div class="mt-4 text-red-600 text-sm">
+      <ul>
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</form>
+{% endblock %}

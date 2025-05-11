@@ -10,7 +10,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',       # Localhost
     'localhost',       # Localhost
-    '192.168.172.40',      # Your local IP address
+    '192.168.1.190',      # Your local IP address
     '0.0.0.0',         # For binding to all network interfaces (optional)
     '10.0.21.8',   # GUEST
   'd31c-45-215-255-168.ngrok-free.app',  # Your ngrok domain
@@ -31,10 +31,11 @@ INSTALLED_APPS = [
     'sim',
     'auths',
     'cart',
+ 
     'payments.apps.PaymentsConfig',
     'paypal.standard.ipn',
     'pwa',
-  
+    'staffs.apps.StaffsConfig',    
 
 ]
 # Add PWA settings at the bottom
@@ -79,6 +80,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'core.urls'

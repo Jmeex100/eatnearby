@@ -1,0 +1,75 @@
+{% load static %}
+<header>
+  <nav class="bg-blue-600 dark:bg-blue-800 dark:text-white fixed top-0 w-full z-50 shadow">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="{% url 'staffs:my_deliveries' %}" class="text-white text-xl font-semibold flex items-center">
+        <i class="fas fa-truck mr-2"></i> Eat Nearby Staff
+      </a>
+
+      <div class="flex items-center space-x-4">
+        <!-- Notifications -->
+        <div class="relative">
+          <button id="notificationBtn" class="p-2 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 relative">
+            <i class="fas fa-bell text-white text-xl"></i>
+            {% if unread_notifications_count > 0 %}
+              <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {{ unread_notifications_count }}
+              </span>
+            {% endif %}
+          </button>
+          <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+            <!-- Notification items -->
+            <div class="p-4 text-gray-600 dark:text-gray-200 text-sm">No new notifications.</div>
+          </div>
+        </div>
+
+        <!-- Dark Mode -->
+        <button id="darkModeToggle" class="p-2 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 text-white">
+          <i class="fas fa-sun hidden dark:block"></i>
+        </button>
+
+        <!-- Current Time -->
+        <div id="currentTime" class="text-white font-semibold"></div>
+
+        <!-- User Menu -->
+        <div class="relative">
+          <button id="userMenuBtn" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700 dark:hover:bg-blue-900 text-white">
+            <img src="{% if request.user.image %}{{ request.user.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" class="h-8 w-8 rounded-full" alt="User Avatar">
+            <span class="hidden md:block">{{ request.user.get_full_name }}</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+          </button>
+          <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 text-sm rounded shadow-md z-50 border border-gray-200 dark:border-gray-700">
+            <!-- Profile Link -->
+            <a href="{% url 'profile' %}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+            
+            <!-- Settings Link -->
+            <a href="{% url 'settings' %}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
+            
+            <!-- Logout Link -->
+            <a href="{% url 'logout' %}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Add the JavaScript to update the time -->
+<script>
+  function updateTime() {
+    var now = new Date();
+    var hours = now.getHours().toString().padStart(2, '0');
+    var minutes = now.getMinutes().toString().padStart(2, '0');
+    var seconds = now.getSeconds().toString().padStart(2, '0');
+    var timeString = hours + ':' + minutes + ':' + seconds;
+    
+    document.getElementById("currentTime").innerText = timeString;
+  }
+
+  // Update the time every second
+  setInterval(updateTime, 1000);
+  
+  // Set initial time on page load
+  updateTime();
+</script>
