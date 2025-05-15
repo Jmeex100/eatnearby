@@ -329,11 +329,14 @@ def payment_success(request, delivery_id):
     return render(request, 'payments/success.html', context)
 
 # [Previous imports and code unchanged until payment_done]
-
 @login_required
 @csrf_exempt
 def payment_done(request):
-    # Handle PayPal
+    logger.debug(f"payment_done called: session_keys={list(request.session.keys())}, "
+                 f"session_id={request.session.session_key}, "
+                 f"referer={request.META.get('HTTP_REFERER', 'None')}")
+
+    # Handle PayPal (unchanged)
     paypal_order_data = request.session.get('paypal_order_data')
     if paypal_order_data:
         try:
@@ -370,12 +373,106 @@ def payment_done(request):
             messages.error(request, f"Payment processing failed: {str(e)}")
             return redirect('payments:checkout')
 
-    # [Stripe and Pesapal sections unchanged]
+    # Handle Stripe
+    stripe_session_id = request.session.get('stripe_session_id')
+    stripe_order_data = request.session.get('stripe_order_data')
+    # Fallback to query parameter if session data is missing
+    if not (stripe_session_id and stripe_order_data):
+        session_key = request.GET.get('session_key')
+        if session_key and session_key == request.session.session_key:
+            stripe_session_id = request.session.get('stripe_session_id')
+            stripe_order_data = request.session.get('stripe_order_data')
+            logger.debug(f"Stripe session restored via query param: session_id={stripe_session_id}, order_data={stripe_order_data}")
+        else:
+            logger.error(f"Stripe session missing: session_id={stripe_session_id}, order_data={stripe_order_data}, "
+                         f"query_session_key={session_key}, current_session_key={request.session.session_key}")
+            messages.error(request, "Invalid payment session.")
+            return redirect('payments:checkout')
 
+    if stripe_session_id and stripe_order_data:
+        try:
+            status = verify_stripe_payment(stripe_session_id)
+            if status == 'paid':
+                cart = Cart.objects.get(id=stripe_order_data['cart_id'], user=request.user)
+                delivery_info = create_delivery_info(request, stripe_order_data, cart)
+
+                items = [
+                    {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
+                    for item in cart.cartitem_set.all()
+                ]
+                payment_history = PaymentHistory.objects.create(
+                    user=request.user,
+                    cart=cart,
+                    delivery_info=delivery_info,
+                    total=cart.total(),
+                    items=items,
+                    transaction_id=f"STRIPE-{str(uuid.uuid4())}"
+                )
+                delivery_info.delivery_status = 'pending'
+                delivery_info.save()
+
+                for key in ['stripe_session_id', 'stripe_order_data', 'pending_order']:
+                    request.session.pop(key, None)
+                messages.success(request, "Stripe payment successful!")
+                return redirect('payments:payment_success', delivery_id=delivery_info.id)
+            else:
+                logger.warning(f"Stripe payment not completed: status={status}")
+                messages.error(request, "Stripe payment was not completed.")
+                return redirect('payments:checkout')
+        except Cart.DoesNotExist:
+            logger.error(f"Cart {stripe_order_data['cart_id']} not found for Stripe payment")
+            messages.error(request, "Invalid payment session: Cart not found.")
+            return redirect('payments:checkout')
+        except Exception as e:
+            logger.error(f"Stripe payment verification failed: {str(e)}")
+            messages.error(request, f"Payment verification failed: {str(e)}")
+            return redirect('payments:checkout')
+
+    # Handle Pesapal (unchanged)
+    pesapal_order_data = request.session.get('pesapal_order_data')
+    pesapal_order_id = request.session.get('pesapal_order_id')
+    if pesapal_order_data and pesapal_order_id:
+        try:
+            status = verify_pesapal_payment(pesapal_order_id)
+            if status == 'paid':
+                cart = Cart.objects.get(id=pesapal_order_data['cart_id'], user=request.user)
+                delivery_info = create_delivery_info(request, pesapal_order_data, cart)
+
+                items = [
+                    {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
+                    for item in cart.cartitem_set.all()
+                ]
+                payment_history = PaymentHistory.objects.create(
+                    user=request.user,
+                    cart=cart,
+                    delivery_info=delivery_info,
+                    total=cart.total(),
+                    items=items,
+                    transaction_id=f"PESAPAL-{pesapal_order_id}"
+                )
+                delivery_info.delivery_status = 'pending'
+                delivery_info.save()
+
+                for key in ['pesapal_order_data', 'pesapal_order_id', 'pending_order']:
+                    request.session.pop(key, None)
+                messages.success(request, "Pesapal payment successful!")
+                return redirect('payments:payment_success', delivery_id=delivery_info.id)
+            else:
+                messages.error(request, "Pesapal payment was not completed.")
+                return redirect('payments:checkout')
+        except Cart.DoesNotExist:
+            logger.error(f"Cart {pesapal_order_data['cart_id']} not found for Pesapal payment")
+            messages.error(request, "Invalid payment session: Cart not found.")
+            return redirect('payments:checkout')
+        except Exception as e:
+            logger.error(f"Pesapal payment verification failed: {str(e)}")
+            messages.error(request, f"Payment verification failed: {str(e)}")
+            return redirect('payments:checkout')
+
+    logger.error("Invalid payment session: No valid session data found")
     messages.error(request, "Invalid payment session.")
     return redirect('payments:checkout')
 
-# [Rest of the file unchanged]
 @login_required
 @csrf_exempt
 def payment_cancelled(request):

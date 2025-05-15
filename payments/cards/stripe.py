@@ -54,18 +54,24 @@ def initiate_stripe_payment(request, cart, delivery_info, total_usd):
             'quantity': item.quantity,
         })
 
+    # Ensure session_key is initialized
+    if not request.session.session_key:
+        request.session.save()
+
     # Create Stripe Checkout session
     try:
+        success_url = request.build_absolute_uri('/payments/payment-done/') + f'?session_key={request.session.session_key}'
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=line_items,
             mode='payment',
-            success_url=request.build_absolute_uri('/payments/payment-done/'),
+            success_url=success_url,
             cancel_url=request.build_absolute_uri('/payments/payment-cancelled/'),
             customer_email=request.user.email or "customer@example.com",
             metadata={
                 'cart_id': str(cart.id),
                 'delivery_info_id': 'pending' if delivery_info is None else str(delivery_info.id),
+                'session_key': request.session.session_key,
             }
         )
         logger.debug(f"Stripe Checkout session created: {session.id}, URL: {session.url}")
@@ -91,7 +97,7 @@ def verify_stripe_payment(session_id):
         session_id: The Stripe Checkout session ID.
 
     Returns:
-        str: Payment status (e.g., 'paid', 'unpaid').
+        str: Payment status (e.g., 'paid', 'unpaid').s
 
     Raises:
         Exception: If verification fails.
