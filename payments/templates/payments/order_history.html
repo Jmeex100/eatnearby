@@ -3,36 +3,36 @@
 
 {% block content %}
 <div class="min-h-screen bg-gray-100 pt-16 pb-8">
-    <!-- PC View -->
+
+    <!-- Desktop View -->
     <div class="hidden md:block">
         <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Your Order History</h1>
 
             {% with history.0 as favorite %}
             {% if favorite %}
-            <div id="favorite-order" class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6 rounded shadow animate__animated animate__fadeInDown animate__faster">
-                <div class="flex justify-between items-center animate__animated animate__fadeInRight animate__delay-1s">
+            <div id="favorite-order" class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6 rounded shadow">
+                <div class="flex justify-between items-center">
                     <div>
                         <p class="text-gray-800 font-semibold text-lg">🌟 Your Favorite Order</p>
                         <p class="text-sm text-gray-600">Placed on {{ favorite.created_at|date:"F d, Y H:i" }}</p>
                     </div>
-                    <form method="post" action="{% url 'payments:reorder' favorite.id %}" class="animate__animated animate__zoomIn animate__delay-2s">
+                    <form method="post" action="{% url 'payments:reorder' favorite.id %}">
                         {% csrf_token %}
                         <button type="submit" class="bg-yellow-500 text-white text-sm px-3 py-1 rounded hover:bg-yellow-600 transition">
                             Reorder
                         </button>
                     </form>
                 </div>
-                <ul class="list-disc list-inside mt-2 text-sm animate__animated animate__fadeInUp animate__delay-1s">
+                <ul class="list-disc list-inside mt-2 text-sm">
                     {% for item in favorite.items %}
                         <li>{{ item.name }} (x{{ item.quantity }}) - K{{ item.subtotal|floatformat:2 }}</li>
                     {% endfor %}
                 </ul>
-                <p class="mt-2 font-medium animate__animated animate__fadeInUp animate__delay-2s">Total: K{{ favorite.total|floatformat:2 }}</p>
+                <p class="mt-2 font-medium">Total: K{{ favorite.total|floatformat:2 }}</p>
             </div>
             {% endif %}
             {% endwith %}
-            
 
             {% if history %}
                 <table class="w-full border-collapse mb-6">
@@ -49,55 +49,16 @@
                     </thead>
                     <tbody id="pc-history-table">
                         {% for order in history|slice:":5" %}
-                        <tr class="border-b">
-                            <td class="p-3">{{ order.created_at|date:"F d, Y H:i" }}</td>
-                            <td class="p-3">{{ order.delivery_info.address|default:order.delivery_info.get_predefined_address_display }}</td>
-                            <td class="p-3">{{ order.delivery_info.get_payment_method_display }}</td>
-                            <td class="p-3">{{ order.delivery_info.get_delivery_status_display }}</td>
-                            <td class="p-3">
-                                <ul class="list-disc pl-5">
-                                    {% for item in order.items %}
-                                    <li>{{ item.name }} (x{{ item.quantity }}) - K{{ item.subtotal|floatformat:2 }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td class="p-3">K{{ order.total|floatformat:2 }}</td>
-                            <td class="p-3">
-                                <form method="post" action="{% url 'payments:reorder' order.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="bg-green-600 text-white py-1 px-3 rounded-lg hover:bg-green-700 transition duration-300">Reorder</button>
-                                </form>
-                                <button type="button" onclick="markFavorite(this)" class="text-yellow-600 text-xs underline hover:text-yellow-800 mt-2 block">★ Add to Favorites</button>
-                            </td>
-                        </tr>
+                            {% include "payments/order_row.html" %}
                         {% endfor %}
                     </tbody>
                     <tbody id="pc-full-history" class="hidden">
                         {% for order in history %}
-                        <tr class="border-b">
-                            <td class="p-3">{{ order.created_at|date:"F d, Y H:i" }}</td>
-                            <td class="p-3">{{ order.delivery_info.address|default:order.delivery_info.get_predefined_address_display }}</td>
-                            <td class="p-3">{{ order.delivery_info.get_payment_method_display }}</td>
-                            <td class="p-3">{{ order.delivery_info.get_delivery_status_display }}</td>
-                            <td class="p-3">
-                                <ul class="list-disc pl-5">
-                                    {% for item in order.items %}
-                                    <li>{{ item.name }} (x{{ item.quantity }}) - K{{ item.subtotal|floatformat:2 }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td class="p-3">K{{ order.total|floatformat:2 }}</td>
-                            <td class="p-3">
-                                <form method="post" action="{% url 'payments:reorder' order.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="bg-green-600 text-white py-1 px-3 rounded-lg hover:bg-green-700 transition duration-300">Reorder</button>
-                                </form>
-                                <button type="button" onclick="markFavorite(this)" class="text-yellow-600 text-xs underline hover:text-yellow-800 mt-2 block">★ Add to Favorites</button>
-                            </td>
-                        </tr>
+                            {% include "payments/order_row.html" %}
                         {% endfor %}
                     </tbody>
                 </table>
+
                 {% if history|length > 5 %}
                 <div class="text-center mt-4">
                     <button id="pc-view-all-btn" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
@@ -108,6 +69,7 @@
             {% else %}
                 <p class="text-gray-600 text-center">You have no order history yet.</p>
             {% endif %}
+
             <a href="{% url 'cart:cart_view' %}" class="mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Back to Cart</a>
         </div>
     </div>
@@ -119,7 +81,7 @@
 
             {% with history.0 as favorite %}
             {% if favorite %}
-            <div id="favorite-order" class="bg-yellow-100 border-l-4 border-yellow-500 p-3 mb-4 rounded shadow animate__animated animate__fadeIn text-sm">
+            <div id="favorite-order" class="bg-yellow-100 border-l-4 border-yellow-500 p-3 mb-4 rounded shadow text-sm">
                 <div class="flex justify-between items-center mb-2">
                     <div>
                         <p class="font-semibold text-gray-800">Your Favorite Order</p>
@@ -132,7 +94,7 @@
                 </div>
                 <ul class="list-disc pl-4">
                     {% for item in favorite.items %}
-                    <li>{{ item.name|truncatechars:10 }} (x{{ item.quantity }})</li>
+                        <li>{{ item.name|truncatechars:10 }} (x{{ item.quantity }})</li>
                     {% endfor %}
                 </ul>
                 <p class="mt-2">Total: K{{ favorite.total|floatformat:2 }}</p>
@@ -155,55 +117,16 @@
                     </thead>
                     <tbody id="mobile-history-table">
                         {% for order in history|slice:":5" %}
-                        <tr class="border-b">
-                            <td class="p-2">{{ order.created_at|date:"M d, Y" }}</td>
-                            <td class="p-2">{{ order.delivery_info.address|default:order.delivery_info.get_predefined_address_display|truncatechars:10 }}</td>
-                            <td class="p-2">{{ order.delivery_info.get_payment_method_display|truncatechars:10 }}</td>
-                            <td class="p-2">{{ order.delivery_info.get_delivery_status_display|truncatechars:10 }}</td>
-                            <td class="p-2">
-                                <ul class="list-disc pl-4">
-                                    {% for item in order.items %}
-                                    <li>{{ item.name|truncatechars:10 }} (x{{ item.quantity }})</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td class="p-2">K{{ order.total|floatformat:2 }}</td>
-                            <td class="p-2">
-                                <form method="post" action="{% url 'payments:reorder' order.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="bg-green-600 text-white py-1 px-2 rounded hover:bg-green-700 text-xs">Reorder</button>
-                                </form>
-                                <button type="button" onclick="markFavorite(this)" class="text-yellow-600 text-xs underline hover:text-yellow-800 mt-1 block">★</button>
-                            </td>
-                        </tr>
+                            {% include "payments/order_row_mobile.html" %}
                         {% endfor %}
                     </tbody>
                     <tbody id="mobile-full-history" class="hidden">
                         {% for order in history %}
-                        <tr class="border-b">
-                            <td class="p-2">{{ order.created_at|date:"M d, Y" }}</td>
-                            <td class="p-2">{{ order.delivery_info.address|default:order.delivery_info.get_predefined_address_display|truncatechars:10 }}</td>
-                            <td class="p-2">{{ order.delivery_info.get_payment_method_display|truncatechars:10 }}</td>
-                            <td class="p-2">{{ order.delivery_info.get_delivery_status_display|truncatechars:10 }}</td>
-                            <td class="p-2">
-                                <ul class="list-disc pl-4">
-                                    {% for item in order.items %}
-                                    <li>{{ item.name|truncatechars:10 }} (x{{ item.quantity }})</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td class="p-2">K{{ order.total|floatformat:2 }}</td>
-                            <td class="p-2">
-                                <form method="post" action="{% url 'payments:reorder' order.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="bg-green-600 text-white py-1 px-2 rounded hover:bg-green-700 text-xs">Reorder</button>
-                                </form>
-                                <button type="button" onclick="markFavorite(this)" class="text-yellow-600 text-xs underline hover:text-yellow-800 mt-1 block">★</button>
-                            </td>
-                        </tr>
+                            {% include "payments/order_row_mobile.html" %}
                         {% endfor %}
                     </tbody>
                 </table>
+
                 {% if history|length > 5 %}
                 <div class="text-center mt-4">
                     <button id="mobile-view-all-btn" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 text-sm">
@@ -221,53 +144,17 @@
 
 <script>
     document.getElementById('pc-view-all-btn')?.addEventListener('click', function() {
-        const fullHistory = document.getElementById('pc-full-history');
-        const partialHistory = document.getElementById('pc-history-table');
-        const button = this;
-        if (fullHistory.classList.contains('hidden')) {
-            fullHistory.classList.remove('hidden');
-            partialHistory.classList.add('hidden');
-            button.textContent = 'Show Less';
-        } else {
-            fullHistory.classList.add('hidden');
-            partialHistory.classList.remove('hidden');
-            button.textContent = 'View All Orders';
-        }
+        const full = document.getElementById('pc-full-history');
+        const slice = document.getElementById('pc-history-table');
+        this.textContent = full.classList.toggle('hidden') ? 'View All Orders' : 'Show Less';
+        slice.classList.toggle('hidden');
     });
 
     document.getElementById('mobile-view-all-btn')?.addEventListener('click', function() {
-        const fullHistory = document.getElementById('mobile-full-history');
-        const partialHistory = document.getElementById('mobile-history-table');
-        const button = this;
-        if (fullHistory.classList.contains('hidden')) {
-            fullHistory.classList.remove('hidden');
-            partialHistory.classList.add('hidden');
-            button.textContent = 'Show Less';
-        } else {
-            fullHistory.classList.add('hidden');
-            partialHistory.classList.remove('hidden');
-            button.textContent = 'View All Orders';
-        }
+        const full = document.getElementById('mobile-full-history');
+        const slice = document.getElementById('mobile-history-table');
+        this.textContent = full.classList.toggle('hidden') ? 'View All Orders' : 'Show Less';
+        slice.classList.toggle('hidden');
     });
-
-    function markFavorite(button) {
-        const orderRow = button.closest('tr');
-        const favoriteSection = document.getElementById('favorite-order');
-        const clone = orderRow.cloneNode(true);
-        clone.querySelectorAll("form").forEach(f => f.remove());
-        clone.querySelectorAll("button").forEach(b => b.remove());
-
-        const newFav = document.createElement('div');
-        newFav.className = "bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6 rounded shadow animate__animated animate__fadeIn";
-        newFav.innerHTML = `
-            <div class="flex justify-between items-center">
-                <div><p class="text-gray-800 font-semibold">Your Favorite Order</p></div>
-            </div>
-            <table class="text-sm mt-2 w-full">${clone.outerHTML}</table>
-        `;
-        favoriteSection?.remove();
-        newFav.id = "favorite-order";
-        orderRow.closest('div').insertBefore(newFav, orderRow.closest('table'));
-    }
 </script>
 {% endblock %}

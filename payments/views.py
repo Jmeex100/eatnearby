@@ -13,6 +13,7 @@ from staffs.models import StaffAssignment, Notification
 from staffs.staffs_assignments import pick_staff_for_point
 
 # Payment integrations
+from django.db import transaction
 from .cards.paypal import initiate_paypal_payment
 from .cards.pesapal import initiate_pesapal_payment, verify_pesapal_payment
 from .cards.stripe import initiate_stripe_payment, verify_stripe_payment
@@ -328,7 +329,6 @@ def payment_success(request, delivery_id):
     }
     return render(request, 'payments/success.html', context)
 
-# [Previous imports and code unchanged until payment_done]
 @login_required
 @csrf_exempt
 def payment_done(request):
@@ -483,6 +483,7 @@ def payment_cancelled(request):
 
 @login_required
 def order_history(request):
+    """Display the user's order history."""
     history = PaymentHistory.objects.filter(user=request.user)
     return render(request, 'payments/order_history.html', {'history': history})
 
@@ -521,3 +522,94 @@ def mtn_callback(request):
             logger.error(f"MTN Callback error: {str(e)}")
             return HttpResponse(status=500)
     return HttpResponse(status=405)
+
+
+
+@login_required
+@csrf_exempt
+def in_progress_orders(request):
+    """
+    Display in-progress and declined (cancelled) orders for the logged-in customer.
+    Allow confirming delivery and deleting declined orders.
+    """
+    in_progress_orders = DeliveryInfo.objects.filter(
+        user=request.user,
+        delivery_status='in_progress'
+    ).select_related('cart', 'user').prefetch_related('cart__cartitem_set', 'payment_histories')
+
+    declined_orders = DeliveryInfo.objects.filter(
+        user=request.user,
+        delivery_status='cancelled'
+    ).select_related('cart', 'user').prefetch_related('cart__cartitem_set', 'payment_histories')
+
+    if request.method == 'POST':
+        # Handle deletion of declined orders
+        delete_id = request.POST.get('delete_delivery_id')
+        if delete_id:
+            try:
+                delivery_to_delete = get_object_or_404(
+                    DeliveryInfo,
+                    id=delete_id,
+                    user=request.user,
+                    delivery_status='cancelled'
+                )
+                delivery_to_delete.delete()
+                messages.success(request, f"Declined order #{delete_id} deleted.")
+            except Exception as e:
+                logger.error(f"Error deleting declined order {delete_id}: {str(e)}")
+                messages.error(request, f"Could not delete order #{delete_id}. Please try again.")
+            return redirect('payments:orders_delivering')
+
+        # Handle confirmation of delivery
+        delivery_id = request.POST.get('delivery_id')
+        try:
+            with transaction.atomic():
+                delivery_info = get_object_or_404(
+                    DeliveryInfo,
+                    id=delivery_id,
+                    user=request.user,
+                    delivery_status='in_progress'
+                )
+
+                delivery_info.delivery_status = 'completed'
+                delivery_info.save()
+
+                staff_assignment = StaffAssignment.objects.filter(delivery=delivery_info).first()
+                if staff_assignment:
+                    Notification.objects.create(
+                        recipient=staff_assignment.staff,
+                        message=f"Delivery at {delivery_info.get_predefined_address_display()} confirmed by customer.",
+                        related_delivery=delivery_info,
+                        notification_type='delivery_completed'
+                    )
+
+                cart = delivery_info.cart
+                if cart:
+                    cart.cartitem_set.all().delete()
+
+                payment_history = PaymentHistory.objects.filter(delivery_info=delivery_info).first()
+                order_reference = payment_history.id if payment_history else delivery_info.id
+                total_amount = payment_history.total if payment_history else cart.total() if cart else 0.00
+
+                sms_body = (
+                    f"Order #{order_reference} Confirmed!\n"
+                    f"Total: K{total_amount:.2f}\n"
+                    f"Delivery to: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
+                    f"Thank you for ordering with us!"
+                )
+                send_sms(delivery_info.phone_number, sms_body)
+
+                messages.success(request, f"Order {delivery_id} confirmed! SMS sent to {delivery_info.phone_number}")
+                logger.info(f"Delivery {delivery_id} confirmed by user {request.user.username}")
+
+        except Exception as e:
+            logger.error(f"Error confirming delivery {delivery_id}: {str(e)}")
+            messages.error(request, f"Error confirming order: {str(e)}")
+
+        return redirect('payments:orders_delivering')
+
+    context = {
+        'in_progress_orders': in_progress_orders,
+        'declined_orders': declined_orders,
+    }
+    return render(request, 'payments/in_progress_orders.html', context)

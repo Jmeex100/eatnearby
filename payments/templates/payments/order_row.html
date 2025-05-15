@@ -1,0 +1,31 @@
+<tr class="border-b">
+    <td class="p-3">{{ order.created_at|date:"F d, Y H:i" }}</td>
+    <td class="p-3">
+        {% if order.delivery_info %}
+            {{ order.delivery_info.address|default:order.delivery_info.get_predefined_address_display }}
+        {% else %}
+            <span class="text-gray-400 italic">No delivery info</span>
+        {% endif %}
+    </td>
+    <td class="p-3">
+        {{ order.delivery_info.get_payment_method_display|default:"—" }}
+    </td>
+    <td class="p-3">
+        {{ order.delivery_info.get_delivery_status_display|default:"—" }}
+    </td>
+    <td class="p-3">
+        <ul class="list-disc pl-5">
+            {% for item in order.items %}
+                <li>{{ item.name }} (x{{ item.quantity }}) - K{{ item.subtotal|floatformat:2 }}</li>
+            {% endfor %}
+        </ul>
+    </td>
+    <td class="p-3">K{{ order.total|floatformat:2 }}</td>
+    <td class="p-3">
+        <form method="post" action="{% url 'payments:reorder' order.id %}">
+            {% csrf_token %}
+            <button type="submit" class="bg-green-600 text-white py-1 px-3 rounded-lg hover:bg-green-700">Reorder</button>
+        </form>
+        <button type="button" onclick="markFavorite(this)" class="text-yellow-600 text-xs underline hover:text-yellow-800 mt-2 block">★ Add to Favorites</button>
+    </td>
+</tr>

@@ -21,6 +21,7 @@
                     <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
                     <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
                 <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
+                    <a title="in progress" href="{% url 'payments:orders_delivering' %}" class="hover:font-bold">Delivering</a>
                     <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
                 {% else %}
                     <a href="{% url 'home' %}" class="hover:font-bold">Home</a>
@@ -86,8 +87,11 @@
                 <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
                 <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
                 <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
+                 <a href="{% url 'payments:orders_delivering' %}" class="hover:font-bold">Delivering</a>
                 <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
                 <a href="{% url 'cart:cart_view' %}" class="relative hover:font-bold">
+                       
+
                     <svg class="w-6 h-6 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-1 5h10l-1-5M9 21h6m-6-6h6m-6-6h6m-6-6h6"></path>
                     </svg>
