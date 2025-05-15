@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
-
+# /home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/twilio_utils.py
 logger = logging.getLogger(__name__)
 
 def normalize_phone_number(phone):

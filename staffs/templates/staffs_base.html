@@ -15,47 +15,7 @@
     <main class="mt-16">
         <div class="container mx-auto px-4 py-6">
             <!-- My Delivery Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <!-- My Active Deliveries -->
-                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                    <div class="flex items-center justify-between">
-                        <div>
-                      <div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">My Active Deliveries</p>
-                    <p class="text-2xl font-bold text-gray-900  dark:text-black">{{ my_deliveries.active_count }}</p>
-                </div> </div>
-                        <div class="bg-blue-100 p-3 rounded-full">
-                            <i class="fas fa-truck-loading text-blue-500"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Today's Completed -->
-                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
-                    <div class="flex items-center justify-between">
-                        <div>
-                             <p class="text-gray-500 dark:text-gray-400 text-sm">Completed Today</p>
-                    <p class="text-2xl font-bold text-gray-900  dark:text-black">{{ my_deliveries.completed_today }}</p>
-                              </div>
-                        <div class="bg-green-100 p-3 rounded-full">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- On-Time Performance -->
-                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-purple-500">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">On-Time Rate</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-black">{{ my_deliveries.on_time_rate }}%</p>
-                </div>
-                        <div class="bg-purple-100 p-3 rounded-full">
-                            <i class="fas fa-stopwatch text-purple-500"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {% include 'staffs/Stats.html' %}
   <main class="mt-16 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
 

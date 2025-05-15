@@ -2,24 +2,28 @@ import stripe
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 import logging
+import urllib3
 
 logger = logging.getLogger(__name__)
 
 # Set Stripe API key
 stripe.api_key = settings.STRIPE_SECRET_KEY
+# Disable proxy to avoid ProxyError
+stripe.proxy = None
+urllib3.util.connection.ALLOWED_HOSTNAMES = ['api.stripe.com']
 
 def initiate_stripe_payment(request, cart, delivery_info, total_usd):
     """
-    Initiate a Stripe Checkout session for the given cart and delivery info.
+    Initiate a Stripe Checkout session for the given cart.
 
     Args:
         request: The HTTP request object.
         cart: The user's cart object (Cart model instance).
-        delivery_info: The DeliveryInfo instance tied to the order.
+        delivery_info: The DeliveryInfo instance tied to the order (None if not created).
         total_usd: The total amount in USD (float).
 
     Returns:
-        dict: Contains 'checkout_url' for redirecting to Stripe's hosted payment page.
+        dict: Contains 'checkout_url', 'session_id', 'public_key', 'cart', and 'total_usd'.
 
     Raises:
         ImproperlyConfigured: If required Stripe settings are missing.
@@ -34,7 +38,7 @@ def initiate_stripe_payment(request, cart, delivery_info, total_usd):
     # Prepare line items from cart
     line_items = []
     for item in cart.cartitem_set.all():
-        product = item.get_product()  # Call the method with ()
+        product = item.get_product()
         if not product:
             logger.error(f"No product found for cart item {item.id}")
             raise Exception(f"Invalid product in cart item {item.id}")
@@ -44,14 +48,11 @@ def initiate_stripe_payment(request, cart, delivery_info, total_usd):
                 'currency': 'usd',
                 'unit_amount': unit_amount,
                 'product_data': {
-                    'name': product.name,  # Now product is an object with a 'name' attribute
+                    'name': product.name,
                 },
             },
             'quantity': item.quantity,
         })
-
-    # Ensure total matches (in cents)
-    total_usd_cents = int(total_usd * 100)
 
     # Create Stripe Checkout session
     try:
@@ -64,21 +65,23 @@ def initiate_stripe_payment(request, cart, delivery_info, total_usd):
             customer_email=request.user.email or "customer@example.com",
             metadata={
                 'cart_id': str(cart.id),
-                'delivery_info_id': str(delivery_info.id),
+                'delivery_info_id': 'pending' if delivery_info is None else str(delivery_info.id),
             }
         )
         logger.debug(f"Stripe Checkout session created: {session.id}, URL: {session.url}")
+        return {
+            'checkout_url': session.url,
+            'session_id': session.id,
+            'public_key': settings.STRIPE_PUBLISHABLE_KEY,
+            'cart': cart,
+            'total_usd': total_usd,
+        }
     except stripe.error.StripeError as e:
-        logger.error(f"Stripe API error: {str(e)}")
+        logger.error(f"Stripe API error: {str(e)}", exc_info=True)
         raise Exception(f"Stripe payment failed: {str(e)}")
     except Exception as e:
-        logger.error(f"Unexpected error creating Stripe session: {str(e)}")
+        logger.error(f"Unexpected error creating Stripe session: {str(e)}", exc_info=True)
         raise Exception(f"Stripe payment failed: {str(e)}")
-
-    return {
-        'checkout_url': session.url,
-        'session_id': session.id
-    }
 
 def verify_stripe_payment(session_id):
     """
@@ -98,5 +101,8 @@ def verify_stripe_payment(session_id):
         logger.debug(f"Stripe session status: {session.payment_status}")
         return session.payment_status
     except stripe.error.StripeError as e:
-        logger.error(f"Stripe verification error: {str(e)}")
+        logger.error(f"Stripe verification error: {str(e)}", exc_info=True)
+        raise Exception(f"Stripe verification failed: {str(e)}")
+    except Exception as e:
+        logger.error(f"Unexpected error verifying Stripe session: {str(e)}", exc_info=True)
         raise Exception(f"Stripe verification failed: {str(e)}")

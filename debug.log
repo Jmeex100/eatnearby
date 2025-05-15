@@ -1,0 +1,1683 @@
+Watching for file changes with StatReloader
+User 6 attempting to decline delivery 325, current status: pending
+DeliveryInfo 325 status changed from pending to cancelled
+Delivery 325 declined by user 6, status updated to cancelled
+New DeliveryInfo created with status pending
+Created DeliveryInfo 326 with status pending
+Assigned delivery 326 to staff 6
+DeliveryInfo 326 status changed from pending to in_progress
+Delivery 326 accepted by user 6, status updated to in_progress
+DeliveryInfo 326 status changed from in_progress to pending
+DeliveryInfo 326 status changed from pending to in_progress
+Delivery 326 accepted by user 6, status updated to in_progress
+DeliveryInfo 326 status changed from in_progress to completed
+Delivery 326 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 327 with status pending
+Assigned delivery 327 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=178&line_items[0][price_data][product_data][name]=Order+%23327+from+EatNearby&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=327
+Starting new HTTPS connection (1): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa810a8d7f0>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (2): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa80a79d090>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.62 seconds.'
+Starting new HTTPS connection (3): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa80a79d590>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+User 6 attempting to decline delivery 327, current status: pending
+DeliveryInfo 327 status changed from pending to cancelled
+Delivery 327 declined by user 6, status updated to cancelled
+New DeliveryInfo created with status pending
+Created DeliveryInfo 328 with status pending
+Assigned delivery 328 to staff 6
+Simulated Airtel payment for +260973546375, Total: 51.0 ZMW, Transaction ID: AT-328-2
+DeliveryInfo 328 status changed from pending to in_progress
+Delivery 328 accepted by user 6, status updated to in_progress
+DeliveryInfo 328 status changed from in_progress to completed
+Delivery 328 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 329 with status pending
+Assigned delivery 329 to staff 6
+Simulated MTN payment for +260973546375, Total: 248.0 ZMW, Transaction ID: MTN-329-2
+DeliveryInfo 329 status changed from pending to in_progress
+Delivery 329 accepted by user 6, status updated to in_progress
+New DeliveryInfo created with status pending
+Created DeliveryInfo 330 with status pending
+Assigned delivery 330 to staff 6
+Simulated MTN payment for +260973546375, Total: 248.0 ZMW, Transaction ID: MTN-330-2
+Mtn payment for +260973546375, Amount: 248.00 ZMW, Delivery 330
+DeliveryInfo 330 status changed from pending to in_progress
+Delivery 330 accepted by user 6, status updated to in_progress
+DeliveryInfo 330 status changed from in_progress to completed
+Delivery 330 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 331 with status pending
+Assigned delivery 331 to staff 6
+Starting new HTTPS connection (1): demo.pesapal.com:443
+Pesapal API unreachable: HTTPSConnectionPool(host='demo.pesapal.com', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa80a79cb90>: Failed to establish a new connection: [Errno 111] Connection refused'))). Returning placeholder.
+DeliveryInfo 331 status changed from pending to in_progress
+Delivery 331 accepted by user 6, status updated to in_progress
+New DeliveryInfo created with status pending
+Created DeliveryInfo 332 with status pending
+Assigned delivery 332 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=761&line_items[0][price_data][product_data][name]=Order+%23332+from+EatNearby&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=332
+Starting new HTTPS connection (4): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa810a5a990>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (5): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa80a79d450>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.76 seconds.'
+Starting new HTTPS connection (6): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fa80a79d6d0>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+New DeliveryInfo created with status pending
+Created DeliveryInfo 333 with status pending
+Assigned delivery 333 to staff 6
+Simulated Airtel payment for +63269973546375, Total: 218.0 ZMW, Transaction ID: AT-333-2
+Airtel payment for +63269973546375, Amount: 218.00 ZMW, Delivery 333
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/staffs/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/staffs/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/staffs/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/signals.py changed, reloading.
+Watching for file changes with StatReloader
+DeliveryInfo 333 status changed from pending to in_progress
+Delivery 333 accepted by user 6, status updated to in_progress
+DeliveryInfo 332 status changed from pending to in_progress
+Delivery 332 accepted by user 6, status updated to in_progress
+Paypal payment initiation failed: 'NoneType' object has no attribute 'id'
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/staffs/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/paypal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+New DeliveryInfo created with status pending
+Created DeliveryInfo 334 with status pending
+Assigned delivery 334 to staff 6
+Simulated MTN payment for +260973546375, Total: 218.0 ZMW, Transaction ID: MTN-334-2
+New DeliveryInfo created with status pending
+Created DeliveryInfo 335 with status pending
+Assigned delivery 335 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=761&line_items[0][price_data][product_data][name]=Order+%23335+from+EatNearby&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=335
+Starting new HTTPS connection (1): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc542404c20>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (2): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc5435a3c50>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.92 seconds.'
+Starting new HTTPS connection (3): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc543510190>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+New DeliveryInfo created with status pending
+Created DeliveryInfo 336 with status pending
+Assigned delivery 336 to staff 6
+User 6 attempting to decline delivery 336, current status: pending
+DeliveryInfo 336 status changed from pending to cancelled
+Delivery 336 declined by user 6, status updated to cancelled
+DeliveryInfo 335 status changed from pending to in_progress
+Delivery 335 accepted by user 6, status updated to in_progress
+DeliveryInfo 334 status changed from pending to in_progress
+Delivery 334 accepted by user 6, status updated to in_progress
+New DeliveryInfo created with status pending
+Created DeliveryInfo 337 with status pending
+Assigned delivery 337 to staff 6
+Simulated Airtel payment for +260973546375, Total: 218.0 ZMW, Transaction ID: AT-337-2
+Airtel payment for +260973546375, Amount: 218.00 ZMW, Delivery 337
+DeliveryInfo 337 status changed from pending to in_progress
+Delivery 337 accepted by user 6, status updated to in_progress
+DeliveryInfo 337 status changed from in_progress to completed
+Delivery 337 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 338 with status pending
+Assigned delivery 338 to staff 6
+Simulated MTN payment for +260973546375, Total: 248.0 ZMW, Transaction ID: MTN-338-2
+DeliveryInfo 338 status changed from pending to in_progress
+Delivery 338 accepted by user 6, status updated to in_progress
+DeliveryInfo 338 status changed from in_progress to completed
+Delivery 338 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 339 with status pending
+Assigned delivery 339 to staff 6
+Simulated Airtel payment for +260973546375, Total: 248.0 ZMW, Transaction ID: AT-339-2
+Airtel payment for +260973546375, Amount: 248.00 ZMW, Delivery 339
+DeliveryInfo 339 status changed from pending to in_progress
+Delivery 339 accepted by user 6, status updated to in_progress
+DeliveryInfo 339 status changed from in_progress to completed
+Delivery 339 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 340 with status pending
+Assigned delivery 340 to staff 6
+Simulated MTN payment for +260973546375, Total: 533.0 ZMW, Transaction ID: MTN-340-2
+Mtn payment for +260973546375, Amount: 533.0 ZMW, Delivery 340
+DeliveryInfo 340 status changed from pending to in_progress
+Delivery 340 accepted by user 6, status updated to in_progress
+DeliveryInfo 340 status changed from in_progress to completed
+Delivery 340 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 341 with status pending
+Assigned delivery 341 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=761&line_items[0][price_data][product_data][name]=Order+%23341+from+EatNearby&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=341
+Starting new HTTPS connection (4): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc5435a39d0>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (5): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc543510410>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.98 seconds.'
+Starting new HTTPS connection (6): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc5435a39d0>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+DeliveryInfo 341 status changed from pending to in_progress
+Delivery 341 accepted by user 6, status updated to in_progress
+New DeliveryInfo created with status pending
+Created DeliveryInfo 342 with status pending
+Assigned delivery 342 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=761&line_items[0][price_data][product_data][name]=Order+%23342+from+EatNearby&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=342
+Starting new HTTPS connection (7): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc543510050>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (8): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc5435116d0>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.56 seconds.'
+Starting new HTTPS connection (9): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fc543511a90>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/stripe.py changed, reloading.
+Watching for file changes with StatReloader
+New DeliveryInfo created with status pending
+Created DeliveryInfo 343 with status pending
+Assigned delivery 343 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=761&line_items[0][price_data][product_data][name]=Order+from+EatNearby+for+admin&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=343
+Starting new HTTPS connection (1): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff9d70f1160>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (2): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff9d6cc3c50>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.79 seconds.'
+Starting new HTTPS connection (3): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff9d6cc3610>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+New DeliveryInfo created with status pending
+Created DeliveryInfo 344 with status pending
+Assigned delivery 344 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=761&line_items[0][price_data][product_data][name]=Order+from+EatNearby+for+admin&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=344
+Starting new HTTPS connection (4): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff9d69b3110>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (5): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff9d69b3610>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.93 seconds.'
+Starting new HTTPS connection (6): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff9d69b3750>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/stripe.py changed, reloading.
+Watching for file changes with StatReloader
+New DeliveryInfo created with status pending
+Created DeliveryInfo 345 with status pending
+Assigned delivery 345 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=9&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=6&line_items[1][price_data][product_data][name]=Vitumbuwa&line_items[1][quantity]=4&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=139&line_items[2][price_data][product_data][name]=Goat+Meat&line_items[2][quantity]=12&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=345
+Starting new HTTPS connection (1): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fd1c1665fd0>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 1 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.50 seconds.'
+Starting new HTTPS connection (2): api.stripe.com:443
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fd1c15e8910>: Failed to establish a new connection: [Errno 111] Connection refused'))))"
+message='Initiating retry 2 for request post https://api.stripe.com/v1/checkout/sessions after sleeping 0.71 seconds.'
+Starting new HTTPS connection (3): api.stripe.com:443
+Stripe API error: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ProxyError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/checkout/sessions (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fd1c1647ed0>: Failed to establish a new connection: [Errno 111] Connection refused'))))
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+DeliveryInfo 345 status changed from pending to in_progress
+Delivery 345 accepted by user 6, status updated to in_progress
+DeliveryInfo 344 status changed from pending to in_progress
+Delivery 344 accepted by user 6, status updated to in_progress
+DeliveryInfo 343 status changed from pending to in_progress
+Delivery 343 accepted by user 6, status updated to in_progress
+DeliveryInfo 342 status changed from pending to in_progress
+Delivery 342 accepted by user 6, status updated to in_progress
+New DeliveryInfo created with status pending
+Created DeliveryInfo 346 with status pending
+Assigned delivery 346 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=9&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=7&line_items[1][price_data][product_data][name]=Vitumbuwa&line_items[1][quantity]=4&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=140&line_items[2][price_data][product_data][name]=Goat+Meat&line_items[2][quantity]=12&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F%3Fsession_id%3D%257BCHECKOUT_SESSION_ID%257D&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=346&metadata[user_id]=1
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2937
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1HbIrXyUNkLvglCcd1sUbcQrU3VCZqgOfsVffKc2xGL4hwyrGlcqYjWuc",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 1861,\n  "amount_total": 1861,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747318570,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "Amin1000@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747404970,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "346",\n    "user_id": "1"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/?session_id=%7BCHECKOUT_SESSION_ID%7D",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1HbIrXyUNkLvglCcd1sUbcQrU3VCZqgOfsVffKc2xGL4hwyrGlcqYjWuc#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_bOoQ6MFKfRhWcB message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1HbIrXyUNkLvglCcd1sUbcQrU3VCZqgOfsVffKc2xGL4hwyrGlcqYjWuc, URL: https://checkout.stripe.com/c/pay/cs_test_b1HbIrXyUNkLvglCcd1sUbcQrU3VCZqgOfsVffKc2xGL4hwyrGlcqYjWuc#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+DeliveryInfo 346 status changed from pending to in_progress
+Delivery 346 accepted by user 6, status updated to in_progress
+message='Request to Stripe api' method=get url=https://api.stripe.com/v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand[0]=payment_intent
+api_version=2025-02-24.acacia message='Post details' post_data=expand[0]=payment_intent
+https://api.stripe.com:443 "GET /v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand%5B0%5D=payment_intent HTTP/1.1" 404 323
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand[0]=payment_intent response_code=404
+body='{\n  "error": {\n    "code": "resource_missing",\n    "doc_url": "https://stripe.com/docs/error-codes/resource-missing",\n    "message": "No such checkout.session: {CHECKOUT_SESSION_ID}",\n    "request_log_url": "https://dashboard.stripe.com/test/logs/req_q3kA0fMMJ68xsZ?t=1747318603",\n    "type": "invalid_request_error"\n  }\n}\n' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_q3kA0fMMJ68xsZ message='Dashboard link for request'
+error_code=resource_missing error_message='No such checkout.session: {CHECKOUT_SESSION_ID}' error_param=None error_type=invalid_request_error message='Stripe v1 API error received'
+Stripe verification error: Request req_q3kA0fMMJ68xsZ: No such checkout.session: {CHECKOUT_SESSION_ID}
+Stripe payment verification failed: Stripe verification failed: Request req_q3kA0fMMJ68xsZ: No such checkout.session: {CHECKOUT_SESSION_ID}
+New DeliveryInfo created with status pending
+Created DeliveryInfo 347 with status pending
+Assigned delivery 347 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=9&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=7&line_items[1][price_data][product_data][name]=Vitumbuwa&line_items[1][quantity]=4&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=140&line_items[2][price_data][product_data][name]=Goat+Meat&line_items[2][quantity]=12&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F%3Fsession_id%3D%257BCHECKOUT_SESSION_ID%257D&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=347&metadata[user_id]=1
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2937
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1bawFKhlsdOBAQLiJTjnlRGlJpotlpLWzPp1DgLqVyXtY3kM116YqdAQ4",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 1861,\n  "amount_total": 1861,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747318670,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "Amin1000@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747405070,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "347",\n    "user_id": "1"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/?session_id=%7BCHECKOUT_SESSION_ID%7D",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1bawFKhlsdOBAQLiJTjnlRGlJpotlpLWzPp1DgLqVyXtY3kM116YqdAQ4#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_Edr5dAHA6FioTl message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1bawFKhlsdOBAQLiJTjnlRGlJpotlpLWzPp1DgLqVyXtY3kM116YqdAQ4, URL: https://checkout.stripe.com/c/pay/cs_test_b1bawFKhlsdOBAQLiJTjnlRGlJpotlpLWzPp1DgLqVyXtY3kM116YqdAQ4#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+message='Request to Stripe api' method=get url=https://api.stripe.com/v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand[0]=payment_intent
+api_version=2025-02-24.acacia message='Post details' post_data=expand[0]=payment_intent
+message="Encountered a retryable error Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))"
+message='Initiating retry 1 for request get https://api.stripe.com/v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand[0]=payment_intent after sleeping 0.50 seconds.'
+Starting new HTTPS connection (2): api.stripe.com:443
+https://api.stripe.com:443 "GET /v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand%5B0%5D=payment_intent HTTP/1.1" 404 323
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions/%7BCHECKOUT_SESSION_ID%7D?expand[0]=payment_intent response_code=404
+body='{\n  "error": {\n    "code": "resource_missing",\n    "doc_url": "https://stripe.com/docs/error-codes/resource-missing",\n    "message": "No such checkout.session: {CHECKOUT_SESSION_ID}",\n    "request_log_url": "https://dashboard.stripe.com/test/logs/req_nRKHNahDZMVyXl?t=1747318762",\n    "type": "invalid_request_error"\n  }\n}\n' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_nRKHNahDZMVyXl message='Dashboard link for request'
+error_code=resource_missing error_message='No such checkout.session: {CHECKOUT_SESSION_ID}' error_param=None error_type=invalid_request_error message='Stripe v1 API error received'
+Stripe verification error: Request req_nRKHNahDZMVyXl: No such checkout.session: {CHECKOUT_SESSION_ID}
+Stripe payment verification failed: Stripe verification failed: Request req_nRKHNahDZMVyXl: No such checkout.session: {CHECKOUT_SESSION_ID}
+DeliveryInfo 347 status changed from pending to in_progress
+Delivery 347 accepted by user 6, status updated to in_progress
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/stripe.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/paypal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/pesapal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/signals.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/staffs/views.py changed, reloading.
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=8&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=6&line_items[1][price_data][product_data][name]=Vitumbuwa&line_items[1][quantity]=4&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=139&line_items[2][price_data][product_data][name]=Goat+Meat&line_items[2][quantity]=6&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=pending
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2882
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 994,\n  "amount_total": 994,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747319205,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "Amin1000@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747405604,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_grTqu4Kttr4edY message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH, URL: https://checkout.stripe.com/c/pay/cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+message='Request to Stripe api' method=get url=https://api.stripe.com/v1/checkout/sessions/cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH
+api_version=2025-02-24.acacia message='Post details' post_data=
+https://api.stripe.com:443 "GET /v1/checkout/sessions/cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH HTTP/1.1" 200 2692
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions/cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH response_code=200
+body='{\n  "id": "cs_test_b1QZoiJpAVXfktP4dhpdxwwnsnQPJlfjuSnNOKucsk9XK7elLeAy5YuRWH",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 994,\n  "amount_total": 994,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747319205,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": {\n      "city": null,\n      "country": "ZM",\n      "line1": null,\n      "line2": null,\n      "postal_code": null,\n      "state": null\n    },\n    "email": "amin1000@gmail.com",\n    "name": "richard",\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": []\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747405604,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": "pi_3RP2l903BiiFlMW70ESQbxtF",\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "paid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "complete",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": null,\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_Y1XHK6y13XN52J message='Dashboard link for request'
+Stripe session status: paid
+New DeliveryInfo created with status pending
+Created DeliveryInfo 348 with status pending
+Assigned delivery 348 to staff 6
+DeliveryInfo 348 status changed from pending to in_progress
+Delivery 348 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 14:27:56 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ5cf2c3e6dd833a5c4bd08403143eff00', 'Twilio-Request-Duration': '0.019', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0d396afe4e84f9897988c687ae23e40c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'AMJkaQgRXg7k9JlNfWfX7CSwPTBiDOeD4cRciUzF-cEp06KUA0hzgg==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 348 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 14:28:05 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQe2f32ed837029d8be2c6c4c068198468', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 038b8581beae8686112f69a45f987e7a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'NFx_SCTEISXYjek-3e6kYdVtyNHHY1MTgM34lczHip6pRnVARCuelQ==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 348 confirmed by user admin
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Starting new HTTPS connection (1): demo.pesapal.com:443
+Pesapal API unreachable: HTTPSConnectionPool(host='demo.pesapal.com', port=443): Read timed out. (read timeout=5)
+New DeliveryInfo created with status pending
+Created DeliveryInfo 349 for cash order with status pending
+Assigned cash delivery 349 to staff 6
+New DeliveryInfo created with status pending
+Created DeliveryInfo 350 with status pending
+Assigned delivery 350 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=157&line_items[0][price_data][product_data][name]=beef&line_items[0][quantity]=1&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=17&line_items[1][price_data][product_data][name]=scones&line_items[1][quantity]=3&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=6&line_items[2][price_data][product_data][name]=Vitumbuwa&line_items[2][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2906
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1K2GX26ohgeRW3C49gS5w5f4GRoysFfugVsqPgIF12ZhTsSLJuSMyMLnC",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 214,\n  "amount_total": 214,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747320523,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "mulangarichardgina@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747406923,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1K2GX26ohgeRW3C49gS5w5f4GRoysFfugVsqPgIF12ZhTsSLJuSMyMLnC#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_SVBSTbumkySXeG message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1K2GX26ohgeRW3C49gS5w5f4GRoysFfugVsqPgIF12ZhTsSLJuSMyMLnC, URL: https://checkout.stripe.com/c/pay/cs_test_b1K2GX26ohgeRW3C49gS5w5f4GRoysFfugVsqPgIF12ZhTsSLJuSMyMLnC#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=157&line_items[0][price_data][product_data][name]=beef&line_items[0][quantity]=1&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=17&line_items[1][price_data][product_data][name]=scones&line_items[1][quantity]=3&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=6&line_items[2][price_data][product_data][name]=Vitumbuwa&line_items[2][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+Resetting dropped connection: api.stripe.com
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2906
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 214,\n  "amount_total": 214,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747320651,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "mulangarichardgina@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747407050,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_5qmHaftuz6QqSF message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK, URL: https://checkout.stripe.com/c/pay/cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+message='Request to Stripe api' method=get url=https://api.stripe.com/v1/checkout/sessions/cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK
+api_version=2025-02-24.acacia message='Post details' post_data=
+https://api.stripe.com:443 "GET /v1/checkout/sessions/cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK HTTP/1.1" 200 2716
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions/cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK response_code=200
+body='{\n  "id": "cs_test_b1d7pHpUYaYucsKcbDALrOH50PnxXI65J2maUkU4xjTU19MBMHWgVF0XKK",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 214,\n  "amount_total": 214,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747320651,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": {\n      "city": null,\n      "country": "ZM",\n      "line1": null,\n      "line2": null,\n      "postal_code": null,\n      "state": null\n    },\n    "email": "mulangarichardgina@gmail.com",\n    "name": "richard",\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": []\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747407050,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": "pi_3RP38c03BiiFlMW71S7IjAgJ",\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "paid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "complete",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": null,\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_YR9ZjGa0PbRc6l message='Dashboard link for request'
+Stripe session status: paid
+New DeliveryInfo created with status pending
+Created DeliveryInfo 351 with status pending
+Assigned delivery 351 to staff 6
+DeliveryInfo 351 status changed from pending to in_progress
+Delivery 351 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 14:52:41 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQee19626b87991be78944c86f33cdc806', 'Twilio-Request-Duration': '0.018', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 eaecd2156c5a302266e719d4c9e21862.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'X-TJQ2SdQsJ5s5SOqatmaNdARQn_1qa2kehne866PAY9R0QqlwE9Fw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 349 status changed from pending to in_progress
+Delivery 349 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 14:52:44 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ3b1ca0b0c10be56474ea4901963270df', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 833f3f78d6e0bca01204421f588c9046.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'KdgRz0aKnJ8obL1zOeUfCXD3wIfitW5WzxLnkoxB-hHRSZQhE0D-vA==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+New DeliveryInfo created with status pending
+Created DeliveryInfo 352 with status pending
+Assigned delivery 352 to staff 6
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+Simulated Zamtel payment failed: 'NoneType' object has no attribute 'phone_number'
+Zamtel payment failed: Simulated Zamtel payment initiation failed: 'NoneType' object has no attribute 'phone_number'
+Simulated Airtel payment failed: 'NoneType' object has no attribute 'phone_number'
+Airtel payment failed: Simulated Airtel payment initiation failed: 'NoneType' object has no attribute 'phone_number'
+New DeliveryInfo created with status pending
+Created DeliveryInfo 353 for cash order with status pending
+Assigned cash delivery 353 to staff 6
+DeliveryInfo 353 status changed from pending to in_progress
+Delivery 353 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:01:51 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQaece433a7937c633b6ebc2f420652518', 'Twilio-Request-Duration': '0.026', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 2ce4b229f8bd98d275179d6d3db0c850.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'tsHAfZiNAWML_yzmtPJ8fstk13FaQ8HpISFR6JawG4-NkQYDFJEYPQ==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Simulated Airtel payment failed: 'NoneType' object has no attribute 'phone_number'
+Airtel payment failed: Simulated Airtel payment initiation failed: 'NoneType' object has no attribute 'phone_number'
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/paypal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/signals.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/airtel.py changed, reloading.
+Watching for file changes with StatReloader
+Simulated Airtel payment initiated for +260973546375, Amount: 288.0 ZMW, Transaction ID: 5b01e217-ee66-4f2c-8063-94473fa45039
+New DeliveryInfo created with status pending
+Created DeliveryInfo 354 with status pending
+Assigned delivery 354 to staff 6
+Airtel payment for +260973546375, Amount: 288.00 ZMW, Delivery 354
+DeliveryInfo 354 status changed from pending to in_progress
+Delivery 354 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:19:24 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ38aa6e41fc7243ab20b3604245c8ce3b', 'Twilio-Request-Duration': '0.016', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 833f3f78d6e0bca01204421f588c9046.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'rXoEGT8vvmAlGT6nBMjDP1BdPxj243vusVp5CHXTcTjIXaN9-pR76Q==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 354 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:19:31 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ89c6f73463f51a8abe03a51c921d5a69', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 27be43bf12a72b6d1ab8d9706dde080a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'gZKFngIRIG9rPrgYduIiQrW_b6BW-aV7QOdDlZ9yAjIrN6a_RYrCcw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 354 confirmed by user admin
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+New DeliveryInfo created with status pending
+Created DeliveryInfo 355 with status pending
+Assigned delivery 355 to staff 6
+DeliveryInfo 355 status changed from pending to in_progress
+Delivery 355 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:24:25 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ0f73893b744b7174109c9eefe5827d05', 'Twilio-Request-Duration': '0.021', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 c4809662226af2602188548ec60364e4.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'wNcgVvr1PZIcH86snxSjHC-6RecrE9ZfWVCmCb1lEVy_mNTOmG2ROg==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 355 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:24:36 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQe7dc8fbdb95015945da5eebe86f0a5fc', 'Twilio-Request-Duration': '0.010', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 a3efa1801023fa39b0810945bbc5fed0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'c7Hj5YaP4XB4h-nHyv2lwgJ5KT5zSVZE3XkfDy3nmwUtSJYuhMPU3A==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 355 confirmed by user admin
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=8&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=6&line_items[1][price_data][product_data][name]=Vitumbuwa&line_items[1][quantity]=4&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=139&line_items[2][price_data][product_data][name]=Goat+Meat&line_items[2][quantity]=6&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=pending
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2882
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1jYYLDdGpaTHsVMKcPqeHQdSwiA2uuIkrtVmIIYiRX5AcXff8RACprvkD",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 994,\n  "amount_total": 994,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747322878,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "Amin1000@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747409278,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1jYYLDdGpaTHsVMKcPqeHQdSwiA2uuIkrtVmIIYiRX5AcXff8RACprvkD#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_cYHcqvzVKvg7hx message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1jYYLDdGpaTHsVMKcPqeHQdSwiA2uuIkrtVmIIYiRX5AcXff8RACprvkD, URL: https://checkout.stripe.com/c/pay/cs_test_b1jYYLDdGpaTHsVMKcPqeHQdSwiA2uuIkrtVmIIYiRX5AcXff8RACprvkD#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=157&line_items[0][price_data][product_data][name]=beef&line_items[0][quantity]=1&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=17&line_items[1][price_data][product_data][name]=scones&line_items[1][quantity]=3&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=6&line_items[2][price_data][product_data][name]=Vitumbuwa&line_items[2][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2906
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1m9KNGQpqx2kn0QZbo9VFhUmZgEWgJlRrhvrSgKUvjIaj9xRxjQkoEmTs",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 214,\n  "amount_total": 214,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747322971,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "mulangarichardgina@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747409370,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1m9KNGQpqx2kn0QZbo9VFhUmZgEWgJlRrhvrSgKUvjIaj9xRxjQkoEmTs#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_SCun9rtLcH4xm7 message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1m9KNGQpqx2kn0QZbo9VFhUmZgEWgJlRrhvrSgKUvjIaj9xRxjQkoEmTs, URL: https://checkout.stripe.com/c/pay/cs_test_b1m9KNGQpqx2kn0QZbo9VFhUmZgEWgJlRrhvrSgKUvjIaj9xRxjQkoEmTs#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=157&line_items[0][price_data][product_data][name]=beef&line_items[0][quantity]=1&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=17&line_items[1][price_data][product_data][name]=scones&line_items[1][quantity]=3&line_items[2][price_data][currency]=usd&line_items[2][price_data][unit_amount]=6&line_items[2][price_data][product_data][name]=Vitumbuwa&line_items[2][quantity]=2&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+Resetting dropped connection: api.stripe.com
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2906
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1w1Az9H3jSLARuf9IIDKqjtQ7BbkMVpGq4rJjv0m0w3k2ufvf1xgF3alf",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 220,\n  "amount_total": 220,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747323271,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "mulangarichardgina@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747409670,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1w1Az9H3jSLARuf9IIDKqjtQ7BbkMVpGq4rJjv0m0w3k2ufvf1xgF3alf#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_qZd1Gukyxhw4BM message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1w1Az9H3jSLARuf9IIDKqjtQ7BbkMVpGq4rJjv0m0w3k2ufvf1xgF3alf, URL: https://checkout.stripe.com/c/pay/cs_test_b1w1Az9H3jSLARuf9IIDKqjtQ7BbkMVpGq4rJjv0m0w3k2ufvf1xgF3alf#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl
+New DeliveryInfo created with status pending
+Created DeliveryInfo 356 with status pending
+Assigned delivery 356 to staff 6
+New DeliveryInfo created with status pending
+Created DeliveryInfo 357 with status pending
+Assigned delivery 357 to staff 6
+DeliveryInfo 357 status changed from pending to in_progress
+Delivery 357 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:37:31 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQe2921a9341de13b72c0e389d19881ad6', 'Twilio-Request-Duration': '0.020', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 2dabd9d679490761d87acf52c604a99c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'q0Lq-_okiG4tLjks3W5S1QWj1lNTUUjsE5qJXCSxh50BYy9Pt6wD5Q==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 356 status changed from pending to in_progress
+Delivery 356 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:37:34 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQcafb51558029ac449992c11419e13968', 'Twilio-Request-Duration': '0.011', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 4ec88a002f40a457d78312a00a1f28d0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'YrB06Trd6y4fZPaEt3ytiCkzy_qxCS9J1iR2A8PUkvRFlLF4nKiwlw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 357 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:37:40 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQd94c78b0b70febf32a15ebedfa9dc89a', 'Twilio-Request-Duration': '0.009', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 13a63334c3e7343d5bfe0199d40d1e18.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'yiYaPL1huxxUtX5Y720MRLAeN0y5PC7M82f7nTupSHc3HkM4l7f9tw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 357 confirmed by user Gina
+Simulated Airtel payment initiated for +260973546375, Amount: 150.0 ZMW, Transaction ID: 22313a01-49a2-426b-8f47-73565fe449f6
+New DeliveryInfo created with status pending
+Created DeliveryInfo 358 with status pending
+Assigned delivery 358 to staff 6
+Airtel payment for +260973546375, Amount: 150.00 ZMW, Delivery 358
+DeliveryInfo 358 status changed from pending to in_progress
+Delivery 358 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:38:29 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ38ab31ee60a3ce637412843f68b39d2f', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 b44eb5ebbd602f74d4314ff5d01125e2.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '__9n797IbFwokpX7aLhl-bFT0pfXNzOzcwWeUmsCN_el9_9UjImNzg==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 358 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:38:34 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ6a2924d81c3e88fee3acf6ab0c0cc4cb', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 9866340aacbb1f006016dcfe8e9a4d04.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'ykkIWCOUZrcgl16lvp2QWSlNkHD_oTV-W8UZ6maIvKL7wnmMgTwqPg==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 358 confirmed by user Gina
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+Simulated Zamtel payment failed: 'NoneType' object has no attribute 'phone_number'
+Zamtel payment failed: Simulated Zamtel payment initiation failed: 'NoneType' object has no attribute 'phone_number'
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+/home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/zamtel.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/zamtel.py changed, reloading.
+Watching for file changes with StatReloader
+Simulated MTN payment failed: 'NoneType' object has no attribute 'id'
+Mtn payment failed: Simulated MTN payment initiation failed: 'NoneType' object has no attribute 'id'
+/home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/mtn.py changed, reloading.
+Watching for file changes with StatReloader
+Simulated MTN payment for +260973546375, Total: 2.0 ZMW, Transaction ID: MTN-PENDING-5
+New DeliveryInfo created with status pending
+Created DeliveryInfo 359 with status pending
+Assigned delivery 359 to staff 6
+Mtn payment for +260973546375, Amount: 2.0 ZMW, Delivery 359
+DeliveryInfo 359 status changed from pending to in_progress
+Delivery 359 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:46:21 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQeee4ca81553ffc2848221feb60edbaa3', 'Twilio-Request-Duration': '0.020', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 6e91a4dbb2a5af5c14e92162f8d0f414.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'ptJ7xZ1PyE2Wc7dB_2pqXl6-CtJ7Wl_iwc_T_MNXy24UCUDcmeu6uQ==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 359 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:46:37 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQaec5b8cbddea85d4aa9be4e88ace58bc', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 7d153f52288c2a7fa00f9afcb6c6423a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'jhye14DSgZW8YcLi0mmjEq9okuwJ4u5MR0bFIg8TlEl_JBX0WJlSFw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 359 confirmed by user Gina
+Simulated Zamtel payment for +260973546375, Total: 450.0 ZMW, Transaction ID: ZT-PENDING-5
+New DeliveryInfo created with status pending
+Created DeliveryInfo 360 with status pending
+Assigned delivery 360 to staff 6
+Zamtel payment for +260973546375, Amount: 450.00 ZMW, Delivery 360
+DeliveryInfo 360 status changed from pending to in_progress
+Delivery 360 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:48:27 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ4e061621c851aa5d99cf3a2a7687536e', 'Twilio-Request-Duration': '0.010', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 155c66c00eae85d3bda3d2cec926ace4.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'zXbToqDlmEXSGGqFnEbGvYJsDm_dqfzGQ85lSbdrsr-T8ZR3HEGSLA==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+New DeliveryInfo created with status pending
+Created DeliveryInfo 361 for cash order with status pending
+Assigned cash delivery 361 to staff 6
+DeliveryInfo 361 status changed from pending to in_progress
+Delivery 361 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:51:14 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ48176ccee5ef96a2be06adbbab626ad8', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 13a63334c3e7343d5bfe0199d40d1e18.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'jNJyRZkzoTTqFnEOSCcvEIuLTAociRgnR8nVA1IYbB7Ul9YBka-D0w==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 361 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:51:19 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ082a7d623cc197403cf78cfa9f66f630', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 7d153f52288c2a7fa00f9afcb6c6423a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'rysLJeR6BTUOqkak_zDi0ujKOY_MI2IkE8GQAacSre9hNyjSmiKfIw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 361 confirmed by user Gina
+Simulated MTN payment for +260973546375, Total: 537.0 ZMW, Transaction ID: MTN-PENDING-2
+New DeliveryInfo created with status pending
+Created DeliveryInfo 362 with status pending
+Assigned delivery 362 to staff 6
+Mtn payment for +260973546375, Amount: 537.0 ZMW, Delivery 362
+DeliveryInfo 362 status changed from pending to in_progress
+Delivery 362 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:52:29 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ20da0db25598ae110843b31acc012202', 'Twilio-Request-Duration': '0.014', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 e594c961a988ff445141b3bc908bf770.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'H5HlN07Zv0C6fhhdjuCVKYiAnTpdfbXe9lLfUJZOD3i97pbhwU3myA==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+/home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/mtn.py changed, reloading.
+Watching for file changes with StatReloader
+ MTN payment for +260973546375, Total: 537.0 ZMW, Transaction ID: MTN-PENDING-2
+New DeliveryInfo created with status pending
+Created DeliveryInfo 363 with status pending
+Assigned delivery 363 to staff 6
+Mtn payment for +260973546375, Amount: 537.0 ZMW, Delivery 363
+Watching for file changes with StatReloader
+DeliveryInfo 363 status changed from pending to in_progress
+Delivery 363 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 15:58:28 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQe4165bfbd0ea0c5d09481a2cdc5194fd', 'Twilio-Request-Duration': '0.014', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 f0f80a9ec4a0c4018ab5c89d0b20032a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'jiZT5aWLUEwkloGLE34ys1cZIccyv_pYXsQAvZtLBJRFAuqvvL9sZw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Watching for file changes with StatReloader
+/home/surecode/Documents/GitHub/django/eatnearby/payments/mobile/mtn.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Simulated Airtel payment initiated for +260973546375, Amount: 537.0 ZMW, Transaction ID: d07483ea-fbe8-441d-bccf-dc15a8b7f5f6
+New DeliveryInfo created with status pending
+Created DeliveryInfo 364 with status pending
+Assigned delivery 364 to staff 6
+Airtel payment for +260973546375, Amount: 537.00 ZMW, Delivery 364
+DeliveryInfo 364 status changed from pending to in_progress
+Delivery 364 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:13:46 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ1bad7631c053bd496b2b6328cbc4cfdb', 'Twilio-Request-Duration': '0.020', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 7d153f52288c2a7fa00f9afcb6c6423a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'jsKyOSDJ3dykLFoJxskb0nfsPIxkwoyKuSk86lwEunXMnhovnI6HPw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 364 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:13:50 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ807ffb5b2d1c3b54c49b96a409883659', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 bc7d732734ef147ce1fc1f891ed59b4e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'ckeAy5tytq0ln9OqCzBZIfYeLyBPvaKekVBHT-ME7yX8jOHwA4cUgw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 364 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 365 for cash order with status pending
+Assigned cash delivery 365 to staff 6
+DeliveryInfo 365 status changed from pending to in_progress
+Delivery 365 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:14:23 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQcd2f570a2a50b1147dcbe3d7d2779a55', 'Twilio-Request-Duration': '0.009', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 155c66c00eae85d3bda3d2cec926ace4.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '11RT0gQ5R6YTOMcOiBpE702YS7ccWrsNWjmBx7aYVVQFPl67CzVGXA==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 365 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:14:27 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQe7136b09d6f9f68df0065364b17b31d7', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 038b8581beae8686112f69a45f987e7a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'xZNMtBu-K75TiXrFlnaMccBxk20XaPN1FcLbAruDMfN_d5N0HttqHQ==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 365 confirmed by user admin
+ MTN payment for +260973546375, Total: 537.0 ZMW, Transaction ID: MTN-PENDING-2
+New DeliveryInfo created with status pending
+Created DeliveryInfo 366 with status pending
+Assigned delivery 366 to staff 6
+Mtn payment for +260973546375, Amount: 537.0 ZMW, Delivery 366
+DeliveryInfo 366 status changed from pending to in_progress
+Delivery 366 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:15:05 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ17b1327b46af4a19c2ced574ff1f5933', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 9866340aacbb1f006016dcfe8e9a4d04.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'k91269iOPlt7O8kNCwxu2qjRjfD_ntq9FmyIkwOOlpZ8YTqYJg2VXQ==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 366 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:15:13 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQbcc8bb555684d58d59019042aa9dbe23', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 40097d2e1188c16871be43393fc8ce72.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '7cqGAKvZC5YKAwxR89h0Su673sp2gfSMZUBbwi7ADe4M7_Jg2XSzTg==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 366 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 367 for cash order with status pending
+Assigned cash delivery 367 to staff 6
+DeliveryInfo 367 status changed from pending to in_progress
+Delivery 367 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:15:43 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ1aae3ddf6963c7621a08e68388b61547', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 6140aac990323a743c341794c765cd2c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'pBofkCEXKF_mEwhviQNpd1VhxGUqx8eET43uaSvwlhvQUtVnJlhvig==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 367 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:15:52 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQff6b5886f6f6f088efcf23fd72e8911c', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 ed39c404583c1e95693253e26db3325e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'S1GFKb-NGSiUqBc1g49SquDZcsAGEFG121k0qqEbZUALS5awYEwivw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 367 confirmed by user admin
+Simulated Zamtel payment for +260973546375, Total: 525.0 ZMW, Transaction ID: ZT-PENDING-2
+New DeliveryInfo created with status pending
+Created DeliveryInfo 368 with status pending
+Assigned delivery 368 to staff 6
+Zamtel payment for +260973546375, Amount: 525.00 ZMW, Delivery 368
+DeliveryInfo 368 status changed from pending to in_progress
+Delivery 368 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:16:42 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ4a2965757e6787da2fa121e912d1000a', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 66e541e2e0ebad8589f58c47fa05e1fc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '1Xv6X9qD2hUDlckHC1YShRI-UwIHMa510XUGkPMvbo9-gzTNIsqoMA==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 368 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:16:53 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQa3a36fadf2ed5a81afd5cc477c1139a9', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 155c66c00eae85d3bda3d2cec926ace4.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'HPYLyW_IXdaeDJajP1cVM0mIQlAsNGVwXOG_U4gJLy7tAP83-y5MDw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 368 confirmed by user admin
+New DeliveryInfo created with status pending
+Created DeliveryInfo 369 with status pending
+Assigned delivery 369 to staff 6
+DeliveryInfo 369 status changed from pending to in_progress
+Delivery 369 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:18:16 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ3e02c58f753c0b9ec8feb7f3d60606f3', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 2dabd9d679490761d87acf52c604a99c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'bW7KU7-iFzdOIFDqYMA7nkYWChN7GvP3sCbzEFSyBJlvGXg3Qv7_QA==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+DeliveryInfo 369 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 15 May 2025 16:18:29 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ8d2f3f7a21639dbc19af382ea2bce7ad', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 2ce4b229f8bd98d275179d6d3db0c850.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'qMEk9WoG1vsQi7hmxfP8_wIrI8eE77_Ls77Nfl7RBXU80nAsKT2leg==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 369 confirmed by user admin
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=9&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=pending
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2884
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1xBRSpsm11f6PLeEjsAVk3XhPCJq5OyR9Ud0AepPYozIe0fUykUlz4Y1A",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 153,\n  "amount_total": 153,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747325984,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "Amin1000@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747412384,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1xBRSpsm11f6PLeEjsAVk3XhPCJq5OyR9Ud0AepPYozIe0fUykUlz4Y1A#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_BPlmBfWBNDfeJw message='Dashboard link for request'
+Stripe Checkout session created: cs_test_a1xBRSpsm11f6PLeEjsAVk3XhPCJq5OyR9Ud0AepPYozIe0fUykUlz4Y1A, URL: https://checkout.stripe.com/c/pay/cs_test_a1xBRSpsm11f6PLeEjsAVk3XhPCJq5OyR9Ud0AepPYozIe0fUykUlz4Y1A#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 400 387
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=400
+body='{\n  "error": {\n    "code": "amount_too_small",\n    "doc_url": "https://stripe.com/docs/error-codes/amount-too-small",\n    "message": "The Checkout Session\'s total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.",\n    "request_log_url": "https://dashboard.stripe.com/test/logs/req_vnoE6sJy4LiY8d?t=1747326052",\n    "type": "invalid_request_error"\n  }\n}\n' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_vnoE6sJy4LiY8d message='Dashboard link for request'
+error_code=amount_too_small error_message="The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15." error_param=None error_type=invalid_request_error message='Stripe v1 API error received'
+Stripe API error: Request req_vnoE6sJy4LiY8d: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+Traceback (most recent call last):
+  File "/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/stripe.py", line 59, in initiate_stripe_payment
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+    ...<8 lines>...
+        }
+    )
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/checkout/_session.py", line 4694, in create
+    cls._static_request(
+    ~~~~~~~~~~~~~~~~~~~^
+        "post",
+        ^^^^^^^
+        cls.class_url(),
+        ^^^^^^^^^^^^^^^^
+        params=params,
+        ^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_resource.py", line 172, in _static_request
+    return _APIRequestor._global_instance().request(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        method_,
+        ^^^^^^^^
+    ...<3 lines>...
+        base_address=base_address,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 197, in request
+    resp = requestor._interpret_response(rbody, rcode, rheaders, api_mode)
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 853, in _interpret_response
+    self.handle_error_response(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        rbody, rcode, resp.data, rheaders, api_mode
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 336, in handle_error_response
+    raise err
+stripe._error.InvalidRequestError: Request req_vnoE6sJy4LiY8d: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+Stripe payment initiation failed: Stripe payment failed: Request req_vnoE6sJy4LiY8d: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 400 387
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=400
+body='{\n  "error": {\n    "code": "amount_too_small",\n    "doc_url": "https://stripe.com/docs/error-codes/amount-too-small",\n    "message": "The Checkout Session\'s total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.",\n    "request_log_url": "https://dashboard.stripe.com/test/logs/req_Xrh7leas8lZM4V?t=1747326070",\n    "type": "invalid_request_error"\n  }\n}\n' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_Xrh7leas8lZM4V message='Dashboard link for request'
+error_code=amount_too_small error_message="The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15." error_param=None error_type=invalid_request_error message='Stripe v1 API error received'
+Stripe API error: Request req_Xrh7leas8lZM4V: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+Traceback (most recent call last):
+  File "/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/stripe.py", line 59, in initiate_stripe_payment
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+    ...<8 lines>...
+        }
+    )
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/checkout/_session.py", line 4694, in create
+    cls._static_request(
+    ~~~~~~~~~~~~~~~~~~~^
+        "post",
+        ^^^^^^^
+        cls.class_url(),
+        ^^^^^^^^^^^^^^^^
+        params=params,
+        ^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_resource.py", line 172, in _static_request
+    return _APIRequestor._global_instance().request(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        method_,
+        ^^^^^^^^
+    ...<3 lines>...
+        base_address=base_address,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 197, in request
+    resp = requestor._interpret_response(rbody, rcode, rheaders, api_mode)
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 853, in _interpret_response
+    self.handle_error_response(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        rbody, rcode, resp.data, rheaders, api_mode
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 336, in handle_error_response
+    raise err
+stripe._error.InvalidRequestError: Request req_Xrh7leas8lZM4V: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+Stripe payment initiation failed: Stripe payment failed: Request req_Xrh7leas8lZM4V: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+New DeliveryInfo created with status pending
+Created DeliveryInfo 370 for cash order with status pending
+Assigned cash delivery 370 to staff 6
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 400 387
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=400
+body='{\n  "error": {\n    "code": "amount_too_small",\n    "doc_url": "https://stripe.com/docs/error-codes/amount-too-small",\n    "message": "The Checkout Session\'s total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.",\n    "request_log_url": "https://dashboard.stripe.com/test/logs/req_4s0H4zOv9rmqIA?t=1747326119",\n    "type": "invalid_request_error"\n  }\n}\n' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_4s0H4zOv9rmqIA message='Dashboard link for request'
+error_code=amount_too_small error_message="The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15." error_param=None error_type=invalid_request_error message='Stripe v1 API error received'
+Stripe API error: Request req_4s0H4zOv9rmqIA: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+Traceback (most recent call last):
+  File "/home/surecode/Documents/GitHub/django/eatnearby/payments/cards/stripe.py", line 59, in initiate_stripe_payment
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+    ...<8 lines>...
+        }
+    )
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/checkout/_session.py", line 4694, in create
+    cls._static_request(
+    ~~~~~~~~~~~~~~~~~~~^
+        "post",
+        ^^^^^^^
+        cls.class_url(),
+        ^^^^^^^^^^^^^^^^
+        params=params,
+        ^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_resource.py", line 172, in _static_request
+    return _APIRequestor._global_instance().request(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        method_,
+        ^^^^^^^^
+    ...<3 lines>...
+        base_address=base_address,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 197, in request
+    resp = requestor._interpret_response(rbody, rcode, rheaders, api_mode)
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 853, in _interpret_response
+    self.handle_error_response(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        rbody, rcode, resp.data, rheaders, api_mode
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/surecode/.local/lib/python3.13/site-packages/stripe/_api_requestor.py", line 336, in handle_error_response
+    raise err
+stripe._error.InvalidRequestError: Request req_4s0H4zOv9rmqIA: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+Stripe payment initiation failed: Stripe payment failed: Request req_4s0H4zOv9rmqIA: The Checkout Session's total amount must convert to at least 50 cents. $0.17 converts to approximately €0.15.
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=13&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2908
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1SRBmFuQopkmFS6jQlKlbOmzUpUjI0ez36XRBKH34yxKrvzeXxlmCMWxW",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 221,\n  "amount_total": 221,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747326177,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "mulangarichardgina@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747412577,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1SRBmFuQopkmFS6jQlKlbOmzUpUjI0ez36XRBKH34yxKrvzeXxlmCMWxW#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_ny4ZzIh5hfvl4E message='Dashboard link for request'
+Stripe Checkout session created: cs_test_a1SRBmFuQopkmFS6jQlKlbOmzUpUjI0ez36XRBKH34yxKrvzeXxlmCMWxW, URL: https://checkout.stripe.com/c/pay/cs_test_a1SRBmFuQopkmFS6jQlKlbOmzUpUjI0ez36XRBKH34yxKrvzeXxlmCMWxW#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=9&mode=payment&success_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F0.0.0.0%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=Amin1000%40gmail.com&metadata[cart_id]=2&metadata[delivery_info_id]=pending
+Resetting dropped connection: api.stripe.com
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2884
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1vFjP4bwb1bUSZIyyrqXEDJSQLaXxhf7JP9OewGCZOMhJItr9ZJmTHsdk",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 153,\n  "amount_total": 153,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://0.0.0.0:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747326316,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "Amin1000@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "Amin1000@gmail.com",\n  "discounts": [],\n  "expires_at": 1747412716,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "2",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://0.0.0.0:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1vFjP4bwb1bUSZIyyrqXEDJSQLaXxhf7JP9OewGCZOMhJItr9ZJmTHsdk#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_oKxzsdkmdPzcV2 message='Dashboard link for request'
+Stripe Checkout session created: cs_test_a1vFjP4bwb1bUSZIyyrqXEDJSQLaXxhf7JP9OewGCZOMhJItr9ZJmTHsdk, URL: https://checkout.stripe.com/c/pay/cs_test_a1vFjP4bwb1bUSZIyyrqXEDJSQLaXxhf7JP9OewGCZOMhJItr9ZJmTHsdk#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-02-24.acacia message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][unit_amount]=17&line_items[0][price_data][product_data][name]=scones&line_items[0][quantity]=13&line_items[1][price_data][currency]=usd&line_items[1][price_data][unit_amount]=6&line_items[1][price_data][product_data][name]=Vitumbuwa&line_items[1][quantity]=5&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-done%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpayments%2Fpayment-cancelled%2F&customer_email=mulangarichardgina%40gmail.com&metadata[cart_id]=5&metadata[delivery_info_id]=pending
+Resetting dropped connection: api.stripe.com
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2906
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_b1j0vXnkBxhNSkTUvf3oMUKAOyYF6mb6SFxX1ElvhdqdR0N8bMlXC7Nn0L",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": false\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 251,\n  "amount_total": 251,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/payments/payment-cancelled/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": {\n    "shipping_details": null\n  },\n  "consent": null,\n  "consent_collection": null,\n  "created": 1747326447,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": {\n    "address": null,\n    "email": "mulangarichardgina@gmail.com",\n    "name": null,\n    "phone": null,\n    "tax_exempt": "none",\n    "tax_ids": null\n  },\n  "customer_email": "mulangarichardgina@gmail.com",\n  "discounts": [],\n  "expires_at": 1747412847,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {\n    "cart_id": "5",\n    "delivery_info_id": "pending"\n  },\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_details": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/payments/payment-done/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_b1j0vXnkBxhNSkTUvf3oMUKAOyYF6mb6SFxX1ElvhdqdR0N8bMlXC7Nn0L#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_rSpyrJWGafW0Xl message='Dashboard link for request'
+Stripe Checkout session created: cs_test_b1j0vXnkBxhNSkTUvf3oMUKAOyYF6mb6SFxX1ElvhdqdR0N8bMlXC7Nn0L, URL: https://checkout.stripe.com/c/pay/cs_test_b1j0vXnkBxhNSkTUvf3oMUKAOyYF6mb6SFxX1ElvhdqdR0N8bMlXC7Nn0L#fidkdWxOYHwnPyd1blpxYHZxWjA0VzYwYkA1NkdsbENpSFIybnxPNDJmcDc0RERvcFVfcW8wZn1TQlZEckhsbklJdHY2MHZ8TjBvSm9iQGY1Z09gQEJONj1wY3N8T3ROUHRnajE9M2ZkcWpUNTVpd3d1PV1BYicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl

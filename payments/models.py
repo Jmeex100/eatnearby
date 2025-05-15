@@ -1,6 +1,10 @@
+# payments/models.py
 from django.db import models
 from auths.models import User
 from cart.models import Cart
+import logging
+
+logger = logging.getLogger(__name__)
 
 class DeliveryInfo(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -41,7 +45,6 @@ class DeliveryInfo(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-
     address = models.CharField(max_length=100, blank=True, null=True)
     predefined_address = models.CharField(
         max_length=30,
@@ -68,7 +71,6 @@ class DeliveryInfo(models.Model):
         null=True,
         help_text="Specific provider for Mobile Money or Card (e.g., Airtel, Stripe)"
     )
-
     phone_number = models.CharField(max_length=20)
     secondary_phone_number = models.CharField(
         max_length=20,
@@ -76,11 +78,22 @@ class DeliveryInfo(models.Model):
         null=True,
         help_text="Optional secondary contact number"
     )
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
+        if self.pk:
+            try:
+                old_instance = DeliveryInfo.objects.get(pk=self.pk)
+                if old_instance.delivery_status != self.delivery_status:
+                    logger.info(
+                        f"DeliveryInfo {self.id} status changed from "
+                        f"{old_instance.delivery_status} to {self.delivery_status}"
+                    )
+            except DeliveryInfo.DoesNotExist:
+                logger.warning(f"DeliveryInfo {self.id} not found during save")
+        else:
+            logger.info(f"New DeliveryInfo created with status {self.delivery_status}")
         if self.predefined_address and not self.address:
             self.address = self.get_predefined_address_display()
         super().save(*args, **kwargs)
@@ -97,8 +110,7 @@ class DeliveryInfo(models.Model):
 
 class PaymentHistory(models.Model):
     id = models.BigAutoField(primary_key=True)
-    transaction_id = models.CharField(max_length=100, blank=True, null=True) #paypal transaction
-
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)  # paypal transaction
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     delivery_info = models.ForeignKey(
@@ -109,7 +121,6 @@ class PaymentHistory(models.Model):
     )
     total = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
-
     items = models.JSONField(
         help_text="List of items in the payment (e.g., [{'name': 'Pizza', 'quantity': 2, 'subtotal': 15.00}])"
     )

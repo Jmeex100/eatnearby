@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StaffAssignment, Notification
+from .models import StaffAssignment, Notification ,StaffServiceArea
 
 class StaffAssignmentAdmin(admin.ModelAdmin):
     list_display = ('staff', 'delivery', 'assigned_at')
@@ -35,3 +35,4 @@ class NotificationAdmin(admin.ModelAdmin):
 # Registering the models in Django admin
 admin.site.register(StaffAssignment, StaffAssignmentAdmin)
 admin.site.register(Notification, NotificationAdmin)
+admin.site.register(StaffServiceArea)

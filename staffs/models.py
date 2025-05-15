@@ -2,6 +2,30 @@ from django.db import models
 from auths.models import User
 from payments.models import DeliveryInfo
 
+class StaffServiceArea(models.Model):
+    """
+    Maps staff members to the predefined delivery points they can serve.
+    """
+    staff = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={'user_type': 'staff'},
+        related_name='service_areas'
+    )
+    point = models.CharField(
+        max_length=30,
+        choices=DeliveryInfo.DELIVERY_POINTS,
+        help_text="Which delivery point this staff covers"
+    )
+
+    class Meta:
+        unique_together = ('staff', 'point')
+        verbose_name = "Staff Service Area"
+        verbose_name_plural = "Staff Service Areas"
+
+    def __str__(self):
+        return f"{self.staff.username} covers {self.get_point_display()}"
+
 class StaffAssignment(models.Model):
     staff = models.ForeignKey(
         User,

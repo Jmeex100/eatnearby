@@ -1,4 +1,5 @@
 {% extends 'staffs_base.html' %}
+{% load static %}
 {% block title %}Delivery History - Eat Nearby{% endblock %}
 {% block content %}
 <div class="p-6">
@@ -10,34 +11,379 @@
             <h3 class="text-lg font-medium mb-2">Recent Notifications</h3>
             <ul class="bg-white rounded-lg shadow-sm p-4 space-y-2">
                 {% for notification in notifications %}
-                    <li class="border-b py-2 {% if not notification.is_read %}bg-blue-50{% endif %}">
-                        <p class="text-gray-700">{{ notification.message }}</p>
+                    <li class="border-b py-2 px-2 rounded bg-blue-50">
+                        <p class="text-gray-700">
+                            {{ notification.message }}
+                            {% if notification.related_delivery %}
+                                (Order ID: {{ notification.related_delivery.id }})
+                            {% endif %}
+                        </p>
                         <p class="text-sm text-gray-500">
                             {{ notification.get_notification_type_display }} | 
                             {{ notification.created_at|date:"M d, Y H:i" }}
+                            <!-- Debugging output -->
+                            (Type: {{ notification.notification_type }}, 
+                            Delivery Status: {{ notification.related_delivery.delivery_status|default:"None" }})
                         </p>
-                        {% if notification.related_delivery %}
-                            <a href="#delivery-{{ notification.related_delivery.id }}" 
-                               class="text-blue-600 text-sm hover:underline">
-                                View Order
-                            </a>
-                        {% endif %}
-                        {% if not notification.is_read %}
+                        <div class="mt-2 flex space-x-4">
+                            {% if notification.notification_type in 'delivery_assignment,assignment' and notification.related_delivery and notification.related_delivery.delivery_status == 'pending' %}
+                                <a href="#delivery-{{ notification.related_delivery.id }}" 
+                                   class="text-blue-600 text-sm hover:underline">
+                                    View Order
+                                </a>
+                                <!-- Accept/Decline buttons -->
+                                <form method="post" action="{% url 'staffs:accept_delivery' notification.related_delivery.id %}" class="inline accept-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="text-green-600 text-sm hover:underline accept-btn">Accept</button>
+                                </form>
+                                <form method="post" action="{% url 'staffs:decline_delivery' notification.related_delivery.id %}" class="inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="text-red-600 text-sm hover:underline">Decline</button>
+                                </form>
+                            {% endif %}
                             <button class="text-blue-600 text-sm hover:underline mark-read" 
                                     data-notification-id="{{ notification.id }}">
                                 Mark as Read
                             </button>
-                        {% endif %}
+                            <form method="post" action="{% url 'staffs:delete_notification' notification.id %}" class="inline">
+                                {% csrf_token %}
+                                <button type="submit" class="text-red-600 text-sm hover:underline">Delete</button>
+                            </form>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
         </div>
+    {% else %}
+        <p class="text-gray-500">No new notifications.</p>
     {% endif %}
     
+
+    <!-- Payment History Section -->
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Payment History</h2>
+        <table class="min-w-full border-collapse">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Transaction ID</th>
+                    <th class="px-4 py-2 text-left">Total</th>
+                    <th class="px-4 py-2 text-left">Payment Method</th>
+                    <th class="px-4 py-2 text-left">Created At</th>
+                    <th class="px-4 py-2 text-left">Username</th>
+                    <th class="px-4 py-2 text-left screen-only">Print</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payment_history %}
+                    <tr data-payment-id="{{ payment.id }}">
+                        <td class="px-4 py-2">
+                            {% if payment.delivery_info.payment_method != 'cash' %}
+                                {{ payment.transaction_id|default:"N/A" }}
+                            {% else %}
+                                Cash Payment
+                            {% endif %}
+                        </td>
+                        <td class="px-4 py-2">{{ payment.total }}</td>
+                        <td class="px-4 py-2">{{ payment.delivery_info.get_payment_method_display }}</td>
+                        <td class="px-4 py-2">{{ payment.created_at|date:"Y-m-d H:i" }}</td>
+                        <td class="px-4 py-2">{{ payment.user.username }}</td>
+                        <td class="px-4 py-2 screen-only">
+                            <button onclick="printPayment({{ payment.id }})" class="text-blue-500 hover:underline">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="px-4 py-2 text-center text-gray-500">No payment history found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Pagination Controls -->
+        <div class="mt-4 pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded">Previous</a>
+            {% endif %}
+            <span class="px-4 py-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+ Print-Specific Styles -->
+<style>
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 1cm;
+        }
+        
+        body {
+            background: white !important;
+            color: black !important;
+            font-size: 12pt;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+        }
+        
+        .header-print {
+            display: flex !important;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .header-print img {
+            height: 60px;
+            margin-right: 20px;
+        }
+        
+        .header-print h1 {
+            font-size: 18pt;
+            margin: 0;
+            color: black !important;
+        }
+        
+        .header-print .print-date {
+            margin-left: auto;
+            font-size: 10pt;
+        }
+        
+        .p-6 {
+            padding: 0 !important;
+        }
+        
+        .print-button, .pagination, .screen-only, nav, header, footer {
+            display: none !important;
+        }
+        
+        .bg-white, .dark:bg-gray-800 {
+            background: white !important;
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+        
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .grid > div {
+            flex: 1 1 30%;
+            min-width: 200px;
+            page-break-inside: avoid;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        
+        th {
+            background-color: #f2f2f2 !important;
+            color: black !important;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        h1, h2 {
+            font-size: 14pt;
+            color: black !important;
+            page-break-after: avoid;
+        }
+        
+        .border-l-4 {
+            border-left: none !important;
+            border-bottom: 2px solid #333 !important;
+        }
+        
+        .bg-blue-100, .bg-green-100, .bg-purple-100 {
+            background: #f0f0f0 !important;
+        }
+        
+        i.fas {
+            display: none !important;
+        }
+        
+        .footer-print {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            font-size: 9pt;
+            text-align: center;
+        }
+    }
+</style>
+
+<script>
+    function printPayment(paymentId) {
+        const row = document.querySelector(`tr[data-payment-id="${paymentId}"]`);
+        if (!row) {
+            alert('Payment not found');
+            return;
+        }
+        
+        const transactionId = row.cells[0].innerText;
+        const total = row.cells[1].innerText;
+        const paymentMethod = row.cells[2].innerText;
+        const createdAt = row.cells[3].innerText;
+        const username = row.cells[4].innerText;
+        const currentDate = new Date().toLocaleDateString();
+        const currentTime = new Date().toLocaleTimeString();
+
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Payment Receipt #${paymentId}</title>
+                    <style>
+                        @page {
+                            size: A4 portrait;
+                            margin: 1cm;
+                        }
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            padding: 20px;
+                            color: #333;
+                        }
+                        .header {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 20px;
+                            border-bottom: 2px solid #333;
+                            padding-bottom: 10px;
+                        }
+                        .header img {
+                            height: 60px;
+                            margin-right: 20px;
+                        }
+                        .header-text {
+                            flex-grow: 1;
+                        }
+                        .header h1 {
+                            margin: 0;
+                            font-size: 18pt;
+                        }
+                        .header p {
+                            margin: 5px 0 0;
+                            font-size: 10pt;
+                            color: #666;
+                        }
+                        .receipt-info {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 20px;
+                        }
+                        table { 
+                            width: 100%; 
+                            border-collapse: collapse;
+                            margin: 20px 0;
+                        }
+                        th, td { 
+                            border: 1px solid #ddd; 
+                            padding: 10px;
+                            text-align: left;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                        .total-row {
+                            font-weight: bold;
+                            background-color: #f9f9f9;
+                        }
+                        .footer {
+                            margin-top: 30px;
+                            padding-top: 10px;
+                            border-top: 1px solid #ddd;
+                            font-size: 9pt;
+                            text-align: center;
+                            color: #666;
+                        }
+                        .signature {
+                            margin-top: 40px;
+                            border-top: 1px dashed #999;
+                            width: 200px;
+                            text-align: center;
+                            padding-top: 5px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <img src="{% static 'images/icon-192x192.png' %}" alt="Eat Nearby Logo">
+                        <div class="header-text">
+                            <h1>Eat Nearby</h1>
+                            <p>123 Restaurant Street, Foodville</p>
+                            <p>Phone: (123) 456-7890 | Email: info@eatnearby.com</p>
+                        </div>
+                        <div class="print-date">
+                            Printed: ${currentDate} ${currentTime}
+                        </div>
+                    </div>
+                    
+                    <h2>Payment Receipt #${paymentId}</h2>
+                    
+                    <div class="receipt-info">
+                        <div>
+                            <p><strong>Customer:</strong> ${username}</p>
+                            <p><strong>Date:</strong> ${createdAt}</p>
+                        </div>
+                        <div>
+                            <p><strong>Transaction ID:</strong> ${transactionId}</p>
+                            <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                        </div>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food Delivery Service</td>
+                                <td>${total}</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total</strong></td>
+                                <td><strong>${total}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="signature">Staff Signature</div>
+                    
+                    <div class="footer">
+                        <p>Thank you for choosing Eat Nearby ☺️!</p>
+                        <p>For any inquiries, please contact our customer service</p>
+                    </div>
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
+
     <!-- Delivery History List -->
     <div class="bg-white rounded-lg shadow-sm p-6">
         {% if deliveries %}
-            <table class="w-full text-left">
+            <table class="w-full text-black text-left">
                 <thead>
                     <tr class="border-b">
                         <th class="py-2">Order ID</th>
@@ -53,7 +399,11 @@
                             <td class="py-3">{{ delivery.id }}</td>
                             <td class="py-3">{{ delivery.user.username }}</td>
                             <td class="py-3">{{ delivery.address|default:"N/A" }}</td>
-                            <td class="py-3">{{ delivery.get_delivery_status_display }}</td>
+                            <td class="py-3">
+                                <span class="{% if delivery.delivery_status == 'in_progress' %}text-green-600{% elif delivery.delivery_status in 'declined,cancelled' %}text-red-600{% else %}text-gray-600{% endif %}">
+                                    {{ delivery.get_delivery_status_display }}
+                                </span>
+                            </td>
                             <td class="py-3">
                                 {% if delivery.delivery_status == 'completed' %}
                                     {{ delivery.updated_at|date:"M d, Y H:i" }}
@@ -71,24 +421,44 @@
     </div>
 </div>
 
-<!-- JavaScript for Mark as Read -->
+<!-- JavaScript for Mark as Read and Prevent Double Submission -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.mark-read').forEach(button => {
+        // Mark as Read
+        const markReadButtons = document.querySelectorAll('.mark-read');
+        markReadButtons.forEach(button => {
             button.addEventListener('click', function() {
-                const notificationId = this.getAttribute('data-notification-id');
+                const notificationId = this.dataset.notificationId;
                 fetch(`/staff/mark-notification-read/${notificationId}/`, {
                     method: 'POST',
                     headers: {
                         'X-CSRFToken': '{{ csrf_token }}',
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => response.json()).then(data => {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
                     if (data.status === 'success') {
-                        this.closest('li').classList.remove('bg-blue-50');
-                        this.remove();
+                        const li = this.closest('li');
+                        li.remove();
+                    } else {
+                        alert("Failed to mark notification as read.");
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                 });
+            });
+        });
+
+        // Prevent double submission for Accept button
+        const acceptForms = document.querySelectorAll('.accept-form');
+        acceptForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const button = form.querySelector('.accept-btn');
+                button.disabled = true;
+                button.textContent = 'Processing...';
             });
         });
     });

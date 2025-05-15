@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Airtel Money Checkout{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gray-100 pt-16 pb-8">
     <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8 text-center">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Airtel Money Payment</h1>
-        <div class="flex justify-center mb-6">
-            <img src="data:image/png;base64,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" alt="Airtel Logo" class="h-16 w-auto">
-        </div>
-        <p class="text-gray-700 mb-4">Please confirm your payment details below:</p>
         
+        <div class="flex justify-center mb-6">
+            <img src="{% static 'images/airtel-money-logo.png' %}" alt="Airtel Money Logo" class="h-24">
+        </div>
+
         <div class="text-left max-w-md mx-auto mb-6">
             <div class="flex justify-between py-2 border-b">
                 <span class="text-gray-600">Payment Amount:</span>
@@ -27,17 +28,37 @@
             {% endif %}
         </div>
 
-        <form method="post" action="{% url 'payments:payment_success' %}" class="mb-6">
+        <form method="POST" action="{% url 'payments:airtel_payment_process' %}" class="space-y-6" id="airtel-payment-form">
             {% csrf_token %}
-            <div class="text-left max-w-md mx-auto">
-                <label for="airtel_number" class="block text-sm font-medium text-gray-700 mb-2">Enter Airtel Number for Payment:</label>
-                <input type="text" name="airtel_number" id="airtel_number" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+26097..." value="{{ phone_number }}">
-                <p class="text-gray-500 text-sm mt-2">Enter the Airtel Money number where the payment request will be sent. This can be different from your registered number.</p>
+            <input type="hidden" name="delivery_id" value="{{ delivery_id }}">
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Airtel Phone Number</label>
+                <input type="tel" name="phone" id="phone" required value="{{ phone_number }}"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
             </div>
-            <button type="submit" class="mt-4 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">Confirm Payment</button>
+            <div>
+                <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Amount (ZMW)</label>
+                <input type="number" name="amount" id="amount" required value="{{ total_zmw|floatformat:2 }}"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outlinerije">
+            </div>
+            <button type="submit" id="submit-button"
+                class="w-full bg-red-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-700 transition">
+                Pay with Airtel Money
+            </button>
         </form>
-        
-        <a href="{% url 'payments:payment_cancelled' %}" class="inline-block bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300">Cancel Payment</a>
+
+        <p class="text-sm text-gray-500 mt-6">
+            This is a simulated payment. In a real scenario, you would receive a prompt on your Airtel phone.
+        </p>
+        <a href="{% url 'payments:payment_cancelled' %}" class="inline-block mt-4 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">Cancel Payment</a>
     </div>
 </div>
+
+<script>
+    document.getElementById('airtel-payment-form').addEventListener('submit', function(event) {
+        const submitButton = document.getElementById('submit-button');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Processing...';
+    });
+</script>
 {% endblock %}

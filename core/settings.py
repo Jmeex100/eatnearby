@@ -10,9 +10,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',       # Localhost
     'localhost',       # Localhost
-    '192.168.1.190',      # Your local IP address
+    '192.168.119.40',      # Your local IP address
     '0.0.0.0',         # For binding to all network interfaces (optional)
-    '10.0.21.8',   # GUEST
+    '192.168.1.190',   # GUEST
   'd31c-45-215-255-168.ngrok-free.app',  # Your ngrok domain
     'eatnearby.duckdns.org',   # SCHOOL WIFI
     #  'django_extensions',  # Add this
@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'staffs.apps.StaffsConfig',    
 
 ]
+
+# Session settings (recommended)
+SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
+SESSION_SAVE_EVERY_REQUEST = True
+
 # Add PWA settings at the bottom
 PWA_APP_NAME = 'Eat Nearby'
 PWA_APP_DESCRIPTION = "Find and order food from nearby restaurants"
@@ -163,61 +168,46 @@ PAYPAL_BUY_BUTTON_IMAGE = 'https://www.paypalobjects.com/webstatic/en_US/i/butto
 PAYPAL_IDENTITY_TOKEN = 'your_sandbox_identity_token'  # Optional, for PDT if needed
 
 
-
-# settings.py
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
         },
     },
     'loggers': {
         '': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'DEBUG',
+            'propagate': True,
         },
     },
 }
-
-# Your Pesapal settings
+# Pesapal settings
 PESAPAL_CONSUMER_KEY = 'Ypnpr3qhC4iGX3gr1WpaGToTkHRq109D'
 PESAPAL_CONSUMER_SECRET = 'bTM6fdxYWtuKoDGoA218hcZZmo0='
 PESAPAL_TEST = True
 PESAPAL_API_URL = 'https://demo.pesapal.com' if PESAPAL_TEST else 'https://www.pesapal.com'
 
-# stripe
+# Stripe settings
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51R35gE03BiiFlMW7kyJ17cu21AAjuPZtj5cxVGSAwMikLLqs35syK5jOjgEc0bJeEGK38ufvyJqKUqbo486catoQ00lrrp8XDg'
 STRIPE_SECRET_KEY = 'sk_test_51R35gE03BiiFlMW7mekLfURkjve5GCdE52jKv3Qv9EJaup84TnPeTGSCFZAg2lB5DZXURIg0VSlgZSapVSmimaoA00s5LsrbxM'
 
-
-#mobile money 
-
-# airtel
-
-# # Name
-
-
+# Mobile money settings
 AIRTEL_API_KEY = 'dummy_key'
 AIRTEL_API_SECRET = 'dummy_secret'
-
-
-# zamtel mobile money
 
 ZAMTEL_API_KEY = 'dummy_key'
 ZAMTEL_API_SECRET = 'dummy_secret'
 
-# mtn momo
-# MTN MoMo API settings
-MTN_SUBSCRIPTION_KEY = "6651b057793b45d6bb86511d76ae3e2f"  # Your primary key from MTN
-MTN_CALLBACK_HOST = "https://6f60-41-63-9-121.ngrok-free.app"  # Your ngrok URL
-
-
+MTN_SUBSCRIPTION_KEY = 'dummy_key'
+MTN_CALLBACK_HOST = 'http://localhost:8000'
 
 # Twilio Configuration
-TWILIO_ACCOUNT_SID = 'AC82fd9f51a19dc28febd379fe64fe4e57'  # Your Account SID
-TWILIO_AUTH_TOKEN = '2bd58a7286c569902174c81c79c16fbe'     # Your Auth Token
-TWILIO_PHONE_NUMBER = '+19897873604'                          # Your Twilio phone number
-TWILIO_ENABLED = True                                         # Enable SMS sending
-
+TWILIO_ACCOUNT_SID = 'AC82fd9f51a19dc28febd379fe64fe4e57'
+TWILIO_AUTH_TOKEN = '2bd58a7286c569902174c81c79c16fbe'
+TWILIO_PHONE_NUMBER = '+19897873604'
+TWILIO_ENABLED = True

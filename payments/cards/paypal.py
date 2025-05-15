@@ -2,15 +2,16 @@ from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 import uuid
 from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse
 
 def initiate_paypal_payment(request, cart, delivery_info, total_usd):
     """
-    Initiate a PayPal payment for the given cart and delivery info.
+    Initiate a PayPal payment for the given cart.
 
     Args:
         request: The HTTP request object.
         cart: The user's cart object (Cart model instance).
-        delivery_info: The DeliveryInfo instance tied to the order.
+        delivery_info: The DeliveryInfo instance tied to the order (None if not created).
         total_usd: The total amount in USD (float).
 
     Returns:
@@ -25,27 +26,19 @@ def initiate_paypal_payment(request, cart, delivery_info, total_usd):
 
     paypal_dict = {
         "business": settings.PAYPAL_RECEIVER_EMAIL,
-        "amount": f"{total_usd:.2f}",  # Ensure 2 decimal places
+        "amount": f"{total_usd:.2f}",
         "item_name": f"Order for {request.user.username}",
-        "invoice": str(uuid.uuid4()),
+        "invoice": f"EATNEARBY-{uuid.uuid4().hex[:6]}",
         "currency_code": "USD",
-        "notify_url": request.build_absolute_uri('/paypal/'),
-        "return_url": request.build_absolute_uri('/payments/payment-done/'),
-        "cancel_return": request.build_absolute_uri('/payments/payment-cancelled/'),
-        "custom": str(delivery_info.id),  # Pass delivery_info ID for IPN
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return_url": request.build_absolute_uri(reverse('payments:payment_done')),
+        "cancel_return": request.build_absolute_uri(reverse('payments:payment_cancelled')),
+        "custom": 'pending' if delivery_info is None else str(delivery_info.id),
     }
 
-    # Optional PayPal settings from settings.py
-    if hasattr(settings, 'PAYPAL_TEST') and settings.PAYPAL_TEST:
-        paypal_dict["test_ipn"] = "1"  # Enable sandbox mode if PAYPAL_TEST is True
+    # Enable sandbox mode if PAYPAL_TEST is True
+    if getattr(settings, 'PAYPAL_TEST', True):
+        paypal_dict["test_ipn"] = "1"
 
-    form = PayPalPaymentsForm(initial=paypal_dict)
+    form = PayPalPaymentsForm(initial=paypal_dict, button_type='buy')
     return form
-
-def verify_paypal_payment(request):
-    """
-    Placeholder for verifying PayPal payment (e.g., via IPN).
-    To be implemented if needed for custom IPN handling.
-    """
-    # Add logic here if you want custom IPN processing beyond django-paypal's default
-    pass
