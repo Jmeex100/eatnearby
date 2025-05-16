@@ -4,9 +4,7 @@
 {% block title %}My Deliveries{% endblock %}
 
 {% block content %}
-
 <div class="container mx-auto px-4 mt-20">
-
     <!-- Pending Deliveries -->
     <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-8">
         <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Pending Deliveries</h2>
@@ -21,15 +19,18 @@
                         <p><strong>Status:</strong> {{ delivery.get_delivery_status_display }}</p>
                         <p><strong>Total:</strong> K{{ delivery.cart.total|floatformat:2 }}</p>
                         <div class="mt-4 flex space-x-2">
+                            <!-- Accept Form -->
                             <form method="post" action="{% url 'staffs:accept_delivery' delivery_id=delivery.id %}">
                                 {% csrf_token %}
                                 <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 flex items-center">
                                     <i class="fas fa-check mr-2"></i> Accept Order
                                 </button>
                             </form>
+                            <!-- Decline Form -->
                             <form method="post" action="{% url 'staffs:decline_delivery' delivery_id=delivery.id %}">
                                 {% csrf_token %}
-                                <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center">
+                                <textarea name="decline_reason" class="w-full p-2 border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200 mt-2" rows="3" placeholder="Reason for declining (e.g., Out of stock)" required></textarea>
+                                <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center mt-2">
                                     <i class="fas fa-times mr-2"></i> Decline Order
                                 </button>
                             </form>

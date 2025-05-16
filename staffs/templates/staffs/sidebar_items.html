@@ -1,0 +1,51 @@
+<!-- Mobile Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 md:hidden flex">
+  <a href="{% url 'staffs:dashboard' %}"
+     class="flex-1 flex flex-col items-center justify-center py-3 text-sm transition-all duration-150 ease-in-out 
+     {% if request.resolver_match.url_name == 'dashboard' %}
+        text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30
+     {% else %}
+        text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+     {% endif %}">
+    <i class="fas fa-tachometer-alt text-lg mb-1"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <a href="{% url 'staffs:my_deliveries' %}"
+     class="flex-1 flex flex-col items-center justify-center py-3 text-sm relative transition-all duration-150 ease-in-out 
+     {% if request.resolver_match.url_name == 'my_deliveries' %}
+        text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30
+     {% else %}
+        text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+     {% endif %}">
+    <i class="fas fa-truck text-lg mb-1"></i>
+    <span>Deliveries</span>
+    {% if my_deliveries.active_count %}
+      <span class="absolute top-1 right-3 bg-blue-600 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow">
+        {{ my_deliveries.active_count }}
+      </span>
+    {% endif %}
+  </a>
+
+  <a href="{% url 'staffs:delivery_history' %}"
+     class="flex-1 flex flex-col items-center justify-center py-3 text-sm transition-all duration-150 ease-in-out 
+     {% if request.resolver_match.url_name == 'delivery_history' %}
+        text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30
+     {% else %}
+        text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+     {% endif %}">
+    <i class="fas fa-history text-lg mb-1"></i>
+    <span>History</span>
+  </a>
+
+  <a href="{% url 'staffs:staff_availability_single' request.user.id %}"
+     class="flex-1 flex flex-col items-center justify-center py-3 text-sm transition-all duration-150 ease-in-out 
+     {% if request.resolver_match.url_name in 'staff_availability_single,staff_availability_all' %}
+        text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30
+     {% else %}
+        text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+     {% endif %}">
+    <i class="fas fa-calendar-alt text-lg mb-1"></i>
+    <span>Availability</span>
+  </a>
+</nav>

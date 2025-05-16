@@ -140,29 +140,50 @@ def accept_delivery(request, delivery_id):
     except Exception as e:
         messages.error(request, f"An error occurred: {str(e)}")
     return redirect('staffs:my_deliveries')
-
 @login_required
 @require_POST
 def decline_delivery(request, delivery_id):
     delivery = get_object_or_404(DeliveryInfo, id=delivery_id)
     logger.info(f"User {request.user.id} attempting to decline delivery {delivery_id}, current status: {delivery.delivery_status}")
 
-    if delivery.delivery_status == 'pending':
-        delivery.delivery_status = 'cancelled'
-        delivery.save()
-        messages.info(request, "You declined the delivery.")
-        logger.info(f"Delivery {delivery_id} declined by user {request.user.id}, status updated to cancelled")
+    # Check if staff is assigned
+    assignment = StaffAssignment.objects.filter(staff=request.user, delivery=delivery).first()
+    if not assignment:
+        messages.error(request, "You are not assigned to this delivery.")
+        logger.warning(f"User {request.user.id} not assigned to delivery {delivery_id}")
+        return redirect('staffs:my_deliveries')
 
-        Notification.objects.create(
-            recipient=request.user,
-            message=f"You declined delivery (Order ID: {delivery.id})",
-            related_delivery=delivery,
-            notification_type='delivery_declined'
-        )
-        send_sms(
-            delivery.phone_number,
-            f"Your order #{delivery.id} has been cancelled. Please contact support for assistance."
-        )
+    if delivery.delivery_status == 'pending':
+        reason = request.POST.get('decline_reason', '').strip()
+        if not reason:
+            messages.error(request, "Please provide a reason for declining the delivery.")
+            logger.warning(f"Decline attempt for delivery {delivery_id} failed: No reason provided")
+            return redirect('staffs:my_deliveries')
+
+        try:
+            delivery.delivery_status = 'cancelled'
+            delivery.save()
+
+            # Store reason in Notification
+            Notification.objects.create(
+                recipient=request.user,
+                message=f"Delivery declined: {reason}",
+                related_delivery=delivery,
+                notification_type='delivery_declined'
+            )
+
+            messages.info(request, "You declined the delivery.")
+            logger.info(f"Delivery {delivery_id} declined by user {request.user.id}, status updated to cancelled, reason: {reason}")
+
+            # Notify customer via SMS
+            send_sms(
+                delivery.phone_number,
+                f"Your order #{delivery.id} has been cancelled. Reason: {reason}. Please contact support for assistance."
+            )
+
+        except Exception as e:
+            messages.error(request, f"Error declining delivery: {str(e)}")
+            logger.error(f"Error declining delivery {delivery_id}: {str(e)}")
     else:
         messages.warning(request, "This delivery cannot be declined as it is no longer pending.")
         logger.warning(f"Delivery {delivery_id} is not pending, status: {delivery.delivery_status}")

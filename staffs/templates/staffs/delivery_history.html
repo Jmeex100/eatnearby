@@ -2,52 +2,52 @@
 {% load static %}
 {% block title %}Delivery History - Eat Nearby{% endblock %}
 {% block content %}
-<div class="p-6">
-    <h2 class="text-2xl font-semibold mb-4">Delivery History</h2>
+<div class="p-4 md:p-6">
+    <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Delivery History</h2>
     
     <!-- Notifications -->
     {% if notifications %}
         <div class="mb-6">
-            <h3 class="text-lg font-medium mb-2">Recent Notifications</h3>
-            <ul class="bg-white rounded-lg shadow-sm p-4 space-y-2">
+            <h3 class="text-lg font-medium mb-2 text-gray-900 dark:text-white">Recent Notifications</h3>
+            <ul class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 space-y-2">
                 {% for notification in notifications %}
-                    <li class="border-b py-2 px-2 rounded bg-blue-50">
-                        <p class="text-gray-700">
+                    <li class="border-b py-2 px-2 rounded bg-blue-50 dark:bg-blue-900">
+                        <p class="text-gray-700 dark:text-gray-300">
                             {{ notification.message }}
                             {% if notification.related_delivery %}
                                 (Order ID: {{ notification.related_delivery.id }})
                             {% endif %}
                         </p>
-                        <p class="text-sm text-gray-500">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                             {{ notification.get_notification_type_display }} | 
                             {{ notification.created_at|date:"M d, Y H:i" }}
                             <!-- Debugging output -->
                             (Type: {{ notification.notification_type }}, 
                             Delivery Status: {{ notification.related_delivery.delivery_status|default:"None" }})
                         </p>
-                        <div class="mt-2 flex space-x-4">
+                        <div class="mt-2 flex flex-wrap gap-4">
                             {% if notification.notification_type in 'delivery_assignment,assignment' and notification.related_delivery and notification.related_delivery.delivery_status == 'pending' %}
                                 <a href="#delivery-{{ notification.related_delivery.id }}" 
-                                   class="text-blue-600 text-sm hover:underline">
+                                   class="text-blue-600 dark:text-blue-400 text-sm hover:underline">
                                     View Order
                                 </a>
                                 <!-- Accept/Decline buttons -->
                                 <form method="post" action="{% url 'staffs:accept_delivery' notification.related_delivery.id %}" class="inline accept-form">
                                     {% csrf_token %}
-                                    <button type="submit" class="text-green-600 text-sm hover:underline accept-btn">Accept</button>
+                                    <button type="submit" class="text-green-600 dark:text-green-400 text-sm hover:underline accept-btn">Accept</button>
                                 </form>
                                 <form method="post" action="{% url 'staffs:decline_delivery' notification.related_delivery.id %}" class="inline">
                                     {% csrf_token %}
-                                    <button type="submit" class="text-red-600 text-sm hover:underline">Decline</button>
+                                    <button type="submit" class="text-red-600 dark:text-red-400 text-sm hover:underline">Decline</button>
                                 </form>
                             {% endif %}
-                            <button class="text-blue-600 text-sm hover:underline mark-read" 
+                            <button class="text-blue-600 dark:text-blue-400 text-sm hover:underline mark-read" 
                                     data-notification-id="{{ notification.id }}">
                                 Mark as Read
                             </button>
                             <form method="post" action="{% url 'staffs:delete_notification' notification.id %}" class="inline">
                                 {% csrf_token %}
-                                <button type="submit" class="text-red-600 text-sm hover:underline">Delete</button>
+                                <button type="submit" class="text-red-600 dark:text-red-400 text-sm hover:underline">Delete</button>
                             </form>
                         </div>
                     </li>
@@ -55,16 +55,15 @@
             </ul>
         </div>
     {% else %}
-        <p class="text-gray-500">No new notifications.</p>
+        <p class="text-gray-500 dark:text-gray-400">No new notifications.</p>
     {% endif %}
     
-
     <!-- Payment History Section -->
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm mb-6 overflow-x-auto">
         <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Payment History</h2>
-        <table class="min-w-full border-collapse">
+        <table class="w-full border-collapse text-sm">
             <thead>
-                <tr>
+                <tr class="bg-gray-100 dark:bg-gray-700">
                     <th class="px-4 py-2 text-left">Transaction ID</th>
                     <th class="px-4 py-2 text-left">Total</th>
                     <th class="px-4 py-2 text-left">Payment Method</th>
@@ -75,7 +74,7 @@
             </thead>
             <tbody>
                 {% for payment in payment_history %}
-                    <tr data-payment-id="{{ payment.id }}">
+                    <tr data-payment-id="{{ payment.id }}" class="hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-4 py-2">
                             {% if payment.delivery_info.payment_method != 'cash' %}
                                 {{ payment.transaction_id|default:"N/A" }}
@@ -88,38 +87,78 @@
                         <td class="px-4 py-2">{{ payment.created_at|date:"Y-m-d H:i" }}</td>
                         <td class="px-4 py-2">{{ payment.user.username }}</td>
                         <td class="px-4 py-2 screen-only">
-                            <button onclick="printPayment({{ payment.id }})" class="text-blue-500 hover:underline">
+                            <button onclick="printPayment({{ payment.id }})" class="text-blue-500 dark:text-blue-400 hover:underline">
                                 <i class="fas fa-print"></i> Print
                             </button>
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="6" class="px-4 py-2 text-center text-gray-500">No payment history found.</td>
+                        <td colspan="6" class="px-4 py-2 text-center text-gray-500 dark:text-gray-400">No payment history found.</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
         <!-- Pagination Controls -->
-        <div class="mt-4 pagination">
+        <div class="mt-4 pagination flex flex-wrap gap-2">
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded">Previous</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Previous</a>
             {% endif %}
-            <span class="px-4 py-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            <span class="px-4 py-2 text-gray-700 dark:text-gray-300">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded">Next</a>
+                <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Next</a>
             {% endif %}
         </div>
     </div>
+
+    <!-- Delivery History List -->
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm overflow-x-auto">
+        {% if deliveries %}
+            <table class="w-full border-collapse text-sm">
+                <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700">
+                        <th class="px-4 py-2 text-left">Order ID</th>
+                        <th class="px-4 py-2 text-left">Customer</th>
+                        <th class="px-4 py-2 text-left">Address</th>
+                        <th class="px-4 py-2 text-left">Status</th>
+                        <th class="px-4 py-2 text-left">Completed At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for delivery in deliveries %}
+                        <tr class="border-b hover:bg-gray-50 dark:hover:bg-gray-600" id="delivery-{{ delivery.id }}">
+                            <td class="px-4 py-3">{{ delivery.id }}</td>
+                            <td class="px-4 py-3">{{ delivery.user.username }}</td>
+                            <td class="px-4 py-3">{{ delivery.address|default:"N/A" }}</td>
+                            <td class="px-4 py-3">
+                                <span class="{% if delivery.delivery_status == 'in_progress' %}text-green-600 dark:text-green-400{% elif delivery.delivery_status in 'declined,cancelled' %}text-red-600 dark:text-red-400{% else %}text-gray-600 dark:text-gray-400{% endif %}">
+                                    {{ delivery.get_delivery_status_display }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3">
+                                {% if delivery.delivery_status == 'completed' %}
+                                    {{ delivery.updated_at|date:"M d, Y H:i" }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-gray-500 dark:text-gray-400">No delivery history found.</p>
+        {% endif %}
+    </div>
 </div>
- Print-Specific Styles -->
+
+<!-- Print-Specific Styles -->
 <style>
     @media print {
         @page {
             size: A4 portrait;
             margin: 1cm;
         }
-        
         body {
             background: white !important;
             color: black !important;
@@ -127,7 +166,6 @@
             font-family: Arial, sans-serif;
             line-height: 1.5;
         }
-        
         .header-print {
             display: flex !important;
             align-items: center;
@@ -135,31 +173,25 @@
             border-bottom: 2px solid #333;
             padding-bottom: 10px;
         }
-        
         .header-print img {
             height: 60px;
             margin-right: 20px;
         }
-        
         .header-print h1 {
             font-size: 18pt;
             margin: 0;
             color: black !important;
         }
-        
         .header-print .print-date {
             margin-left: auto;
             font-size: 10pt;
         }
-        
-        .p-6 {
+        .p-4, .p-6, .md:p-6 {
             padding: 0 !important;
         }
-        
         .print-button, .pagination, .screen-only, nav, header, footer {
             display: none !important;
         }
-        
         .bg-white, .dark:bg-gray-800 {
             background: white !important;
             box-shadow: none !important;
@@ -167,56 +199,46 @@
             margin-bottom: 15px;
             page-break-inside: avoid;
         }
-        
         .grid {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
         }
-        
         .grid > div {
             flex: 1 1 30%;
             min-width: 200px;
             page-break-inside: avoid;
         }
-        
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
             font-size: 10pt;
         }
-        
         th {
             background-color: #f2f2f2 !important;
             color: black !important;
         }
-        
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
-        
         h1, h2 {
             font-size: 14pt;
             color: black !important;
             page-break-after: avoid;
         }
-        
         .border-l-4 {
             border-left: none !important;
             border-bottom: 2px solid #333 !important;
         }
-        
         .bg-blue-100, .bg-green-100, .bg-purple-100 {
             background: #f0f0f0 !important;
         }
-        
         i.fas {
             display: none !important;
         }
-        
         .footer-print {
             margin-top: 20px;
             padding-top: 10px;
@@ -227,6 +249,7 @@
     }
 </style>
 
+<!-- JavaScript for Print, Mark as Read, and Prevent Double Submission -->
 <script>
     function printPayment(paymentId) {
         const row = document.querySelector(`tr[data-payment-id="${paymentId}"]`);
@@ -378,51 +401,7 @@
         printWindow.print();
         printWindow.close();
     }
-</script>
 
-    <!-- Delivery History List -->
-    <div class="bg-white rounded-lg shadow-sm p-6">
-        {% if deliveries %}
-            <table class="w-full text-black text-left">
-                <thead>
-                    <tr class="border-b">
-                        <th class="py-2">Order ID</th>
-                        <th class="py-2">Customer</th>
-                        <th class="py-2">Address</th>
-                        <th class="py-2">Status</th>
-                        <th class="py-2">Completed At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for delivery in deliveries %}
-                        <tr class="border-b hover:bg-gray-50" id="delivery-{{ delivery.id }}">
-                            <td class="py-3">{{ delivery.id }}</td>
-                            <td class="py-3">{{ delivery.user.username }}</td>
-                            <td class="py-3">{{ delivery.address|default:"N/A" }}</td>
-                            <td class="py-3">
-                                <span class="{% if delivery.delivery_status == 'in_progress' %}text-green-600{% elif delivery.delivery_status in 'declined,cancelled' %}text-red-600{% else %}text-gray-600{% endif %}">
-                                    {{ delivery.get_delivery_status_display }}
-                                </span>
-                            </td>
-                            <td class="py-3">
-                                {% if delivery.delivery_status == 'completed' %}
-                                    {{ delivery.updated_at|date:"M d, Y H:i" }}
-                                {% else %}
-                                    N/A
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p class="text-gray-500">No delivery history found.</p>
-        {% endif %}
-    </div>
-</div>
-
-<!-- JavaScript for Mark as Read and Prevent Double Submission -->
-<script>
     document.addEventListener('DOMContentLoaded', function() {
         // Mark as Read
         const markReadButtons = document.querySelectorAll('.mark-read');

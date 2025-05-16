@@ -54,6 +54,7 @@ class Notification(models.Model):
         ('delivery_almost_complete', 'Delivery Almost Complete'),
         ('delivery_completed', 'Delivery Completed'),
         ('alert', 'Alert'),
+        ('delivery_declined', 'Delivery Declined'),
     ]
     
     recipient = models.ForeignKey(

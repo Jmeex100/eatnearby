@@ -11,7 +11,7 @@ urlpatterns = [
     path('mtn-payment-process/', views.mtn_payment_process, name='mtn_payment_process'),
     path('payment-success/<int:delivery_id>/', views.payment_success, name='payment_success'),
     path('payment-done/', views.payment_done, name='payment_done'),
-    path('delivering/', views.in_progress_orders, name='orders_delivering'),
+    path('delivering/', views.in_progress_orders, name='in_progress_orders'),
 
     path('payment-cancelled/', views.payment_cancelled, name='payment_cancelled'),
     path('order-history/', views.order_history, name='order_history'),

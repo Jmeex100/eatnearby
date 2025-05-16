@@ -7,7 +7,7 @@
         <!-- In-Progress Orders Section -->
         <section class="mb-12 my-10">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">In-Progress Orders</h2>
+                <h2 class=" inline-block text-center text-2xl font-bold text-gray-800">In-Progress Orders</h2>
                 <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium">
                     {{ in_progress_orders|length }} active
                 </span>
@@ -79,7 +79,7 @@
         <!-- Declined Orders Section -->
         <section>
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Declined Orders</h2>
+                <h2 class=" inline-block text-center text-2xl font-bold text-gray-800">Declined Orders</h2>
                 <span class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-800 text-sm font-medium">
                     {{ declined_orders|length }} declined
                 </span>
@@ -95,6 +95,7 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Items</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Delivery</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Total</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Reason</th>
                                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-red-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
@@ -122,15 +123,22 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                     K{{ order.cart.total|floatformat:2 }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="delete_delivery_id" value="{{ order.id }}">
-                                        <button type="submit" class="text-red-600 hover:text-red-900 font-medium">
-                                            Delete Order
-                                        </button>
-                                    </form>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    {% for notification in order.notifications.all %}
+                                        {% if notification.notification_type == 'delivery_declined' %}
+                                            {{ notification.message|slice:"16:" }}
+                                        {% endif %}
+                                    {% endfor %}
                                 </td>
+                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete_delivery_id" value="{{ order.id }}">
+                                    <button type="submit" name="delete_single_order" value="true" class="text-red-600 hover:text-red-900 font-medium">
+                                        Delete Order
+                                    </button>
+                                </form>
+                            </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -147,6 +155,13 @@
             </div>
             {% endif %}
         </section>
+     <div class="flex justify-center mt-6">
+  <a href="{% url 'payments:order_history' %}"
+     class="inline-block text-center bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">
+    Order History
+  </a>
+</div>
+
     </div>
 </div>
 {% endblock %}

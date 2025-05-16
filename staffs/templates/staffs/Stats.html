@@ -1,25 +1,22 @@
-    <!-- Delivery Stats in staffs/templates/staffs/Stats.html -->
-    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-8">
-        <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">My Deliveries</h1>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-
-            <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg text-center">
-                <p class="text-lg font-semibold text-yellow-800 dark:text-yellow-200">pending</p>
-<p class="text-2xl font-bold text-yellow-600 dark:text-yellow-100">{{ my_deliveries.pending_count|default:"0" }}</p>
-
-            </div>
-            <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg text-center">
-                <p class="text-lg font-semibold text-blue-800 dark:text-blue-200">Active Deliveries</p>
-                <p class="text-2xl font-bold text-blue-600 dark:text-blue-100">{{ my_deliveries.active_count }}</p>
-            </div>
-             
-            <div class="bg-green-100 dark:bg-green-900 p-4 rounded-lg text-center">
-                <p class="text-lg font-semibold text-green-800 dark:text-green-200">Completed Today</p>
-                <p class="text-2xl font-bold text-green-600 dark:text-green-100">{{ my_deliveries.completed_today }}</p>
-            </div>
-            <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg text-center">
-                <p class="text-lg font-semibold text-yellow-800 dark:text-yellow-200">On-Time Rate</p>
-                <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-100">{{ my_deliveries.on_time_rate }}%</p>
-            </div>
+{% load static %}
+<div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 md:p-6 mb-8 hidden md:block">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">My Deliveries</h1>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-yellow-100 dark:bg-yellow-500 p-4 rounded-lg text-center">
+            <p class="text-lg font-semibold text-yellow-800 dark:text-yellow-200">Pending</p>
+            <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-100">{{ my_deliveries.pending_count|default:"0" }}</p>
+        </div>
+        <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg text-center">
+            <p class="text-lg font-semibold text-blue-800 dark:text-blue-200">Active Deliveries</p>
+            <p class="text-2xl font-bold text-blue-600 dark:text-blue-100">{{ my_deliveries.active_count }}</p>
+        </div>
+        <div class="bg-green-100 dark:bg-green-900 p-4 rounded-lg text-center">
+            <p class="text-lg font-semibold text-green-800 dark:text-green-200">Completed Today</p>
+            <p class="text-2xl font-bold text-green-600 dark:text-green-100">{{ my_deliveries.completed_today }}</p>
+        </div>
+        <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg text-center">
+            <p class="text-lg font-semibold text-yellow-800 dark:text-yellow-200">On-Time Rate</p>
+            <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-100">{{ my_deliveries.on_time_rate }}%</p>
         </div>
     </div>
+</div>

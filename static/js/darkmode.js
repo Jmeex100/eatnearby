@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const darkModeToggle = document.getElementById('darkModeToggle');
   const systemPref = window.matchMedia('(prefers-color-scheme: dark)');
   const saved = localStorage.getItem('darkMode');
-
+// /home/surecode/Documents/GitHub/django/eatnearby/static/js/darkmode.js
   function applyDarkMode(enabled) {
     document.documentElement.classList.toggle('dark', enabled);
     const icon = darkModeToggle?.querySelector('i');

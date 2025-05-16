@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" class="{% if request.user.dark_mode %}dark{% endif %}">
 <head>
   <meta charset="UTF-8">
@@ -7,33 +7,72 @@
   <title>{% block title %}Eat Nearby - My Deliveries{% endblock %}</title>
   <link href="{% static 'css/output.css' %}" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <style>
+    /* Mobile-first responsive styles */
+    @media (max-width: 767px) {
+      .mobile-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .mobile-nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 0.75rem 0;
+      }
+      .mobile-nav-icon {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .mobile-nav-label {
+        font-size: 0.75rem;
+      }
+      .desktop-sidebar {
+        display: none;
+      }
+    }
+    @media (min-width: 768px) {
+      .mobile-bottom-nav {
+        display: none;
+      }
+      .desktop-sidebar {
+        display: block;
+      }
+    }
+    /* Ensure active state styling is consistent */
+    .nav-link.active {
+      color: #2563eb !important; /* text-blue-600 */
+      font-weight: 600 !important;
+      background-color: #dbeafe !important; /* bg-blue-100 */
+    }
+    .dark .nav-link.active {
+      background-color: #1e3a8a !important; /* dark:bg-blue-700 */
+    }
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans tracking-tight">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans tracking-tight overflow-x-hidden">
 
   {% include 'staffs/staffs_header.html' %}
-<!-- Main Content -->
-    <main class="mt-16">
-        <div class="container mx-auto px-4 py-6">
-            <!-- My Delivery Stats -->
-        {% include 'staffs/Stats.html' %}
-  <main class="mt-16 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
 
-      <!-- Sidebar -->
-      <aside class="w-full md:w-64">
-        <nav class Parked="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 min-h-screen sticky top-0">
+  <!-- Main Content -->
+  <main class="mt-16 min-h-screen pb-16 md:pb-0">
+    <div class="max-w-7xl mx-auto px-0 md:px-4 py-0 md:py-6 flex flex-col md:flex-row gap-6">
+
+      <!-- Desktop Sidebar -->
+      <aside class="desktop-sidebar w-full md:w-64">
+        <nav class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 md:min-h-screen sticky top-16">
           <ul class="space-y-3">
             <li>
               <a href="{% url 'staffs:dashboard' %}"
-                 class="flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition 
-                 {% if request.resolver_match.url_name == 'dashboard' %}text-blue-600 font-semibold{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                 class="nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition {% if request.resolver_match.url_name == 'dashboard' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
                 <i class="fas fa-tachometer-alt w-5 text-blue-500"></i> Dashboard
               </a>
             </li>
             <li>
               <a href="{% url 'staffs:my_deliveries' %}"
-                 class="flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition 
-                 {% if request.resolver_match.url_name == 'my_deliveries' %}text-blue-600 font-semibold{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                 class="nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition {% if request.resolver_match.url_name == 'my_deliveries' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
                 <i class="fas fa-truck w-5 text-blue-500"></i> My Deliveries
                 <span class="ml-auto bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2 py-1 rounded-full">
                   {{ my_deliveries.active_count|default:"0" }}
@@ -42,15 +81,13 @@
             </li>
             <li>
               <a href="{% url 'staffs:delivery_history' %}"
-                 class="flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition 
-                 {% if request.resolver_match.url_name == 'delivery_history' %}text-blue-600 font-semibold{% else %}text-gray-700 dark:text-gray-300{% endif %}">
-                <i class="fas fa-history w-5 text-blue-500"></i> My History
+                 class="nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition {% if request.resolver_match.url_name == 'delivery_history' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                <i class="fas fa-history w-5 text-blue-500"></i> <span>History</span>
               </a>
             </li>
             <li>
               <a href="{% url 'staffs:staff_availability_single' request.user.id %}"
-                 class="flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition 
-                 {% if request.resolver_match.url_name in 'staff_availability_single,staff_availability_all' %}text-blue-600 font-semibold{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                 class="nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-700 transition {% if request.resolver_match.url_name in 'staff_availability_single,staff_availability_all' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
                 <i class="fas fa-calendar-alt w-5 text-blue-500"></i> My Availability
               </a>
             </li>
@@ -58,15 +95,19 @@
         </nav>
       </aside>
 
-      <!-- Content -->
-      <section class="flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+      <!-- Main Content Area -->
+      <section class="flex-1 bg-white dark:bg-gray-800 rounded-none md:rounded-2xl shadow-md p-4 md:p-6">
+        <!-- {% include 'staffs/Stats.html' %} -->
         {% block content %}{% endblock %}
       </section>
 
     </div>
   </main>
 
+  <!-- Mobile Bottom Navigation -->
+  {% include 'staffs/sidebar_items.html' %}
   <script src="{% static 'js/darkmode.js' %}"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>
