@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="{% if request.user.dark_mode %}dark{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Eat Nearby - Superadmin{% endblock %}</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <style>
+        @media (max-width: 767px) {
+            .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; }
+            .mobile-nav-item { flex: 1; text-align: center; padding: 0.75rem 0; }
+            .mobile-nav-icon { font-size: 1.25rem; margin-bottom: 0.25rem; }
+            .mobile-nav-label { font-size: 0.75rem; }
+            .desktop-sidebar { display: none; }
+        }
+        @media (min-width: 768px) {
+            .mobile-bottom-nav { display: none; }
+            .desktop-sidebar { display: block; }
+        }
+        .nav-link.active {
+            color: #dc2626 !important;
+            font-weight: 600 !important;
+            background-color: #fee2e2 !important;
+        }
+        .dark .nav-link.active {
+            background-color: #991b1b !important;
+        }
+        .admin-badge {
+            background-color: #fef08a;
+            color: #991b1b;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            margin-left: 0.5rem;
+        }
+        .dropdown-menu {
+            display: none;
+            margin-left: 1.5rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid #e5e7eb;
+        }
+        .dark .dropdown-menu {
+            border-left-color: #4b5563;
+        }
+        .dropdown-menu:not(.hidden) {
+            display: block;
+        }
+        .dropdown-toggle:hover {
+            background-color: #f3f4f6;
+        }
+        .dark .dropdown-toggle:hover {
+            background-color: #374151;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans tracking-tight overflow-x-hidden">
+    {% include 'superadmin/superadmin_header.html' %}
+    <main class="mt-16 min-h-screen pb-16 md:pb-0">
+        <div class="max-w-7xl mx-auto px-0 md:px-4 py-0 md:py-6 flex flex-col md:flex-row gap-6">
+            <aside class="desktop-sidebar w-full md:w-64">
+                <nav class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 md:min-h-screen sticky top-16">
+                    <ul class="space-y-3">
+                        <!-- Dashboard -->
+                        <li>
+                            <a href="{% url 'superadmin:dashboard' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'dashboard' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-tachometer-alt w-5 text-red-500"></i> Dashboard
+                            </a>
+                        </li>
+                        <!-- Users Dropdown -->
+                        <li>
+                            <button class="dropdown-toggle nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition w-full text-left {% if request.resolver_match.url_name in 'user_list,user_create,staff_list,customer_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-users w-5 text-red-500"></i> Users
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            </button>
+                            <ul class="dropdown-menu hidden">
+                                <li>
+                                    <a href="{% url 'superadmin:user_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'user_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-list w-5 text-red-500"></i> All Users
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:user_create' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'user_create' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-user-plus w-5 text-red-500"></i> Create User
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:staff_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'staff_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-user-tie w-5 text-red-500"></i> Staff
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:customer_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'customer_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-user w-5 text-red-500"></i> Customers
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Categories Dropdown -->
+                        <li>
+                            <button class="dropdown-toggle nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition w-full text-left {% if request.resolver_match.url_name in 'category_list,category_create' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-list w-5 text-red-500"></i> Categories
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            </button>
+                            <ul class="dropdown-menu hidden">
+                                <li>
+                                    <a href="{% url 'superadmin:category_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'category_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-list w-5 text-red-500"></i> All Categories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:category_create' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'category_create' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-plus w-5 text-red-500"></i> Create Category
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Products Dropdown -->
+                        <li>
+                            <button class="dropdown-toggle nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition w-full text-left {% if request.resolver_match.url_name in 'product_list,product_create' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-utensils w-5 text-red-500"></i> Products
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            </button>
+                            <ul class="dropdown-menu hidden">
+                                <li>
+                                    <a href="{% url 'superadmin:product_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'product_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-list w-5 text-red-500"></i> All Products
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:product_create' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'product_create' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-plus w-5 text-red-500"></i> Create Product
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Carts -->
+                        <li>
+                            <a href="{% url 'superadmin:cart_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'cart_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-shopping-cart w-5 text-red-500"></i> Carts
+                            </a>
+                        </li>
+                        <!-- Deliveries Dropdown -->
+                        <li>
+                            <button class="dropdown-toggle nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition w-full text-left {% if request.resolver_match.url_name in 'delivery_list,all_deliveries' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-truck w-5 text-red-500"></i> Deliveries
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            </button>
+                            <ul class="dropdown-menu hidden">
+                                <li>
+                                    <a href="{% url 'superadmin:delivery_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'delivery_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-list w-5 text-red-500"></i> Active Deliveries
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:all_deliveries' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'all_deliveries' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-archive w-5 text-red-500"></i> All Deliveries
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Payments -->
+                        <li>
+                            <a href="{% url 'superadmin:payment_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'payment_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-credit-card w-5 text-red-500"></i> Payments
+                            </a>
+                        </li>
+                        <!-- Revenue -->
+                        <li>
+                            <a href="{% url 'superadmin:revenue_dashboard' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'revenue_dashboard' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-money-bill-wave w-5 text-red-500"></i> Revenue
+                            </a>
+                        </li>
+                        <!-- Staff Management Dropdown -->
+                        <li>
+                            <button class="dropdown-toggle nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition w-full text-left {% if request.resolver_match.url_name in 'staff_service_area_list,staff_assignment_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-user-tie w-5 text-red-500"></i> Staff Management
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            </button>
+                            <ul class="dropdown-menu hidden">
+                                <li>
+                                    <a href="{% url 'superadmin:staff_service_area_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'staff_service_area_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-map-marker-alt w-5 text-red-500"></i> Service Areas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'superadmin:staff_assignment_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'staff_assignment_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                        <i class="fas fa-user-check w-5 text-red-500"></i> Assignments
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Notifications -->
+                        <li>
+                            <a href="{% url 'superadmin:notification_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'notification_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-bell w-5 text-red-500"></i> Notifications
+                            </a>
+                        </li>
+                        <!-- Settings -->
+                        <li>
+                            <a href="{% url 'superadmin:system_settings' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-700 transition {% if request.resolver_match.url_name == 'system_settings' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-cog w-5 text-red-500"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <section class="flex-1 bg-white dark:bg-gray-800 rounded-none md:rounded-2xl shadow-md p-4 md:p-6">
+                {% block content %}{% endblock %}
+            </section>
+        </div>
+    </main>
+    {% include 'superadmin/superadmin_sidebar_items.html' %}
+    <script src="{% static 'js/darkmode.js' %}"></script>
+    <script src="{% static 'js/superadmin.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -21,3 +21,4 @@ def order_notifications(request):
         'nav_declined_count': declined_count,
         'nav_total_notifications': in_progress_count + declined_count,
     }
+    # /home/surecode/Documents/GitHub/django/eatnearby/payments/context_processors.py

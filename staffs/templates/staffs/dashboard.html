@@ -1,4 +1,4 @@
-{% extends 'staffs_base.html' %}
+ {% extends 'staffs_base.html' %}
 {% load static %}
 
 {% block title %}Dashboard - Eat Nearby{% endblock %}
@@ -23,6 +23,18 @@
                 </div>
                 <div class="bg-blue-100 dark:bg-blue-700 p-3 rounded-full">
                     <i class="fas fa-truck-loading text-blue-500 dark:text-blue-300"></i>
+                </div>
+            </div>
+        </div>
+          <!-- Today's Completed -->
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">pending deliveries</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ my_deliveries.pending_count }}</p>
+                </div>
+                <div class="bg-green-100 dark:bg-yellow-500 p-3 rounded-full">
+                    <i class="fas fa-hourglass-half text-yellow-500 dark:text-green-300"></i>
                 </div>
             </div>
         </div>
@@ -127,7 +139,7 @@
             align-items: center;
             margin-bottom: 20px;
             border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+            padding-bottom: 10px; 
         }
         .header-print img {
             height: 60px;
@@ -357,4 +369,4 @@
         printWindow.close();
     }
 </script>
-{% endblock %}
+{% endblock %} 

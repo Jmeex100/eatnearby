@@ -12,7 +12,7 @@ ALLOWED_HOSTS = [
     'localhost',       # Localhost
     '192.168.119.40',      # Your local IP address
     '0.0.0.0',         # For binding to all network interfaces (optional)
-    '192.168.1.190',   # GUEST
+    '10.0.8.176',   # GUEST
   'd31c-45-215-255-168.ngrok-free.app',  # Your ngrok domain
     'eatnearby.duckdns.org',   # SCHOOL WIFI
     #  'django_extensions',  # Add this
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'sim',
     'auths',
     'cart',
- 
+     'superadmin.apps.SuperadminConfig',
     'payments.apps.PaymentsConfig',
     'paypal.standard.ipn',
     'pwa',
@@ -102,6 +102,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'payments.context_processors.order_notifications',
+                 'staffs.context_processors.staff_notifications',
             ],
         },
     },

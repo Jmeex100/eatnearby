@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Mobile Bottom Navigation -->
 <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 md:hidden flex">
   <a href="{% url 'staffs:dashboard' %}"
@@ -9,6 +10,11 @@
      {% endif %}">
     <i class="fas fa-tachometer-alt text-lg mb-1"></i>
     <span>Dashboard</span>
+    {% if dashboard_notifications %}
+      <span class="absolute top-1 right-3 bg-blue-600 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow">
+        {{ dashboard_notifications }}
+      </span>
+    {% endif %}
   </a>
 
   <a href="{% url 'staffs:my_deliveries' %}"
@@ -36,6 +42,11 @@
      {% endif %}">
     <i class="fas fa-history text-lg mb-1"></i>
     <span>History</span>
+    {% if history_notifications %}
+      <span class="absolute top-1 right-3 bg-blue-600 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow">
+        {{ history_notifications }}
+      </span>
+    {% endif %}
   </a>
 
   <a href="{% url 'staffs:staff_availability_single' request.user.id %}"
@@ -47,5 +58,10 @@
      {% endif %}">
     <i class="fas fa-calendar-alt text-lg mb-1"></i>
     <span>Availability</span>
+    {% if availability_notifications %}
+      <span class="absolute top-1 right-3 bg-blue-600 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow">
+        {{ availability_notifications }}
+      </span>
+    {% endif %}
   </a>
 </nav>

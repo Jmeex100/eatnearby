@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.utils.timezone import now
+from django.utils.timezone import now, timedelta
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.contrib import messages
@@ -22,6 +22,7 @@ def dashboard(request):
     today = now().date()
     staff = request.user
 
+    # Delivery stats
     stats = StaffAssignment.objects.filter(staff=staff).aggregate(
         active_count=Count('id', filter=Q(delivery__delivery_status='in_progress')),
         completed_today_count=Count('id', filter=Q(delivery__delivery_status='completed', delivery__updated_at__date=today)),
@@ -35,13 +36,31 @@ def dashboard(request):
     pending_count = stats['pending_count']
     on_time_rate = 0 if total_completed == 0 else round((completed_today / total_completed) * 100)
 
+    # Payment history with optimized queries
     payment_history = PaymentHistory.objects.filter(
         delivery_info__staff_assignments__staff=staff
-    ).select_related('delivery_info').order_by('-created_at')
+    ).select_related('delivery_info', 'user').prefetch_related('delivery_info__staff_assignments').order_by('-created_at')
 
     paginator = Paginator(payment_history, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
+
+    # Badge counts for sidebar_items.html
+    dashboard_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type='new_order'
+    ).count()
+    history_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type__in=['delivery_completed', 'delivery_declined']
+    ).count()
+    availability_notifications = StaffAssignment.objects.filter(
+        staff=staff,
+        assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
+        assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    ).count()
 
     context = {
         'my_deliveries': {
@@ -51,10 +70,14 @@ def dashboard(request):
             'pending_count': pending_count
         },
         'payment_history': page_obj,
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'dashboard_notifications': dashboard_notifications,
+        'history_notifications': history_notifications,
+        'availability_notifications': availability_notifications,
+        'last_login': staff.last_login,
+        'staff_name': staff.get_full_name() or staff.username,
     }
     return render(request, 'staffs/dashboard.html', context)
-
 @login_required
 @staff_view
 def my_deliveries(request):
@@ -68,7 +91,6 @@ def my_deliveries(request):
         pending_count=Count('id', filter=Q(delivery__delivery_status='pending'))
     )
 
-    # Fetch pending deliveries with PaymentHistory or cash
     pending_deliveries = DeliveryInfo.objects.filter(
         staff_assignments__staff=staff,
         delivery_status='pending'
@@ -76,11 +98,27 @@ def my_deliveries(request):
         Q(payment_histories__isnull=False) | Q(payment_method='cash')
     ).select_related('user', 'cart').order_by('-created_at')
 
-    # Fetch in-progress deliveries
     in_progress_deliveries = DeliveryInfo.objects.filter(
         staff_assignments__staff=staff,
         delivery_status='in_progress'
     ).select_related('user', 'cart').order_by('-created_at')
+
+    # Badge counts
+    dashboard_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type='new_order'
+    ).count()
+    history_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type__in=['delivery_completed', 'delivery_declined']
+    ).count()
+    availability_notifications = StaffAssignment.objects.filter(
+        staff=staff,
+        assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
+        assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    ).count()
 
     context = {
         'my_deliveries': {
@@ -90,7 +128,10 @@ def my_deliveries(request):
             'pending_count': stats['pending_count']
         },
         'pending_deliveries': pending_deliveries,
-        'in_progress_deliveries': in_progress_deliveries
+        'in_progress_deliveries': in_progress_deliveries,
+        'dashboard_notifications': dashboard_notifications,
+        'history_notifications': history_notifications,
+        'availability_notifications': availability_notifications,
     }
     return render(request, 'staffs/my_deliveries.html', context)
 
@@ -108,9 +149,35 @@ def delivery_history(request):
     ).order_by('-created_at')[:10]
     logger.debug(f"Notifications for user {staff.id}: {[n.id for n in notifications]}")
 
+    # Badge counts
+    dashboard_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type='new_order'
+    ).count()
+    history_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type__in=['delivery_completed', 'delivery_declined']
+    ).count()
+    availability_notifications = StaffAssignment.objects.filter(
+        staff=staff,
+        assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
+        assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    ).count()
+
     context = {
         'deliveries': deliveries,
-        'notifications': notifications
+        'notifications': notifications,
+        'my_deliveries': {
+            'active_count': StaffAssignment.objects.filter(
+                staff=staff,
+                delivery__delivery_status='in_progress'
+            ).count()
+        },
+        'dashboard_notifications': dashboard_notifications,
+        'history_notifications': history_notifications,
+        'availability_notifications': availability_notifications,
     }
     return render(request, 'staffs/delivery_history.html', context)
 
@@ -140,13 +207,13 @@ def accept_delivery(request, delivery_id):
     except Exception as e:
         messages.error(request, f"An error occurred: {str(e)}")
     return redirect('staffs:my_deliveries')
+
 @login_required
 @require_POST
 def decline_delivery(request, delivery_id):
     delivery = get_object_or_404(DeliveryInfo, id=delivery_id)
     logger.info(f"User {request.user.id} attempting to decline delivery {delivery_id}, current status: {delivery.delivery_status}")
 
-    # Check if staff is assigned
     assignment = StaffAssignment.objects.filter(staff=request.user, delivery=delivery).first()
     if not assignment:
         messages.error(request, "You are not assigned to this delivery.")
@@ -164,7 +231,6 @@ def decline_delivery(request, delivery_id):
             delivery.delivery_status = 'cancelled'
             delivery.save()
 
-            # Store reason in Notification
             Notification.objects.create(
                 recipient=request.user,
                 message=f"Delivery declined: {reason}",
@@ -175,7 +241,6 @@ def decline_delivery(request, delivery_id):
             messages.info(request, "You declined the delivery.")
             logger.info(f"Delivery {delivery_id} declined by user {request.user.id}, status updated to cancelled, reason: {reason}")
 
-            # Notify customer via SMS
             send_sms(
                 delivery.phone_number,
                 f"Your order #{delivery.id} has been cancelled. Reason: {reason}. Please contact support for assistance."
@@ -202,13 +267,43 @@ def availability(request, staff_id=None):
             return 'present'
         return 'not at work'
 
+    staff = request.user
+    # Badge counts
+    dashboard_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type='new_order'
+    ).count()
+    history_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type__in=['delivery_completed', 'delivery_declined']
+    ).count()
+    availability_notifications = StaffAssignment.objects.filter(
+        staff=staff,
+        assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
+        assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    ).count()
+
     if staff_id:
         staff = get_object_or_404(User, id=staff_id)
         if not (request.user.user_type in ['staff', 'admin'] or request.user.is_superuser):
             return render(request, 'staffs/error.html', {'message': 'You do not have permission to view this page.'})
         staff.status = get_user_status(staff)
         staff.role = getattr(staff, 'get_user_type_display', lambda: 'Staff')()
-        return render(request, 'staffs/availability_single.html', {'staff': staff})
+        context = {
+            'staff': staff,
+            'my_deliveries': {
+                'active_count': StaffAssignment.objects.filter(
+                    staff=staff,
+                    delivery__delivery_status='in_progress'
+                ).count()
+            },
+            'dashboard_notifications': dashboard_notifications,
+            'history_notifications': history_notifications,
+            'availability_notifications': availability_notifications,
+        }
+        return render(request, 'staffs/availability_single.html', context)
 
     if not (request.user.user_type in ['staff', 'admin'] or request.user.is_superuser):
         return render(request, 'staffs/error.html', {'message': 'You do not have permission to view this page.'})
@@ -218,17 +313,87 @@ def availability(request, staff_id=None):
         staff.status = get_user_status(staff)
         staff.role = getattr(staff, 'get_user_type_display', lambda: 'Staff')()
 
-    return render(request, 'staffs/availability.html', {'staff_list': staff_list})
+    context = {
+        'staff_list': staff_list,
+        'my_deliveries': {
+            'active_count': StaffAssignment.objects.filter(
+                staff=request.user,
+                delivery__delivery_status='in_progress'
+            ).count()
+        },
+        'dashboard_notifications': dashboard_notifications,
+        'history_notifications': history_notifications,
+        'availability_notifications': availability_notifications,
+    }
+    return render(request, 'staffs/availability.html', context)
 
 @login_required
 @staff_view
 def profile(request):
-    return render(request, 'staffs/profile.html')
+    staff = request.user
+    # Badge counts
+    dashboard_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type='new_order'
+    ).count()
+    history_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type__in=['delivery_completed', 'delivery_declined']
+    ).count()
+    availability_notifications = StaffAssignment.objects.filter(
+        staff=staff,
+        assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
+        assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    ).count()
+
+    context = {
+        'my_deliveries': {
+            'active_count': StaffAssignment.objects.filter(
+                staff=staff,
+                delivery__delivery_status='in_progress'
+            ).count()
+        },
+        'dashboard_notifications': dashboard_notifications,
+        'history_notifications': history_notifications,
+        'availability_notifications': availability_notifications,
+    }
+    return render(request, 'staffs/profile.html', context)
 
 @login_required
 @staff_view
 def settings(request):
-    return render(request, 'staffs/settings.html')
+    staff = request.user
+    # Badge counts
+    dashboard_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type='new_order'
+    ).count()
+    history_notifications = Notification.objects.filter(
+        recipient=staff,
+        is_read=False,
+        notification_type__in=['delivery_completed', 'delivery_declined']
+    ).count()
+    availability_notifications = StaffAssignment.objects.filter(
+        staff=staff,
+        assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
+        assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    ).count()
+
+    context = {
+        'my_deliveries': {
+            'active_count': StaffAssignment.objects.filter(
+                staff=staff,
+                delivery__delivery_status='in_progress'
+            ).count()
+        },
+        'dashboard_notifications': dashboard_notifications,
+        'history_notifications': history_notifications,
+        'availability_notifications': availability_notifications,
+    }
+    return render(request, 'staffs/settings.html', context)
 
 @login_required
 @staff_view

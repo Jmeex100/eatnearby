@@ -1,0 +1,57 @@
+{% load static %}
+<!-- Mobile Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 md:hidden flex">
+    <a href="{% url 'superadmin:dashboard' %}"
+       class="flex-1 flex flex-col items-center justify-center py-3 text-sm transition-all duration-150 ease-in-out 
+       {% if request.resolver_match.url_name == 'dashboard' %}
+          text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30
+       {% else %}
+          text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+       {% endif %}">
+        <i class="fas fa-tachometer-alt text-lg mb-1"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="{% url 'superadmin:user_list' %}"
+       class="flex-1 flex flex-col items-center justify-center py-3 text-sm relative transition-all duration-150 ease-in-out 
+       {% if request.resolver_match.url_name == 'user_list' %}
+          text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30
+       {% else %}
+          text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+       {% endif %}">
+        <i class="fas fa-users text-lg mb-1"></i>
+        <span>Users</span>
+        {% if user_counts.total %}
+        <span class="absolute top-1 right-3 bg-red-600 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow">
+            {{ user_counts.total }}
+        </span>
+        {% endif %}
+    </a>
+
+    <a href="{% url 'superadmin:delivery_list' %}"
+       class="flex-1 flex flex-col items-center justify-center py-3 text-sm transition-all duration-150 ease-in-out 
+       {% if request.resolver_match.url_name == 'delivery_list' %}
+          text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30
+       {% else %}
+          text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+       {% endif %}">
+        <i class="fas fa-truck text-lg mb-1"></i>
+        <span>Deliveries</span>
+        {% if delivery_counts.active %}
+        <span class="absolute top-1 right-3 bg-red-600 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow">
+            {{ delivery_counts.active }}
+        </span>
+        {% endif %}
+    </a>
+
+    <a href="{% url 'superadmin:revenue_dashboard' %}"
+       class="flex-1 flex flex-col items-center justify-center py-3 text-sm transition-all duration-150 ease-in-out 
+       {% if request.resolver_match.url_name == 'revenue_dashboard' %}
+          text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30
+       {% else %}
+          text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
+       {% endif %}">
+        <i class="fas fa-money-bill-wave text-lg mb-1"></i>
+        <span>Revenue</span>
+    </a>
+</nav>

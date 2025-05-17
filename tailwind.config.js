@@ -13,6 +13,8 @@ module.exports = {
     './payments/static/js/**/*.js',
     './staffs/templates/**/*.html',
     './staffs/static/js/**/*.js',
+        './superadmin/templates/**/*.html',
+    './superadmin/static/js/**/*.js',
   ],
   theme: {
     extend: {
