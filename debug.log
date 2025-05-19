@@ -10551,3 +10551,69 @@ Traceback (most recent call last):
   File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: superadmin/users/customer_list.html
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+Not Found: /accounts/login/
+Not Found: /accounts/login/
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 417 for cash order with status pending
+Assigned cash delivery 417 to staff 21
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+/home/surecode/Documents/GitHub/django/eatnearby/core/settings.py changed, reloading.
+Watching for file changes with StatReloader
