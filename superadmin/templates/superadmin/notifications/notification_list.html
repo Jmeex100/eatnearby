@@ -1,0 +1,53 @@
+<!-- superadmin/notifications/notification_list.html -->
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block title %}Notifications - Eat Nearby{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Notifications</h1>
+
+  {% if page_obj %}
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="px-6 py-3">Message</th>
+            <th class="px-6 py-3">Type</th>
+            <th class="px-6 py-3">Created At</th>
+            <th class="px-6 py-3">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for notification in page_obj %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4">
+                <a href="{% url 'superadmin:notification_detail' pk=notification.pk %}" class="hover:underline">
+                  {{ notification.message|truncatechars:50 }}
+                </a>
+              </td>
+              <td class="px-6 py-4">{{ notification.get_notification_type_display }}</td>
+              <td class="px-6 py-4">{{ notification.created_at|date:"Y-m-d H:i:s" }}</td>
+              <td class="px-6 py-4">{{ notification.is_read|yesno:"Read,Unread" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="mt-4">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Previous</a>
+        {% endif %}
+        <span class="px-4 py-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Next</a>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <p class="text-gray-600 dark:text-gray-400">No notifications available.</p>
+  {% endif %}
+</div>
+{% endblock %}

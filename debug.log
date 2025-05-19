@@ -10617,3 +10617,1001 @@ Availability notifications for user 1: 0
 Total notifications for user 1: 0
 /home/surecode/Documents/GitHub/django/eatnearby/core/settings.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Internal Server Error: /superadmin/staff/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/user_views.py", line 133, in staff_list
+    return render(request, 'superadmin/users/staff_list.html', {'page_obj': page_obj})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/users/staff_list.html
+Internal Server Error: /superadmin/deliveries/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/delivery_views.py", line 12, in delivery_list
+    return render(request, 'superadmin/deliveries/delivery_list.html', {'page_obj': page_obj})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/deliveries/delivery_list.html
+Internal Server Error: /superadmin/revenue/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/revenue.py", line 6, in revenue_dashboard
+    return render(request, 'superadmin/revenue/revenue_dashboard.html')
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/revenue/revenue_dashboard.html
+Internal Server Error: /superadmin/notifications/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/notification_views.py", line 12, in notification_list
+    return render(request, 'superadmin/notifications/notification_list.html', {'page_obj': page_obj})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/notifications/notification_list.html
+Internal Server Error: /superadmin/settings/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/views.py", line 86, in system_settings
+    return render(request, 'superadmin/settings/system_settings.html')
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/settings/system_settings.html
+Internal Server Error: /superadmin/categories/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/category_views.py", line 53, in category_list
+    return render(request, 'superadmin/categories/category_list.html', {'page_obj': page_obj})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/categories/category_list.html
+Internal Server Error: /superadmin/customers/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/user_views.py", line 142, in customer_list
+    return render(request, 'superadmin/users/customer_list.html', {'page_obj': page_obj})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/users/customer_list.html
+Internal Server Error: /superadmin/users/create/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/user_views.py", line 89, in user_create
+    return render(request, 'superadmin/users/user_form.html', {'form': form, 'action': 'Create'})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/users/user_form.html
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/staff-service-areas/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/staff_views.py", line 8, in staff_service_area_list
+    areas = StaffServiceArea.objects.all().order_by('name')
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/db/models/query.py", line 1718, in order_by
+    obj.query.add_ordering(*field_names)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/db/models/sql/query.py", line 2288, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1802, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'name' into field. Choices are: id, point, staff, staff_id
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+ MTN payment for +260973546375, Total: 45.0 ZMW, Transaction ID: MTN-PENDING-2
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 418 with status pending
+Assigned delivery 418 to staff 21
+Mtn payment for +260973546375, Amount: 45.0 ZMW, Delivery 418
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/delivery/418/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/delivery_views.py", line 17, in delivery_detail
+    return render(request, 'superadmin/deliveries/delivery_detail.html', {'delivery': delivery})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'update_delivery_status' not found. 'update_delivery_status' is not a valid view function or pattern name.
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/delivery/417/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/delivery_views.py", line 17, in delivery_detail
+    return render(request, 'superadmin/deliveries/delivery_detail.html', {'delivery': delivery})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'update_delivery_status' not found. 'update_delivery_status' is not a valid view function or pattern name.
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/delivery/418/
+Traceback (most recent call last):
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/surecode/Documents/GitHub/django/eatnearby/superadmin/delivery_views.py", line 17, in delivery_detail
+    return render(request, 'superadmin/deliveries/delivery_detail.html', {'delivery': delivery})
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/surecode/.local/lib/python3.13/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'update_delivery_status' not found. 'update_delivery_status' is not a valid view function or pattern name.
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Not Found: /accounts/login/
+Not Found: /accounts/login/
+Not Found: /accounts/login/
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Simulated Airtel payment initiated for +260973546375, Amount: 40.0 ZMW, Transaction ID: 74a90151-070d-4a82-a8da-032d55a836bf
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 419 with status pending
+No staff available for delivery 419
+Airtel payment for +260973546375, Amount: 40.00 ZMW, Delivery 419
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Watching for file changes with StatReloader
+Not Found: /accounts/login/
+Not Found: /accounts/login/
+Not Found: /accounts/login/
+Forbidden (CSRF token from POST incorrect.): /payments/checkout/
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+In-progress orders context: {'in_progress_orders': <QuerySet []>, 'declined_orders': <QuerySet []>}
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+In-progress orders context: {'in_progress_orders': <QuerySet []>, 'declined_orders': <QuerySet []>}
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 420 for cash order with status pending
+Assigned cash delivery 420 to staff 21
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+In-progress orders context: {'in_progress_orders': <QuerySet []>, 'declined_orders': <QuerySet []>}
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+In-progress orders context: {'in_progress_orders': <QuerySet []>, 'declined_orders': <QuerySet []>}
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 1
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 63
+DeliveryInfo 413 status changed from pending to in_progress
+Delivery 413 accepted by user 6, status updated to in_progress
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.5.0 (Linux x86_64) Python/3.13.2
+X-Twilio-Client : python-9.5.0
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Mon, 19 May 2025 22:43:51 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQc128dd55ddb60e2d20a49c39cbcad19e', 'Twilio-Request-Duration': '0.024', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Www-Authenticate': 'Basic realm="Twilio API"', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 155c66c00eae85d3bda3d2cec926ace4.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'wVNZODbfB2B3Y0A-i0T_4mvqJx3P6ZBKG1nIvXi-o0-16bm-Kcreyw==', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 6: 0
+Pending deliveries for user 6: 0
+History notifications for user 6: 62
+Availability notifications for user 6: 0
+Total notifications for user 6: 62
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+Dashboard notifications for user 23: 0
+Pending deliveries for user 23: 0
+History notifications for user 23: 0
+Availability notifications for user 23: 0
+Total notifications for user 23: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts

@@ -1,0 +1,197 @@
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block title %}{{ action }} User - Eat Nearby{% endblock %}
+
+{% block content %}
+<div class="p-4 md:p-6">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">{{ action }} User</h1>
+        <div class="flex space-x-2">
+            <button onclick="window.print()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                <i class="fas fa-print mr-2"></i>Print
+            </button>
+            <a href="{% url 'superadmin:user_list' %}" class="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-500">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Users
+            </a>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+        <form method="POST" id="userForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% csrf_token %}
+            <!-- Username -->
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.username.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- First Name -->
+            <div>
+                <label for="id_first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.first_name.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- Last Name -->
+            <div>
+                <label for="id_last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.last_name.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- Email -->
+            <div>
+                <label for="id_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.email.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- User Type -->
+            <div>
+                <label for="id_user_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">User Type</label>
+                {{ form.user_type }}
+                {% if form.user_type.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.user_type.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- Gender -->
+            <div>
+                <label for="id_gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
+                {{ form.gender }}
+                {% if form.gender.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.gender.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- Phone Number -->
+            <div>
+                <label for="id_phone_number" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
+                {{ form.phone_number }}
+                {% if form.phone_number.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.phone_number.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- Preferred Delivery Point -->
+            <div id="deliveryPointField">
+                <label for="id_preferred_delivery_point" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Delivery Point</label>
+                {{ form.preferred_delivery_point }}
+                {% if form.preferred_delivery_point.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.preferred_delivery_point.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- Superuser -->
+            <div class="flex items-center">
+                <label for="id_is_superuser" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mr-2">Superuser (Admin only)</label>
+                {{ form.is_superuser }}
+                {% if form.is_superuser.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.is_superuser.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <!-- New Password (Update Only) -->
+            {% if action == 'Update' %}
+            <div>
+                <label for="id_new_password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">New Password</label>
+                {{ form.new_password }}
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Enter a new password to reset (optional).</p>
+                {% if form.new_password.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.new_password.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+            <!-- Submit/Cancel -->
+            <div class="md:col-span-2 flex justify-end space-x-2">
+                <a href="{% url 'superadmin:user_list' %}" class="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-500">
+                    Cancel
+                </a>
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    <i class="fas fa-save mr-2"></i>{{ action }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userTypeField = document.getElementById('id_user_type');
+        const deliveryPointField = document.getElementById('deliveryPointField');
+        
+        function toggleDeliveryPointField() {
+            if (userTypeField.value === 'customer') {
+                deliveryPointField.style.display = 'block';
+                document.getElementById('id_preferred_delivery_point').disabled = false;
+            } else {
+                deliveryPointField.style.display = 'none';
+                document.getElementById('id_preferred_delivery_point').disabled = true;
+                document.getElementById('id_preferred_delivery_point').value = '';
+            }
+        }
+        
+        // Initial toggle based on current value
+        toggleDeliveryPointField();
+        
+        // Add event listener for changes
+        userTypeField.addEventListener('change', toggleDeliveryPointField);
+        
+        // Form validation
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            const email = document.getElementById('id_email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email && !emailRegex.test(email)) {
+                e.preventDefault();
+                alert('Please enter a valid email address.');
+                document.getElementById('id_email').focus();
+            }
+            {% if action == 'Update' %}
+            const password = document.getElementById('id_new_password').value;
+            if (password && password.length < 8) {
+                e.preventDefault();
+                alert('Password must be at least 8 characters long.');
+                document.getElementById('id_new_password').focus();
+            }
+            {% endif %}
+            const phone = document.getElementById('id_phone_number').value;
+            if (phone && !phone.replace('+', '').replace('-', '').replace(' ', '').match(/^\d+$/)) {
+                e.preventDefault();
+                alert('Phone number must contain only digits, +, -, or spaces.');
+                document.getElementById('id_phone_number').focus();
+            }
+        });
+    });
+</script>
+<style>
+    @media print {
+        header, aside, .mobile-bottom-nav, .flex.justify-between, a[href], button:not([type="submit"]) {
+            display: none !important;
+        }
+        body {
+            background: white !important;
+            color: black !important;
+        }
+        .p-4.md\:p-6 {
+            padding: 0 !important;
+        }
+        .bg-white {
+            background: white !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        form {
+            font-size: 12pt;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        input, select {
+            border: 1px solid #dc2626 !important;
+            padding: 4px !important;
+            background: white !important;
+            color: black !important;
+        }
+    }
+</style>
+{% endblock %}

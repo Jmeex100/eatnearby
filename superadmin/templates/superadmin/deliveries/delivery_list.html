@@ -1,0 +1,117 @@
+{% extends 'superadmin/superadmin_base.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-6 px-4 dark:bg-gray-900 dark:text-gray-100 bg-white rounded shadow">
+    <h2 class="text-2xl font-semibold mb-6">Delivery List</h2>
+
+    {% if unread_notifications_count %}
+        <div class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-4 py-3 rounded mb-4">
+            You have {{ unread_notifications_count }} unread notification{{ unread_notifications_count|pluralize }}.
+        </div>
+    {% endif %}
+
+    <form method="get" class="flex flex-wrap gap-4 items-center mb-6">
+        <input type="text" name="q" placeholder="Search by email or phone" value="{{ search_query }}"
+            class="w-full md:w-auto flex-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-gray-100" />
+
+        <select name="status"
+            class="w-full md:w-auto px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-gray-100">
+            <option value="">All Statuses</option>
+            {% for value, label in delivery_status_choices %}
+                <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit"
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Filter</button>
+    </form>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full text-left border border-gray-200 dark:border-gray-700">
+            <thead class="bg-gray-100 dark:bg-gray-800">
+                <tr>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">User</th>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">Phone</th>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">Address</th>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">Payment Method</th>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">Provider</th>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">Status</th>
+                    <th class="px-4 py-2 border-b dark:border-gray-700">Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery in page_obj %}
+                    <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900 dark:even:bg-gray-800">
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.user.username }}</td>
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.phone_number }}</td>
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.address|default:delivery.get_predefined_address_display }}</td>
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.get_payment_method_display }}</td>
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.payment_provider|default:"N/A" }}</td>
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.get_delivery_status_display }}</td>
+                        <td class="px-4 py-2 border-b dark:border-gray-700">{{ delivery.created_at|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center py-4 text-gray-500 dark:text-gray-400">No deliveries found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if page_obj.has_other_pages %}
+        <div class="flex justify-center mt-6">
+            <nav class="inline-flex shadow-sm">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query }}&status={{ status_filter }}"
+                        class="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Previous</a>
+                {% else %}
+                    <span class="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed">Previous</span>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="px-3 py-2 border-t border-b border-gray-300 dark:border-gray-600 bg-blue-600 text-white">{{ num }}</span>
+                    {% else %}
+                        <a href="?page={{ num }}&q={{ search_query }}&status={{ status_filter }}"
+                            class="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&q={{ search_query }}&status={{ status_filter }}"
+                        class="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Next</a>
+                {% else %}
+                    <span class="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed">Next</span>
+                {% endif %}
+            </nav>
+        </div>
+    {% endif %}
+</div>
+<script>
+    function printTable() {
+        const printContents = document.querySelector('.overflow-x-auto').innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = `
+            <html>
+                <head>
+                    <title>Print Delivery List</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        table { width: 100%; border-collapse: collapse; }
+                        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+                        th { background-color: #f4f4f4; }
+                    </style>
+                </head>
+                <body>
+                    <h2>Delivery List</h2>
+                    ${printContents}
+                </body>
+            </html>
+        `;
+        window.print();
+        window.location.reload();
+    }
+</script>
+{% endblock %}

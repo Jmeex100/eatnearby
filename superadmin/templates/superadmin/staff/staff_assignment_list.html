@@ -1,0 +1,86 @@
+{% extends 'superadmin/superadmin_base.html' %}
+{% block title %}Staff Assignments - Eat Nearby{% endblock %}
+{% block content %}
+<div class="p-4 md:p-6">
+    <!-- Breadcrumbs -->
+    <nav class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <a href="{% url 'superadmin:dashboard' %}" class="hover:underline">Dashboard</a> > <a href="{% url 'superadmin:staff_assignment_list' %}" class="hover:underline">Staff Management</a> > Assignments
+    </nav>
+
+    <!-- Search -->
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
+        <form method="GET" class="flex flex-col sm:flex-row gap-4">
+            <input type="text" name="q" value="{{ search_query }}" placeholder="Search assignments..." class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Search</button>
+        </form>
+    </div>
+
+    <!-- Create Button -->
+    <div class="mb-6">
+        <a href="{% url 'superadmin:staff_assignment_create' %}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Add New Assignment</a>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="mb-6 space-y-2">
+        {% for message in messages %}
+        <div class="p-4 rounded-lg {% if message.tags == 'info' %}bg-blue-100 border-blue-500 text-blue-700{% elif message.tags == 'warning' %}bg-yellow-100 border-yellow-500 text-yellow-700{% elif message.tags == 'success' %}bg-green-100 border-green-500 text-green-700{% else %}bg-red-100 border-red-500 text-red-700{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Assignments Table -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
+        <table class="w-full table-auto">
+            <thead class="bg-gray-200 dark:bg-gray-700">
+                <tr>
+                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Staff</th>
+                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Delivery ID</th>
+                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Assigned At</th>
+                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in page_obj %}
+                <tr class="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td class="p-3">{{ assignment.staff.username }}</td>
+                    <td class="p-3">{{ assignment.delivery.id }}</td>
+                    <td class="p-3">{{ assignment.assigned_at|date:"F d, Y H:i" }}</td>
+                    <td class="p-3 space-x-2">
+                        <a href="{% url 'superadmin:staff_assignment_detail' assignment.pk %}" class="text-blue-600 hover:underline">View</a>
+                        <a href="{% url 'superadmin:staff_assignment_update' assignment.pk %}" class="text-yellow-600 hover:underline">Edit</a>
+                        <a href="{% url 'superadmin:staff_assignment_delete' assignment.pk %}" class="text-red-600 hover:underline">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="p-3 text-center text-gray-500 dark:text-gray-400">No assignments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    {% if page_obj.has_other_pages %}
+    <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="text-gray-600 dark:text-gray-400">
+            Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ paginator.count }} entries
+        </div>
+        <div class="flex space-x-2">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}" class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Previous</a>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            <a href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}" class="px-3 py-1 {% if page_obj.number == num %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300{% endif %} rounded-lg hover:bg-red-500 hover:text-white transition">{{ num }}</a>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}" class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Next</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

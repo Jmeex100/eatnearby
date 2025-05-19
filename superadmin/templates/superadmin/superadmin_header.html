@@ -1,6 +1,5 @@
 {% load static %}
 <header>
-    {% comment %} /home/surecode/Documents/GitHub/django/eatnearby/superadmin/templates/superadmin/superadmin_header.html {% endcomment %}
   <nav class="bg-red-600 dark:bg-red-800 dark:text-white fixed top-0 w-full z-50 shadow">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
       <!-- Logo -->
@@ -14,23 +13,19 @@
         <div class="relative">
           <button id="notificationBtn" class="p-2 rounded-full hover:bg-red-700 dark:hover:bg-red-900 relative">
             <i class="fas fa-bell text-white text-xl"></i>
-            {% if unread_notifications_count > 0 %}
-              <span class="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {{ unread_notifications_count }}
-              </span>
-            {% endif %}
+            <span id="notificationCount" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center {% if unread_notifications_count == 0 %}hidden{% endif %}">
+              {{ unread_notifications_count }}
+            </span>
           </button>
           <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-y-auto">
             <div id="notificationList" class="divide-y divide-gray-200 dark:divide-gray-700">
               <div class="p-4 text-gray-600 dark:text-gray-200 text-sm text-center">Loading notifications...</div>
             </div>
-            {% if unread_notifications_count > 0 %}
-              <div class="p-2 border-t border-gray-200 dark:border-gray-700">
-                <button id="markAllReadBtn" class="w-full text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-sm">
-                  Mark all as read
-                </button>
-              </div>
-            {% endif %}
+            <div id="markAllReadSection" class="p-2 border-t border-gray-200 dark:border-gray-700 hidden">
+              <button id="markAllReadBtn" class="w-full text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-sm">
+                Mark all as read
+              </button>
+            </div>
           </div>
         </div>
 
@@ -75,3 +70,132 @@
     {% endfor %}
   </div> 
 {% endif %}
+
+<script>
+  // Update current time
+  function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+    document.getElementById('currentTime').textContent = timeString;
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
+
+  // Toggle dark mode
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  darkModeToggle.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  });
+
+  // User menu toggle
+  const userMenuBtn = document.getElementById('userMenuBtn');
+  const userMenu = document.getElementById('userMenu');
+  userMenuBtn.addEventListener('click', () => {
+    userMenu.classList.toggle('hidden');
+  });
+
+  // Close user menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!userMenuBtn.contains(e.target) && !userMenu.contains(e.target)) {
+      userMenu.classList.add('hidden');
+    }
+  });
+
+  // Notification handling
+  const notificationBtn = document.getElementById('notificationBtn');
+  const notificationDropdown = document.getElementById('notificationDropdown');
+  const notificationList = document.getElementById('notificationList');
+  const notificationCount = document.getElementById('notificationCount');
+  const markAllReadSection = document.getElementById('markAllReadSection');
+  const markAllReadBtn = document.getElementById('markAllReadBtn');
+
+  function fetchNotifications() {
+    fetch("{% url 'staffs:get_unread_notifications' %}", {
+      method: 'GET',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Notifications:', data);
+      notificationList.innerHTML = '';
+      if (data.notifications.length === 0) {
+        notificationList.innerHTML = '<div class="p-4 text-gray-600 dark:text-gray-200 text-sm text-center">No unread notifications</div>';
+      } else {
+        data.notifications.forEach(notification => {
+          const div = document.createElement('div');
+          div.className = 'p-4 text-sm text-gray-800 dark:text-gray-200 font-medium';
+          const link = notification.delivery_id ? 
+            `<a href="/staffs/deliveries/${notification.delivery_id}/" class="hover:underline">${notification.message}</a>` : 
+            notification.message;
+          div.innerHTML = `
+            <div>${link}</div>
+            <div class="text-xs text-gray-400 dark:text-gray-500">${notification.created_at}</div>
+          `;
+          notificationList.appendChild(div);
+        });
+      }
+      const unreadCount = data.notifications.length;
+      notificationCount.textContent = unreadCount;
+      notificationCount.classList.toggle('hidden', unreadCount === 0);
+      markAllReadSection.classList.toggle('hidden', unreadCount === 0);
+    })
+    .catch(error => {
+      console.error('Error fetching notifications:', error);
+      notificationList.innerHTML = '<div class="p-4 text-red-600 dark:text-red-400 text-sm text-center">Error loading notifications</div>';
+    });
+  }
+
+  notificationBtn.addEventListener('click', () => {
+    notificationDropdown.classList.toggle('hidden');
+    if (!notificationDropdown.classList.contains('hidden')) {
+      fetchNotifications();
+    }
+  });
+
+  markAllReadBtn.addEventListener('click', () => {
+    fetch("{% url 'staffs:mark_all_notifications_read' %}", {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        fetchNotifications();
+      }
+    })
+    .catch(error => console.error('Error marking notifications as read:', error));
+  });
+
+  // Close notification dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+      notificationDropdown.classList.add('hidden');
+    }
+  });
+
+  // Initial fetch
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchNotifications();
+  });
+
+  // Poll for new notifications every 30 seconds
+  setInterval(fetchNotifications, 30000);
+</script>
+
+<style>
+  .admin-badge {
+    background-color: #FFD700;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 0.25rem;
+  }
+</style>

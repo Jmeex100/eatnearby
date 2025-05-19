@@ -1,0 +1,35 @@
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 max-w-lg mx-auto transition-colors duration-300">
+        <div class="flex items-center mb-6">
+            <img src="{% if product.image_url %}{{ product.image_url }}{% else %}{% static 'img/default-product.png' %}{% endif %}" 
+                 alt="{{ product.name }}" 
+                 class="w-12 h-12 rounded-full object-cover mr-4">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Delete {{ product.name }}</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ product.product_id }}</p>
+            </div>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Are you sure you want to delete <span class="font-medium">{{ product.name }}</span>? 
+            This action cannot be undone.
+        </p>
+        <form method="post" action="{% url 'superadmin:product_delete' product.product_id %}">
+            {% csrf_token %}
+            <div class="flex justify-end space-x-3">
+                <a href="{% url 'superadmin:product_list' %}" 
+                   class="px-4 py-2 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="px-4 py-2 bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600 rounded-lg hover:bg-red-700 transition-colors duration-200">
+                    Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

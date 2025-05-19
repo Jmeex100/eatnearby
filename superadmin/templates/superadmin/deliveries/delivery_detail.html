@@ -1,0 +1,132 @@
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block title %}Delivery #{{ delivery.id }} - Eat Nearby{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Delivery #{{ delivery.id }}</h1>
+
+  <!-- Messages -->
+  {% if messages %}
+    <div class="mb-4">
+      {% for message in messages %}
+        <div class="p-4 rounded shadow 
+                    {% if message.tags == 'success' %}bg-green-100 text-green-800 border border-green-300
+                    {% elif message.tags == 'error' or message.tags == 'danger' %}bg-red-100 text-red-800 border border-red-300
+                    {% elif message.tags == 'warning' %}bg-yellow-100 text-yellow-800 border border-yellow-300
+                    {% else %}bg-blue-100 text-blue-800 border border-blue-300{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Delivery Details -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+    <h2 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">Delivery Information</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <p><strong>User:</strong> {{ delivery.user.get_full_name }} ({{ delivery.user.username }})</p>
+        <p><strong>Address:</strong> {{ delivery.address|default:delivery.get_predefined_address_display }}</p>
+        <p><strong>Phone Number:</strong> {{ delivery.phone_number }}</p>
+        <p><strong>Secondary Phone:</strong> {{ delivery.secondary_phone_number|default:"N/A" }}</p>
+      </div>
+      <div>
+        <p><strong>Delivery Status:</strong> {{ delivery.get_delivery_status_display }}</p>
+        <p><strong>Payment Method:</strong> {{ delivery.get_payment_method_display }}</p>
+        <p><strong>Payment Provider:</strong> {{ delivery.payment_provider|default:"N/A" }}</p>
+        <p><strong>Created At:</strong> {{ delivery.created_at|date:"Y-m-d H:i:s" }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Status Form -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+    <h2 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">Update Delivery Status</h2>
+    <form method="POST" action="{% url 'superadmin:update_delivery_status' pk=delivery.id %}">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label for="delivery_status" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Status</label>
+        <select name="delivery_status" id="delivery_status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-600 focus:ring focus:ring-red-600 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          {% for value, label in delivery.DELIVERY_STATUS_CHOICES %}
+            <option value="{{ value }}" {% if value == delivery.delivery_status %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900">Update Status</button>
+    </form>
+  </div>
+
+  <!-- Cart Items -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+    <h2 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">Cart Items</h2>
+    {% if delivery.cart.cartitem_set.all %}
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="px-6 py-3">Product</th>
+            <th class="px-6 py-3">Quantity</th>
+            <th class="px-6 py-3">Quality</th>
+            <th class="px-6 py-3">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in delivery.cart.cartitem_set.all %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4">{{ item.get_product.name }}</td>
+              <td class="px-6 py-4">{{ item.quantity }}</td>
+              <td class="px-6 py-4">{{ item.quality }}</td>
+              <td class="px-6 py-4">${{ item.subtotal|floatformat:2 }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="mt-4 text-lg font-semibold">Total: ${{ delivery.cart.total|floatformat:2 }}</p>
+    {% else %}
+      <p class="text-gray-600 dark:text-gray-400">No items in cart.</p>
+    {% endif %}
+  </div>
+
+  <!-- Payment History -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+    <h2 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">Payment History</h2>
+    {% if delivery.payment_histories.all %}
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="px-6 py-3">Transaction ID</th>
+            <th class="px-6 py-3">Total</th>
+            <th class="px-6 py-3">Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for payment in delivery.payment_histories.all %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4">{{ payment.transaction_id|default:"N/A" }}</td>
+              <td class="px-6 py-4">${{ payment.total|floatformat:2 }}</td>
+              <td class="px-6 py-4">{{ payment.created_at|date:"Y-m-d H:i:s" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-gray-600 dark:text-gray-400">No payment history available.</p>
+    {% endif %}
+  </div>
+
+  <!-- Staff Assignments -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    <h2 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">Staff Assignments</h2>
+    {% if delivery.staff_assignments.all %}
+      <ul class="list-disc pl-5">
+        {% for assignment in delivery.staff_assignments.all %}
+          <li class="text-gray-600 dark:text-gray-400">{{ assignment.staff.get_full_name }} (Assigned at: {{ assignment.assigned_at|date:"Y-m-d H:i:s" }})</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-gray-600 dark:text-gray-400">No staff assigned.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

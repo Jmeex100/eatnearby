@@ -1,0 +1,22 @@
+<!-- superadmin/notifications/notification_detail.html -->
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block title %}Notification #{{ notification.id }} - Eat Nearby{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Notification #{{ notification.id }}</h1>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    <h2 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">Notification Details</h2>
+    <p><strong>Message:</strong> {{ notification.message }}</p>
+    <p><strong>Type:</strong> {{ notification.get_notification_type_display }}</p>
+    <p><strong>Created At:</strong> {{ notification.created_at|date:"Y-m-d H:i:s" }}</p>
+    <p><strong>Status:</strong> {{ notification.is_read|yesno:"Read,Unread" }}</p>
+    {% if notification.related_delivery %}
+      <p><strong>Related Delivery:</strong> <a href="{% url 'superadmin:delivery_detail' pk=notification.related_delivery.id %}" class="text-red-600 hover:underline">Delivery #{{ notification.related_delivery.id }}</a></p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'superadmin/superadmin_base.html' %}
+{% block title %}{% if area %}Edit Service Area{% else %}Create Service Area{% endif %} - Eat Nearby{% endblock %}
+{% block content %}
+<div class="p-4 md:p-6">
+    <!-- Breadcrumbs -->
+    <nav class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <a href="{% url 'superadmin:dashboard' %}" class="hover:underline">Dashboard</a> > <a href="{% url 'superadmin:staff_service_area_list' %}" class="hover:underline">Staff Management</a> > <a href="{% url 'superadmin:staff_service_area_list' %}" class="hover:underline">Service Areas</a> > {% if area %}Edit {{ area.staff.username }}{% else %}Create Service Area{% endif %}
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="mb-6 space-y-2">
+        {% for message in messages %}
+        <div class="p-4 rounded-lg {% if message.tags == 'info' %}bg-blue-100 border-blue-500 text-blue-700{% elif message.tags == 'warning' %}bg-yellow-100 border-yellow-500 text-yellow-700{% elif message.tags == 'success' %}bg-green-100 border-green-500 text-green-700{% else %}bg-red-100 border-red-500 text-red-700{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Form -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">{% if area %}Edit Service Area{% else %}Create Service Area{% endif %}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <label class="block text-gray-700 dark:text-gray-300 mb-1">Staff</label>
+                    {{ form.staff }}
+                    {% if form.staff.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.staff.errors.as_text }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label class="block text-gray-700 dark:text-gray-300 mb-1">Delivery Point</label>
+                    {{ form.point }}
+                    {% if form.point.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.point.errors.as_text }}</p>
+                    {% endif %}
+                </div>
+                {% if form.non_field_errors %}
+                <div class="text-red-600 text-sm mt-2">
+                    {{ form.non_field_errors.as_text }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="mt-6 flex flex-wrap gap-2">
+                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Save</button>
+                <a href="{% url 'superadmin:staff_service_area_list' %}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
