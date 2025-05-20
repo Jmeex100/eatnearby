@@ -4,7 +4,7 @@
 {% block title %}Product Details - Eat Nearby Superadmin{% endblock %}
 
 {% block content %}
-<div class="space-y-6">
+<div class="container mx-auto px-4 py-6 space-y-6">
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
@@ -23,27 +23,38 @@
             <!-- Image -->
             <div>
                 {% if product.image_url %}
-                    <img src="{{ product.image_url }}" alt="{{ product.name }}" 
-                         class="w-full h-64 object-cover rounded-lg">
+                    <img src="{{ product.image_url }}" 
+                         alt="{{ product.name }} image" 
+                         class="w-full h-64 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                         loading="lazy">
+                    <!-- Thumbnail for consistency with product_list -->
+                    <img src="{{ product.image_url }}" 
+                         alt="{{ product.name }} thumbnail" 
+                         class="mt-4 w-12 h-12 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                         loading="lazy">
                 {% else %}
-                    <div class="w-full h-64 bg-gray-200 dark:bg-gray-600 rounded-lg flex items-center justify-center">
+                    <div class="w-full h-64 bg-gray-200 dark:bg-gray-600 rounded-lg flex items-center justify-center border border-gray-300 dark:border-gray-600">
                         <span class="text-gray-500 dark:text-gray-400">No Image</span>
                     </div>
+                    <!-- Thumbnail placeholder -->
+                    <img src="{% static 'auths/images/empty.png' %}" 
+                         alt="No image available" 
+                         class="mt-4 w-12 h-12 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                         loading="lazy">
                 {% endif %}
             </div>
             <!-- Details -->
             <div class="space-y-4">
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ product.name }}</h2>
-                <p class="text-gray-600 dark:text-gray-400"><strong>Type:</strong> {{ product_type }}</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>Type:</strong> {{ product_type|default:"Food" }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Product ID:</strong> {{ product.product_id }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Price:</strong> ${{ product.price }}</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>Quantity:</strong> {{ product.quantity }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Category:</strong> {{ product.category.name }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Description:</strong> {{ product.description|default:"No description" }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Created At:</strong> {{ product.created_at|date:"M d, Y" }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Updated At:</strong> {{ product.updated_at|date:"M d, Y" }}</p>
-
-                <!-- ✅ Total Sales -->
-                <p class="text-gray-600 dark:text-gray-400"><strong>Total Sales:</strong> {{ total_sales }}</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>Total Sales:</strong> {{ total_sales|default:"Not available" }}</p>
             </div>
         </div>
 

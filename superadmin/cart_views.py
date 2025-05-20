@@ -20,7 +20,8 @@ def cart_list(request):
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
-        'unread_notifications_count': get_unread_notification_count(request.user)
+        'unread_notifications_count': get_unread_notification_count(request.user),
+        'product_type': 'Food',  # For consistency with product templates
     }
     return render(request, 'superadmin/carts/cart_list.html', context)
 
@@ -29,7 +30,8 @@ def cart_detail(request, pk):
     cart = get_object_or_404(Cart, pk=pk)
     context = {
         'cart': cart,
-        'unread_notifications_count': get_unread_notification_count(request.user)
+        'unread_notifications_count': get_unread_notification_count(request.user),
+        'product_type': 'Food',  # For consistency with product templates
     }
     return render(request, 'superadmin/carts/cart_detail.html', context)
 

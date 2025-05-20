@@ -26,11 +26,11 @@ path('users/<int:pk>/delete/', user_views.user_delete, name='user_delete'),
 path('staff/', user_views.staff_list, name='staff_list'),
 path('customers/', user_views.customer_list, name='customer_list'),
     # Product Management
-    path('products/', products_views.product_list, name='product_list'),
-    path('product/<int:pk>/', products_views.product_detail, name='product_detail'),
+   path('products/', products_views.product_list, name='product_list'),
+    path('product/<str:pk>/', products_views.product_detail, name='product_detail'),
     path('products/create/', products_views.product_create, name='product_create'),
-    path('products/<int:pk>/update/', products_views.product_update, name='product_update'),
-    path('products/<int:pk>/delete/', products_views.product_delete, name='product_delete'),
+    path('products/<str:pk>/update/', products_views.product_update, name='product_update'),
+    path('products/<str:pk>/delete/', products_views.product_delete, name='product_delete'),
 
     # Revenue Management
     path('revenue/', revenue.revenue_dashboard, name='revenue_dashboard'),
@@ -50,13 +50,15 @@ path('customers/', user_views.customer_list, name='customer_list'),
     # Cart Management
     path('carts/', cart_views.cart_list, name='cart_list'),
     path('cart/<int:pk>/', cart_views.cart_detail, name='cart_detail'),
-
+    path('cart/<int:pk>/delete/', cart_views.cart_delete, name='cart_delete'),
     # Payment Management
     path('payments/', payment_views.payment_list, name='payment_list'),
     path('payment/<int:pk>/', payment_views.payment_detail, name='payment_detail'),
+    path('payment/<int:pk>/approve/', payment_views.approve_payment, name='approve_payment'),
 
     # Staff Management
-    path('staff-service-areas/', staff_views.staff_service_area_list, name='staff_service_area_list'),
+  path('staff-service-areas/', staff_views.staff_service_area_list, name='staff_service_area_list'),
+    path('staff-service-areas/create/', staff_views.staff_service_area_create, name='staff_service_area_create'),
     path('staff-service-area/<int:pk>/', staff_views.staff_service_area_detail, name='staff_service_area_detail'),
     path('staff-assignments/', staff_views.staff_assignment_list, name='staff_assignment_list'),
     path('staff-assignment/<int:pk>/', staff_views.staff_assignment_detail, name='staff_assignment_detail'),

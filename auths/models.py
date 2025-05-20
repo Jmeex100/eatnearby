@@ -21,6 +21,7 @@ class Product(models.Model):
     product_id = models.CharField(max_length=100, unique=True, primary_key=True)
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)  
     description = models.TextField(blank=True, null=True)
     image_url = models.URLField(max_length=300, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='%(class)s_products')  # Dynamic related_name

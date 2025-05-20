@@ -1,0 +1,88 @@
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block title %}Add Staff Service Area - Eat Nearby{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center text-sm text-gray-600 dark:text-gray-300 mb-6">
+        <a href="{% url 'superadmin:dashboard' %}" class="hover:text-red-500 dark:hover:text-red-400 transition font-medium">Dashboard</a>
+        <span class="mx-2">/</span>
+        <a href="{% url 'superadmin:staff_service_area_list' %}" class="hover:text-red-500 dark:hover:text-red-400 transition font-medium">Staff Service Areas</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-800 dark:text-gray-100 font-medium">Add</span>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="mb-6 space-y-3 animate-fade-in">
+        {% for message in messages %}
+        <div class="flex items-center p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 
+                    {% if message.tags == 'success' %}bg-green-50 text-green-800 dark:bg-green-900/50 dark:text-green-200
+                    {% elif message.tags == 'error' %}bg-red-50 text-red-800 dark:bg-red-900/50 dark:text-red-200
+                    {% else %}bg-blue-50 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200{% endif %}" 
+             role="alert">
+            <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="{% if message.tags == 'success' %}M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z
+                         {% elif message.tags == 'error' %}M6 18L18 6M6 6l12 12
+                         {% else %}M13 16h-1v-4h1m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z{% endif %}"></path>
+            </svg>
+            <span class="flex-1">{{ message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">
+        <i class="fas fa-plus mr-3 text-green-500 dark:text-green-400"></i>Add Staff Service Area
+    </h1>
+
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 max-w-lg mx-auto">
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            <div>
+                <label for="{{ form.staff.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    Staff Member
+                </label>
+                {{ form.staff }}
+                {% if form.staff.errors %}
+                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.staff.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="{{ form.point.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    Delivery Point
+                </label>
+                {{ form.point }}
+                {% if form.point.errors %}
+                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.point.errors.as_text }}</p>
+                {% endif %}
+            </div>
+            <div class="flex gap-4">
+                <button type="submit" 
+                        class="flex-1 bg-green-600 text-white px-5 py-2.5 rounded-xl hover:bg-green-700 
+                               focus:ring-2 focus:ring-green-500 focus:outline-none transition shadow-md text-sm font-medium">
+                    <i class="fas fa-save mr-2"></i> Save
+                </button>
+                <a href="{% url 'superadmin:staff_service_area_list' %}" 
+                   class="flex-1 text-center bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-xl 
+                          hover:bg-gray-200 dark:hover:bg-gray-600 transition text-sm font-medium">
+                    <i class="fas fa-times mr-2"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+</style>
+{% endblock %}

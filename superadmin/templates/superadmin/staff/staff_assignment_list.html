@@ -1,86 +1,182 @@
 {% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
 {% block title %}Staff Assignments - Eat Nearby{% endblock %}
+
 {% block content %}
-<div class="p-4 md:p-6">
+<div class="container mx-auto px-4 py-6">
     <!-- Breadcrumbs -->
-    <nav class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-        <a href="{% url 'superadmin:dashboard' %}" class="hover:underline">Dashboard</a> > <a href="{% url 'superadmin:staff_assignment_list' %}" class="hover:underline">Staff Management</a> > Assignments
+    <nav class="flex items-center text-sm text-gray-600 dark:text-gray-300 mb-6">
+        <a href="{% url 'superadmin:dashboard' %}" class="hover:text-red-500 dark:hover:text-red-400 transition font-medium">Dashboard</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-800 dark:text-gray-100 font-medium">Staff Assignments</span>
     </nav>
-
-    <!-- Search -->
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
-        <form method="GET" class="flex flex-col sm:flex-row gap-4">
-            <input type="text" name="q" value="{{ search_query }}" placeholder="Search assignments..." class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100">
-            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Search</button>
-        </form>
-    </div>
-
-    <!-- Create Button -->
-    <div class="mb-6">
-        <a href="{% url 'superadmin:staff_assignment_create' %}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Add New Assignment</a>
-    </div>
 
     <!-- Messages -->
     {% if messages %}
-    <div class="mb-6 space-y-2">
+    <div class="mb-6 space-y-3 animate-fade-in">
         {% for message in messages %}
-        <div class="p-4 rounded-lg {% if message.tags == 'info' %}bg-blue-100 border-blue-500 text-blue-700{% elif message.tags == 'warning' %}bg-yellow-100 border-yellow-500 text-yellow-700{% elif message.tags == 'success' %}bg-green-100 border-green-500 text-green-700{% else %}bg-red-100 border-red-500 text-red-700{% endif %}">
-            {{ message }}
+        <div class="flex items-center p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 
+                    {% if message.tags == 'success' %}bg-green-50 text-green-800 dark:bg-green-900/50 dark:text-green-200
+                    {% elif message.tags == 'error' %}bg-red-50 text-red-800 dark:bg-red-900/50 dark:text-red-200
+                    {% else %}bg-blue-50 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200{% endif %}" 
+             role="alert">
+            <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="{% if message.tags == 'success' %}M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z
+                         {% elif message.tags == 'error' %}M6 18L18 6M6 6l12 12
+                         {% else %}M13 16h-1v-4h1m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z{% endif %}"></path>
+            </svg>
+            <span class="flex-1">{{ message }}</span>
         </div>
         {% endfor %}
     </div>
     {% endif %}
 
+    <!-- Header and Filters -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            <i class="fas fa-truck mr-3 text-red-500 dark:text-red-400"></i>Staff Assignments
+        </h1>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <form method="GET" class="flex gap-3">
+                <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search staff, delivery ID, or address..." 
+                       class="flex-grow p-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 
+                              focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:border-transparent
+                              transition shadow-sm text-sm">
+                <button type="submit" class="bg-red-600 text-white px-5 py-2.5 rounded-xl hover:bg-red-700 
+                                            focus:ring-2 focus:ring-red-500 focus:outline-none transition
+                                            flex items-center justify-center shadow-md text-sm font-medium">
+                    <i class="fas fa-search mr-2"></i> Search
+                </button>
+            </form>
+            <a href="{% url 'superadmin:staff_service_area_create' %}" 
+               class="bg-green-600 text-white px-5 py-2.5 rounded-xl hover:bg-green-700 
+                      focus:ring-2 focus:ring-green-500 focus:outline-none transition
+                      flex items-center justify-center shadow-md text-sm font-medium">
+                <i class="fas fa-plus mr-2"></i> Add Assignment
+            </a>
+        </div>
+    </div>
+
     <!-- Assignments Table -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
-        <table class="w-full table-auto">
-            <thead class="bg-gray-200 dark:bg-gray-700">
-                <tr>
-                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Staff</th>
-                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Delivery ID</th>
-                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Assigned At</th>
-                    <th class="p-3 text-left text-gray-700 dark:text-gray-300">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for assignment in page_obj %}
-                <tr class="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <td class="p-3">{{ assignment.staff.username }}</td>
-                    <td class="p-3">{{ assignment.delivery.id }}</td>
-                    <td class="p-3">{{ assignment.assigned_at|date:"F d, Y H:i" }}</td>
-                    <td class="p-3 space-x-2">
-                        <a href="{% url 'superadmin:staff_assignment_detail' assignment.pk %}" class="text-blue-600 hover:underline">View</a>
-                        <a href="{% url 'superadmin:staff_assignment_update' assignment.pk %}" class="text-yellow-600 hover:underline">Edit</a>
-                        <a href="{% url 'superadmin:staff_assignment_delete' assignment.pk %}" class="text-red-600 hover:underline">Delete</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4" class="p-3 text-center text-gray-500 dark:text-gray-400">No assignments found.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div class="overflow-x-auto">
+            <table class="w-full table-auto border-collapse">
+                <thead class="bg-gray-50 dark:bg-gray-700 sticky top-0 z-10">
+                    <tr>
+                        <th class="p-4 text-left text-gray-700 dark:text-gray-200 font-semibold text-xs uppercase tracking-wider">Staff</th>
+                        <th class="p-4 text-left text-gray-700 dark:text-gray-200 font-semibold text-xs uppercase tracking-wider">Assignments</th>
+                        <th class="p-4 text-left text-gray-700 dark:text-gray-200 font-semibold text-xs uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-700/50">
+                    {% for group in page_obj %}
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition">
+                        <td class="p-4 text-gray-800 dark:text-gray-200">
+                            <div class="flex items-center">
+                                {% if group.staff.image %}
+                                <img src="{{ group.staff.image.url }}" 
+                                     alt="{{ group.staff.get_full_name|default:group.staff.username }} avatar" 
+                                     class="w-8 h-8 rounded-full object-cover border border-gray-200 dark:border-gray-600 mr-3"
+                                     loading="lazy">
+                                {% else %}
+                                <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-gray-400 dark:text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                                <div>
+                                    <div class="font-semibold text-gray-900 dark:text-gray-100">{{ group.staff.get_full_name|default:group.staff.username }}</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400">{{ group.staff.email|default:"N/A" }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-4 text-gray-800 dark:text-gray-200">
+                            {% if group.assignments %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for assignment in group.assignments %}
+                                <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium 
+                                            {% if assignment.status_raw == 'completed' %}bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400
+                                            {% elif assignment.status_raw == 'pending' %}bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400
+                                            {% elif assignment.status_raw == 'in_progress' %}bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400
+                                            {% elif assignment.status_raw == 'cancelled' %}bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400
+                                            {% else %}bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300{% endif %}">
+                                    Delivery #{{ assignment.id }} ({{ assignment.status }})
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <span class="text-gray-500 dark:text-gray-400 text-sm">No assignments</span>
+                            {% endif %}
+                        </td>
+                        <td class="p-4">
+                            <a href="{% url 'superadmin:staff_assignment_detail' group.pk %}" 
+                               class="inline-flex items-center px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-md 
+                                      hover:bg-blue-100 dark:hover:bg-blue-900/50 transition text-sm font-medium">
+                                <i class="fas fa-eye mr-1.5"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="p-8 text-center text-gray-500 dark:text-gray-400">
+                            <div class="flex flex-col items-center justify-center py-10">
+                                <i class="fas fa-truck text-5xl text-gray-200 dark:text-gray-600 mb-4"></i>
+                                <p class="text-lg font-medium">No staff assignments found</p>
+                                <p class="text-sm mt-2 text-gray-400 dark:text-gray-500">Assign staff to deliveries to see them here</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Pagination -->
     {% if page_obj.has_other_pages %}
-    <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div class="text-gray-600 dark:text-gray-400">
-            Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ paginator.count }} entries
+    <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="text-gray-600 dark:text-gray-400 text-sm">
+            Showing <span class="font-semibold">{{ page_obj.start_index }}</span> to <span class="font-semibold">{{ page_obj.end_index }}</span> of <span class="font-semibold">{{ paginator.count }}</span> entries
         </div>
-        <div class="flex space-x-2">
+        <div class="flex flex-wrap gap-2">
             {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}" class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Previous</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" 
+               class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg 
+                      hover:bg-red-600 hover:text-white dark:hover:bg-red-700 focus:ring-2 focus:ring-red-500 transition flex items-center text-sm font-medium">
+                <i class="fas fa-chevron-left mr-2"></i> Previous
+            </a>
             {% endif %}
             {% for num in page_obj.paginator.page_range %}
-            <a href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}" class="px-3 py-1 {% if page_obj.number == num %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300{% endif %} rounded-lg hover:bg-red-500 hover:text-white transition">{{ num }}</a>
+            {% if page_obj.number == num %}
+            <span class="px-4 py-2 bg-red-600 text-white rounded-lg cursor-default text-sm font-semibold">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" 
+               class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg 
+                      hover:bg-gray-200 dark:hover:bg-gray-600 focus:ring-2 focus:ring-red-500 transition text-sm">
+                {{ num }}
+            </a>
+            {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}" class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Next</a>
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" 
+               class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg 
+                      hover:bg-red-600 hover:text-white dark:hover:bg-red-700 focus:ring-2 focus:ring-red-500 transition flex items-center text-sm font-medium">
+                Next <i class="fas fa-chevron-right ml-2"></i>
+            </a>
             {% endif %}
         </div>
     </div>
     {% endif %}
 </div>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+</style>
 {% endblock %}

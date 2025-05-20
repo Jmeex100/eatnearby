@@ -1,14 +1,15 @@
 {% extends 'superadmin/superadmin_base.html' %}
 {% load static %}
 
-{% block title %}Payment History - Eat Nearby{% endblock %}
+{% block title %}Revenue Details - {{ method }} - Eat Nearby{% endblock %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-6">
     <!-- Breadcrumbs -->
     <nav class="text-sm text-gray-600 dark:text-gray-300 mb-4">
         <a href="{% url 'superadmin:dashboard' %}" class="hover:text-red-500 dark:hover:text-red-400 transition">Dashboard</a> > 
-        <span class="text-gray-800 dark:text-gray-100">Payment Management</span>
+        <a href="{% url 'superadmin:revenue_dashboard' %}" class="hover:text-red-500 dark:hover:text-red-400 transition">Revenue Dashboard</a> > 
+        <span class="text-gray-800 dark:text-gray-100">{{ method }}</span>
     </nav>
 
     <!-- Messages -->
@@ -35,7 +36,7 @@
     <!-- Header and Filters -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-            <i class="fas fa-credit-card mr-2 text-red-500 dark:text-red-400"></i>Payment History
+            <i class="fas fa-credit-card mr-2 text-red-500 dark:text-red-400"></i>Revenue Details - {{ method }}
         </h1>
         <div class="flex flex-col sm:flex-row gap-4">
             <form method="GET" class="flex gap-2">
@@ -64,7 +65,6 @@
                         <th class="p-4 text-left text-gray-700 dark:text-gray-300 font-semibold text-sm uppercase tracking-wider">Total</th>
                         <th class="p-4 text-left text-gray-700 dark:text-gray-300 font-semibold text-sm uppercase tracking-wider">Status</th>
                         <th class="p-4 text-left text-gray-700 dark:text-gray-300 font-semibold text-sm uppercase tracking-wider">Date</th>
-                        <th class="p-4 text-left text-gray-700 dark:text-gray-300 font-semibold text-sm uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -72,9 +72,9 @@
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
                         <td class="p-4">
                             {% with first_item=payment.cart.items.first %}
-                            {% if first_item and first_item.product.image_url %}
-                            <img src="{{ first_item.product.image_url }}" 
-                                 alt="{{ first_item.product.name }} image" 
+                            {% if first_item and first_item.get_product.image_url %}
+                            <img src="{{ first_item.get_product.image_url }}" 
+                                 alt="{{ first_item.get_product.name }} image" 
                                  class="w-12 h-12 object-cover rounded-md border border-gray-300 dark:border-gray-600"
                                  loading="lazy">
                             {% else %}
@@ -107,7 +107,7 @@
                             </div>
                         </td>
                         <td class="p-4 text-gray-800 dark:text-gray-200 font-medium">
-                            ${{ payment.total|floatformat:2 }}
+                            K{{ payment.total|floatformat:2 }}
                         </td>
                         <td class="p-4">
                             {% if payment.delivery_info %}
@@ -128,34 +128,14 @@
                         <td class="p-4 text-gray-600 dark:text-gray-400 text-sm">
                             {{ payment.created_at|date:"M d, Y h:i A" }}
                         </td>
-                        <td class="p-4">
-                            <div class="flex gap-2">
-                                <a href="{% url 'superadmin:payment_detail' payment.id %}" 
-                                   class="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-md 
-                                          hover:bg-blue-100 dark:hover:bg-blue-900/50 transition flex items-center text-sm">
-                                    <i class="fas fa-eye mr-1.5"></i> View
-                                </a>
-                                {% if payment.delivery_info and payment.delivery_info.delivery_status == 'pending' %}
-                                <form action="{% url 'superadmin:approve_payment' payment.id %}" method="POST" class="inline">
-                                    {% csrf_token %}
-                                    <button type="submit" 
-                                            class="px-3 py-1.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-md 
-                                                   hover:bg-green-100 dark:hover:bg-green-900/50 transition flex items-center text-sm"
-                                            onclick="return confirm('Are you sure you want to approve this payment?')">
-                                        <i class="fas fa-check-circle mr-1.5"></i> Approve
-                                    </button>
-                                </form>
-                                {% endif %}
-                            </div>
-                        </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="7" class="p-8 text-center text-gray-500 dark:text-gray-400">
+                        <td colspan="6" class="p-8 text-center text-gray-500 dark:text-gray-400">
                             <div class="flex flex-col items-center justify-center py-8">
                                 <i class="fas fa-credit-card text-4xl text-gray-300 dark:text-gray-600 mb-4"></i>
-                                <p class="text-lg">No payment records found</p>
-                                <p class="text-sm mt-2">All payment transactions will appear here</p>
+                                <p class="text-lg">No payment records found for {{ method }}</p>
+                                <p class="text-sm mt-2">Completed payments will appear here</p>
                             </div>
                         </td>
                     </tr>
