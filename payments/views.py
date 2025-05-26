@@ -24,6 +24,7 @@ from .mobile.twilio_utils import send_sms
 
 logger = logging.getLogger(__name__)
 
+
 @login_required
 def checkout(request):
     try:
@@ -159,6 +160,21 @@ def checkout(request):
             )
             logger.info(f"Created DeliveryInfo {delivery_info.id} for cash order with status {delivery_info.delivery_status}")
 
+            # Create PaymentHistory for cash payment
+            items = [
+                {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
+                for item in cart.cartitem_set.all()
+            ]
+            payment_history = PaymentHistory.objects.create(
+                user=request.user,
+                cart=cart,
+                delivery_info=delivery_info,
+                total=cart.total(),
+                items=items,
+                transaction_id=f"CASH-{str(uuid.uuid4())[:8]}"
+            )
+            logger.info(f"Created PaymentHistory {payment_history.id} for cash order")
+
             staff = pick_staff_for_point(delivery_info.predefined_address)
             if staff:
                 StaffAssignment.objects.create(staff=staff, delivery=delivery_info)
@@ -183,7 +199,6 @@ def checkout(request):
             return render(request, 'payments/checkout.html', context)
 
     return render(request, 'payments/checkout.html', context)
-
 def create_delivery_info(request, order_data, cart):
     """Helper function to create DeliveryInfo and assign staff."""
     try:
@@ -282,6 +297,8 @@ mtn_payment_process = lambda request: simulate_mobile_payment(request, 'mtn')
 
 @login_required
 @csrf_exempt
+@login_required
+@csrf_exempt
 def payment_success(request, delivery_id):
     delivery_info = get_object_or_404(DeliveryInfo, id=delivery_id, user=request.user)
     cart = delivery_info.cart
@@ -301,13 +318,16 @@ def payment_success(request, delivery_id):
                     notification_type='delivery_completed'
                 )
 
+            # Calculate total before deleting items
+            total_amount = cart.total() if cart else 0.00
+
             cart.cartitem_set.all().delete()
             for key in ['mobile_order_data', 'mobile_transaction_id', 'stripe_session_id', 'paypal_order_data', 'pesapal_order_data', 'stripe_order_data', 'pesapal_order_id', 'pending_order']:
                 request.session.pop(key, None)
 
             sms_body = (
                 f"Order #{payment_history.id if payment_history else delivery_info.id} Confirmed!\n"
-                f"Total: K{cart.total():.2f}\n"
+                f"Total: K{total_amount:.2f}\n"
                 f"Delivery to: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
                 f"Thank you for ordering with us!"
             )

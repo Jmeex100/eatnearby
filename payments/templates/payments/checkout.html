@@ -2,32 +2,32 @@
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-gray-100 pt-16 pb-8">
+<div class="min-h-screen bg-gray-100 dark:bg-gray-950 pt-16 pb-8">
     <!-- PC View (Hidden on Mobile) -->
     <div class="hidden md:block">
-        <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Checkout</h1>
+        <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">Checkout</h1>
             <!-- Countdown Timer -->
-            <div id="countdown-pc" class="bg-orange-500 text-white text-center p-4 rounded-lg mb-6">
+            <div id="countdown-pc" class="bg-orange-500 dark:bg-orange-600 text-white text-center p-4 rounded-lg mb-6 shadow-md transition-colors duration-200">
                 <p class="text-lg font-semibold">Complete Your Order Within:</p>
                 <div class="text-2xl font-bold mt-2">
                     <span id="days-pc">00</span> : <span id="hours-pc">00</span> : <span id="minutes-pc">00</span> : <span id="seconds-pc">00</span>
                 </div>
-                <p class="text-sm mt-2">days : hours : minutes : seconds</p>
+                <p class="text-sm mt-2 text-gray-100">days : hours : minutes : seconds</p>
             </div>
 
             <div class="mb-6">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Your Cart</h2>
+                <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Your Cart</h2>
                 <div class="space-y-4">
                     {% for item in cart.cartitem_set.all %}
-                    <div class="flex justify-between text-gray-600">
+                    <div class="flex justify-between text-gray-600 dark:text-gray-300">
                         <span>{{ item.get_product.name }} (x{{ item.quantity }})</span>
                         <span>K{{ item.subtotal|floatformat:2 }}</span>
                     </div>
                     {% empty %}
-                    <p class="text-gray-600">No items in cart.</p>
+                    <p class="text-gray-600 dark:text-gray-400">No items in cart.</p>
                     {% endfor %}
-                    <div class="border-t pt-2 flex justify-between font-bold text-gray-800">
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between font-bold text-gray-800 dark:text-white">
                         <span>Total</span>
                         <span>K{{ cart.total|floatformat:2 }} (~${{ total_usd|floatformat:2 }} USD)</span>
                     </div>
@@ -37,26 +37,26 @@
             <form method="post" class="space-y-6">
                 {% csrf_token %}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="predefined_address_pc">Delivery Location</label>
-                    <select name="predefined_address" id="predefined_address_pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2" for="predefined_address_pc">Delivery Location</label>
+                    <select name="predefined_address" id="predefined_address_pc" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200">
                         <option value="">Select a predefined location</option>
                         {% for value, label in delivery_points %}
                         <option value="{{ value }}">{{ label }}</option>
                         {% endfor %}
                     </select>
-                    <input type="text" name="address" placeholder="Or enter custom address" class="w-full mt-2 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" name="address" placeholder="Or enter custom address" class="w-full mt-2 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="payment-method-pc">Payment Method</label>
-                    <select name="payment_method" id="payment-method-pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="toggleProvider('pc')">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2" for="payment-method-pc">Payment Method</label>
+                    <select name="payment_method" id="payment-method-pc" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200" onchange="toggleProvider('pc')">
                         {% for value, label in payment_methods %}
                         <option value="{{ value }}">{{ label }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div id="payment-provider-div-pc" class="hidden">
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="payment-provider-pc">Payment Provider</label>
-                    <select name="payment_provider" id="payment-provider-pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2" for="payment-provider-pc">Payment Provider</label>
+                    <select name="payment_provider" id="payment-provider-pc" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200">
                         <option value="">Select a provider</option>
                         <optgroup label="Mobile Money" id="mobile-money-options-pc" class="hidden">
                             {% for value, label in mobile_money_providers %}
@@ -71,43 +71,43 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="phone_number_pc">Phone Number</label>
-                    <input type="text" name="phone_number" id="phone_number_pc" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2" for="phone_number_pc">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number_pc" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200" placeholder="+260...">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="secondary_phone_number_pc">Secondary Phone Number (Optional)</label>
-                    <input type="text" name="secondary_phone_number" id="secondary_phone_number_pc" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2" for="secondary_phone_number_pc">Secondary Phone Number (Optional)</label>
+                    <input type="text" name="secondary_phone_number" id="secondary_phone_number_pc" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200" placeholder="+260...">
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">Place Order</button>
+                <button type="submit" class="w-full bg-blue-600 dark:bg-blue-400 text-white py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-300">Place Order</button>
             </form>
         </div>
     </div>
 
     <!-- Mobile View (Hidden on PC) -->
     <div class="md:hidden">
-        <div class="bg-white shadow-lg rounded-lg p-4 mx-2">
-            <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Checkout</h1>
+        <div class="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 mx-4">
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center">Checkout</h1>
             <!-- Countdown Timer -->
-            <div id="countdown-mobile" class="bg-orange-500 text-white text-center p-4 rounded-lg mb-4">
+            <div id="countdown-mobile" class="bg-orange-500 dark:bg-orange-600 text-white text-center p-4 rounded-lg mb-4 shadow-md transition-colors duration-200">
                 <p class="text-base font-semibold">Complete Your Order Within:</p>
                 <div class="text-xl font-bold mt-2">
                     <span id="days-mobile">00</span> : <span id="hours-mobile">00</span> : <span id="minutes-mobile">00</span> : <span id="seconds-mobile">00</span>
                 </div>
-                <p class="text-xs mt-2">days : hours : minutes : seconds</p>
+                <p class="text-xs mt-2 text-gray-100">days : hours : minutes : seconds</p>
             </div>
 
             <div class="mb-4">
-                <h2 class="text-lg font-semibold text-gray-700 mb-2">Your Cart</h2>
-                <div class="space-y-2">
+                <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Your Cart</h2>
+                <div class="space-y-3">
                     {% for item in cart.cartitem_set.all %}
-                    <div class="flex justify-between text-sm text-gray-600">
-                        <span>{{ item.get_product.name }} (x{{ item.quantity }})</span>
+                    <div class="flex justify-between text-sm text-gray-600 dark:text-gray-300">
+                        <span class="truncate">{{ item.get_product.name }} (x{{ item.quantity }})</span>
                         <span>K{{ item.subtotal|floatformat:2 }}</span>
                     </div>
                     {% empty %}
-                    <p class="text-gray-600">No items in cart.</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">No items in cart.</p>
                     {% endfor %}
-                    <div class="border-t pt-2 flex justify-between font-bold text-gray-800 text-sm">
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between font-bold text-gray-800 dark:text-white text-sm">
                         <span>Total</span>
                         <span>K{{ cart.total|floatformat:2 }} (~${{ total_usd|floatformat:2 }} USD)</span>
                     </div>
@@ -117,26 +117,26 @@
             <form method="post" class="space-y-4">
                 {% csrf_token %}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="predefined_address_mobile">Delivery Location</label>
-                    <select name="predefined_address" id="predefined_address_mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" for="predefined_address_mobile">Delivery Location</label>
+                    <select name="predefined_address" id="predefined_address_mobile" class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200">
                         <option value="">Select a location</option>
                         {% for value, label in delivery_points %}
                         <option value="{{ value }}">{{ label }}</option>
                         {% endfor %}
                     </select>
-                    <input type="text" name="address" placeholder="Or custom address" class="w-full mt-2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" name="address" placeholder="Or custom address" class="w-full mt-2 px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="payment-method-mobile">Payment Method</label>
-                    <select name="payment_method" id="payment-method-mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="toggleProvider('mobile')">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" for="payment-method-mobile">Payment Method</label>
+                    <select name="payment_method" id="payment-method-mobile" class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200" onchange="toggleProvider('mobile')">
                         {% for value, label in payment_methods %}
                         <option value="{{ value }}">{{ label }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div id="payment-provider-div-mobile" class="hidden">
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="payment-provider-mobile">Payment Provider</label>
-                    <select name="payment_provider" id="payment-provider-mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" for="payment-provider-mobile">Payment Provider</label>
+                    <select name="payment_provider" id="payment-provider-mobile" class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200">
                         <option value="">Select a provider</option>
                         <optgroup label="Mobile Money" id="mobile-money-options-mobile" class="hidden">
                             {% for value, label in mobile_money_providers %}
@@ -151,14 +151,14 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="phone_number_mobile">Phone Number</label>
-                    <input type="text" name="phone_number" id="phone_number_mobile" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" for="phone_number_mobile">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number_mobile" required class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200" placeholder="+260...">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="secondary_phone_number_mobile">Secondary Phone (Optional)</label>
-                    <input type="text" name="secondary_phone_number" id="secondary_phone_number_mobile" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="+260...">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" for="secondary_phone_number_mobile">Secondary Phone (Optional)</label>
+                    <input type="text" name="secondary_phone_number" id="secondary_phone_number_mobile" class="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200" placeholder="+260...">
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">Place Order</button>
+                <button type="submit" class="w-full bg-blue-600 dark:bg-blue-400 text-white py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-300">Place Order</button>
             </form>
         </div>
     </div>

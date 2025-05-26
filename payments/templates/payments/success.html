@@ -2,67 +2,94 @@
 {% block title %}Order Confirmation{% endblock %}
 {% comment %} /home/surecode/Documents/GitHub/django/eatnearby/payments/templates/payments/success.html {% endcomment %}
 {% block content %}
-<div class="min-h-screen bg-gray-100 pt-16 pb-8">
-    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8 text-center">
-        <h1 class="text-3xl font-bold text-green-600 mb-6">Order Placed Successfully!</h1>
-        <p class="text-gray-700 mb-4 text-lg">Thank you for your order. Here are the details:</p>
+<div class="min-h-screen bg-gray-900 pt-16 pb-8">
+    <div class="max-w-3xl mx-auto bg-gray-800 shadow-lg rounded-lg p-8 text-center">
+        <h1 class="text-3xl font-bold text-green-400 mb-6">Order Placed Successfully!</h1>
+        <p class="text-gray-300 mb-6 text-lg">Thank you for your order. Here are the details:</p>
         {% if messages %}
             {% for message in messages %}
-                <p class="{% if message.tags == 'error' %}text-red-600{% else %}text-green-600{% endif %} mb-4">{{ message }}</p>
+                <p class="{% if message.tags == 'error' %}text-red-400{% else %}text-green-400{% endif %} mb-4">{{ message }}</p>
             {% endfor %}
         {% endif %}
-        <div class="space-y-4 text-left">
-            <p><strong>Payment ID:</strong> {{ payment_history.id|default:"Pending" }}</p>
-            <p><strong>Ordered By:</strong> {{ delivery_info.user.username }}</p>
-            <p><strong>Delivery Location:</strong> {{ delivery_info.address|default:delivery_info.get_predefined_address_display }}</p>
-            <p><strong>Payment Method:</strong> {{ delivery_info.get_payment_method_display }}</p>
-            <p><strong>Phone Number:</strong> {{ delivery_info.phone_number }}</p>
+        <div class="space-y-4 text-left max-w-md mx-auto">
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Order ID:</strong></span>
+                <span class="text-gray-200">{{ delivery_info.id }}</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Payment ID:</strong></span>
+                <span class="text-gray-200">{{ payment_history.id|default:"Pending" }}</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Ordered By:</strong></span>
+                <span class="text-gray-200">{{ delivery_info.user.username }}</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Delivery Location:</strong></span>
+                <span class="text-gray-200">{{ delivery_info.address|default:delivery_info.get_predefined_address_display }}</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Payment Method:</strong></span>
+                <span class="text-gray-200">{{ delivery_info.get_payment_method_display }}</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Phone Number:</strong></span>
+                <span class="text-gray-200">{{ delivery_info.phone_number }}</span>
+            </div>
             {% if delivery_info.secondary_phone_number %}
-                <p><strong>Secondary Phone:</strong> {{ delivery_info.secondary_phone_number }}</p>
+                <div class="flex justify-between py-2 border-b border-gray-600">
+                    <span class="text-gray-400"><strong>Secondary Phone:</strong></span>
+                    <span class="text-gray-200">{{ delivery_info.secondary_phone_number }}</span>
+                </div>
             {% endif %}
-            <p><strong>Status:</strong> {{ delivery_info.get_delivery_status_display }}</p>
-            
+            <div class="flex justify-between py-2 border-b border-gray-600">
+                <span class="text-gray-400"><strong>Status:</strong></span>
+                <span class="text-gray-200">{{ delivery_info.get_delivery_status_display }}</span>
+            </div>
             <!-- Status Feedback -->
             {% if delivery_info.delivery_status == 'pending' %}
-                <p class="text-yellow-600 font-semibold">Your order is awaiting staff assignment. Please wait.</p>
+                <p class="text-food-orange dark:text-food-orange font-semibold">Your order is being processed. Please wait.</p>
             {% elif delivery_info.delivery_status == 'in_progress' %}
-                <p class="text-blue-600 font-semibold">Order accepted by staff. Please confirm delivery completion.</p>
+                <p class="text-blue-400 dark:text-blue-400 font-semibold">Order accepted by staff. Please confirm delivery completion.</p>
             {% elif delivery_info.delivery_status == 'completed' %}
-                <p class="text-green-600 font-semibold">Your order has been confirmed and completed.</p>
+                <p class="text-food-green dark:text-food-green font-semibold">Your order has been confirmed and completed.</p>
+                <button onclick="window.print()" class="no-print mt-4 bg-yellow-600 text-white py-3 px-6 rounded-lg hover:bg-yellow-700 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-300">Print Ticket</button>
             {% elif delivery_info.delivery_status == 'cancelled' %}
-                <p class="text-red-600 font-semibold">Your order has been cancelled.</p>
+                <p class="text-red-400 dark:text-red-400 font-semibold">Your order has been cancelled.</p>
             {% endif %}
-            
             <!-- Product Information -->
             <div>
-                <h3 class="text-lg font-semibold text-gray-700 mb-2">Ordered Items:</h3>
+                <h3 class="text-lg font-semibold text-gray-300 mb-2">Ordered Items:</h3>
                 <div class="space-y-2">
                     {% if payment_history %}
                         {% for item in payment_history.items %}
-                            <div class="flex justify-between">
-                                <span>{{ item.name }} (x{{ item.quantity }})</span>
-                                <span>K{{ item.subtotal|floatformat:2 }}</span>
+                            <div class="flex justify-between py-2 border-b border-gray-600">
+                                <span class="text-gray-300">{{ item.name }} (x{{ item.quantity }})</span>
+                                <span class="text-gray-200">K{{ item.subtotal|floatformat:2 }}</span>
                             </div>
                         {% endfor %}
                     {% else %}
                         {% for item in cart.cartitem_set.all %}
-                            <div class="flex justify-between">
-                                <span>{{ item.get_product.name }} (x{{ item.quantity }})</span>
-                                <span>K{{ item.subtotal|floatformat:2 }}</span>
+                            <div class="flex justify-between py-2 border-b border-gray-600">
+                                <span class="text-gray-300">{{ item.get_product.name }} (x{{ item.quantity }})</span>
+                                <span class="text-gray-200">K{{ item.subtotal|floatformat:2 }}</span>
                             </div>
                         {% endfor %}
                     {% endif %}
                 </div>
             </div>
-            <p><strong>Total:</strong> K{{ cart.total|floatformat:2 }}</p>
+            <div class="flex justify-between py-2">
+                <span class="text-gray-400"><strong>Total:</strong></span>
+                <span class="text-gray-200 font-bold">K{% if payment_history %}{{ payment_history.total|floatformat:2 }}{% else %}{{ cart.total|floatformat:2 }}{% endif %}</span>
+            </div>
         </div>
         {% if delivery_info.delivery_status == 'in_progress' %}
-            <form method="post" class="mt-6">
+            <form method="post" class="no-print mt-6">
                 {% csrf_token %}
-                <button type="submit" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Confirm Delivery Completion</button>
+                <button type="submit" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-300">Confirm Delivery Completion</button>
             </form>
         {% endif %}
-        <a href="{% url 'cart:cart_view' %}" class="mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Back to Cart</a>
+        <a href="{% url 'cart:cart_view' %}" class="no-print mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-300">Back to Cart</a>
     </div>
 </div>
 {% endblock %}

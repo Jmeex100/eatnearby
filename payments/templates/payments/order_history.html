@@ -2,34 +2,33 @@
 {% block title %}Order History{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-gray-100 pt-16 pb-8">
-
+<div class="min-h-screen bg-gray-100 dark:bg-gray-950 pt-16 pb-8">
     <!-- Desktop View -->
     <div class="hidden md:block">
-        <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Your Order History</h1>
+        <div class="max-w-4xl mx-auto bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">Your Order History</h1>
 
             {% with history.0 as favorite %}
             {% if favorite %}
-            <div id="favorite-order" class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6 rounded shadow">
+            <div id="favorite-order" class="bg-yellow-100 dark:bg-yellow-900 border-l-4 border-yellow-500 dark:border-yellow-400 p-4 mb-6 rounded shadow-md">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-gray-800 font-semibold text-lg">🌟 Your Favorite Order</p>
-                        <p class="text-sm text-gray-600">Placed on {{ favorite.created_at|date:"F d, Y H:i" }}</p>
+                        <p class="text-gray-800 dark:text-yellow-100 font-semibold text-lg">🌟 Your Favorite Order</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Placed on {{ favorite.created_at|date:"F d, Y H:i" }}</p>
                     </div>
                     <form method="post" action="{% url 'payments:reorder' favorite.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="bg-yellow-500 text-white text-sm px-3 py-1 rounded hover:bg-yellow-600 transition">
+                        <button type="submit" class="bg-yellow-500 dark:bg-yellow-400 text-white text-sm px-4 py-2 rounded hover:bg-yellow-600 dark:hover:bg-yellow-300 transition-colors duration-200">
                             Reorder
                         </button>
                     </form>
                 </div>
-                <ul class="list-disc list-inside mt-2 text-sm">
+                <ul class="list-disc list-inside mt-2 text-sm text-gray-700 dark:text-gray-200">
                     {% for item in favorite.items %}
                         <li>{{ item.name }} (x{{ item.quantity }}) - K{{ item.subtotal|floatformat:2 }}</li>
                     {% endfor %}
                 </ul>
-                <p class="mt-2 font-medium">Total: K{{ favorite.total|floatformat:2 }}</p>
+                <p class="mt-2 font-medium text-gray-800 dark:text-white">Total: K{{ favorite.total|floatformat:2 }}</p>
             </div>
             {% endif %}
             {% endwith %}
@@ -37,14 +36,14 @@
             {% if history %}
                 <table class="w-full border-collapse mb-6">
                     <thead>
-                        <tr class="bg-gray-200">
-                            <th class="p-3 text-left text-gray-700">Order Date</th>
-                            <th class="p-3 text-left text-gray-700">Delivery Location</th>
-                            <th class="p-3 text-left text-gray-700">Payment Method</th>
-                            <th class="p-3 text-left text-gray-700">Status</th>
-                            <th class="p-3 text-left text-gray-700">Items</th>
-                            <th class="p-3 text-left text-gray-700">Total</th>
-                            <th class="p-3 text-left text-gray-700">Action</th>
+                        <tr class="bg-gray-200 dark:bg-gray-800">
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Order Date</th>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Delivery Location</th>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Payment Method</th>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Status</th>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Items</th>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Total</th>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-200">Action</th>
                         </tr>
                     </thead>
                     <tbody id="pc-history-table">
@@ -61,83 +60,72 @@
 
                 {% if history|length > 5 %}
                 <div class="text-center mt-4">
-                    <button id="pc-view-all-btn" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
+                    <button id="pc-view-all-btn" class="bg-blue-600 dark:bg-blue-400 text-white py-2 px-6 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-300 transition-colors duration-300">
                         View All Orders
                     </button>
                 </div>
                 {% endif %}
             {% else %}
-                <p class="text-gray-600 text-center">You have no order history yet.</p>
+                <p class="text-gray-600 dark:text-gray-400 text-center py-4">You have no order history yet.</p>
             {% endif %}
 
-            <a href="{% url 'cart:cart_view' %}" class="mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Back to Cart</a>
+            <a href="{% url 'cart:cart_view' %}" class="mt-6 inline-block bg-blue-600 dark:bg-blue-400 text-white py-3 px-6 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-300 transition-colors duration-300">Back to Cart</a>
         </div>
     </div>
 
     <!-- Mobile View -->
     <div class="md:hidden">
-        <div class="bg-white shadow-lg rounded-lg p-4 mx-2">
-            <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Order History</h1>
+        <div class="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 mx-4">
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center">Order History</h1>
 
             {% with history.0 as favorite %}
             {% if favorite %}
-            <div id="favorite-order" class="bg-yellow-100 border-l-4 border-yellow-500 p-3 mb-4 rounded shadow text-sm">
+            <div id="favorite-order" class="bg-yellow-100 dark:bg-yellow-900 border-l-4 border-yellow-500 dark:border-yellow-400 p-4 mb-4 rounded shadow-md text-sm">
                 <div class="flex justify-between items-center mb-2">
                     <div>
-                        <p class="font-semibold text-gray-800">Your Favorite Order</p>
-                        <p class="text-gray-600">On {{ favorite.created_at|date:"M d, Y" }}</p>
+                        <p class="font-semibold text-gray-800 dark:text-yellow-100">🌟 Your Favorite Order</p>
+                        <p class="text-gray-600 dark:text-gray-300">On {{ favorite.created_at|date:"M d, Y" }}</p>
                     </div>
                     <form method="post" action="{% url 'payments:reorder' favorite.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600">Reorder</button>
+                        <button type="submit" class="bg-yellow-500 dark:bg-yellow-400 text-white px-3 py-1.5 rounded text-sm hover:bg-yellow-600 dark:hover:bg-yellow-300 transition-colors duration-200">
+                            Reorder
+                        </button>
                     </form>
                 </div>
-                <ul class="list-disc pl-4">
+                <ul class="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-200">
                     {% for item in favorite.items %}
-                        <li>{{ item.name|truncatechars:10 }} (x{{ item.quantity }})</li>
+                        <li class="truncate">{{ item.name }} (x{{ item.quantity }})</li>
                     {% endfor %}
                 </ul>
-                <p class="mt-2">Total: K{{ favorite.total|floatformat:2 }}</p>
+                <p class="mt-2 font-medium text-gray-800 dark:text-white">Total: K{{ favorite.total|floatformat:2 }}</p>
             </div>
             {% endif %}
             {% endwith %}
 
             {% if history %}
-                <table class="w-full border-collapse mb-4 text-sm">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="p-2 text-left text-gray-700">Date</th>
-                            <th class="p-2 text-left text-gray-700">Location</th>
-                            <th class="p-2 text-left text-gray-700">Payment</th>
-                            <th class="p-2 text-left text-gray-700">Status</th>
-                            <th class="p-2 text-left text-gray-700">Items</th>
-                            <th class="p-2 text-left text-gray-700">Total</th>
-                            <th class="p-2 text-left text-gray-700">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mobile-history-table">
-                        {% for order in history|slice:":5" %}
-                            {% include "payments/order_row_mobile.html" %}
-                        {% endfor %}
-                    </tbody>
-                    <tbody id="mobile-full-history" class="hidden">
+                <div class="space-y-4 mb-4">
+                    {% for order in history|slice:":5" %}
+                        {% include "payments/order_row_mobile.html" %}
+                    {% endfor %}
+                    <div id="mobile-full-history" class="hidden space-y-4">
                         {% for order in history %}
                             {% include "payments/order_row_mobile.html" %}
                         {% endfor %}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
 
                 {% if history|length > 5 %}
                 <div class="text-center mt-4">
-                    <button id="mobile-view-all-btn" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 text-sm">
+                    <button id="mobile-view-all-btn" class="bg-blue-600 dark:bg-blue-400 text-white py-2 px-6 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-300 transition-colors duration-300 text-sm">
                         View All Orders
                     </button>
                 </div>
                 {% endif %}
             {% else %}
-                <p class="text-gray-600 text-center text-sm">No orders yet.</p>
+                <p class="text-gray-600 dark:text-gray-400 text-center py-4 text-sm">No orders yet.</p>
             {% endif %}
-            <a href="{% url 'cart:cart_view' %}" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Back to Cart</a>
+            <a href="{% url 'cart:cart_view' %}" class="mt-4 inline-block w-full text-center bg-blue-600 dark:bg-blue-400 text-white py-3 px-6 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-300 transition-colors duration-300 text-sm">Back to Cart</a>
         </div>
     </div>
 </div>
@@ -154,7 +142,7 @@
         const full = document.getElementById('mobile-full-history');
         const slice = document.getElementById('mobile-history-table');
         this.textContent = full.classList.toggle('hidden') ? 'View All Orders' : 'Show Less';
-        slice.classList.toggle('hidden');
+        slice?.classList.toggle('hidden');
     });
 </script>
 {% endblock %}

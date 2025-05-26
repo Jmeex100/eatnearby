@@ -3,60 +3,100 @@
 {% load static %}
 
 {% block content %}
-
-<br>
-<br>
 <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-    <!-- Sidebar Filters (Left Column) -->
-    <div class="w-full md:w-1/4">
-        <div class="bg-white p-6 rounded-lg shadow-lg sticky top-4">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Filter Menu</h2>
+    <!-- Mobile Filter Button (Hidden on Desktop) -->
+    <div class="md:hidden fixed bottom-20 right-4 z-[500]">
+        <button id="mobileFilterButton" class="flex items-center justify-center bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300 dark:text-white transition-colors duration-300 hover:shadow-2xl animate-pulse" style="width: 56px; height: 56px;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 0 0-.293-.707L3.293 7.293A1 1 0 0 1 3 6.586V4z" />
+            </svg>
+        </button>
+    </div>
 
-            <!-- Search and Filters Form -->
-            <form method="get" action="{% url 'orders' %}" class="space-y-6">
+    <!-- Mobile Filter Overlay (Slide-in from Right) -->
+    <div id="mobileFilterOverlay" class="fixed inset-0 bg-black/50 dark:bg-black/60 z-[600] hidden transition-opacity duration-300">
+        <div class="absolute top-0 right-0 w-full max-w-sm bg-white dark:bg-gray-900 p-6 h-full overflow-y-auto transform transition-transform duration-300 translate-x-full shadow-xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white">Filter Menu</h2>
+                <button id="closeMobileFilter" class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Filters Form -->
+            <form method="get" action="{% url 'orders' %}" class="space-y-4">
                 <div class="flex">
-                    <input type="text" name="q" value="{{ query }}" placeholder="Search for products..." class="w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition">Search</button>
+                    <input type="text" name="q" value="{{ query }}" placeholder="Search for products..." class="w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition dark:bg-blue-400 dark:hover:bg-blue-300">Go</button>
                 </div>
-
-                <div class="flex flex-col md:flex-row gap-4">
-                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min Price" class="w-full md:w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max Price" class="w-full md:w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min Price" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max Price" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                 </div>
-
-                <select name="category" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="category" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                     <option value="">All Categories</option>
                     {% for category in categories %}
                         <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
                     {% endfor %}
                 </select>
-
-                <select name="sort" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="sort" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                     <option value="">Sort By</option>
                     <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
                     <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
                     <option value="name_asc" {% if sort == 'name_asc' %}selected{% endif %}>Name: A to Z</option>
                     <option value="name_desc" {% if sort == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
                 </select>
+                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition dark:bg-blue-400 dark:hover:bg-blue-300">Apply Filters</button>
+                <button type="reset" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">Reset</button>
+            </form>
+        </div>
+    </div>
 
-                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Apply Filters</button>
+    <!-- Sidebar Filters (Desktop Only) -->
+    <div class="w-full md:w-1/4 z-[2]">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg sticky top-4">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Filter Menu</h2>
+            <form method="get" action="{% url 'orders' %}" class="space-y-6">
+                <div class="flex">
+                    <input type="text" name="q" value="{{ query }}" placeholder="Search for products..." class="w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition dark:bg-blue-400 dark:hover:bg-blue-300">Search</button>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min Price" class="w-full md:w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max Price" class="w-full md:w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                </div>
+                <select name="category" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="sort" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="">Sort By</option>
+                    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                    <option value="name_asc" {% if sort == 'name_asc' %}selected{% endif %}>Name: A to Z</option>
+                    <option value="name_desc" {% if sort == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
+                </select>
+                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition dark:bg-blue-400 dark:hover:bg-blue-300">Apply Filters</button>
+                <button type="reset" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">Reset</button>
             </form>
         </div>
     </div>
 
     <!-- Main Content (Right Column) -->
-    <div class="w-full md:w-3/4">
+    <div class="w-full md:w-3/4 z-[1]">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800">Menu</h1>
-            
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Menu</h1>
         </div>
 
         <!-- Fast Food Section -->
         <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Fast Food</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Fast Food</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {% for item in fast_foods %}
-                <div class="relative bg-white shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
                     <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
                     <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
                         <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
@@ -67,11 +107,11 @@
                            onclick="openModal(event, this)">Order This</a>
                     </div>
                     <div class="p-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-2">{{ item.name }}</h2>
-                        <p class="text-gray-700 mb-4">{{ item.description }}</p>
-                        <p class="text-red-600 font-semibold">Price: K{{ item.price }}</p>
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
                         <div class="text-center mt-4">
-                            <a href="{% url 'order' item.product_id 'fastfood' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Order Now</a>
+                            <a href="{% url 'order' item.product_id 'fastfood' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                         </div>
                     </div>
                 </div>
@@ -81,10 +121,10 @@
 
         <!-- Food Section -->
         <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Food</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Food</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {% for item in foods %}
-                <div class="relative bg-white shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
                     <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
                     <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
                         <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
@@ -95,11 +135,11 @@
                            onclick="openModal(event, this)">Order This</a>
                     </div>
                     <div class="p-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-2">{{ item.name }}</h2>
-                        <p class="text-gray-700 mb-4">{{ item.description }}</p>
-                        <p class="text-red-600 font-semibold">Price: K{{ item.price }}</p>
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
                         <div class="text-center mt-4">
-                            <a href="{% url 'order' item.product_id 'food' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Order Now</a>
+                            <a href="{% url 'order' item.product_id 'food' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                         </div>
                     </div>
                 </div>
@@ -109,10 +149,10 @@
 
         <!-- Drinks Section -->
         <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Drinks</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {% for item in drinks %}
-                <div class="relative bg-white shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
                     <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
                     <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
                         <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
@@ -123,11 +163,11 @@
                            onclick="openModal(event, this)">Order This</a>
                     </div>
                     <div class="p-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-2">{{ item.name }}</h2>
-                        <p class="text-gray-700 mb-4">{{ item.description }}</p>
-                        <p class="text-red-600 font-semibold">Price: K{{ item.price }}</p>
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
                         <div class="text-center mt-4">
-                            <a href="{% url 'order' item.product_id 'drink' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Order Now</a>
+                            <a href="{% url 'order' item.product_id 'drink' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                         </div>
                     </div>
                 </div>
@@ -138,90 +178,141 @@
 </div>
 
 <!-- Modal -->
-<div id="orderModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
-        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onclick="closeModal()">✖</button>
-        <h2 id="modalTitle" class="text-2xl font-bold text-gray-800 mb-4">Item Name</h2>
-        <p id="modalDescription" class="text-gray-700 mb-4">Item description</p>
-        <p id="modalPrice" class="text-red-600 font-semibold">Price: K0.00</p>
-        <p id="modalTotalPrice" class="text-red-600 font-semibold mt-4">Total: K0.00</p>
+<div id="orderModal" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-black/60 hidden justify-center items-center z-[550]">
+    <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-xl max-w-sm w-full">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white" onclick="closeModal()">✖</button>
+        <h2 id="modalTitle" class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Item Name</h2>
+        <p id="modalDescription" class="text-gray-700 dark:text-gray-300 mb-4">Item description</p>
+        <p id="modalPrice" class="text-red-600 dark:text-red-400 font-semibold">Price: K0.00</p>
+        <p id="modalTotalPrice" class="text-red-600 dark:text-red-400 font-semibold mt-4">Total: K0.00</p>
         <div class="flex mt-4">
-            <input type="number" id="modalQuantity" value="1" class="w-16 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" onchange="updateTotalPrice()">
-            <button class="ml-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" onclick="addToCart()">Add to Cart</button>
+            <input type="number" id="modalQuantity" value="1" class="w-16 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white" min="1" onchange="updateTotalPrice()">
+            <button class="ml-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300 dark:text-white transition-colors duration-200" onclick="addToCart()">Add To Cart</button>
         </div>
+        <input type="hidden" id="modalProductId">
     </div>
 </div>
-
+</div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    function openModal(event, element) {
-        event.preventDefault();
-        const productId = element.getAttribute('data-product-id');
-        const name = element.getAttribute('data-name');
-        const price = parseFloat(element.getAttribute('data-price'));
-        const description = element.getAttribute('data-description');
-        document.getElementById('modalProductId').value = productId;
-        document.getElementById('modalTitle').textContent = name;
-        document.getElementById('modalDescription').textContent = description;
-        document.getElementById('modalPrice').textContent = 'Price: K' + price.toFixed(2);
-        document.getElementById('modalTotalPrice').textContent = 'Total: K' + price.toFixed(2);
-        document.getElementById('modalQuantity').value = 1;
-        document.getElementById('orderModal').classList.remove('hidden');
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mobile filter toggle
+        const mobileFilterButton = document.getElementById('mobileFilterButton');
+        const closeMobileFilter = document.getElementById('closeMobileFilter');
+        const mobileFilterOverlay = document.getElementById('mobileFilterOverlay');
+        const mobileFilterPanel = mobileFilterOverlay?.querySelector('div');
 
-    function closeModal() {
-        document.getElementById('orderModal').classList.add('hidden');
-    }
+        if (!mobileFilterButton || !mobileFilterOverlay || !mobileFilterPanel || !closeMobileFilter) {
+            console.warn('Mobile filter elements missing. Ensure IDs exist: mobileFilterButton, mobileFilterButton, closeMobileFilter, and a div inside mobileFilterOverlay');
+            return;
+        }
 
-    function updateTotalPrice() {
-        const price = parseFloat(document.getElementById('modalPrice').textContent.replace('Price: K', ''));
-        const quantity = parseInt(document.getElementById('modalQuantity').value);
-        const total = price * quantity;
-        document.getElementById('modalTotalPrice').textContent = 'Total: K' + total.toFixed(2);
-    }
-
-    function addToCart() {
-        const productId = document.getElementById('modalProductId').value;
-        const quantity = document.getElementById('modalQuantity').value;
-        fetch('{% url "cart:add_to_cart" %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({ product_id: productId, quantity: quantity })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                updateCartIcon(data.cart_count);
-                closeModal();
-                alert('Item added to cart!');
-            } else {
-                alert('Failed to add item to cart: ' + (data.error || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while adding to cart');
+        mobileFilterButton.addEventListener('click', () => {
+            mobileFilterOverlay.classList.remove('hidden');
+            mobileFilterOverlay.classList.add('opacity-mobile100');
+            mobileFilterPanel.classList.remove('translate-x-full');
         });
-    }
 
-    function updateCartIcon(count) {
-        document.getElementById('cartItemCount').textContent = count;
-    }
+        closeMobileFilter.addEventListener('click', () => {
+            mobileFilterOverlay.classList.remove('opacity-100');
+            mobileFilterPanel.classList.add('translate-x-full');
+            setTimeout(() => mobileFilterOverlay.classList.add('hidden'), 300);
+        });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('{% url "cart:cart_view" %}', { method: 'GET' })
+        mobileFilterOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileFilterOverlay) {
+                mobileFilterOverlay.classList.remove('opacity-100');
+                mobileFilterPanel.classList.add('translate-x-full');
+                setTimeout(() => mobileFilterOverlay.classList.add('hidden'), 300);
+            }
+        });
+
+        // Modal functions
+        window.openModal = function(event, element) {
+            event.preventDefault();
+            const productId = element.getAttribute('data-product-id');
+            const name = element.getAttribute('data-name');
+            const price = parseFloat(element.getAttribute('data-price'));
+            const description = element.getAttribute('data-description');
+            document.getElementById('modalProductId').value = productId;
+            document.getElementById('modalTitle').textContent = name;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('modalPrice').textContent = 'Price: K' + price.toFixed(2);
+            document.getElementById('modalTotalPrice').textContent = 'Total: K' + price.toFixed(2);
+            document.getElementById('modalQuantity').value = 1;
+            document.getElementById('orderModal').classList.remove('hidden');
+        };
+
+        window.closeModal = function() {
+            document.getElementById('orderModal').classList.add('hidden');
+        };
+
+        window.updateTotalPrice = function() {
+            const price = parseFloat(document.getElementById('modalPrice').textContent.replace('Price: K', ''));
+            const quantity = parseInt(document.getElementById('modalQuantity').value);
+            const total = price * quantity;
+            document.getElementById('modalTotalPrice').textContent = 'Total: K' + total.toFixed(2);
+        };
+
+        window.addToCart = function() {
+            const productId = document.getElementById('modalProductId').value;
+            const quantity = document.getElementById('modalQuantity').value;
+            fetch('{% url "cart:add_to_cart" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ product_id: productId, quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartIcon(data.cart_count);
+                    closeModal();
+                    showToast('Item added to cart!');
+                } else {
+                    showToast('Error adding item: ' + (data.error || 'Unknown error'), 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('An error occurred', 'error');
+            });
+        };
+
+        function updateCartIcon(count) {
+            const cartCountElement = document.getElementById('cartItemCount');
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-4 right-4 px-4 py-2 rounded-md text-white transition-opacity duration-300 z-[700] shadow-lg ${
+                type === 'success' ? 'bg-blue-600' : 'bg-red-600'
+            } opacity-0`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.remove('opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize cart count
+        fetch('{% url "cart:cart_view" %}')
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
-                const cartItems = doc.querySelectorAll('.cart-item').length;
-                updateCartIcon(cartItems);
-            });
+                updateCartIcon(doc.querySelectorAll('.cart-item').length);
+            })
+            .catch(error => console.error('Cart count fetch error:', error));
     });
 </script>
 {% endblock %}

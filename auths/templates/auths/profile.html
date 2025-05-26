@@ -2,53 +2,47 @@
 {% block title %}Eat Nearby - My Profile{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-gray-50 py-12">
+<div class="min-h-screen bg-gray-50 dark:bg-gray-950 py-12">
     <div class="container mx-auto px-4 max-w-3xl">
-        <h1 class="text-3xl md:text-4xl font-bold my-10 text-gray-800 mb-8 text-center">My Profile</h1>
+        <h1 class="text-3xl md:text-4xl font-bold my-10 text-gray-800 dark:text-white mb-8 text-center">My Profile</h1>
 
         <!-- Profile Card -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md transition-colors duration-200">
             <div class="flex flex-col items-center mb-6">
                 <!-- Profile Image or Initials -->
                 {% if user.image and user.image.url != '/media/auths/images/empty.png' %}
                     <img 
                         src="{{ user.image.url }}" 
                         alt="Profile Image" 
-                        style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'"
+                        class="w-[100px] h-[100px] object-cover rounded-full shadow-md hover:scale-105 transition-transform duration-300"
                     >
                 {% else %}
                     <div 
-                        style="width: 100px; height: 100px; background-color: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #4b5563; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'"
+                        class="w-[100px] h-[100px] bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-2xl font-bold text-gray-600 dark:text-gray-300 shadow-md hover:scale-105 transition-transform duration-300"
                     >
                         {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
                     </div>
-                    <a href="{% url 'settings' %}" style="margin-top: 8px; color: #2563eb; text-decoration: underline; font-size: 0.875rem;">Add Profile Image</a>
+                    <a href="{% url 'settings' %}" class="mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm underline transition-colors duration-200">Add Profile Image</a>
                 {% endif %}
                 <!-- User Name and Type -->
-                <h2 style="margin-top: 16px; font-size: 1.5rem; font-weight: 600; color: #1f2937;">{{ full_name }}</h2>
-                <p style="color: #4b5563; font-size: 1.125rem;">{{ user_type }}</p>
+                <h2 class="mt-4 text-2xl font-semibold text-gray-900 dark:text-white">{{ full_name }}</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">{{ user_type }}</p>
             </div>
 
             <!-- User Details -->
-            <div style="display: flex; flex-direction: column; gap: 16px; color: #374151;">
-                <p><strong>Username:</strong> {{ user.username }}</p>
-                <p><strong>Email:</strong> {{ user.email|default:"Not provided" }}</p>
-                <p><strong>Gender:</strong> {{ gender_prefix|default:"Not specified" }}</p>
-                <p><strong>Phone Number:</strong> {{ user.phone_number|default:"Not provided" }}</p>
-                <p><strong>Joined:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+            <div class="flex flex-col gap-4 text-gray-700 dark:text-gray-200">
+                <p><span class="font-semibold">Username:</span> {{ user.username }}</p>
+                <p><span class="font-semibold">Email:</span> {{ user.email|default:"Not provided" }}</p>
+                <p><span class="font-semibold">Gender:</span> {{ gender_prefix|default:"Not specified" }}</p>
+                <p><span class="font-semibold">Phone Number:</span> {{ user.phone_number|default:"Not provided" }}</p>
+                <p><span class="font-semibold">Joined:</span> {{ user.date_joined|date:"F j, Y" }}</p>
             </div>
 
             <!-- Edit Settings Button -->
-            <div style="margin-top: 32px; text-align: center;">
+            <div class="mt-8 text-center">
                 <a 
                     href="{% url 'settings' %}" 
-                    style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease, box-shadow 0.3s ease;"
-                    onmouseover="this.style.backgroundColor='#1d4ed8'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.15)'"
-                    onmouseout="this.style.backgroundColor='#2563eb'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)'"
+                    class="inline-block bg-blue-600 dark:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300"
                 >
                     Edit Settings
                 </a>
