@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 import secrets
 import string
-
+from payments.models import DeliveryInfo
 # User List View
 @superadmin_required
 def user_list(request):
@@ -43,13 +43,32 @@ def user_create(request):
             password = ''.join(secrets.choice(alphabet) for _ in range(12))
             user.set_password(password)
             # Set superadmin-specific fields
-            user_type = request.POST.get('user_type', 'customer')
+            user_type = form.cleaned_data.get('user_type', 'customer')
             if user_type in ['admin', 'staff']:
                 user.user_type = user_type
             if user_type == 'admin' and request.POST.get('is_superuser') == 'on':
                 user.is_superuser = True
                 user.is_staff = True
             user.save()
+
+            # Create DeliveryInfo for customers
+            if user_type == 'customer':
+                preferred_delivery_point = form.cleaned_data.get('preferred_delivery_point')
+                if preferred_delivery_point:
+                    try:
+                        # Assuming a default cart exists or create one (modify as per your cart logic)
+                        from cart.models import Cart
+                        cart, _ = Cart.objects.get_or_create(user=user)
+                        DeliveryInfo.objects.create(
+                            user=user,
+                            cart=cart,
+                            predefined_address=preferred_delivery_point,
+                            phone_number=form.cleaned_data.get('phone_number', ''),
+                            delivery_status='pending',
+                            payment_method='cash',
+                        )
+                    except Exception as e:
+                        messages.warning(request, f'User created, but failed to set delivery info: {str(e)}')
 
             # Send welcome email
             logo_url = request.build_absolute_uri('/static/images/logo/icon-192x192.png') if request.is_secure() else 'http://localhost:8000/static/images/logo/icon-192x192.png'
@@ -87,7 +106,6 @@ def user_create(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'superadmin/users/user_form.html', {'form': form, 'action': 'Create'})
-
 # User Update View
 @superadmin_required
 def user_update(request, pk):
@@ -96,20 +114,84 @@ def user_update(request, pk):
         form = CustomUserCreationForm(request.POST, instance=user)
         if form.is_valid():
             user = form.save(commit=False)
-            user_type = request.POST.get('user_type', user.user_type)
+            user_type = form.cleaned_data.get('user_type', user.user_type)
             if user_type in ['admin', 'staff']:
                 user.user_type = user_type
             user.is_superuser = (user_type == 'admin' and request.POST.get('is_superuser') == 'on')
             user.is_staff = (user_type == 'admin' and user.is_superuser)
             user.save()
-            messages.success(request, f'User {user.username} updated successfully.')
+
+            # Update or create DeliveryInfo for customers
+            if user_type == 'customer':
+                preferred_delivery_point = form.cleaned_data.get('preferred_delivery_point')
+                if preferred_delivery_point:
+                    try:
+                        from cart.models import Cart
+                        cart, _ = Cart.objects.get_or_create(user=user)
+                        delivery_info, created = DeliveryInfo.objects.get_or_create(
+                            user=user,
+                            defaults={
+                                'cart': cart,
+                                'predefined_address': preferred_delivery_point,
+                                'phone_number': form.cleaned_data.get('phone_number', ''),
+                                'delivery_status': 'pending',
+                                'payment_method': 'cash',
+                            }
+                        )
+                        if not created and delivery_info.predefined_address != preferred_delivery_point:
+                            delivery_info.predefined_address = preferred_delivery_point
+                            delivery_info.phone_number = form.cleaned_data.get('phone_number', '')
+                            delivery_info.save()
+                    except Exception as e:
+                        messages.warning(request, f'User updated, but failed to set delivery info: {str(e)}')
+            else:
+                # Remove DeliveryInfo for non-customers
+                DeliveryInfo.objects.filter(user=user).delete()
+
+            # Send update notification email
+            logo_url = request.build_absolute_uri('/static/images/logo/icon-192x192.png') if request.is_secure() else 'http://localhost:8000/static/images/logo/icon-192x192.png'
+            subject = 'Your Eat Nearby Account Has Been Updated'
+            html_message = f"""
+                <h1 style="color: #1a73e8;">Account Update Notification</h1>
+                <img src="{logo_url}" alt="Eat Nearby Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                <p style="color: #333;">Dear {user.first_name},</p>
+                <p style="color: #555;">Your account details have been updated by an administrator.</p>
+                <p style="font-size: 16px; color: #555;">
+                    <strong style="color: #e91e63;">Username:</strong> {user.username}<br>
+                    <strong style="color: #e91e63;">User Type:</strong> {user.user_type}<br>
+                    <strong style="color: #e91e63;">Email:</strong> {user.email}
+                </p>
+                <p style="color: #d32f2f; font-weight: bold;">Please log in to review your updated account details.</p>
+                <p style="color: #388e3c;">Best regards,<br>The Eat Nearby Team</p>
+                <hr style="border: 1px solid #ddd;">
+ проявление <p style="font-size: 12px; color: #888;">This is an automated message. Please do not reply.</p>
+            """
+            email = EmailMessage(
+                subject,
+                html_message,
+                settings.EMAIL_HOST_USER,
+                [user.email],
+            )
+            email.content_subtype = "html"
+            try:
+                email.send()
+                messages.success(request, f'User {user.username} updated successfully. Notification sent to {user.email}.')
+            except Exception as e:
+                messages.warning(request, f'User updated, but email failed to send: {str(e)}')
+
             return redirect('superadmin:user_list')
         else:
             messages.error(request, 'User update failed. Please check your inputs.')
     else:
         form = CustomUserCreationForm(instance=user)
+        # Pre-populate preferred_delivery_point from DeliveryInfo if it exists
+        try:
+            delivery_info = DeliveryInfo.objects.filter(user=user).first()
+            if delivery_info and delivery_info.predefined_address:
+                form.initial['preferred_delivery_point'] = delivery_info.predefined_address
+        except DeliveryInfo.DoesNotExist:
+            pass
     return render(request, 'superadmin/users/user_form.html', {'form': form, 'action': 'Update', 'user': user})
-
 # User Delete View
 @superadmin_required
 def user_delete(request, pk):

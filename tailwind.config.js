@@ -13,7 +13,7 @@ module.exports = {
     './payments/static/js/**/*.js',
     './staffs/templates/**/*.html',
     './staffs/static/js/**/*.js',
-        './superadmin/templates/**/*.html',
+    './superadmin/templates/**/*.html',
     './superadmin/static/js/**/*.js',
   ],
   theme: {
@@ -24,16 +24,22 @@ module.exports = {
         'food-cream': '#FFF8E1',
         'food-dark': '#1A3C34',
         'food-gray': '#4A5568',
+        // Dark mode specific colors
+        'dark-background': '#111827',
+        'dark-text': '#F3F4F6',
+        'dark-card': '#1F2937',
+        'dark-border': '#374151',
       }
     }
   },
   variants: {
     extend: {
       backgroundColor: ['dark'],
-      textColor: ['white'],
+      textColor: ['dark'],
       borderColor: ['dark'],
       boxShadow: ['dark'],
       opacity: ['dark'],
+      gradientColorStops: ['dark'],
     },
   },
   plugins: [],

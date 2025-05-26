@@ -3,84 +3,84 @@
 {% load static %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Menu</h1>
-    
+<div class="container mx-auto px-4 py-8 dark:bg-dark-background">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6">Menu</h1>
 
-   <!-- Main Dishes Section -->
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold text-white mb-6 rounded text-center hover:text-blue-500 transition-colors duration-300 p-3 bg-gray-700 ease-in-out">Our Menu</h1>
-    <p class="text-gray-700 mb-8">Explore our delicious offerings and find your next meal!</p>
+    <!-- Main Dishes Section -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold text-white dark:text-gray-100 mb-6 rounded text-center hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300 p-3 bg-gray-700 dark:bg-gray-800 ease-in-out">Our Menu</h1>
+        <p class="text-gray-700 dark:text-gray-300 mb-8">Explore our delicious offerings and find your next meal!</p>
 
-     <!-- Main Dishes Section -->
-     <div>
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Main Dishes</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for food in foods %}
-            <div class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="{{ food.image_url }}" alt="{{ food.name }}" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-2">{{ food.name }}</h2>
-                    <h3 class="text-green-600 font-semibold mb-2">+ Free Nsima</h3>
-                    <p class="text-gray-700 mb-4">{{ food.description }}</p>
-                    <p class="text-red-600 font-semibold">Price: K{{ food.price }}</p>
+        <!-- Main Dishes Section -->
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">Main Dishes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for food in foods %}
+                <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-gray-200 dark:border-gray-700">
+                    <img src="{{ food.image_url }}" alt="{{ food.name }}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">{{ food.name }}</h2>
+                        <h3 class="text-green-600 dark:text-green-400 font-semibold mb-2">+ Free Nsima</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ food.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ food.price }}</p>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <!-- See More Button -->
+            <div class="text-center mt-8">
+                <a href="{% url 'login' %}" class="bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">See More</a>
+            </div>
         </div>
-        <!-- See More Button -->
-        <div class="text-center mt-8">
-            <a href="{% url 'login' %}" class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700">See More</a>
-        </div>
-    </div>
 
-    <!-- Fast Food Section -->
-    <div class="mt-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Fast Food</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for fastfood in fastfoods %}
-            <div class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="{{ fastfood.image_url }}" alt="{{ fastfood.name }}" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ fastfood.name }}</h3>
-                    <p class="text-gray-700 mb-4">{{ fastfood.description }}</p>
-                    <p class="text-red-600 font-semibold">Price: K{{ fastfood.price }}</p>
+        <!-- Fast Food Section -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">Fast Food</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for fastfood in fastfoods %}
+                <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-gray-200 dark:border-gray-700">
+                    <img src="{{ fastfood.image_url }}" alt="{{ fastfood.name }}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">{{ fastfood.name }}</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ fastfood.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ fastfood.price }}</p>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <!-- See More Button -->
+            <div class="text-center mt-8">
+                <a href="{% url 'login' %}" class="bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">See More</a>
+            </div>
         </div>
-        <!-- See More Button -->
-        <div class="text-center mt-8">
-            <a href="{% url 'login' %}" class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700">See More</a>
-        </div>
-    </div>
 
-    <!-- Drinks Section -->
-    <div class="mt-12">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Drinks</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for drink in drinks %}
-            <div class="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="{{ drink.image_url }}" alt="{{ drink.name }}" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ drink.name }}</h3>
-                    <p class="text-gray-700 mb-4">{{ drink.description }}</p>
-                    <p class="text-red-600 font-semibold">Price: K{{ drink.price }}</p>
+        <!-- Drinks Section -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">Drinks</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for drink in drinks %}
+                <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-gray-200 dark:border-gray-700">
+                    <img src="{{ drink.image_url }}" alt="{{ drink.name }}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">{{ drink.name }}</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ drink.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ drink.price }}</p>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <!-- See More Button -->
+            <div class="text-center mt-8">
+                <a href="{% url 'login' %}" class="bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">See More</a>
+            </div>
         </div>
-        <!-- See More Button -->
-        <div class="text-center mt-8">
-            <a href="{% url 'login' %}" class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700">See More</a>
-        </div>
-    </div>
 
-    <!-- Weekly Subscription Section -->
-    <div class="mt-12 bg-green-100 rounded-lg p-6">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Weekly Food Subscription</h2>
-        <p class="text-gray-700 mb-4">Subscribe to our weekly meal plan and enjoy 5 delicious meals customized to your preferences. Select what you want to eat each day and leave the rest to us!</p>
-        <p class="text-green-600 font-semibold">Price: 5 meals for <strong>K300</strong></p>
+        <!-- Weekly Subscription Section -->
+        <div class="mt-12 bg-green-100 dark:bg-green-900 rounded-lg p-6 border border-green-200 dark:border-green-800">
+            <h2 class="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-4">Weekly Food Subscription</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">Subscribe to our weekly meal plan and enjoy 5 delicious meals customized to your preferences. Select what you want to eat each day and leave the rest to us!</p>
+            <p class="text-green-600 dark:text-green-400 font-semibold">Price: 5 meals for <strong>K300</strong></p>
+        </div>
     </div>
 </div>
 {% endblock %}

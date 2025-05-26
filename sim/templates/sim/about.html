@@ -7,6 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
     tailwind.config = {
+        darkMode: 'class',
         theme: {
             extend: {
                 colors: {
@@ -15,6 +16,9 @@
                     'food-cream': '#FFF8E1',
                     'food-dark': '#1A3C34',
                     'food-gray': '#4A5568',
+                    'dark-background': '#111827',
+                    'dark-card': '#1F2937',
+                    'dark-text': '#F3F4F6',
                 },
             },
         },
@@ -25,21 +29,21 @@
 {% endblock %}
 
 {% block content %}
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-food-cream bg-opacity-10 rounded-md">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-food-cream dark:bg-dark-background bg-opacity-10 rounded-md">
     <!-- About Us Section -->
     <div class="text-center m-8 mb-12">
-        <h1 class="text-3xl my-10 md:text-4xl font-bold text-food-dark mb-6 mt-10 animate__animated animate__fadeInUp">
-            About <span class="text-food-orange">Eat</span><span class="text-green-500">Nearby</span>
+        <h1 class="text-3xl my-10 md:text-4xl font-bold text-food-dark dark:text-dark-text mb-6 mt-10 animate__animated animate__fadeInUp">
+            About <span class="text-food-orange">Eat</span><span class="text-green-500 dark:text-green-400">Nearby</span>
         </h1>
         <div class="max-w-3xl mx-auto">
-            <p class="text-food-gray mb-4 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-1s">
-                Welcome to <strong class="text-food-dark">Eat Nearby</strong> – your digital bridge between hungry customers and local restaurants. We are a web-based food ordering platform focused on connecting diners with nearby eateries while fostering community-driven engagement.
+            <p class="text-food-gray dark:text-gray-300 mb-4 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-1s">
+                Welcome to <strong class="text-food-dark dark:text-white">Eat Nearby</strong> – your digital bridge between hungry customers and local restaurants.
             </p>
-            <p class="text-food-gray mb-4 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-2s">
-                Inspired by the vibrant food scene around Evelyn Hone College, Eat Nearby was created to simplify food ordering, enhance customer loyalty, and provide clear, accessible information about local dining options.
+            <p class="text-food-gray dark:text-gray-300 mb-4 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-2s">
+                Inspired by the vibrant food scene around Evelyn Hone College, Eat Nearby was created to simplify food ordering and enhance customer loyalty.
             </p>
-            <p class="text-food-gray mb-8 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-3s">
-                Our system supports mobile-friendly access, AI-powered restaurant recommendations, and multiple payment options including Cash, Mobile Money, and cards. With real-time location mapping and user reviews, Eat Nearby is redefining the dining experience.
+            <p class="text-food-gray dark:text-gray-300 mb-8 text-lg leading-relaxed animate__animated animate__fadeInUp animate__delay-3s">
+                Our system supports mobile-friendly access, AI-powered recommendations, and multiple payment options including Cash, Mobile Money, and cards.
             </p>
         </div>
     </div>
@@ -47,46 +51,46 @@
     <!-- Mission and Objectives Section -->
     <div class="grid md:grid-cols-2 gap-8 mb-12">
         <!-- Our Mission -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center mb-4">
-                <div class="p-2 rounded-full bg-food-orange bg-opacity-20 mr-4">
-                    <svg class="w-6 h-6 text-food-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div class="p-2 rounded-full bg-food-orange bg-opacity-20 dark:bg-opacity-30 mr-4">
+                    <svg class="w-6 h-6 text-food-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-food-dark">Our Mission</h2>
+                <h2 class="text-2xl font-bold text-food-dark dark:text-white">Our Mission</h2>
             </div>
-            <p class="text-food-gray pl-12">
-                To empower restaurants with a stronger online presence and create a trusted community where food lovers can connect, explore, and engage. We aim to simplify the ordering process and enhance customer retention through a tech-driven, user-centric platform.
+            <p class="text-food-gray dark:text-gray-300 pl-12">
+                To empower restaurants with a stronger online presence and create a trusted community where food lovers can connect.
             </p>
         </div>
 
         <!-- Our Objectives -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center mb-4">
-                <div class="p-2 rounded-full bg-food-green bg-opacity-20 mr-4">
-                    <svg class="w-6 h-6 text-food-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div class="p-2 rounded-full bg-food-green bg-opacity-20 dark:bg-opacity-30 mr-4">
+                    <svg class="w-6 h-6 text-food-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-food-dark">Our Objectives</h2>
+                <h2 class="text-2xl font-bold text-food-dark dark:text-white">Our Objectives</h2>
             </div>
-            <ul class="list-none space-y-2 text-food-gray pl-12">
+            <ul class="list-none space-y-2 text-food-gray dark:text-gray-300 pl-12">
                 <li class="flex items-start">
-                    <span class="text-food-green mr-2">✓</span>
-                    <span>Create an intuitive web platform showcasing restaurant locations</span>
+                    <span class="text-food-green dark:text-green-400 mr-2">✓</span>
+                    <span>Create an intuitive web platform</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-food-green mr-2">✓</span>
-                    <span>Integrate Google Maps for real-time navigation</span>
+                    <span class="text-food-green dark:text-green-400 mr-2">✓</span>
+                    <span>Integrate Google Maps navigation</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-food-green mr-2">✓</span>
-                    <span>Facilitate customer engagement through reviews</span>
+                    <span class="text-food-green dark:text-green-400 mr-2">✓</span>
+                    <span>Facilitate customer engagement</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-food-green mr-2">✓</span>
-                    <span>Support seamless multi-method payment gateways</span>
+                    <span class="text-food-green dark:text-green-400 mr-2">✓</span>
+                    <span>Support multi-method payments</span>
                 </li>
             </ul>
         </div>
@@ -94,61 +98,61 @@
 
     <!-- Core Features Section -->
     <div class="mb-12">
-        <h2 class="text-2xl font-bold text-food-dark mb-8 text-center">Core Features</h2>
+        <h2 class="text-2xl font-bold text-food-dark dark:text-white mb-8 text-center">Core Features</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Feature 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700">
                 <div class="text-food-orange mb-4">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-semibold text-food-dark mb-3">Restaurant Discovery</h3>
-                <p class="text-food-gray">Easily find nearby restaurants with our integrated map and detailed business profiles.</p>
+                <h3 class="text-xl font-semibold text-food-dark dark:text-white mb-3">Restaurant Discovery</h3>
+                <p class="text-food-gray dark:text-gray-300">Find nearby restaurants with our integrated map.</p>
             </div>
             
             <!-- Feature 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700">
                 <div class="text-food-green mb-4">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-semibold text-food-dark mb-3">Community Engagement</h3>
-                <p class="text-food-gray">Build connections through reviews, shared experiences, and digital loyalty interactions.</p>
+                <h3 class="text-xl font-semibold text-food-dark dark:text-white mb-3">Community Engagement</h3>
+                <p class="text-food-gray dark:text-gray-300">Build connections through reviews and loyalty.</p>
             </div>
             
             <!-- Feature 3 -->
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700">
                 <div class="text-food-orange mb-4">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-semibold text-food-dark mb-3">Smart Personalization</h3>
-                <p class="text-food-gray">Receive tailored restaurant suggestions through AI-powered recommendations.</p>
+                <h3 class="text-xl font-semibold text-food-dark dark:text-white mb-3">Smart Personalization</h3>
+                <p class="text-food-gray dark:text-gray-300">AI-powered restaurant suggestions.</p>
             </div>
         </div>
     </div>
 
     <!-- Security and Payments Section -->
-    <div class="mb-12 bg-gradient-to-r from-food-cream to-white p-8 rounded-lg">
+    <div class="mb-12 bg-gradient-to-r from-food-cream dark:from-gray-800 to-white dark:to-gray-900 p-8 rounded-lg border border-gray-200 dark:border-gray-700">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold text-food-dark mb-6 text-center">Security & Payment Options</h2>
+            <h2 class="text-2xl font-bold text-food-dark dark:text-white mb-6 text-center">Security & Payment Options</h2>
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <p class="text-food-gray mb-6 text-lg">
-                        Eat Nearby prioritizes data protection and secure transactions. We employ Python-based security measures to safeguard user information and payment processes.
+                    <p class="text-food-gray dark:text-gray-300 mb-6 text-lg">
+                        Eat Nearby prioritizes data protection and secure transactions.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <span class="bg-food-green bg-opacity-10 text-food-green px-4 py-2 rounded-full text-sm font-medium">Cash on Delivery</span>
-                        <span class="bg-food-orange bg-opacity-10 text-food-orange px-4 py-2 rounded-full text-sm font-medium">Mobile Money</span>
-                        <span class="bg-food-dark bg-opacity-10 text-food-dark px-4 py-2 rounded-full text-sm font-medium">Card Payments</span>
+                        <span class="bg-food-green bg-opacity-10 dark:bg-opacity-20 text-food-green dark:text-green-400 px-4 py-2 rounded-full text-sm font-medium">Cash on Delivery</span>
+                        <span class="bg-food-orange bg-opacity-10 dark:bg-opacity-20 text-food-orange dark:text-orange-400 px-4 py-2 rounded-full text-sm font-medium">Mobile Money</span>
+                        <span class="bg-food-dark bg-opacity-10 dark:bg-opacity-20 text-food-dark dark:text-gray-300 px-4 py-2 rounded-full text-sm font-medium">Card Payments</span>
                     </div>
                 </div>
                 <div class="flex justify-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2451/2451981.png" alt="Secure Payments" class="w-48 h-48 object-contain">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2451/2451981.png" alt="Secure Payments" class="w-48 h-48 object-contain dark:invert-[80%]">
                 </div>
             </div>
         </div>
@@ -156,66 +160,66 @@
 
     <!-- Team Section -->
     <div class="mb-12">
-        <h2 class="text-2xl font-bold text-food-dark mb-8 text-center">Meet The Team</h2>
+        <h2 class="text-2xl font-bold text-food-dark dark:text-white mb-8 text-center">Meet The Team</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <!-- Team Member 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md text-center border border-gray-200 dark:border-gray-700">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream dark:bg-gray-700 overflow-hidden">
                     <img src="{% static 'images/people/ceo.png' %}" alt="Team Member" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-semibold text-food-dark">Sarah Lungu</h3>
-                <p class="text-food-orange text-sm mb-2">CEO & Founder</p>
-                <p class="text-food-gray text-sm">Food tech enthusiast with 10+ years in the industry</p>
+                <h3 class="text-xl font-semibold text-food-dark dark:text-white">Sarah Lungu</h3>
+                <p class="text-food-orange dark:text-orange-400 text-sm mb-2">CEO & Founder</p>
+                <p class="text-food-gray dark:text-gray-300 text-sm">Food tech enthusiast</p>
             </div>
             
             <!-- Team Member 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md text-center border border-gray-200 dark:border-gray-700">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream dark:bg-gray-700 overflow-hidden">
                     <img src="{% static 'images/people/richard.png' %}" alt="Team Member" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-bold text-food-dark">Richman Mushanga</h3>
-                <p class="text-food-orange text-sm mb-2">CTO</p>
-                <p class="text-food-gray text-sm">Full-stack developer and security expert</p>
+                <h3 class="text-xl font-bold text-food-dark dark:text-white">Richman Mushanga</h3>
+                <p class="text-food-orange dark:text-orange-400 text-sm mb-2">CTO</p>
+                <p class="text-food-gray dark:text-gray-300 text-sm">Full-stack developer</p>
             </div>
             
             <!-- Team Member 3 -->
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md text-center border border-gray-200 dark:border-gray-700">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream dark:bg-gray-700 overflow-hidden">
                     <img src="{% static 'images/people/judth.png' %}" alt="Team Member" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-semibold text-food-dark">judth banda</h3>
-                <p class="text-food-orange text-sm mb-2">Marketing Director</p>
-                <p class="text-food-gray text-sm">Digital marketing and community growth specialist</p>
+                <h3 class="text-xl font-semibold text-food-dark dark:text-white">Judth Banda</h3>
+                <p class="text-food-orange dark:text-orange-400 text-sm mb-2">Marketing Director</p>
+                <p class="text-food-gray dark:text-gray-300 text-sm">Digital marketing specialist</p>
             </div>
             
             <!-- Team Member 4 -->
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream overflow-hidden">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md text-center border border-gray-200 dark:border-gray-700">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-food-cream dark:bg-gray-700 overflow-hidden">
                     <img src="{% static 'images/people/richard2.png' %}" alt="Team Member" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-semibold text-food-dark">David Mwila</h3>
-                <p class="text-food-orange text-sm mb-2">Product Manager</p>
-                <p class="text-food-gray text-sm">UX designer and product development lead</p>
+                <h3 class="text-xl font-semibold text-food-dark dark:text-white">David Mwila</h3>
+                <p class="text-food-orange dark:text-orange-400 text-sm mb-2">Product Manager</p>
+                <p class="text-food-gray dark:text-gray-300 text-sm">UX designer</p>
             </div>
         </div>
     </div>
 
     <!-- Call to Action -->
-    <div class="text-center my-12 bg-food-dark p-8 rounded-lg">
+    <div class="text-center my-12 bg-food-dark dark:bg-gray-900 p-8 rounded-lg border border-gray-700">
         <h2 class="text-2xl font-bold text-white mb-4">Join Our Community</h2>
-        <p class="text-food-cream mb-6 max-w-2xl mx-auto">
-            Whether you're a restaurant owner or a food enthusiast, Eat Nearby is here to enhance your culinary experience. Join us and be a part of a growing digital food community.
+        <p class="text-food-cream dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+            Whether you're a restaurant owner or a food enthusiast, join our growing digital food community.
         </p>
-        <div class="flex justify-center space-x-4">
-            <a href="#" class="bg-food-orange hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300 inline-flex items-center">
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#" class="bg-food-orange hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300 inline-flex items-center justify-center">
                 <span>For Restaurants</span>
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </a>
-            <a href="#" class="bg-white hover:bg-gray-100 text-food-dark font-semibold py-3 px-6 rounded-full transition duration-300 inline-flex items-center">
+            <a href="#" class="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-food-dark dark:text-white font-semibold py-3 px-6 rounded-full transition duration-300 inline-flex items-center justify-center">
                 <span>For Customers</span>
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </a>
@@ -234,13 +238,6 @@
         top: 0.25rem;
     }
 
-    /* Gradient text for h1 */
-    h1 {
-        background: linear-gradient(to right, #FF6B35, #4CAF50);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
     /* Smooth transitions */
     .transition-all {
         transition-property: all;

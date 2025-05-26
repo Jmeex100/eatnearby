@@ -6,23 +6,26 @@
 {% block content %}
 <div class="p-4 md:p-6">
     <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">{{ action }} User</h1>
+        <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">{{ action }} User</h1>
         <div class="flex space-x-2">
-            <button onclick="window.print()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700">
                 <i class="fas fa-print mr-2"></i>Print
             </button>
-            <a href="{% url 'superadmin:user_list' %}" class="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-500">
+            <a href="{% url 'superadmin:user_list' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded transition-colors duration-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Users
             </a>
         </div>
     </div>
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
         <form method="POST" id="userForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {% csrf_token %}
             <!-- Username -->
             <div>
                 <label for="id_username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
-                {{ form.username }}
+                <input type="text" name="username" id="id_username" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ease-in-out dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                       value="{{ form.username.value|default_if_none:'' }}"
+                       placeholder="Enter username">
                 {% if form.username.errors %}
                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.username.errors.as_text }}</p>
                 {% endif %}
@@ -104,10 +107,10 @@
             {% endif %}
             <!-- Submit/Cancel -->
             <div class="md:col-span-2 flex justify-end space-x-2">
-                <a href="{% url 'superadmin:user_list' %}" class="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-500">
+                <a href="{% url 'superadmin:user_list' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded transition-colors duration-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200">
                     Cancel
                 </a>
-                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200 dark:bg-red-600 dark:hover:bg-red-700">
                     <i class="fas fa-save mr-2"></i>{{ action }}
                 </button>
             </div>
@@ -192,6 +195,28 @@
             background: white !important;
             color: black !important;
         }
+    }
+    
+    /* Dark mode form field styling */
+    .dark input, .dark select, .dark textarea {
+        background-color: #1f2937 !important;
+        border-color: #4b5563 !important;
+        color: #f3f4f6 !important;
+    }
+    
+    .dark input:focus, .dark select:focus, .dark textarea:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+    }
+    
+    .dark .form-checkbox {
+        background-color: #1f2937 !important;
+        border-color: #4b5563 !important;
+    }
+    
+    .dark .form-checkbox:checked {
+        background-color: #3b82f6 !important;
+        border-color: #3b82f6 !important;
     }
 </style>
 {% endblock %}

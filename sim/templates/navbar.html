@@ -3,15 +3,15 @@
 <nav class="shadow-lg fixed w-full z-10">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
+                <!-- Logo -->
             <div class="flex items-center">
-                <a href="{% url 'home' %}" class="text-xl font-bold flex items-center">
+                <a href="{% if user.is_authenticated %}{% url 'index' %}{% else %}{% url 'home' %}{% endif %}" 
+                   class="text-xl font-bold flex items-center">
                     <span class="logo-red">Eat-NEAR</span><span class="logo-green">-BY</span>
-                    <img 
-                        src="{% static 'images/logo/icon-192x192.png' %}" 
-                        alt="Eat-NEAR-BY Logo" 
-                        title="Eat-NEAR-BY" 
-                        class="w-10 h-10 rounded-full">
+                    <img src="{% static 'images/logo/icon-192x192.png' %}" 
+                         alt="Eat-NEAR-BY Logo" 
+                         title="Eat-NEAR-BY" 
+                         class="w-10 h-10 rounded-full">
                 </a>
             </div>
             <div class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2 items-center">
@@ -123,7 +123,9 @@
         </div>
     </div>
     <!-- Messages Pop-up Container -->
+     
     <div id="message-popup" class="fixed top-16 right-4 z-50 w-80 max-h-96 overflow-y-auto hidden">
+        
         {% if messages %}
             {% for message in messages %}
             <div class="message p-4 rounded-lg shadow-md mb-2 flex justify-between items-center" role="alert">
@@ -134,6 +136,7 @@
                     </svg>
                 </button>
             </div>
+            
             {% endfor %}
         {% endif %}
     </div>

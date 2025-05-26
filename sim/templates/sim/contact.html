@@ -1,138 +1,177 @@
-<!-- contact.html -->
 {% extends 'base.html' %}
 {% block title %}Contact Us{% endblock %}
 
 {% block content %}
+<div class="container mx-auto px-6 py-8 transition-colors duration-300">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 my-10">Contact Us</h1>
+      
+    {% if messages %}
+    <div class="max-w-2xl mx-auto mb-8">
+        {% for message in messages %}
+        <div class="{% if message.tags == 'success' %}bg-green-100 border-green-400 text-green-700{% else %}bg-red-100 border-red-400 text-red-700{% endif %} px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif%}
+    <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">We'd love to hear from you! Reach out through any of these channels:</p>
 
-<div class="container mx-auto px-6 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-4 my-10">Contact Us</h1>
-    <p class="text-gray-700 mb-8">Get in touch with us using the information below:</p>
-
-    <ul class="list-disc list-inside mb-8">
-        <li class="flex items-center text-gray-700 hover:text-blue-500">
-            <i class="fa-solid fa-map-location-dot mr-2"></i>
-            <a href="{% url 'map' %}" class="hover:underline">123 Main Street, City, Country</a>
-        </li>
-        <li class="flex items-center text-gray-700 hover:text-blue-500">
-            <i class="fa-solid fa-phone mr-2"></i>
-            Phone: +260 456 7890
-        </li>
-        <li class="flex items-center text-gray-700 hover:text-blue-500">
-            <i class="fa-brands fa-whatsapp mr-2"></i>
-            <a href="https://wa.me/2604567890" class="hover:underline">WhatsApp</a>
-        </li>
-        <li class="flex items-center text-gray-700 hover:text-blue-500">
-            <i class="fa-brands fa-facebook mr-2"></i>
-            <a href="https://www.facebook.com/yourpage" class="hover:underline">Facebook</a>
-        </li>
-        <li class="flex items-center text-gray-700 hover:text-blue-500">
-            <i class="fa-regular fa-envelope mr-2"></i>
-            Email: <a href="mailto:info@restaurant.com" class="hover:underline">info@restaurant.com</a>
-        </li>
-    </ul>
-
-   <!-- <!-- Join Us Section -->
-<div class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 shadow-lg rounded-xl p-8 mb-10 animate__animated animate__fadeIn">
-    <h2 class="text-3xl font-extrabold text-gray-900 mb-6 text-center tracking-tight animate__animated animate__fadeInDown">
-        How to Join or Contact Us
-    </h2>
-    <p class="text-gray-600 mb-6 text-center text-lg leading-relaxed animate__animated animate__fadeIn animate__delay-1s">
-        Interested in becoming a part of Eat-NEAR-BY? <br>
-        <span class="text-gray-800 font-medium">Here's how you can get started</span>
-    </p>
-    
-    <ol class="space-y-8 text-gray-700">
-        <!-- Step 1 -->
-        <li class="relative pl-14 flex items-start animate__animated animate__fadeInLeft animate__delay-2s">
-            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-700">
-                1
-            </div>
-            <span class="ml-4 text-base leading-relaxed">
-                Contact us through any of the channels listed above—phone, WhatsApp, email, or visit us in person.
-            </span>
-        </li>
-        
-        <!-- Step 2 -->
-        <li class="relative pl-14 flex items-start animate__animated animate__fadeInLeft animate__delay-3s">
-            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-700">
-                2
-            </div>
-            <span class="ml-4 text-base leading-relaxed">
-                Speak with one of our staff members to express your interest in joining or learning more about our services.
-            </span>
-        </li>
-        
-        <!-- Step 3 -->
-        <li class="relative pl-14 flex items-start animate__animated animate__fadeInLeft animate__delay-4s">
-            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-700">
-                3
-            </div>
-            <span class="ml-4 text-base leading-relaxed">
-                Provide your contact information for registration purposes.
-            </span>
-        </li>
-        
-        <!-- Step 4 -->
-        <li class="relative pl-14 flex items-start animate__animated animate__fadeInLeft animate__delay-5s">
-            <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-700">
-                4
-            </div>
-            <span class="ml-4 text-base leading-relaxed">
-                Wait for a confirmation message, which will be sent to you via email or phone.
-            </span>
-        </li>
-    </ol>
-    
-    <p class="text-gray-800 text-center font-semibold mt-8 text-lg animate__animated animate__fadeIn animate__delay-6s">
-        We're excited to welcome you to our community and look forward to serving you! 🎉
-    </p>
-</div>
-
-    <!-- Contact Form -->
-    <div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Send Us a Message</h2>
-        <form action="{% url 'contact' %}" method="post">
-            {% csrf_token %}
-
-            <div class="mb-4">
-                {{ form.name.label_tag }}
-                {{ form.name }}
-                {% if form.name.errors %}
-                <div class="text-red-600 text-sm mt-2">
-                    {{ form.name.errors }}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <!-- Contact Info Cards -->
+        <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                    <i class="fa-solid fa-map-location-dot text-blue-600 dark:text-blue-400 text-xl"></i>
                 </div>
-                {% endif %}
-            </div>
-
-            <div class="mb-4">
-                {{ form.email.label_tag }}
-                {{ form.email }}
-                {% if form.email.errors %}
-                <div class="text-red-600 text-sm mt-2">
-                    {{ form.email.errors }}
+                <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-200">Address</h3>
+                    <a href="{% url 'map' %}" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        123 Main Street, City, Country
+                    </a>
                 </div>
-                {% endif %}
             </div>
+        </div>
 
-            <div class="mb-6">
-                {{ form.message.label_tag }}
-                {{ form.message }}
-                {% if form.message.errors %}
-                <div class="text-red-600 text-sm mt-2">
-                    {{ form.message.errors }}
+        <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-full">
+                    <i class="fa-brands fa-whatsapp text-green-600 dark:text-green-400 text-xl"></i>
                 </div>
-                {% endif %}
+                <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-200">WhatsApp</h3>
+                    <a href="https://wa.me/260973546375?text=Hi%2C%20I%20would%20like%20to%20join%20Eat-NEAR-BY."
+                       class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                       target="_blank" rel="noopener">
+                        Chat with us
+                    </a>
+                </div>
             </div>
+        </div>
 
-            <!-- Submit button -->
-            <div class="text-center">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
-                    data-twe-ripple-init data-twe-ripple-color="light">
-                    Send Message
-                </button>
+        <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                    <i class="fa-brands fa-facebook text-blue-600 dark:text-blue-400 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-200">Facebook</h3>
+                    <a href="https://www.facebook.com/yourpage" 
+                       class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        Visit our page
+                    </a>
+                </div>
             </div>
-        </form>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="p-3 bg-red-100 dark:bg-red-900/30 rounded-full">
+                    <i class="fa-regular fa-envelope text-red-600 dark:text-red-400 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-200">Email</h3>
+                    <a href="mailto:info@restaurant.com" 
+                       class="text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                        info@restaurant.com
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Join Us Section -->
+    <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 shadow-lg rounded-xl p-8 mb-10 transition-all duration-500 hover:shadow-xl">
+        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-6 text-center">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-300">
+                How to Join or Contact Us
+            </span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-8 text-center text-lg leading-relaxed">
+            Interested in becoming a part of Eat-NEAR-BY? <br>
+            <span class="text-gray-800 dark:text-gray-100 font-medium">Here's how you can get started</span>
+        </p>
+        
+        <ol class="space-y-6">
+            {% for i in "1234" %}
+            <li class="relative pl-14 group">
+                <div class="absolute left-0 top-0 h-10 w-10 flex items-center justify-center bg-blue-600 dark:bg-blue-700 text-white font-bold rounded-full shadow-md transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-700 dark:group-hover:bg-blue-600">
+                    {{ forloop.counter }}
+                </div>
+                <div class="ml-4">
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {% if forloop.counter == 1 %}Contact us through any of the listed channels—phone, WhatsApp, email, or visit us.
+                        {% elif forloop.counter == 2 %}Speak with our staff to express interest in joining or learning more.
+                        {% elif forloop.counter == 3 %}Provide your contact information for registration.
+                        {% elif forloop.counter == 4 %}Wait for confirmation via email or phone.
+                        {% endif %}
+                    </p>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+        
+        <p class="text-gray-800 dark:text-gray-100 text-center font-semibold mt-8 text-lg">
+            We're excited to welcome you to our community and look forward to serving you! 🎉
+        </p>
+    </div>
+
+   <!-- Contact Form -->
+<div class="bg-white dark:bg-gray-800 shadow-md rounded-xl p-8 max-w-2xl mx-auto transition-all duration-300 hover:shadow-lg">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Send Us a Message</h2>
+    <form action="{% url 'contact' %}" method="post">
+        {% csrf_token %}
+
+        <div class="mb-5">
+            <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ form.name.label }}
+            </label>
+            <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" 
+                   class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-200"
+                   {% if form.name.value %}value="{{ form.name.value }}"{% endif %}
+                   placeholder="Your name">
+            {% if form.name.errors %}
+            <div class="text-red-600 dark:text-red-400 text-sm mt-2">
+                {{ form.name.errors }}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-5">
+            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ form.email.label }}
+            </label>
+            <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" 
+                   class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-200"
+                   {% if form.email.value %}value="{{ form.email.value }}"{% endif %}
+                   placeholder="Your email">
+            {% if form.email.errors %}
+            <div class="text-red-600 dark:text-red-400 text-sm mt-2">
+                {{ form.email.errors }}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-6">
+            <label for="{{ form.message.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ form.message.label }}
+            </label>
+            <textarea name="{{ form.message.name }}" id="{{ form.message.id_for_label }}" 
+                      class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-200 min-h-[120px]"
+                      placeholder="Your message">{% if form.message.value %}{{ form.message.value }}{% endif %}</textarea>
+            {% if form.message.errors %}
+            <div class="text-red-600 dark:text-red-400 text-sm mt-2">
+                {{ form.message.errors }}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+                Send Message
+            </button>
+        </div>
+    </form>
+</div>
 </div>
 {% endblock %}
