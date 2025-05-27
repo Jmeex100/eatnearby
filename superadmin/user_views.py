@@ -32,6 +32,20 @@ class UserDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 # User Create View
+import logging
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from auths.forms import CustomUserCreationForm
+from auths.models import User
+from cart.models import Cart
+from payments.models import DeliveryInfo
+from django.conf import settings
+from django.core.mail import EmailMessage
+import secrets
+import string
+
+logger = logging.getLogger(__name__)
+
 @superadmin_required
 def user_create(request):
     if request.method == 'POST':
@@ -49,16 +63,22 @@ def user_create(request):
             if user_type == 'admin' and request.POST.get('is_superuser') == 'on':
                 user.is_superuser = True
                 user.is_staff = True
-            user.save()
+            user.save()  # Ensure user is saved
+            logger.debug(f"User {user.username} saved with PK: {user.pk}")
 
             # Create DeliveryInfo for customers
             if user_type == 'customer':
                 preferred_delivery_point = form.cleaned_data.get('preferred_delivery_point')
                 if preferred_delivery_point:
                     try:
-                        # Assuming a default cart exists or create one (modify as per your cart logic)
-                        from cart.models import Cart
-                        cart, _ = Cart.objects.get_or_create(user=user)
+                        # Ensure cart is saved
+                        cart, created = Cart.objects.get_or_create(user=user)
+                        logger.debug(f"Cart for {user.username} - Created: {created}, PK: {cart.pk}")
+                        if created:
+                            cart.save()  # Explicitly save if newly created
+                            logger.debug(f"Cart saved with PK: {cart.pk}")
+                        if not cart.pk:
+                            raise ValueError(f"Cart for user {user.username} was not saved properly")
                         DeliveryInfo.objects.create(
                             user=user,
                             cart=cart,
@@ -67,7 +87,9 @@ def user_create(request):
                             delivery_status='pending',
                             payment_method='cash',
                         )
+                        logger.debug(f"DeliveryInfo created for user {user.username}")
                     except Exception as e:
+                        logger.error(f"Failed to set delivery info for user {user.username}: {str(e)}")
                         messages.warning(request, f'User created, but failed to set delivery info: {str(e)}')
 
             # Send welcome email
@@ -99,6 +121,7 @@ def user_create(request):
                 email.send()
                 messages.success(request, f'User {user.username} created successfully. Credentials sent to {user.email}.')
             except Exception as e:
+                logger.error(f"Failed to send email to {user.email}: {str(e)}")
                 messages.warning(request, f'User created, but email failed to send: {str(e)}')
             return redirect('superadmin:user_list')
         else:

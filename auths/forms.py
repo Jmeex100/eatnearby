@@ -5,7 +5,7 @@ from payments.models import DeliveryInfo
 
 class CustomUserCreationForm(forms.ModelForm):
     DELIVERY_POINTS = DeliveryInfo.DELIVERY_POINTS
-    
+
     first_name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
@@ -67,8 +67,8 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'user_type', 'gender', 
-                 'phone_number', 'preferred_delivery_point', 'is_superuser')
+        fields = ('username', 'first_name', 'last_name', 'email', 'user_type', 'gender',
+                  'phone_number', 'preferred_delivery_point', 'is_superuser')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -94,14 +94,4 @@ class CustomUserCreationForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=commit)
-        preferred_delivery_point = self.cleaned_data.get('preferred_delivery_point')
-        
-        if user.user_type == 'customer' and preferred_delivery_point:
-            DeliveryInfo.objects.update_or_create(
-                user=user,
-                defaults={
-                    'predefined_address': preferred_delivery_point,
-                    'address': dict(self.DELIVERY_POINTS).get(preferred_delivery_point, '')
-                }
-            )
-        return user
+        return user  # Let the view handle DeliveryInfo creation
