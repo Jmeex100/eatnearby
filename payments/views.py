@@ -1,5 +1,10 @@
+# Qrcode 
+import qrcode
+import io
+import base64
 import logging
 import uuid
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -297,12 +302,38 @@ mtn_payment_process = lambda request: simulate_mobile_payment(request, 'mtn')
 
 @login_required
 @csrf_exempt
-@login_required
-@csrf_exempt
 def payment_success(request, delivery_id):
     delivery_info = get_object_or_404(DeliveryInfo, id=delivery_id, user=request.user)
     cart = delivery_info.cart
     payment_history = PaymentHistory.objects.filter(delivery_info=delivery_info).first()
+
+    # Generate QR code with order details
+    qr_image_base64 = None
+    try:
+        qr_data = (
+            f"Order ID: {delivery_info.id}\n"
+            f"Payment ID: {payment_history.id if payment_history else 'Pending'}\n"
+            f"Ordered By: {delivery_info.user.username}\n"
+            f"Delivery Location: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
+            f"Total: K{payment_history.total if payment_history else cart.total():.2f}"
+        )
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(qr_data)
+        qr.make(fit=True)
+
+        # Create an image from the QR Code
+        img = qr.make_image(fill_color="black", back_color="white")
+        buffer = io.BytesIO()
+        img.save(buffer, format="PNG")
+        qr_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    except Exception as e:
+        logger.error(f"Failed to generate QR code for delivery {delivery_id}: {str(e)}")
+        messages.error(request, "Unable to generate QR code due to an error.")
 
     if request.method == 'POST' and delivery_info.delivery_status == 'in_progress':
         try:
@@ -346,6 +377,7 @@ def payment_success(request, delivery_id):
         'delivery_info': delivery_info,
         'cart': cart,
         'payment_history': payment_history,
+        'qr_image': qr_image_base64,  # Pass the base64-encoded QR code image or None if failed
     }
     return render(request, 'payments/success.html', context)
 

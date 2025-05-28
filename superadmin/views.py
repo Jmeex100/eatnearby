@@ -84,3 +84,4 @@ def system_settings(request):
         messages.success(request, "Settings updated successfully.")
         return redirect('superadmin:system_settings')
     return render(request, 'superadmin/settings/system_settings.html')
+

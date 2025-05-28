@@ -398,13 +398,14 @@ def settings(request):
 @login_required
 @staff_view
 def get_unread_notifications(request):
-    unread = Notification.objects.filter(recipient=request.user, is_read=False).order_by('-created_at')
+    unread = Notification.objects.filter(recipient=request.user, is_read=False).select_related('related_delivery').order_by('-created_at')
     notifications_data = [{
         'id': n.id,
         'message': n.message,
         'type': n.notification_type,
         'created_at': n.created_at.strftime('%Y-%m-%d %H:%M:%S'),
         'delivery_id': n.related_delivery.id if n.related_delivery else None,
+        'delivery_status': n.related_delivery.delivery_status if n.related_delivery else None,  # Add delivery status
     } for n in unread]
     return JsonResponse({'notifications': notifications_data})
 

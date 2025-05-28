@@ -1,95 +1,253 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Order Confirmation{% endblock %}
-{% comment %} /home/surecode/Documents/GitHub/django/eatnearby/payments/templates/payments/success.html {% endcomment %}
 {% block content %}
-<div class="min-h-screen bg-gray-900 pt-16 pb-8">
-    <div class="max-w-3xl mx-auto bg-gray-800 shadow-lg rounded-lg p-8 text-center">
-        <h1 class="text-3xl font-bold text-green-400 mb-6">Order Placed Successfully!</h1>
-        <p class="text-gray-300 mb-6 text-lg">Thank you for your order. Here are the details:</p>
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 pt-8 pb-8 flex justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl w-full">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-green-600 dark:text-green-400 mb-3">Order Placed Successfully!</h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg">Thank you for your order. Here are the details:</p>
+        </div>
+
+        <!-- Messages -->
         {% if messages %}
-            {% for message in messages %}
-                <p class="{% if message.tags == 'error' %}text-red-400{% else %}text-green-400{% endif %} mb-4">{{ message }}</p>
-            {% endfor %}
+            <div class="mb-6">
+                {% for message in messages %}
+                    <div class="{% if message.tags == 'error' %}bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100{% endif %} px-4 py-3 rounded mb-2 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
-        <div class="space-y-4 text-left max-w-md mx-auto">
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Order ID:</strong></span>
-                <span class="text-gray-200">{{ delivery_info.id }}</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Payment ID:</strong></span>
-                <span class="text-gray-200">{{ payment_history.id|default:"Pending" }}</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Ordered By:</strong></span>
-                <span class="text-gray-200">{{ delivery_info.user.username }}</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Delivery Location:</strong></span>
-                <span class="text-gray-200">{{ delivery_info.address|default:delivery_info.get_predefined_address_display }}</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Payment Method:</strong></span>
-                <span class="text-gray-200">{{ delivery_info.get_payment_method_display }}</span>
-            </div>
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Phone Number:</strong></span>
-                <span class="text-gray-200">{{ delivery_info.phone_number }}</span>
-            </div>
-            {% if delivery_info.secondary_phone_number %}
-                <div class="flex justify-between py-2 border-b border-gray-600">
-                    <span class="text-gray-400"><strong>Secondary Phone:</strong></span>
-                    <span class="text-gray-200">{{ delivery_info.secondary_phone_number }}</span>
+
+        <!-- Ticket Container -->
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 print:shadow-none print:border-none">
+            <!-- Ticket Header -->
+            <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-b border-gray-200 dark:border-gray-600 flex flex-col sm:flex-row items-center print:border-b-2 print:border-gray-600">
+                <div class="flex items-center mb-4 sm:mb-0">
+                    <img src="{% static 'images/logo.png' %}" alt="EatNearby Logo" class="h-10 sm:h-12 mr-3 print:h-10">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 print:text-black">EatNearby Order Receipt</h1>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Order Confirmation</p>
+                    </div>
                 </div>
-            {% endif %}
-            <div class="flex justify-between py-2 border-b border-gray-600">
-                <span class="text-gray-400"><strong>Status:</strong></span>
-                <span class="text-gray-200">{{ delivery_info.get_delivery_status_display }}</span>
+                <div class="ml-auto text-sm text-gray-600 dark:text-gray-400 hidden print:block sm:ml-auto">
+                    Printed: {{ current_date }} {{ current_time }}
+                </div>
             </div>
-            <!-- Status Feedback -->
-            {% if delivery_info.delivery_status == 'pending' %}
-                <p class="text-food-orange dark:text-food-orange font-semibold">Your order is being processed. Please wait.</p>
-            {% elif delivery_info.delivery_status == 'in_progress' %}
-                <p class="text-blue-400 dark:text-blue-400 font-semibold">Order accepted by staff. Please confirm delivery completion.</p>
-            {% elif delivery_info.delivery_status == 'completed' %}
-                <p class="text-food-green dark:text-food-green font-semibold">Your order has been confirmed and completed.</p>
-                <button onclick="window.print()" class="no-print mt-4 bg-yellow-600 text-white py-3 px-6 rounded-lg hover:bg-yellow-700 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-300">Print Ticket</button>
-            {% elif delivery_info.delivery_status == 'cancelled' %}
-                <p class="text-red-400 dark:text-red-400 font-semibold">Your order has been cancelled.</p>
-            {% endif %}
-            <!-- Product Information -->
-            <div>
-                <h3 class="text-lg font-semibold text-gray-300 mb-2">Ordered Items:</h3>
-                <div class="space-y-2">
-                    {% if payment_history %}
-                        {% for item in payment_history.items %}
-                            <div class="flex justify-between py-2 border-b border-gray-600">
-                                <span class="text-gray-300">{{ item.name }} (x{{ item.quantity }})</span>
-                                <span class="text-gray-200">K{{ item.subtotal|floatformat:2 }}</span>
+
+            <!-- Main Content -->
+            <div class="p-6 sm:p-8">
+                <!-- Order Details and QR Code -->
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <div class="flex-1 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Order ID:</p>
+                                <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">{{ delivery_info.id }}</p>
                             </div>
-                        {% endfor %}
-                    {% else %}
-                        {% for item in cart.cartitem_set.all %}
-                            <div class="flex justify-between py-2 border-b border-gray-600">
-                                <span class="text-gray-300">{{ item.get_product.name }} (x{{ item.quantity }})</span>
-                                <span class="text-gray-200">K{{ item.subtotal|floatformat:2 }}</span>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Payment ID:</p>
+                                <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">{{ payment_history.id|default:"Pending" }}</p>
                             </div>
-                        {% endfor %}
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Ordered By:</p>
+                                <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">{{ delivery_info.user.username }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Payment Method:</p>
+                                <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">{{ delivery_info.get_payment_method_display }}</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Delivery Location:</p>
+                            <p class="text-gray-800 dark:text-gray-200 print:text-black">{{ delivery_info.address|default:delivery_info.get_predefined_address_display }}</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Phone Number:</p>
+                                <p class="text-gray-800 dark:text-gray-200 print:text-black">{{ delivery_info.phone_number }}</p>
+                            </div>
+                            {% if delivery_info.secondary_phone_number %}
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Secondary Phone:</p>
+                                <p class="text-gray-800 dark:text-gray-200 print:text-black">{{ delivery_info.secondary_phone_number }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Status:</p>
+                            <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">
+                                <span class="px-2 py-1 rounded text-sm 
+                                    {% if delivery_info.delivery_status == 'pending' %}bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200
+                                    {% elif delivery_info.delivery_status == 'in_progress' %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200
+                                    {% elif delivery_info.delivery_status == 'completed' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200
+                                    {% elif delivery_info.delivery_status == 'cancelled' %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200{% endif %}">
+                                    {{ delivery_info.get_delivery_status_display }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center items-center md:justify-end">
+                        {% if qr_image %}
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <img src="data:image/png;base64,{{ qr_image }}" alt="Order QR Code" class="w-32 h-32 sm:w-40 sm:h-40 print:w-28 print:h-28">
+                            </div>
+                        {% else %}
+                            <p class="text-red-500 dark:text-red-400 text-sm print:text-black">QR code not available</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Status Feedback -->
+                <div class="mt-4 mb-6 p-4 rounded-lg 
+                    {% if delivery_info.delivery_status == 'pending' %}bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300
+                    {% elif delivery_info.delivery_status == 'in_progress' %}bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300
+                    {% elif delivery_info.delivery_status == 'completed' %}bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300
+                    {% elif delivery_info.delivery_status == 'cancelled' %}bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300{% endif %}">
+                    {% if delivery_info.delivery_status == 'pending' %}
+                        <p class="font-medium">Your order is being processed. Please wait.</p>
+                    {% elif delivery_info.delivery_status == 'in_progress' %}
+                        <p class="font-medium">Order accepted by staff. Please confirm delivery completion.</p>
+                    {% elif delivery_info.delivery_status == 'completed' %}
+                        <p class="font-medium">Your order has been confirmed and completed.</p>
+                    {% elif delivery_info.delivery_status == 'cancelled' %}
+                        <p class="font-medium">Your order has been cancelled.</p>
                     {% endif %}
                 </div>
+
+                <!-- Ordered Items Table -->
+                <div class="mt-6 overflow-x-auto">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 print:text-black">Ordered Items</h3>
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-700 print:bg-gray-100">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider print:text-black">Item</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider print:text-black">Quantity</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider print:text-black">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                {% if payment_history %}
+                                    {% for item in payment_history.items %}
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">{{ item.name }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">x{{ item.quantity }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">K{{ item.subtotal|floatformat:2 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for item in cart.cartitem_set.all %}
+                                        <tr>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">{{ item.get_product.name }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">x{{ item.quantity }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">K{{ item.subtotal|floatformat:2 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                <tr class="bg-gray-50 dark:bg-gray-700 font-bold print:bg-gray-100">
+                                    <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">Total</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black"></td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">K{% if payment_history %}{{ payment_history.total|floatformat:2 }}{% else %}{{ cart.total|floatformat:2 }}{% endif %}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="flex justify-between py-2">
-                <span class="text-gray-400"><strong>Total:</strong></span>
-                <span class="text-gray-200 font-bold">K{% if payment_history %}{{ payment_history.total|floatformat:2 }}{% else %}{{ cart.total|floatformat:2 }}{% endif %}</span>
+
+            <!-- Footer -->
+            <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600 text-center text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">
+                <p>Thank you for choosing EatNearby!</p>
+                <p class="mt-1">Contact us at support@eatnearby.com | Phone: (123) 456-7890</p>
             </div>
         </div>
-        {% if delivery_info.delivery_status == 'in_progress' %}
-            <form method="post" class="no-print mt-6">
-                {% csrf_token %}
-                <button type="submit" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-300">Confirm Delivery Completion</button>
-            </form>
-        {% endif %}
-        <a href="{% url 'cart:cart_view' %}" class="no-print mt-6 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-300">Back to Cart</a>
+
+        <!-- Action Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4 no-print">
+            {% if delivery_info.delivery_status == 'in_progress' %}
+                <form method="post" class="w-full sm:w-auto">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-150 ease-in-out">
+                        Confirm Delivery
+                    </button>
+                </form>
+            {% endif %}
+            {% if delivery_info.delivery_status == 'completed' %}
+                <button onclick="printOrder({{ delivery_info.id }})" class="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition duration-150 ease-in-out">
+                    Print Receipt
+                </button>
+            {% endif %}
+            <a href="{% url 'cart:cart_view' %}" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out text-center">
+                Back to Cart
+            </a>
+        </div>
     </div>
 </div>
+
+<!-- Print-Specific Styles -->
+<style>
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 1cm;
+        }
+        body {
+            background: white !important;
+            color: black !important;
+            font-size: 12pt;
+            line-height: 1.5;
+        }
+        .no-print, .print-button, nav, header, footer {
+            display: none !important;
+        }
+        .min-h-screen {
+            min-height: auto;
+            padding: 0 !important;
+        }
+        .max-w-4xl {
+            max-width: 100% !important;
+            margin: 0 !important;
+        }
+        .bg-white, .dark:bg-gray-800 {
+            background: white !important;
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+        }
+        .header-print {
+            display: flex !important;
+            border-bottom: 2px solid #333 !important;
+        }
+        table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+        }
+        th, td {
+            border: 1px solid #ddd !important;
+            padding: 8px !important;
+        }
+        th {
+            background-color: #f2f2f2 !important;
+        }
+        .footer-print {
+            border-top: 1px solid #ddd !important;
+        }
+        .overflow-x-auto {
+            overflow-x: visible !important;
+        }
+    }
+</style>
+
+<!-- JavaScript for Printing -->
+<script>
+    function printOrder(deliveryId) {
+        window.print();
+    }
+</script>
 {% endblock %}

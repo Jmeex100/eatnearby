@@ -12,11 +12,11 @@
         <div class="relative">
           <button id="notificationBtn" class="p-2 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 relative">
             <i class="fas fa-bell text-white text-xl"></i>
-            {% if unread_notifications_count > 0 %}
-              <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {{ unread_notifications_count }}
-              </span>
-            {% endif %}
+            {% if nav_total_notifications > 0 %}
+                                <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                                    {{ nav_total_notifications }}
+                                </span>
+                            {% endif %}
           </button>
           <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-y-auto">
             <div id="notificationList" class="divide-y divide-gray-200 dark:divide-gray-700">

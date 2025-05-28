@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [
     '0.0.0.0',         # For binding to all network interfaces (optional)
     '192.168.121.40',   # GUEST
   'd31c-45-215-255-168.ngrok-free.app',  # Your ngrok domain
-    'eatnearby.duckdns.org',
+    '10.0.23.179',
     '192.168.1.189',# SCHOOL WIFI
     #  'django_extensions',  # Add this
     

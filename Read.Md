@@ -20,3 +20,8 @@ source .venv/Scripts/activate
 ./tailwindcss -i ./sim/static/css/input.css -o ./sim/static/css/output.css --watch
 
 ./tailwindcss -i ./sim/static/css/input.css -o ./sim/static/css/output.css --watch
+
+User info:
+Username: staff
+
+Password: Gu8WdGQwhXDO

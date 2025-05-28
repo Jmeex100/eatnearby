@@ -13,30 +13,34 @@
         <div class="relative">
           <button id="notificationBtn" class="p-2 rounded-full hover:bg-red-700 dark:hover:bg-red-900 relative">
             <i class="fas fa-bell text-white text-xl"></i>
-            <span id="notificationCount" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center {% if unread_notifications_count == 0 %}hidden{% endif %}">
-              {{ unread_notifications_count }}
-            </span>
+            {% if nav_total_notifications > 0 %}
+              <span id="notificationCount" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                {{ nav_total_notifications }}
+              </span>
+            {% endif %}
           </button>
           <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-y-auto">
             <div id="notificationList" class="divide-y divide-gray-200 dark:divide-gray-700">
               <div class="p-4 text-gray-600 dark:text-gray-200 text-sm text-center">Loading notifications...</div>
             </div>
-            <div id="markAllReadSection" class="p-2 border-t border-gray-200 dark:border-gray-700 hidden">
-              <button id="markAllReadBtn" class="w-full text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-sm">
-                Mark all as read
-              </button>
-            </div>
+            {% if unread_notifications_count > 0 %}
+              <div id="markAllReadSection" class="p-2 border-t border-gray-200 dark:border-gray-700">
+                <button id="markAllReadBtn" class="w-full text-blue-600 dark:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-sm">
+                  Mark all as read
+                </button>
+              </div>
+            {% endif %}
           </div>
         </div>
 
         <!-- Dark Mode -->
         <button id="darkModeToggle" class="p-2 rounded-full hover:bg-red-700 dark:hover:bg-red-900 text-white">
-          <i class="fas fa-sun hidden dark:block"></i>
-          <i class="fas fa-moon block dark:hidden"></i>
+          <i class="fas fa-sun hidden"></i>
+          <i class="fas fa-moon"></i>
         </button>
 
         <!-- Current Time -->
-        <div id="currentTime" class="text-white font-semibold"></div>
+        <div id="currentTime" class="text-white font-semibold hidden md:block"></div>
 
         <!-- User Menu -->
         <div class="relative">
@@ -68,48 +72,11 @@
         {{ message }}
       </div>
     {% endfor %}
-  </div> 
+  </div>
 {% endif %}
 
 <script>
-  // Update current time
-  function updateTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('en-US', { hour12: false });
-    document.getElementById('currentTime').textContent = timeString;
-  }
-  setInterval(updateTime, 1000);
-  updateTime();
-
-  // Toggle dark mode
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  darkModeToggle.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-  });
-
-  // User menu toggle
-  const userMenuBtn = document.getElementById('userMenuBtn');
-  const userMenu = document.getElementById('userMenu');
-  userMenuBtn.addEventListener('click', () => {
-    userMenu.classList.toggle('hidden');
-  });
-
-  // Close user menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!userMenuBtn.contains(e.target) && !userMenu.contains(e.target)) {
-      userMenu.classList.add('hidden');
-    }
-  });
-
   // Notification handling
-  const notificationBtn = document.getElementById('notificationBtn');
-  const notificationDropdown = document.getElementById('notificationDropdown');
-  const notificationList = document.getElementById('notificationList');
-  const notificationCount = document.getElementById('notificationCount');
-  const markAllReadSection = document.getElementById('markAllReadSection');
-  const markAllReadBtn = document.getElementById('markAllReadBtn');
-
   function fetchNotifications() {
     fetch("{% url 'staffs:get_unread_notifications' %}", {
       method: 'GET',
@@ -118,7 +85,9 @@
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Notifications:', data);
+      const notificationList = document.getElementById('notificationList');
+      const notificationCount = document.getElementById('notificationCount');
+      const markAllReadSection = document.getElementById('markAllReadSection');
       notificationList.innerHTML = '';
       if (data.notifications.length === 0) {
         notificationList.innerHTML = '<div class="p-4 text-gray-600 dark:text-gray-200 text-sm text-center">No unread notifications</div>';
@@ -137,9 +106,13 @@
         });
       }
       const unreadCount = data.notifications.length;
-      notificationCount.textContent = unreadCount;
-      notificationCount.classList.toggle('hidden', unreadCount === 0);
-      markAllReadSection.classList.toggle('hidden', unreadCount === 0);
+      if (notificationCount) {
+        notificationCount.textContent = unreadCount;
+        notificationCount.classList.toggle('hidden', unreadCount === 0);
+      }
+      if (markAllReadSection) {
+        markAllReadSection.classList.toggle('hidden', unreadCount === 0);
+      }
     })
     .catch(error => {
       console.error('Error fetching notifications:', error);
@@ -147,44 +120,30 @@
     });
   }
 
-  notificationBtn.addEventListener('click', () => {
-    notificationDropdown.classList.toggle('hidden');
-    if (!notificationDropdown.classList.contains('hidden')) {
-      fetchNotifications();
-    }
-  });
-
-  markAllReadBtn.addEventListener('click', () => {
-    fetch("{% url 'staffs:mark_all_notifications_read' %}", {
-      method: 'POST',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': '{{ csrf_token }}'
-      },
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'success') {
-        fetchNotifications();
-      }
-    })
-    .catch(error => console.error('Error marking notifications as read:', error));
-  });
-
-  // Close notification dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
-      notificationDropdown.classList.add('hidden');
-    }
-  });
+  // Mark all notifications as read
+  const markAllReadBtn = document.getElementById('markAllReadBtn');
+  if (markAllReadBtn) {
+    markAllReadBtn.addEventListener('click', () => {
+      fetch("{% url 'staffs:mark_all_notifications_read' %}", {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          fetchNotifications();
+        }
+      })
+      .catch(error => console.error('Error marking notifications as read:', error));
+    });
+  }
 
   // Initial fetch
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchNotifications();
-  });
-
-  // Poll for new notifications every 30 seconds
+  fetchNotifications();
   setInterval(fetchNotifications, 30000);
 </script>
 
