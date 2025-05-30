@@ -5,6 +5,48 @@
 
 {% block content %}
 <div class="p-4 md:p-6">
+    <!-- Dashboard Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <!-- Customers Card -->
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-500 dark:text-gray-400">Total Customers</h3>
+                    <p class="text-2xl font-bold dark:text-white">{{ customer_count }}</p>
+                </div>
+                <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
+                    <i class="fas fa-users text-blue-500 dark:text-blue-300 text-xl"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Staff Card -->
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-500 dark:text-gray-400">Total Staff</h3>
+                    <p class="text-2xl font-bold dark:text-white">{{ staff_count }}</p>
+                </div>
+                <div class="bg-green-100 dark:bg-green-900 p-3 rounded-full">
+                    <i class="fas fa-user-tie text-green-500 dark:text-green-300 text-xl"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admins Card -->
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-red-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-500 dark:text-gray-400">Total Admins</h3>
+                    <p class="text-2xl font-bold dark:text-white">{{ admin_count }}</p>
+                </div>
+                <div class="bg-red-100 dark:bg-red-900 p-3 rounded-full">
+                    <i class="fas fa-user-shield text-red-500 dark:text-red-300 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">Staff</h1>
         <div class="flex space-x-2">

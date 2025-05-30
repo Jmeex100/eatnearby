@@ -1,0 +1,315 @@
+# C:\Users\Surecode\Documents\GitHub\django\coreEat\auths\models.py
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+# ✅ Category Model
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
+
+
+# ✅ Abstract Product Model
+class Product(models.Model):
+    product_id = models.CharField(max_length=100, unique=True, primary_key=True)
+    name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)  
+    description = models.TextField(blank=True, null=True)
+    image_url = models.URLField(max_length=300, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='%(class)s_products')  # Dynamic related_name
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.name} (${self.price})"
+
+
+# ✅ FastFood Model (inherits from Product)
+class FastFood(Product):
+    class Meta:
+        verbose_name = "Fast Food"
+        verbose_name_plural = "Fast Foods"
+
+
+# ✅ Food Model (inherits from Product)
+class Food(Product):
+    class Meta:
+        verbose_name = "Food"
+        verbose_name_plural = "Foods"
+
+
+# ✅ Drink Model (inherits from Product)
+class Drink(Product):
+    class Meta:
+        verbose_name = "Drink"
+        verbose_name_plural = "Drinks"
+
+# ✅ Custom User Model
+class User(AbstractUser):
+    USER_TYPE_CHOICES = [
+        ('admin', 'Admin'),
+        ('customer', 'Customer'),
+        ('staff', 'Staff'),
+    ]
+    GENDER_TYPE_CHOICES = [
+    ('mr', 'Mr.'),
+    ('mrs', 'Mrs.'),
+    ('miss', 'Miss'),
+    ('ms', 'Ms.'),
+    ]
+
+
+    def user_directory_path(instance, filename):
+        # File will be uploaded to MEDIA_ROOT/profile_images/<username>/<filename>
+        return f'profile_images/{instance.username}/{filename}'
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='customer')
+    gender = models.CharField(max_length=10, choices=GENDER_TYPE_CHOICES, blank=True, null=True)
+    phone_number = models.IntegerField(blank=True, null=True)
+    email = models.EmailField(max_length=100,unique=True, blank=False, null=True)
+    image = models.ImageField(
+        upload_to=user_directory_path,
+        default='auths/images/empty.png',
+        blank=True,
+        null=True,
+        verbose_name="Profile Image"
+    )
+
+    def __str__(self):
+        gender_prefix = dict(self.GENDER_TYPE_CHOICES).get(self.gender, "")
+        return f"{gender_prefix} {self.first_name} {self.last_name} ({self.get_user_type_display()})"
+  # payments/models.py
+from django.db import models
+from auths.models import User
+from cart.models import Cart
+import logging
+
+logger = logging.getLogger(__name__)
+
+class DeliveryInfo(models.Model):
+    id = models.BigAutoField(primary_key=True)
+
+    DELIVERY_POINTS = [
+        ('evelyhone', 'Evelyn Hone College'),
+        ('zambia_police', 'Zambia Police Headquarters'),
+        ('zambia_accountancy', 'Zambia Centre for Accountancy'),
+        ('mukuba_house', 'Mukuba Pension House'),
+        ('bus_terminus', 'Lusaka Intercity Bus Terminus'),
+        ('national_museum', 'Lusaka National Museum'),
+    ]
+
+    PAYMENT_METHODS = [
+        ('cash', 'Cash'),
+        ('mobile_money', 'Mobile Money'),
+        ('card', 'Card'),
+    ]
+
+    MOBILE_MONEY_PROVIDERS = [
+        ('airtel', 'Airtel'),
+        ('mtn', 'MTN'),
+        ('zamtel', 'Zamtel'),
+    ]
+
+    CARD_PROVIDERS = [
+        ('paypal', 'Paypal'),
+        ('pesapal', 'Pesapal'),
+        ('stripe', 'Stripe'),
+    ]
+
+    DELIVERY_STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    address = models.CharField(max_length=100, blank=True, null=True)
+    predefined_address = models.CharField(
+        max_length=30,
+        choices=DELIVERY_POINTS,
+        blank=True,
+        null=True,
+        help_text="Predefined delivery point"
+    )
+    delivery_status = models.CharField(
+        max_length=20,
+        choices=DELIVERY_STATUS_CHOICES,
+        default='pending',
+        help_text="Current delivery status"
+    )
+    payment_method = models.CharField(
+        max_length=20,
+        choices=PAYMENT_METHODS,
+        default='cash',
+        help_text="Payment method used"
+    )
+    payment_provider = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        help_text="Specific provider for Mobile Money or Card (e.g., Airtel, Stripe)"
+    )
+    phone_number = models.CharField(max_length=20)
+    secondary_phone_number = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        help_text="Optional secondary contact number"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            try:
+                old_instance = DeliveryInfo.objects.get(pk=self.pk)
+                if old_instance.delivery_status != self.delivery_status:
+                    logger.info(
+                        f"DeliveryInfo {self.id} status changed from "
+                        f"{old_instance.delivery_status} to {self.delivery_status}"
+                    )
+            except DeliveryInfo.DoesNotExist:
+                logger.warning(f"DeliveryInfo {self.id} not found during save")
+        else:
+            logger.info(f"New DeliveryInfo created with status {self.delivery_status}")
+        if self.predefined_address and not self.address:
+            self.address = self.get_predefined_address_display()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        address_display = self.address or self.get_predefined_address_display() or "N/A"
+        return f"Delivery for {self.user.username} at {address_display}"
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Delivery Info"
+        verbose_name_plural = "Delivery Info"
+
+
+class PaymentHistory(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)  # paypal transaction
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
+    delivery_info = models.ForeignKey(
+        DeliveryInfo,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='payment_histories'
+    )
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    items = models.JSONField(
+        help_text="List of items in the payment (e.g., [{'name': 'Pizza', 'quantity': 2, 'subtotal': 15.00}])"
+    )
+
+    def __str__(self):
+        return f"Payment by {self.user.username} on {self.created_at}"
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Payment History"
+        verbose_name_plural = "Payment Histories"   from django.db import models
+from auths.models import User
+from payments.models import DeliveryInfo
+
+class StaffServiceArea(models.Model):
+    """
+    Maps staff members to the predefined delivery points they can serve.
+    """
+    staff = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={'user_type': 'staff'},
+        related_name='service_areas'
+    )
+    point = models.CharField(
+        max_length=30,
+        choices=DeliveryInfo.DELIVERY_POINTS,
+        help_text="Which delivery point this staff covers"
+    )
+
+    class Meta:
+        unique_together = ('staff', 'point')
+        verbose_name = "Staff Service Area"
+        verbose_name_plural = "Staff Service Areas"
+
+    def __str__(self):
+        return f"{self.staff.username} covers {self.get_point_display()}"
+
+class StaffAssignment(models.Model):
+    staff = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={'user_type': 'staff'},
+        related_name='delivery_assignments'
+    )
+    delivery = models.ForeignKey(
+        DeliveryInfo,
+        on_delete=models.CASCADE,
+        related_name='staff_assignments'
+    )
+    assigned_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['staff', 'delivery']
+        verbose_name = "Staff Assignment"
+        verbose_name_plural = "Staff Assignments"
+
+    def __str__(self):
+        return f"{self.staff.username} assigned to Delivery {self.delivery.id}"
+
+class Notification(models.Model):
+    NOTIFICATION_TYPES = [
+        ('new_order', 'New Order'),
+        ('delivery_almost_complete', 'Delivery Almost Complete'),
+        ('delivery_completed', 'Delivery Completed'),
+        ('alert', 'Alert'),
+        ('delivery_declined', 'Delivery Declined'),
+    ]
+    
+    recipient = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={'user_type': 'staff'},
+        related_name='notifications'
+    )
+    message = models.TextField()
+    notification_type = models.CharField(
+        max_length=30,
+        choices=NOTIFICATION_TYPES,
+        default='new_order'
+    )
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    related_delivery = models.ForeignKey(
+        DeliveryInfo,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='notifications'
+    )
+
+    def __str__(self):
+        return f"Notification for {self.recipient.username}: {self.message}"
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Notification"
+        verbose_name_plural = "Notifications"

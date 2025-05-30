@@ -3,22 +3,70 @@ from django.contrib import messages
 from auths.models import User
 from django.core.paginator import Paginator
 from django.views.generic import DetailView
+from django.db.models import Sum, Count, Q
 from .decorators import superadmin_required
 from auths.forms import CustomUserCreationForm
 from django.core.mail import EmailMessage
 from django.conf import settings
 import secrets
+
 import string
 from payments.models import DeliveryInfo
 # User List View
 @superadmin_required
 def user_list(request):
     users = User.objects.all().order_by('-date_joined')
+    
+    # Get filter parameters
+    name = request.GET.get('name', '')
+    username = request.GET.get('username', '')
+    user_type = request.GET.get('user_type', '')
+    date_joined_start = request.GET.get('date_joined_start', '')
+    date_joined_end = request.GET.get('date_joined_end', '')
+    
+    # Apply filters
+    if name:
+        users = users.filter(Q(first_name__icontains=name) | Q(last_name__icontains=name))
+    if username:
+        users = users.filter(username__icontains=username)
+    if user_type:
+        users = users.filter(user_type=user_type)
+    if date_joined_start:
+        users = users.filter(date_joined__gte=date_joined_start)
+    if date_joined_end:
+        users = users.filter(date_joined__lte=date_joined_end)
+    
+    # Get counts for dashboard
+    customer_count = User.objects.filter(user_type='customer').count()
+    staff_count = User.objects.filter(user_type='staff').count()
+    admin_count = User.objects.filter(user_type='admin').count()
+    
+    # Pagination
     paginator = Paginator(users, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'superadmin/users/user_list.html', {'page_obj': page_obj})
-
+    
+    # Preserve filter parameters for pagination links
+    query_string = ''
+    if request.GET:
+        params = request.GET.copy()
+        if 'page' in params:
+            del params['page']
+        query_string = params.urlencode()
+    
+    return render(request, 'superadmin/users/user_list.html', {
+        'page_obj': page_obj,
+        'query_string': query_string,
+        'customer_count': customer_count,
+        'staff_count': staff_count,
+        'admin_count': admin_count,
+        # Pass filter values back to template to repopulate form
+        'name': name,
+        'username': username,
+        'user_type': user_type,
+        'date_joined_start': date_joined_start,
+        'date_joined_end': date_joined_end,
+    })
 # User Detail View
 class UserDetailView(DetailView):
     model = User
@@ -230,12 +278,23 @@ def user_delete(request, pk):
 
 # Staff List View
 @superadmin_required
+@superadmin_required
 def staff_list(request):
     staff = User.objects.filter(user_type='staff').order_by('-date_joined')
+    customer_count = User.objects.filter(user_type='customer').count()
+    staff_count = staff.count()
+    admin_count = User.objects.filter(user_type='admin').count()
+    
     paginator = Paginator(staff, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'superadmin/users/staff_list.html', {'page_obj': page_obj})
+    
+    return render(request, 'superadmin/users/staff_list.html', {
+        'page_obj': page_obj,
+        'customer_count': customer_count,
+        'staff_count': staff_count,
+        'admin_count': admin_count
+    })
 
 # Customer List View
 @superadmin_required

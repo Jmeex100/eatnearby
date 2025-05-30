@@ -4,259 +4,498 @@
 {% block title %}Admin Dashboard - Eat Nearby{% endblock %}
 
 {% block content %}
-<!-- Print Header (Hidden on Screen) -->
-<div class="header-print hidden print:block">
-    <img src="{% static 'images/logo.png' %}" alt="Eat Nearby Logo">
-    <h1>Super Admin Dashboard - Eat Nearby</h1>
-    <span class="print-date">{{ now|date:"F j, Y, g:i a" }}</span>
-</div>
-
 <div class="p-4 md:p-6">
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">Super Admin Dashboard</h1>
-        <button onclick="window.print()" class="print-button bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-            <i class="fas fa-print mr-2"></i>Print Dashboard
-        </button>
-    </div>
-
-    <!-- System Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <!-- Total Users -->
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">Total Users</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">
-                        <a href="{% url 'superadmin:user_list' %}" class="hover:underline">{{ user_counts.total }}</a>
-                    </p>
-                </div>
-                <div class="bg-blue-100 dark:bg-blue-700 p-3 rounded-full">
-                    <i class="fas fa-users text-blue-500 dark:text-blue-300"></i>
-                </div>
-            </div>
+    <!-- Header with Quick Actions -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <div>
+            <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">Super Admin Dashboard</h1>
+            <p class="text-gray-600 dark:text-gray-300">Welcome back, {{ request.user.get_full_name }}</p>
         </div>
-        
-        <!-- Active Deliveries -->
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-green-500">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">Active Deliveries</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">
-                        <a href="{% url 'superadmin:delivery_list' %}" class="hover:underline">{{ delivery_counts.active }}</a>
-                    </p>
-                </div>
-                <div class="bg-green-100 dark:bg-green-700 p-3 rounded-full">
-                    <i class="fas fa-truck-loading text-green-500 dark:text-green-300"></i>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Today's Revenue -->
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-purple-500">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">Today's Revenue</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">
-                        <a href="{% url 'superadmin:revenue_dashboard' %}" class="hover:underline">K{{ revenue.today|default:"0" }}</a>
-                    </p>
-                </div>
-                <div class="bg-purple-100 dark:bg-purple-700 p-3 rounded-full">
-                    <i class="fas fa-money-bill-wave text-purple-500 dark:text-purple-300"></i>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Monthly Revenue -->
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">Monthly Revenue</p>
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">
-                        <a href="{% url 'superadmin:revenue_dashboard' %}" class="hover:underline">K{{ revenue.month|default:"0" }}</a>
-                    </p>
-                </div>
-                <div class="bg-yellow-100 dark:bg-yellow-700 p-3 rounded-full">
-                    <i class="fas fa-chart-line text-yellow-500 dark:text-yellow-300"></i>
-                </div>
-            </div>
+        <div class="flex flex-wrap gap-2">
+            <button onclick="window.print()" class="print-button bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
+                <i class="fas fa-print mr-2 text-gray-600 dark:text-gray-300"></i>Print
+            </button>
+            <a href="{% url 'superadmin:delivery_list' %}" class="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
+                <i class="fas fa-truck mr-2"></i>Manage Deliveries
+            </a>
+            <a href="{% url 'superadmin:product_list' %}" class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
+                <i class="fas fa-utensils mr-2"></i>Manage Products
+            </a>
         </div>
     </div>
 
-    <!-- Recent Activities Section -->
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm mb-6">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Recent Activities</h2>
-        <div class="space-y-4">
-            {% for activity in recent_activities %}
-            <div class="flex items-start gap-3 p-3 border-b border-gray-200 dark:border-gray-700 last:border-0">
-                <div class="flex-shrink-0 mt-1">
-                    <div class="h-10 w-10 rounded-full bg-{{ activity.color }}-100 dark:bg-{{ activity.color }}-800 flex items-center justify-center">
-                        <i class="fas fa-{{ activity.icon }} text-{{ activity.color }}-500 dark:text-{{ activity.color }}-300"></i>
+    <!-- Real-time Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <!-- Users Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5 border-l-4 border-blue-500 dark:border-blue-600">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Users</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ user_counts.total }}</p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-blue-100/80 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full">
+                            {{ user_counts.admin }} Admin
+                        </span>
+                        <span class="text-xs bg-green-100/80 dark:bg-green-900/50 text-green-800 dark:text-green-200 px-2 py-1 rounded-full">
+                            {{ user_counts.customer }} Customers
+                        </span>
+                        <span class="text-xs bg-yellow-100/80 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full">
+                            {{ user_counts.staff }} Staff
+                        </span>
                     </div>
                 </div>
-                <div class="flex-1">
-                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ activity.title }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ activity.description }}</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">{{ activity.timestamp|timesince }} ago</p>
+                <div class="bg-blue-100/50 dark:bg-blue-900/30 p-3 rounded-full text-blue-500 dark:text-blue-400">
+                    <i class="fas fa-users text-xl"></i>
                 </div>
-                {% if activity.action_url %}
-                <a href="{{ activity.action_url }}" class="text-sm text-red-600 dark:text-red-400 hover:underline">View</a>
-                {% endif %}
             </div>
-            {% empty %}
-            <p class="text-gray-500 dark:text-gray-400 text-center py-4">No recent activities found</p>
-            {% endfor %}
+            <a href="{% url 'superadmin:user_list' %}" class="block mt-4 text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors duration-200 text-right">
+                View all users <i class="fas fa-arrow-right ml-1"></i>
+            </a>
         </div>
-    </div>
 
-    <!-- Recent Users Section -->
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm mb-6 overflow-x-auto">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Recent Users</h2>
-        <table class="w-full border-collapse text-sm">
-            <thead>
-                <tr class="bg-gray-100 dark:bg-gray-700">
-                    <th class="px-4 py-2 text-left">Name</th>
-                    <th class="px-4 py-2 text-left">Username</th>
-                    <th class="px-4 py-2 text-left">Type</th>
-                    <th class="px-4 py-2 text-left">Joined</th>
-                    <th class="px-4 py-2 text-left">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in recent_users %}
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="px-4 py-2">
-                        <div class="flex items-center gap-2">
-                            <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
-                                 class="h-8 w-8 rounded-full" alt="{{ user.get_full_name }}">
-                            <span>{{ user.get_full_name }}</span>
-                        </div>
-                    </td>
-                    <td class="px-4 py-2">{{ user.username }}</td>
-                    <td class="px-4 py-2">
-                        <span class="px-2 py-1 rounded-full text-xs 
-                            {% if user.user_type == 'admin' %}bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100
-                            {% elif user.user_type == 'staff' %}bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100
-                            {% else %}bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100{% endif %}">
-                            {{ user.get_user_type_display }}
+        <!-- Deliveries Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5 border-l-4 border-green-500 dark:border-green-600">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Active Deliveries</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ delivery_counts.active }}</p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-green-100/80 dark:bg-green-900/50 text-green-800 dark:text-green-200 px-2 py-1 rounded-full">
+                            {{ delivery_counts.completed }} Completed
                         </span>
-                    </td>
-                    <td class="px-4 py-2">{{ user.date_joined|date:"Y-m-d" }}</td>
-                    <td class="px-4 py-2">
-                        <a href="{% url 'superadmin:user_detail' user.id %}" class="text-red-600 dark:text-red-400 hover:underline">View</a>
-                    </td>
-                </tr>
+                        <span class="text-xs bg-red-100/80 dark:bg-red-900/50 text-red-800 dark:text-red-200 px-2 py-1 rounded-full">
+                            {{ delivery_counts.cancelled }} Cancelled
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-green-100/50 dark:bg-green-900/30 p-3 rounded-full text-green-500 dark:text-green-400">
+                    <i class="fas fa-truck text-xl"></i>
+                </div>
+            </div>
+            <a href="{% url 'superadmin:delivery_list' %}" class="block mt-4 text-sm font-medium text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 transition-colors duration-200 text-right">
+                View deliveries <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        <!-- Revenue Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5 border-l-4 border-purple-500 dark:border-purple-600">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Today's Revenue</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">K{{ revenue.today|default:"0" }}</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ today|date:"F j, Y" }}</p>
+                </div>
+                <div class="bg-purple-100/50 dark:bg-purple-900/30 p-3 rounded-full text-purple-500 dark:text-purple-400">
+                    <i class="fas fa-money-bill-wave text-xl"></i>
+                </div>
+            </div>
+            <a href="{% url 'superadmin:revenue_dashboard' %}" class="block mt-4 text-sm font-medium text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300 transition-colors duration-200 text-right">
+                View revenue <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        <!-- Products Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5 border-l-4 border-yellow-500 dark:border-yellow-600">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Products</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ product_counts.total }}</p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-yellow-100/80 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full">
+                            {{ product_counts.fastfood }} Fast Food
+                        </span>
+                        <span class="text-xs bg-orange-100/80 dark:bg-orange-900/50 text-orange-800 dark:text-orange-200 px-2 py-1 rounded-full">
+                            {{ product_counts.food }} Food
+                        </span>
+                        <span class="text-xs bg-teal-100/80 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 px-2 py-1 rounded-full">
+                            {{ product_counts.drink }} Drinks
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-yellow-100/50 dark:bg-yellow-900/30 p-3 rounded-full text-yellow-500 dark:text-yellow-400">
+                    <i class="fas fa-utensils text-xl"></i>
+                </div>
+            </div>
+            <a href="{% url 'superadmin:product_list' %}" class="block mt-4 text-sm font-medium text-yellow-600 hover:text-yellow-800 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors duration-200 text-right">
+                View products <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <!-- Delivery Status Chart -->
+        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Delivery Status</h2>
+                <select class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
+                    <option selected>Last 7 days</option>
+                    <option>Last 30 days</option>
+                    <option>This month</option>
+                </select>
+            </div>
+            <div class="h-64">
+                <canvas id="deliveryChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Notifications -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Recent Notifications</h2>
+                <a href="{% url 'superadmin:notification_list' %}" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    View all
+                </a>
+            </div>
+            <div class="space-y-3">
+                {% for notification in notification_counts.recent %}
+                <div class="p-3 rounded-lg transition-all duration-200 {% if notification.is_read %}bg-gray-50 dark:bg-gray-700/50{% else %}bg-red-50 dark:bg-red-900/20 border-l-2 border-red-500{% endif %}">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-500 dark:text-blue-400">
+                                <i class="fas fa-bell text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ notification.get_notification_type_display }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">{{ notification.message }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">{{ notification.created_at|timesince }} ago</p>
+                        </div>
+                        {% if not notification.is_read %}
+                        <span class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                        {% endif %}
+                    </div>
+                </div>
                 {% empty %}
-                <tr>
-                    <td colspan="5" class="px-4 py-2 text-center text-gray-500 dark:text-gray-400">No users found</td>
-                </tr>
+                <div class="text-center py-6">
+                    <i class="fas fa-bell-slash text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                    <p class="text-gray-500 dark:text-gray-400">No recent notifications</p>
+                </div>
                 {% endfor %}
-            </tbody>
-        </table>
-        <div class="mt-4 text-right">
-            <a href="{% url 'superadmin:user_list' %}" class="text-red-600 dark:text-red-400 hover:underline">View all users →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Recent Users -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Recent Users</h2>
+                <a href="{% url 'superadmin:user_list' %}" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    View all
+                </a>
+            </div>
+            <div class="space-y-3">
+                {% for user in recent_users %}
+                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
+                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                         class="h-10 w-10 rounded-full object-cover border border-gray-200 dark:border-gray-600" 
+                         alt="{{ user.get_full_name }}">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ user.get_full_name }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ user.username }}</p>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 rounded-full font-medium
+                        {% if user.user_type == 'admin' %}bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-100
+                        {% elif user.user_type == 'staff' %}bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100
+                        {% else %}bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-100{% endif %}">
+                        {{ user.get_user_type_display }}
+                    </span>
+                </div>
+                {% empty %}
+                <div class="text-center py-6">
+                    <i class="fas fa-user-slash text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                    <p class="text-gray-500 dark:text-gray-400">No recent users</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Staff Assignments -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Recent Staff Assignments</h2>
+                <a href="{% url 'superadmin:staff_assignment_list' %}" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    View all
+                </a>
+            </div>
+            <div class="space-y-3">
+                {% for assignment in recent_assignments %}
+                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-200">
+                    <div class="flex items-center gap-3">
+                        <img src="{% if assignment.staff.image %}{{ assignment.staff.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                             class="h-10 w-10 rounded-full object-cover border border-gray-200 dark:border-gray-600" 
+                             alt="{{ assignment.staff.get_full_name }}">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ assignment.staff.get_full_name }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Delivery #{{ assignment.delivery.id }}</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100">
+                            {{ assignment.delivery.get_delivery_status_display }}
+                        </span>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-600 dark:text-gray-300">
+                        <p><i class="far fa-clock mr-1"></i> Assigned {{ assignment.assigned_at|timesince }} ago</p>
+                        <p class="truncate mt-1"><i class="fas fa-map-marker-alt mr-1"></i> {{ assignment.delivery.address|default:assignment.delivery.get_predefined_address_display }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-6">
+                    <i class="fas fa-truck-loading text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                    <p class="text-gray-500 dark:text-gray-400">No recent assignments</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Product Distribution Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Product Distribution</h2>
+                <select class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
+                    <option selected>By Category</option>
+                    <option>By Type</option>
+                </select>
+            </div>
+            <div class="h-48">
+                <canvas id="productChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Categories -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Top Categories</h2>
+                <a href="{% url 'superadmin:category_list' %}" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    View all
+                </a>
+            </div>
+            <div class="space-y-3">
+                {% for category in category_counts.categories %}
+                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ category.name }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ category.description|truncatechars:50 }}</p>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-teal-100 text-teal-800 dark:bg-teal-900/50 dark:text-teal-100">
+                        {{ category.product_count }} Products
+                    </span>
+                </div>
+                {% empty %}
+                <div class="text-center py-6">
+                    <i class="fas fa-tags text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                    <p class="text-gray-500 dark:text-gray-400">No categories found</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Recent Payments -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Recent Payments</h2>
+                <a href="{% url 'superadmin:payment_list' %}" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    View all
+                </a>
+            </div>
+            <div class="space-y-3">
+                {% for payment in payment_counts.recent %}
+                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-200">
+                    <div class="flex items-center gap-3">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Payment #{{ payment.id }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">By {{ payment.user.get_full_name }}</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-100">
+                            K{{ payment.total }}
+                        </span>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-600 dark:text-gray-300">
+                        <p><i class="far fa-clock mr-1"></i> {{ payment.created_at|timesince }} ago</p>
+                        <p class="truncate mt-1"><i class="fas fa-truck mr-1"></i> {{ payment.delivery_info.address|default:payment.delivery_info.get_predefined_address_display }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-6">
+                    <i class="fas fa-money-bill-wave text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                    <p class="text-gray-500 dark:text-gray-400">No recent payments</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Staff Service Areas -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Staff Service Areas</h2>
+                <a href="{% url 'superadmin:staff_service_area_list' %}" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200">
+                    View all
+                </a>
+            </div>
+            <div class="space-y-3">
+                {% for area in staff_service_areas %}
+                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ area.get_point_display }}</p>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100">
+                        {{ area.staff_count }} Staff
+                    </span>
+                </div>
+                {% empty %}
+                <div class="text-center py-6">
+                    <i class="fas fa-map-marked-alt text-gray-400 dark:text-gray-500 text-2xl mb-2"></i>
+                    <p class="text-gray-500 dark:text-gray-400">No service areas assigned</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Print Footer (Hidden on Screen) -->
-<div class="footer-print hidden print:block">
-    <p>Generated by Eat Nearby Admin Dashboard</p>
-</div>
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Delivery Status Chart
+    const deliveryCtx = document.getElementById('deliveryChart').getContext('2d');
+    const deliveryChart = new Chart(deliveryCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [
+                {
+                    label: 'Completed',
+                    data: [12, 19, 8, 15, 12, 10, 5],
+                    backgroundColor: '#10B981',
+                    borderRadius: 6
+                },
+                {
+                    label: 'In Progress',
+                    data: [5, 3, 7, 4, 6, 3, 2],
+                    backgroundColor: '#3B82F6',
+                    borderRadius: 6
+                },
+                {
+                    label: 'Pending',
+                    data: [8, 5, 3, 6, 4, 7, 3],
+                    backgroundColor: '#F59E0B',
+                    borderRadius: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#9CA3AF' : '#6B7280'
+                    }
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    ticks: {
+                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#9CA3AF' : '#6B7280'
+                    },
+                    grid: {
+                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rgba(156, 163, 175, 0.1)' : 'rgba(107, 114, 128, 0.1)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#E5E7EB' : '#374151'
+                    }
+                }
+            }
+        }
+    });
 
-<!-- Print-Specific Styles -->
+    // Product Distribution Chart
+    const productCtx = document.getElementById('productChart').getContext('2d');
+    const productChart = new Chart(productCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Fast Food', 'Food', 'Drinks'],
+            datasets: [{
+                data: [{{ product_counts.fastfood }}, {{ product_counts.food }}, {{ product_counts.drink }}],
+                backgroundColor: ['#FBBF24', '#F97316', '#14B8A6'],
+                borderColor: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#1F2937' : '#FFFFFF',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#E5E7EB' : '#374151',
+                        padding: 20,
+                        boxWidth: 12,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Update charts when color scheme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        deliveryChart.update();
+        productChart.update();
+    });
+</script>
+
+<!-- Print Styles -->
 <style>
     @media print {
-        @page {
-            size: A4 portrait;
-            margin: 1cm;
+        .print-button, select, a:not(.print-button) {
+            display: none !important;
+        }
+        canvas {
+            max-height: 200px !important;
+        }
+        .grid {
+            display: block !important;
+        }
+        .grid > div {
+            page-break-inside: avoid;
+            margin-bottom: 20px;
         }
         body {
             background: white !important;
             color: black !important;
-            font-size: 12pt;
-            font-family: Arial, sans-serif;
-            line-height: 1.5;
         }
-        .header-print {
-            display: flex !important;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+        .dark\:bg-gray-800 {
+            background-color: white !important;
         }
-        .header-print img {
-            height: 60px;
-            margin-right: 20px;
-        }
-        .header-print h1 {
-            font-size: 18pt;
-            margin: 0;
+        .dark\:text-white {
             color: black !important;
         }
-        .header-print .print-date {
-            margin-left: auto;
-            font-size: 10pt;
+        .dark\:text-gray-300 {
+            color: #4B5563 !important;
         }
-        .p-4, .p-6, .md:p-6 {
-            padding: 0 !important;
-        }
-        .print-button, nav, header, footer, .mobile-bottom-nav {
-            display: none !important;
-        }
-        .bg-white, .dark:bg-gray-800 {
-            background: white !important;
+        .shadow-sm, .hover\:shadow-md {
             box-shadow: none !important;
-            border: 1px solid #ddd !important;
-            margin-bottom: 15px;
-            page-break-inside: avoid;
         }
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .grid > div {
-            flex: 1 1 30%;
-            min-width: 200px;
-            page-break-inside: avoid;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 10pt;
-        }
-        th {
-            background-color: #f2f2f2 !important;
-            color: black !important;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        h1, h2 {
-            font-size: 14pt;
-            color: black !important;
-            page-break-after: avoid;
-        }
-        .border-l-4 {
-            border-left: none !important;
-            border-bottom: 2px solid #333 !important;
-        }
-        .bg-blue-100, .bg-green-100, .bg-purple-100, .bg-yellow-100 {
-            background: #f0f0f0 !important;
-        }
-        i.fas {
-            display: none !important;
-        }
-        .footer-print {
-            display: block !important;
-            margin-top: 20px;
-            padding-top: 10px;
-            border-top: 1px solid #ddd;
-            font-size: 9pt;
-            text-align: center;
+        .border-gray-200 {
+            border-color: #E5E7EB !important;
         }
     }
 </style>

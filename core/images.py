@@ -1,6 +1,6 @@
 # utils.py
 from django.templatetags.static import static
-
+# /home/surecode/Documents/Django/GitHub/eatnearby/core/images.py
 def get_fastfood_photos():
     return [
         static('images/fastfood/Vitumbuwa.jpeg'),
