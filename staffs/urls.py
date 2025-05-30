@@ -1,5 +1,6 @@
 from django.urls import path
-from . import views
+from . import views ,pos_views
+
 
 app_name = 'staffs'
 
@@ -17,4 +18,8 @@ urlpatterns = [
     path('notifications/mark-read/<int:notification_id>/', views.mark_notification_read, name='mark_notification_read'),
     path('notifications/mark-all-read/', views.mark_all_notifications_read, name='mark_all_notifications_read'),
     path('delete-notification/<int:notification_id>/', views.delete_notification, name='delete_notification'),
+    
+    
+    # pos_views
+     path('sales', pos_views.sales, name='sales'),
 ]

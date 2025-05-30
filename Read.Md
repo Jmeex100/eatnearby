@@ -25,3 +25,7 @@ User info:
 Username: staff
 
 Password: Gu8WdGQwhXDO
+
+# kill port 8000
+lsof -i :8000
+kill -9

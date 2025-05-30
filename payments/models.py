@@ -53,6 +53,10 @@ class DeliveryInfo(models.Model):
         null=True,
         help_text="Predefined delivery point"
     )
+    is_pos_order = models.BooleanField(
+        default=False,
+        help_text="Indicates if this is an in-store POS order"
+    )
     delivery_status = models.CharField(
         max_length=20,
         choices=DELIVERY_STATUS_CHOICES,

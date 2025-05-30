@@ -1,0 +1,340 @@
+{% extends "staffs_base.html" %}
+{% block title %}POS - Eat Nearby{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-6">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Point of Sale</h2>
+    
+    {% if messages %}
+        <div class="mb-6">
+            {% for message in messages %}
+                <div class="{% if message.tags == 'success' %}bg-green-50 text-green-800 border-green-200{% else %}bg-red-50 text-red-800 border-red-200{% endif %} border px-4 py-3 rounded-lg flex items-center justify-between">
+                    <span>{{ message }}</span>
+                    <button class="text-xl" onclick="this.parentElement.remove()">×</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Product Selection -->
+        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+            <div class="p-5 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Available Products</h3>
+                <div class="mt-2 relative">
+                    <input type="text" id="product-search" placeholder="Search products..." 
+                           class="w-full p-2 pl-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    <svg class="absolute left-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[calc(100vh-250px)] overflow-y-auto">
+                {% for product in products %}
+                    <div class="product-card bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                        {% if product.image_url %}
+                        <div class="h-40 overflow-hidden">
+                            <img src="{{ product.image_url }}" alt="{{ product.name }}" 
+                                 class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        </div>
+                        {% else %}
+                        <div class="h-40 bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                            <svg class="h-20 w-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        {% endif %}
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800 dark:text-white truncate">{{ product.name }}</h4>
+                            <div class="flex justify-between mt-2">
+                                <span class="text-sm font-medium text-blue-600 dark:text-blue-400">${{ product.price }}</span>
+                                <span class="text-sm text-gray-600 dark:text-gray-300">Stock: {{ product.quantity }}</span>
+                            </div>
+                            <div class="mt-3 flex items-center">
+                                <button class="decrease-btn bg-gray-200 dark:bg-gray-600 px-3 py-1 rounded-l-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors" 
+                                        data-product-id="{{ product.product_id }}">-</button>
+                                <input type="number" min="0" max="{{ product.quantity }}" 
+                                       class="quantity-input w-12 text-center border-t border-b border-gray-300 dark:border-gray-500 dark:bg-gray-600 dark:text-white" 
+                                       data-product-id="{{ product.product_id }}"
+                                       data-product-type="{{ product.product_type }}"
+                                       data-price="{{ product.price }}"
+                                       data-product-name="{{ product.name }}"
+                                       data-product-image="{{ product.image_url|default:'' }}"
+                                       value="0">
+                                <button class="increase-btn bg-gray-200 dark:bg-gray-600 px-3 py-1 rounded-r-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors"
+                                        data-product-id="{{ product.product_id }}">+</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+            <div class="p-5 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Order Summary</h3>
+            </div>
+            <form id="pos-form" method="POST" action="{% url 'staffs:sales' %}" class="p-5">
+                {% csrf_token %}
+                <div id="order-items" class="mb-4 space-y-3 max-h-64 overflow-y-auto">
+                    <div class="text-center py-8 text-gray-500 dark:text-gray-400" id="empty-cart-message">
+                        <svg class="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <p class="mt-2">Your cart is empty</p>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-600 dark:text-gray-300">Subtotal:</span>
+                        <span class="font-medium" id="subtotal-amount">$0.00</span>
+                    </div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-600 dark:text-gray-300">Tax (10%):</span>
+                        <span class="font-medium" id="tax-amount">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-semibold mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-gray-800 dark:text-white">Total:</span>
+                        <span class="text-blue-600 dark:text-blue-400" id="total-amount">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="mt-6 space-y-4">
+                    <div>
+                        <label for="payment_method" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Payment Method</label>
+                        <select name="payment_method" id="payment_method" 
+                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            {% for method in payment_methods %}
+                                <option value="{{ method.0 }}">{{ method.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div id="mobile-money-provider" class="hidden">
+                        <label for="payment_provider" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mobile Money Provider</label>
+                        <select name="payment_provider" id="payment_provider"
+                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            <option value="airtel">Airtel</option>
+                            <option value="mtn">MTN</option>
+                            <option value="zamtel">Zamtel</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="phone_number" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Customer Phone</label>
+                        <input type="text" name="phone_number" id="phone_number" 
+                               class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+                               placeholder="Optional">
+                    </div>
+                </div>
+                
+                <input type="hidden" name="items" id="items-input">
+                <button type="submit" id="checkout-btn" disabled
+                        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    Process Order
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    const increaseBtns = document.querySelectorAll('.increase-btn');
+    const decreaseBtns = document.querySelectorAll('.decrease-btn');
+    const orderItemsDiv = document.getElementById('order-items');
+    const emptyCartMessage = document.getElementById('empty-cart-message');
+    const subtotalAmountSpan = document.getElementById('subtotal-amount');
+    const taxAmountSpan = document.getElementById('tax-amount');
+    const totalAmountSpan = document.getElementById('total-amount');
+    const itemsInput = document.getElementById('items-input');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const productSearch = document.getElementById('product-search');
+    const paymentMethodSelect = document.getElementById('payment_method');
+    const mobileMoneyProviderDiv = document.getElementById('mobile-money-provider');
+    let orderItems = [];
+
+    // Toggle mobile money provider dropdown
+    function toggleMobileMoneyProvider() {
+        if (paymentMethodSelect.value === 'mobile_money') {
+            mobileMoneyProviderDiv.classList.remove('hidden');
+        } else {
+            mobileMoneyProviderDiv.classList.add('hidden');
+        }
+    }
+
+    // Update order summary
+    function updateOrderSummary() {
+        orderItems = [];
+        let subtotal = 0;
+        
+        // Clear order items display
+        orderItemsDiv.innerHTML = '';
+        
+        // Process each product
+        quantityInputs.forEach(input => {
+            const quantity = parseInt(input.value) || 0;
+            if (quantity > 0) {
+                const productId = input.dataset.productId;
+                const productType = input.dataset.productType;
+                const price = parseFloat(input.dataset.price);
+                const productName = input.dataset.productName;
+                const productImage = input.dataset.productImage;
+                const itemSubtotal = price * quantity;
+                subtotal += itemSubtotal;
+
+                // Add to order items array
+                orderItems.push({
+                    product_id: productId,
+                    type: productType,
+                    quantity: quantity,
+                    subtotal: itemSubtotal
+                });
+
+                // Create order item display
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex items-center bg-gray-50 dark:bg-gray-700 p-3 rounded-lg gap-3';
+                itemDiv.innerHTML = `
+                    ${productImage ? 
+                        `<img src="${productImage}" alt="${productName}" class="w-12 h-12 object-cover rounded-md">` : 
+                        `<div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-md flex items-center justify-center">
+                            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>`
+                    }
+                    <div class="flex-1 min-w-0">
+                        <p class="font-medium text-gray-800 dark:text-white truncate">${productName}</p>
+                        <div class="flex items-center mt-1">
+                            <button class="item-decrease text-sm bg-gray-200 dark:bg-gray-600 px-2 rounded-l hover:bg-gray-300 dark:hover:bg-gray-500" data-product-id="${productId}">-</button>
+                            <span class="px-2 text-sm border-t border-b border-gray-300 dark:border-gray-500">${quantity}</span>
+                            <button class="item-increase text-sm bg-gray-200 dark:bg-gray-600 px-2 rounded-r hover:bg-gray-300 dark:hover:bg-gray-500" data-product-id="${productId}">+</button>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="block font-medium">$${itemSubtotal.toFixed(2)}</span>
+                        <button class="item-remove text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 mt-1" data-product-id="${productId}">Remove</button>
+                    </div>
+                `;
+                orderItemsDiv.appendChild(itemDiv);
+            }
+        });
+
+        // Calculate tax and total (assuming 10% tax)
+        const tax = subtotal * 0.10;
+        const total = subtotal + tax;
+
+        // Update display
+        subtotalAmountSpan.textContent = `$${subtotal.toFixed(2)}`;
+        taxAmountSpan.textContent = `$${tax.toFixed(2)}`;
+        totalAmountSpan.textContent = `$${total.toFixed(2)}`;
+        itemsInput.value = JSON.stringify(orderItems);
+
+        // Toggle empty cart message
+        if (orderItems.length > 0) {
+            emptyCartMessage.style.display = 'none';
+            checkoutBtn.disabled = false;
+        } else {
+            emptyCartMessage.style.display = 'block';
+            checkoutBtn.disabled = true;
+        }
+
+        // Add event listeners to dynamically created buttons
+        document.querySelectorAll('.item-increase').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const productId = e.target.dataset.productId;
+                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                input.value = parseInt(input.value) + 1;
+                input.dispatchEvent(new Event('input'));
+            });
+        });
+
+        document.querySelectorAll('.item-decrease').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const productId = e.target.dataset.productId;
+                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                if (parseInt(input.value) > 0) {
+                    input.value = parseInt(input.value) - 1;
+                    input.dispatchEvent(new Event('input'));
+                }
+            });
+        });
+
+        document.querySelectorAll('.item-remove').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const productId = e.target.dataset.productId;
+                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                input.value = 0;
+                input.dispatchEvent(new Event('input'));
+            });
+        });
+    }
+
+    // Event listeners for quantity inputs
+    quantityInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const max = parseInt(this.max);
+            if (parseInt(this.value) > max) {
+                this.value = max;
+            }
+            updateOrderSummary();
+        });
+    });
+
+    // Event listeners for increase buttons
+    increaseBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+            input.value = parseInt(input.value) + 1;
+            input.dispatchEvent(new Event('input'));
+        });
+    });
+
+    // Event listeners for decrease buttons
+    decreaseBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+            if (parseInt(input.value) > 0) {
+                input.value = parseInt(input.value) - 1;
+                input.dispatchEvent(new Event('input'));
+            }
+        });
+    });
+
+    // Product search functionality
+    productSearch.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        document.querySelectorAll('.product-card').forEach(card => {
+            const productName = card.querySelector('h4').textContent.toLowerCase();
+            if (productName.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // Payment method change listener
+    paymentMethodSelect.addEventListener('change', toggleMobileMoneyProvider);
+
+    // Initialize
+    toggleMobileMoneyProvider();
+    updateOrderSummary();
+});
+</script>
+
+<style>
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.quantity-input {
+    -moz-appearance: textfield;
+}
+</style>
+{% endblock %}
