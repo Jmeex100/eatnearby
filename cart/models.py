@@ -6,6 +6,11 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user'], name='unique_user_cart')
+        ]
+
     def total(self):
         return sum(item.subtotal() for item in self.cartitem_set.all())
 

@@ -35,11 +35,15 @@ def add_to_cart(request):
         model_name = product.__class__.__name__.lower()
         field_name = 'fast_food' if model_name == 'fastfood' else model_name
 
-        cart, _ = Cart.objects.get_or_create(user=request.user)
+        # Ensure only one cart exists for the user
+        cart = Cart.objects.filter(user=request.user).order_by('-created_at').first()
+        if not cart:
+            cart = Cart.objects.create(user=request.user)
+        
         cart_item, created = CartItem.objects.get_or_create(
             cart=cart,
             **{field_name: product},
-            defaults={'quantity': quantity}
+            defaults={'quantity': quantity, 'quality': 'standard'}  # Ensure quality is set
         )
         
         if not created:
@@ -60,7 +64,11 @@ def add_to_cart(request):
 
 @login_required
 def cart_view(request):
-    cart, created = Cart.objects.get_or_create(user=request.user)
+    # Get the most recent cart for the user
+    cart = Cart.objects.filter(user=request.user).order_by('-created_at').first()
+    if not cart:
+        cart = Cart.objects.create(user=request.user)
+    
     cart_items = cart.cartitem_set.all()
     
     context = {

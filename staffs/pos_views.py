@@ -1,4 +1,3 @@
-# staffs/pos_views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -9,6 +8,7 @@ from cart.models import Cart, CartItem
 import json
 from .staffs_decorator import staff_view
 import logging
+from decimal import Decimal  # Import Decimal
 
 logger = logging.getLogger(__name__)
 
@@ -35,12 +35,12 @@ def sales(request):
     if request.method == 'POST':
         try:
             with transaction.atomic():
-                # Create a cart for the POS order
+                # Create a temporary cart for the POS order
                 cart = Cart.objects.create(user=request.user)
                 
                 # Process selected items
                 items = json.loads(request.POST.get('items', '[]'))
-                subtotal = 0
+                subtotal = Decimal('0')  # Initialize as Decimal
                 cart_items = []
                 
                 for item in items:
@@ -74,7 +74,7 @@ def sales(request):
                     cart_item_data = {
                         'cart': cart,
                         'quantity': quantity,
-                        'quality': 'standard',  # Default value; adjust if needed
+                        'quality': 'standard',  # Default value
                     }
                     if product_type == 'fastfood':
                         cart_item_data['fast_food'] = product
@@ -89,9 +89,9 @@ def sales(request):
                     product.quantity -= quantity
                     product.save()
                 
-                # Calculate tax (10% as per template)
-                tax = subtotal
-                total = subtotal + tax
+                # Calculate tax (0% for promotion)
+                tax = Decimal('0')  # Set tax to zero
+                total = subtotal  # Total is just subtotal since tax is zero
                 
                 # Get payment method and provider
                 payment_method = request.POST.get('payment_method', 'cash')
@@ -109,7 +109,7 @@ def sales(request):
                     payment_method=payment_method,
                     payment_provider=payment_provider if payment_method == 'mobile_money' else None,
                     phone_number=request.POST.get('phone_number', ''),
-                    delivery_status='completed'  # POS orders are completed immediately
+                    delivery_status='completed'
                 )
                 
                 # Create PaymentHistory
@@ -120,6 +120,9 @@ def sales(request):
                     total=total,
                     items=cart_items
                 )
+                
+                # Delete the cart after processing to avoid clutter
+                cart.delete()
                 
                 messages.success(request, "Order processed successfully!")
                 return redirect('staffs:sales')

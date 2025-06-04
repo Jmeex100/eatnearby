@@ -31754,3 +31754,309 @@ Availability notifications for user 1: 0
 Total notifications for user 1: 0
 /home/surecode/Documents/Django/GitHub/eatnearby/payments/models.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py", line 63, in cart_view
+    cart, created = Cart.objects.get_or_create(user=request.user)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 946, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+cart.models.Cart.MultipleObjectsReturned: get() returned more than one Cart -- it returned 6!
+Not Found: /favicon.ico
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/eatnearby/cart/views.py", line 63, in cart_view
+    cart, created = Cart.objects.get_or_create(user=request.user)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 946, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+cart.models.Cart.MultipleObjectsReturned: get() returned more than one Cart -- it returned 7!
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py", line 63, in cart_view
+    cart, created = Cart.objects.get_or_create(user=request.user)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 946, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+cart.models.Cart.MultipleObjectsReturned: get() returned more than one Cart -- it returned 8!
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py", line 63, in cart_view
+    cart, created = Cart.objects.get_or_create(user=request.user)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 946, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+cart.models.Cart.MultipleObjectsReturned: get() returned more than one Cart -- it returned 8!
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/models.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/models.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/staffs/pos_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/staffs/pos_views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Error processing POS order: unsupported operand type(s) for *: 'decimal.Decimal' and 'float'
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+/home/surecode/Documents/Django/GitHub/eatnearby/staffs/pos_views.py changed, reloading.
+Watching for file changes with StatReloader
+New DeliveryInfo created with status completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+/home/surecode/Documents/Django/GitHub/eatnearby/staffs/pos_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/staffs/pos_views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 464 for cash order with status pending
+Created PaymentHistory 228 for cash order
+Assigned cash delivery 464 to staff 4
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0

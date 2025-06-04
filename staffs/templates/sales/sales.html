@@ -91,7 +91,7 @@
                         <span class="font-medium" id="subtotal-amount">$0.00</span>
                     </div>
                     <div class="flex justify-between mb-1">
-                        <span class="text-gray-600 dark:text-gray-300">Tax (10%):</span>
+                        <span class="text-gray-600 dark:text-gray-300">Tax (0% - Promotion):</span>
                         <span class="font-medium" id="tax-amount">$0.00</span>
                     </div>
                     <div class="flex justify-between text-lg font-semibold mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
@@ -222,13 +222,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Calculate tax and total (assuming 10% tax)
-        const tax = subtotal * 0.10;
-        const total = subtotal + tax;
+        // Calculate tax and total (0% tax for promotion)
+        const tax = 0;  // Set tax to zero
+        const total = subtotal;  // Total is just subtotal
 
         // Update display
         subtotalAmountSpan.textContent = `$${subtotal.toFixed(2)}`;
-        taxAmountSpan.textContent = `$${tax.toFixed(2)}`;
+        taxAmountSpan.textContent = `$0.00`;
         totalAmountSpan.textContent = `$${total.toFixed(2)}`;
         itemsInput.value = JSON.stringify(orderItems);
 
