@@ -15,6 +15,7 @@ def revenue_dashboard(request):
     # Get current date and start of month
     today = timezone.now().date()
     month_start = today.replace(day=1)
+    days_in_month = (today - month_start).days + 1
 
     # Filter completed payments
     completed_payments = PaymentHistory.objects.filter(
@@ -31,6 +32,9 @@ def revenue_dashboard(request):
         created_at__date__gte=month_start
     ).aggregate(total=Sum('total'))['total'] or 0
 
+    # Daily average
+    daily_average = round(monthly_revenue / days_in_month, 2) if days_in_month > 0 else 0
+
     # Payment methods breakdown
     payment_methods = []
     for method, method_display in DeliveryInfo.PAYMENT_METHODS:
@@ -38,23 +42,35 @@ def revenue_dashboard(request):
             delivery_info__payment_method=method,
             created_at__date=today
         ).aggregate(total=Sum('total'))['total'] or 0
+        
         month_method_total = completed_payments.filter(
             delivery_info__payment_method=method,
             created_at__date__gte=month_start
         ).aggregate(total=Sum('total'))['total'] or 0
+        
+        percentage = round((month_method_total / monthly_revenue * 100), 2) if monthly_revenue > 0 else 0
+        
         payment_methods.append({
-            'name': method,  # Raw value: 'cash', 'mobile_money', 'card'
-            'display_name': method_display,  # Display: 'Cash', 'Mobile Money', 'Card'
+            'name': method,
+            'display_name': method_display,
             'today': today_method_total,
-            'month': month_method_total
+            'month': month_method_total,
+            'percentage': percentage
         })
+
+    # Recent transactions
+    recent_transactions = completed_payments.select_related(
+        'user', 'delivery_info'
+    ).order_by('-created_at')[:5]
 
     context = {
         'revenue': {
             'today': today_revenue,
-            'month': monthly_revenue
+            'month': monthly_revenue,
+            'daily_average': daily_average
         },
-        'payment_methods': payment_methods
+        'payment_methods': payment_methods,
+        'recent_transactions': recent_transactions
     }
     return render(request, 'superadmin/revenue/revenue_dashboard.html', context)
 
