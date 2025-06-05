@@ -30,11 +30,14 @@ from payments.models import DeliveryInfo, PaymentHistory
 from staffs.models import StaffServiceArea, StaffAssignment, Notification
 from .decorators import superadmin_required
 
+
+
 @superadmin_required
 def dashboard(request):
     today = timezone.now().date()
     week_start = today - timedelta(days=today.weekday())
     month_start = today.replace(day=1)
+    seven_days_ago = today - timedelta(days=6)  # Last 7 days including today
 
     # User statistics
     user_counts = {
@@ -51,6 +54,29 @@ def dashboard(request):
         'cancelled': DeliveryInfo.objects.filter(delivery_status='cancelled').count(),
     }
 
+    # Delivery status chart data (last 7 days)
+    delivery_chart_data = {
+        'labels': [(today - timedelta(days=i)).strftime('%a') for i in range(6, -1, -1)],  # Mon, Tue, ..., Sun
+        'completed': [],
+        'in_progress': [],
+        'pending': [],
+    }
+
+    for i in range(6, -1, -1):  # Last 7 days
+        date = today - timedelta(days=i)
+        deliveries = DeliveryInfo.objects.filter(
+            created_at__date=date
+        ).values('delivery_status').annotate(count=Count('id'))
+
+        status_counts = {status: 0 for status in ['completed', 'in_progress', 'pending']}
+        for delivery in deliveries:
+            if delivery['delivery_status'] in status_counts:
+                status_counts[delivery['delivery_status']] = delivery['count']
+
+        delivery_chart_data['completed'].append(status_counts['completed'])
+        delivery_chart_data['in_progress'].append(status_counts['in_progress'])
+        delivery_chart_data['pending'].append(status_counts['pending'])
+
     # Revenue statistics
     revenue = {
         'today': PaymentHistory.objects.filter(created_at__date=today).aggregate(Sum('total'))['total__sum'] or 0,
@@ -63,7 +89,7 @@ def dashboard(request):
         'total': Category.objects.count(),
         'categories': Category.objects.annotate(
             product_count=Count('fastfood_products') + Count('food_products') + Count('drink_products')
-        ).order_by('-product_count')[:5],  # Top 5 categories by product count
+        ).order_by('-product_count')[:5],
     }
 
     # Product statistics
@@ -79,7 +105,7 @@ def dashboard(request):
         'point'
     ).annotate(
         staff_count=Count('staff')
-    ).order_by('-staff_count')[:5]  # Top 5 service areas by staff count
+    ).order_by('-staff_count')[:5]
 
     # Staff assignment statistics
     assignment_counts = {
@@ -100,7 +126,7 @@ def dashboard(request):
         'recent': PaymentHistory.objects.select_related('user', 'delivery_info').order_by('-created_at')[:5],
     }
 
-    # Recent activities (extended to include product and category updates)
+    # Recent activities
     recent_activities = []
     
     # User registrations
@@ -145,7 +171,7 @@ def dashboard(request):
         list(Food.objects.order_by('-created_at')[:2]) +
         list(Drink.objects.order_by('-created_at')[:2])
     )
-    for product in recent_products[:3]:  # Limit to 3 to avoid overcrowding
+    for product in recent_products[:3]:
         recent_activities.append({
             'title': f'New {product.__class__.__name__} Added',
             'message': f'{product.name} (K{product.price}) in {product.category.name}',
@@ -163,6 +189,7 @@ def dashboard(request):
         'month_start': month_start,
         'user_counts': user_counts,
         'delivery_counts': delivery_counts,
+        'delivery_chart_data': delivery_chart_data,  # New context variable
         'revenue': revenue,
         'category_counts': category_counts,
         'product_counts': product_counts,
@@ -176,6 +203,8 @@ def dashboard(request):
         'recent_activities': recent_activities,
     }
     return render(request, 'superadmin/dashboard.html', context)
+
+
 @superadmin_required
 def system_settings(request):
     if request.method == 'POST':

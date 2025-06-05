@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Payment Details</h1>
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Payment Details</h1>
         <div class="flex space-x-3">
             {% if payment.delivery_info and payment.delivery_info.delivery_status == 'pending' %}
             <form method="post" action="{% url 'superadmin:approve_payment' payment.id %}">
@@ -16,7 +16,7 @@
                 </button>
             </form>
             {% endif %}
-            <a href="{% url 'superadmin:payment_list' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition duration-200">
+            <a href="{% url 'superadmin:payment_list' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 px-4 py-2 rounded-lg transition duration-200">
                 Back to List
             </a>
         </div>
@@ -25,40 +25,40 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Main Payment Card -->
         <div class="lg:col-span-2 space-y-6">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Transaction Summary</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Transaction Summary</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <p class="text-sm text-gray-500">Transaction ID</p>
-                            <p class="font-medium">{{ payment.transaction_id|default:"N/A" }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Transaction ID</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">{{ payment.transaction_id|default:"N/A" }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Date</p>
-                            <p class="font-medium">{{ payment.created_at|date:"M d, Y h:i A" }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Date</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">{{ payment.created_at|date:"M d, Y h:i A" }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Status</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Status</p>
                             <p class="font-medium">
-                                <span class="px-2 py-1 rounded-full text-xs 
-                                    {% if payment.delivery_info.delivery_status == 'completed' %}bg-green-100 text-green-800
-                                    {% elif payment.delivery_info.delivery_status == 'failed' %}bg-red-100 text-red-800
-                                    {% else %}bg-yellow-100 text-yellow-800{% endif %}">
+                                <span class="px-2 py-1 rounded-full text-xs
+                                    {% if payment.delivery_info.delivery_status == 'completed' %}bg-green-100 dark:bg-green-700 text-green-800 dark:text-green-200
+                                    {% elif payment.delivery_info.delivery_status == 'failed' %}bg-red-100 dark:bg-red-700 text-red-800 dark:text-red-200
+                                    {% else %}bg-yellow-100 dark:bg-dark text-yellow-800 dark:text-red-900{% endif %}">
                                     {{ payment.delivery_info.get_delivery_status_display|default:"N/A" }}
                                 </span>
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Payment Method</p>
-                            <p class="font-medium">{{ payment.delivery_info.payment_method|default:"N/A" }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Payment Method</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">{{ payment.delivery_info.payment_method|default:"N/A" }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Subtotal</p>
-                            <p class="font-medium">${{ payment.total|floatformat:2 }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Subtotal</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">${{ payment.total|floatformat:2 }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">User</p>
-                            <p class="font-medium">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">User</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">
                                 {% if payment.user %}
                                     {{ payment.user.get_full_name|default:payment.user.username }}
                                 {% else %}
@@ -72,28 +72,26 @@
 
             <!-- Cart Items Section -->
             {% if cart_items %}
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Order Items</h2>
-                    <div class="divide-y">
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Order Items</h2>
+                    <div class="divide-y divide-gray-200 dark:divide-gray-700">
                         {% for item in cart_items %}
                         <div class="py-4 flex justify-between items-center">
                             <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+                                <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
                                     {% if item.product.image and item.product.image.url %}
-                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" 
-                                             class="w-full h-full object-cover"
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover"
                                              onerror="this.onerror=null;this.src='{% static 'images/default-food.png' %}';">
                                     {% else %}
-                                        <img src="{% static 'images/default-food.png' %}" alt="Default food image" 
-                                             class="w-10 h-10 object-contain opacity-50">
+                                        <img src="{% static 'images/default-food.png' %}" alt="Default food image" class="w-10 h-10 object-contain opacity-50">
                                     {% endif %}
                                 </div>
                                 <div>
-                                    <h3 class="font-medium">{{ item.product.name }}</h3>
-                                    <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+                                    <h3 class="font-medium text-gray-800 dark:text-gray-200">{{ item.product.name }}</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Qty: {{ item.quantity }}</p>
                                     {% if item.product_variations.all %}
-                                    <div class="mt-1 text-xs text-gray-500">
+                                    <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                         {% for variation in item.product_variations.all %}
                                         <span>{{ variation.variation_category|capfirst }}: {{ variation.variation_value|capfirst }}</span>
                                         {% if not forloop.last %}, {% endif %}
@@ -103,16 +101,16 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="font-medium">${{ item.subtotal|floatformat:2 }}</p>
-                                <p class="text-sm text-gray-500">${{ item.product.price|floatformat:2 }} each</p>
+                                <p class="font-medium text-gray-800 dark:text-gray-200">${{ item.subtotal|floatformat:2 }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">${{ item.product.price|floatformat:2 }} each</p>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="border-t pt-4 mt-4">
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
                         <div class="flex justify-between items-center">
-                            <span class="font-semibold">Total</span>
-                            <span class="text-xl font-bold">${{ payment.total|floatformat:2 }}</span>
+                            <span class="font-semibold text-gray-800 dark:text-gray-200">Total</span>
+                            <span class="text-xl font-bold text-gray-800 dark:text-gray-200">${{ payment.total|floatformat:2 }}</span>
                         </div>
                     </div>
                 </div>
@@ -122,27 +120,31 @@
 
         <!-- Timeline Section -->
         <div class="space-y-6">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Payment Timeline</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Payment Timeline</h2>
                     <div class="space-y-4">
                         {% for event in timeline_events %}
                         <div class="flex items-start space-x-3">
                             <div class="flex-shrink-0 mt-1">
-                                <div class="h-8 w-8 rounded-full flex items-center justify-center 
-                                    {% if event.event_type == 'created' %}bg-blue-100 text-blue-600
-                                    {% elif event.event_type == 'completed' %}bg-green-100 text-green-600
-                                    {% elif event.event_type == 'failed' %}bg-red-100 text-red-600
-                                    {% else %}bg-gray-100 text-gray-600{% endif %}">
+                                <div class="h-8 w-8 rounded-full flex items-center justify-center
+                                    {% if event.event_type == 'created' %}bg-blue-100 dark:bg-blue-700 text-blue-600 dark:text-blue-200
+                                    {% elif event.event_type == 'completed' %}bg-green-100 dark:bg-green-700 text-green-600 dark:text-green-200
+                                    {% elif event.event_type == 'failed' %}bg-red-100 dark:bg-red-700 text-red-600 dark:text-red-200
+                                    {% else %}bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300{% endif %}">
+                                    <!-- Icons remain unchanged -->
                                     {% if event.event_type == 'created' %}
+                                    <!-- Created Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                                     </svg>
                                     {% elif event.event_type == 'completed' %}
+                                    <!-- Completed Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                     </svg>
                                     {% else %}
+                                    <!-- Default Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
                                     </svg>
@@ -150,16 +152,16 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium">{{ event.description }}</p>
-                                <p class="text-sm text-gray-500">{{ event.timestamp|date:"M d, Y h:i A" }}</p>
-                                <div class="mt-1 text-xs text-gray-500">
-                                    <span class="font-medium">Method:</span> {{ event.metadata.method }} | 
+                                <p class="font-medium text-gray-800 dark:text-gray-200">{{ event.description }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ event.timestamp|date:"M d, Y h:i A" }}</p>
+                                <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    <span class="font-medium">Method:</span> {{ event.metadata.method }} |
                                     <span class="font-medium">Amount:</span> ${{ event.metadata.amount|floatformat:2 }}
                                 </div>
                             </div>
                         </div>
                         {% empty %}
-                        <p class="text-gray-500">No timeline events available</p>
+                        <p class="text-gray-500 dark:text-gray-400">No timeline events available</p>
                         {% endfor %}
                     </div>
                 </div>
@@ -167,25 +169,25 @@
 
             <!-- Delivery Info Card -->
             {% if delivery_info %}
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Delivery Information</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Delivery Information</h2>
                     <div class="space-y-3">
                         <div>
-                            <p class="text-sm text-gray-500">Delivery Address</p>
-                            <p class="font-medium">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Delivery Address</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">
                                 {{ delivery_info.address_line1 }}<br>
                                 {% if delivery_info.address_line2 %}{{ delivery_info.address_line2 }}<br>{% endif %}
                                 {{ delivery_info.city }}, {{ delivery_info.state }} {{ delivery_info.postal_code }}
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Contact Phone</p>
-                            <p class="font-medium">{{ delivery_info.phone_number|default:"N/A" }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Contact Phone</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">{{ delivery_info.phone_number|default:"N/A" }}</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Delivery Instructions</p>
-                            <p class="font-medium">{{ delivery_info.delivery_instructions|default:"None" }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Delivery Instructions</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">{{ delivery_info.delivery_instructions|default:"None" }}</p>
                         </div>
                     </div>
                 </div>

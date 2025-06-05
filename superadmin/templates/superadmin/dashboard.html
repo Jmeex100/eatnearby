@@ -9,7 +9,7 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">Super Admin Dashboard</h1>
-            <p class="text-gray-600 dark:text-gray-300">Welcome back, {{ request.user.get_full_name }}</p>
+            <p class="text-gray-600 dark:text-gray-300">Welcome back, {{ request.user.get_full_name|default:request.user.username }}</p>
         </div>
         <div class="flex flex-wrap gap-2">
             <button onclick="window.print()" class="print-button bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
@@ -31,16 +31,16 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Users</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ user_counts.total }}</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ user_counts.total|default:0 }}</p>
                     <div class="flex flex-wrap gap-2 mt-2">
                         <span class="text-xs bg-blue-100/80 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full">
-                            {{ user_counts.admin }} Admin
+                            {{ user_counts.admin|default:0 }} Admin
                         </span>
                         <span class="text-xs bg-green-100/80 dark:bg-green-900/50 text-green-800 dark:text-green-200 px-2 py-1 rounded-full">
-                            {{ user_counts.customer }} Customers
+                            {{ user_counts.customer|default:0 }} Customers
                         </span>
                         <span class="text-xs bg-yellow-100/80 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full">
-                            {{ user_counts.staff }} Staff
+                            {{ user_counts.staff|default:0 }} Staff
                         </span>
                     </div>
                 </div>
@@ -58,13 +58,13 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Active Deliveries</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ delivery_counts.active }}</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ delivery_counts.active|default:0 }}</p>
                     <div class="flex flex-wrap gap-2 mt-2">
                         <span class="text-xs bg-green-100/80 dark:bg-green-900/50 text-green-800 dark:text-green-200 px-2 py-1 rounded-full">
-                            {{ delivery_counts.completed }} Completed
+                            {{ delivery_counts.completed|default:0 }} Completed
                         </span>
                         <span class="text-xs bg-red-100/80 dark:bg-red-900/50 text-red-800 dark:text-red-200 px-2 py-1 rounded-full">
-                            {{ delivery_counts.cancelled }} Cancelled
+                            {{ delivery_counts.cancelled|default:0 }} Cancelled
                         </span>
                     </div>
                 </div>
@@ -99,16 +99,16 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Products</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ product_counts.total }}</p>
+                    <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ product_counts.total|default:0 }}</p>
                     <div class="flex flex-wrap gap-2 mt-2">
                         <span class="text-xs bg-yellow-100/80 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full">
-                            {{ product_counts.fastfood }} Fast Food
+                            {{ product_counts.fastfood|default:0 }} Fast Food
                         </span>
                         <span class="text-xs bg-orange-100/80 dark:bg-orange-900/50 text-orange-800 dark:text-orange-200 px-2 py-1 rounded-full">
-                            {{ product_counts.food }} Food
+                            {{ product_counts.food|default:0 }} Food
                         </span>
                         <span class="text-xs bg-teal-100/80 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 px-2 py-1 rounded-full">
-                            {{ product_counts.drink }} Drinks
+                            {{ product_counts.drink|default:0 }} Drinks
                         </span>
                     </div>
                 </div>
@@ -125,19 +125,7 @@
     <!-- Main Content Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <!-- Delivery Status Chart -->
-        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
-                <h2 class="text-lg font-bold text-gray-800 dark:text-white">Delivery Status</h2>
-                <select class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
-                    <option selected>Last 7 days</option>
-                    <option>Last 30 days</option>
-                    <option>This month</option>
-                </select>
-            </div>
-            <div class="h-64">
-                <canvas id="deliveryChart"></canvas>
-            </div>
-        </div>
+        {% include 'superadmin/delivery_status.html' %}
 
         <!-- Recent Notifications -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-5">
@@ -157,9 +145,9 @@
                             </div>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ notification.get_notification_type_display }}</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">{{ notification.message }}</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">{{ notification.created_at|timesince }} ago</p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ notification.get_notification_type_display|default:notification.notification_type }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">{{ notification.message|default:"No message" }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">{{ notification.created_at|timesince|default:"N/A" }} ago</p>
                         </div>
                         {% if not notification.is_read %}
                         <span class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -191,16 +179,16 @@
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
                          class="h-10 w-10 rounded-full object-cover border border-gray-200 dark:border-gray-600" 
-                         alt="{{ user.get_full_name }}">
+                         alt="{{ user.get_full_name|default:user.username }}">
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ user.get_full_name }}</p>
+                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ user.get_full_name|default:user.username }}</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">{{ user.username }}</p>
                     </div>
                     <span class="text-xs px-2.5 py-1 rounded-full font-medium
                         {% if user.user_type == 'admin' %}bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-100
                         {% elif user.user_type == 'staff' %}bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100
                         {% else %}bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-100{% endif %}">
-                        {{ user.get_user_type_display }}
+                        {{ user.get_user_type_display|default:user.user_type|title }}
                     </span>
                 </div>
                 {% empty %}
@@ -226,18 +214,29 @@
                     <div class="flex items-center gap-3">
                         <img src="{% if assignment.staff.image %}{{ assignment.staff.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
                              class="h-10 w-10 rounded-full object-cover border border-gray-200 dark:border-gray-600" 
-                             alt="{{ assignment.staff.get_full_name }}">
+                             alt="{{ assignment.staff.get_full_name|default:assignment.staff.username }}">
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ assignment.staff.get_full_name }}</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Delivery #{{ assignment.delivery.id }}</p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ assignment.staff.get_full_name|default:assignment.staff.username }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Delivery #{{ assignment.delivery.id|default:"N/A" }}</p>
                         </div>
                         <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100">
-                            {{ assignment.delivery.get_delivery_status_display }}
+                            {{ assignment.delivery.get_delivery_status_display|default:"Unknown" }}
                         </span>
                     </div>
                     <div class="mt-2 text-xs text-gray-600 dark:text-gray-300">
-                        <p><i class="far fa-clock mr-1"></i> Assigned {{ assignment.assigned_at|timesince }} ago</p>
-                        <p class="truncate mt-1"><i class="fas fa-map-marker-alt mr-1"></i> {{ assignment.delivery.address|default:assignment.delivery.get_predefined_address_display }}</p>
+                        <p><i class="far fa-clock mr-1"></i> Assigned {{ assignment.assigned_at|timesince|default:"N/A" }} ago</p>
+                        <p class="truncate mt-1"><i class="fas fa-map-marker-alt mr-1"></i> 
+                            {% if assignment.delivery %}
+                                {{ assignment.delivery.address|default:"No address specified" }}
+                                {% if assignment.delivery.address and assignment.delivery.predefined_address %}
+                                    ({{ assignment.delivery.get_predefined_address_display|default:"N/A" }})
+                                {% elif assignment.delivery.predefined_address %}
+                                    {{ assignment.delivery.get_predefined_address_display|default:"N/A" }}
+                                {% endif %}
+                            {% else %}
+                                No delivery assigned
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
                 {% empty %}
@@ -278,11 +277,11 @@
                 {% for category in category_counts.categories %}
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ category.name }}</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ category.description|truncatechars:50 }}</p>
+                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ category.name|default:"Unnamed" }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ category.description|truncatechars:50|default:"No description" }}</p>
                     </div>
                     <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-teal-100 text-teal-800 dark:bg-teal-900/50 dark:text-teal-100">
-                        {{ category.product_count }} Products
+                        {{ category.product_count|default:0 }} Products
                     </span>
                 </div>
                 {% empty %}
@@ -307,16 +306,27 @@
                 <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex items-center gap-3">
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Payment #{{ payment.id }}</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">By {{ payment.user.get_full_name }}</p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Payment #{{ payment.id|default:"N/A" }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">By {{ payment.user.get_full_name|default:payment.user.username }}</p>
                         </div>
                         <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-100">
-                            K{{ payment.total }}
+                            K{{ payment.total|default:"0" }}
                         </span>
                     </div>
                     <div class="mt-2 text-xs text-gray-600 dark:text-gray-300">
-                        <p><i class="far fa-clock mr-1"></i> {{ payment.created_at|timesince }} ago</p>
-                        <p class="truncate mt-1"><i class="fas fa-truck mr-1"></i> {{ payment.delivery_info.address|default:payment.delivery_info.get_predefined_address_display }}</p>
+                        <p><i class="far fa-clock mr-1"></i> {{ payment.created_at|timesince|default:"N/A" }} ago</p>
+                        <p class="truncate mt-1"><i class="fas fa-truck mr-1"></i> 
+                            {% if payment.delivery_info %}
+                                {{ payment.delivery_info.address|default:"No address specified" }}
+                                {% if payment.delivery_info.address and payment.delivery_info.predefined_address %}
+                                    ({{ payment.delivery_info.get_predefined_address_display|default:"N/A" }})
+                                {% elif payment.delivery_info.predefined_address %}
+                                    {{ payment.delivery_info.get_predefined_address_display|default:"N/A" }}
+                                {% endif %}
+                            {% else %}
+                                No delivery info
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
                 {% empty %}
@@ -340,10 +350,10 @@
                 {% for area in staff_service_areas %}
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ area.get_point_display }}</p>
+                        <p class="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{{ area.get_point_display|default:area.point|title }}</p>
                     </div>
                     <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100">
-                        {{ area.staff_count }} Staff
+                        {{ area.staff_count|default:0 }} Staff
                     </span>
                 </div>
                 {% empty %}
@@ -365,23 +375,23 @@
     const deliveryChart = new Chart(deliveryCtx, {
         type: 'bar',
         data: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            labels: {{ delivery_chart_data.labels|safe }},
             datasets: [
                 {
                     label: 'Completed',
-                    data: [12, 19, 8, 15, 12, 10, 5],
+                    data: {{ delivery_chart_data.completed|safe }},
                     backgroundColor: '#10B981',
                     borderRadius: 6
                 },
                 {
                     label: 'In Progress',
-                    data: [5, 3, 7, 4, 6, 3, 2],
+                    data: {{ delivery_chart_data.in_progress|safe }},
                     backgroundColor: '#3B82F6',
                     borderRadius: 6
                 },
                 {
                     label: 'Pending',
-                    data: [8, 5, 3, 6, 4, 7, 3],
+                    data: {{ delivery_chart_data.pending|safe }},
                     backgroundColor: '#F59E0B',
                     borderRadius: 6
                 }
@@ -393,30 +403,20 @@
             scales: {
                 x: {
                     stacked: true,
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#9CA3AF' : '#6B7280'
-                    }
+                    grid: { display: false },
+                    ticks: { color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#9CA3AF' : '#6B7280' }
                 },
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    ticks: {
-                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#9CA3AF' : '#6B7280'
-                    },
-                    grid: {
-                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rgba(156, 163, 175, 0.1)' : 'rgba(107, 114, 128, 0.1)'
-                    }
+                    ticks: { color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#9CA3AF' : '#6B7280' },
+                    grid: { color: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rgba(156, 163, 175, 0.1)' : 'rgba(107, 114, 128, 0.1)' }
                 }
             },
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: {
-                        color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#E5E7EB' : '#374151'
-                    }
+                    labels: { color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#E5E7EB' : '#374151' }
                 }
             }
         }
@@ -429,7 +429,7 @@
         data: {
             labels: ['Fast Food', 'Food', 'Drinks'],
             datasets: [{
-                data: [{{ product_counts.fastfood }}, {{ product_counts.food }}, {{ product_counts.drink }}],
+                data: [{{ product_counts.fastfood|default:0 }}, {{ product_counts.food|default:0 }}, {{ product_counts.drink|default:0 }}],
                 backgroundColor: ['#FBBF24', '#F97316', '#14B8A6'],
                 borderColor: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#1F2937' : '#FFFFFF',
                 borderWidth: 2
@@ -446,9 +446,7 @@
                         color: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#E5E7EB' : '#374151',
                         padding: 20,
                         boxWidth: 12,
-                        font: {
-                            size: 12
-                        }
+                        font: { size: 12 }
                     }
                 }
             }
@@ -456,7 +454,7 @@
     });
 
     // Update charts when color scheme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         deliveryChart.update();
         productChart.update();
     });
@@ -465,38 +463,16 @@
 <!-- Print Styles -->
 <style>
     @media print {
-        .print-button, select, a:not(.print-button) {
-            display: none !important;
-        }
-        canvas {
-            max-height: 200px !important;
-        }
-        .grid {
-            display: block !important;
-        }
-        .grid > div {
-            page-break-inside: avoid;
-            margin-bottom: 20px;
-        }
-        body {
-            background: white !important;
-            color: black !important;
-        }
-        .dark\:bg-gray-800 {
-            background-color: white !important;
-        }
-        .dark\:text-white {
-            color: black !important;
-        }
-        .dark\:text-gray-300 {
-            color: #4B5563 !important;
-        }
-        .shadow-sm, .hover\:shadow-md {
-            box-shadow: none !important;
-        }
-        .border-gray-200 {
-            border-color: #E5E7EB !important;
-        }
+        .print-button, select, a:not(.print-button) { display: none !important; }
+        canvas { max-height: 200px !important; }
+        .grid { display: block !important; }
+        .grid > div { page-break-inside: avoid; margin-bottom: 20px; }
+        body { background: white !important; color: black !important; }
+        .dark\:bg-gray-800 { background-color: white !important; }
+        .dark\:text-white { color: black !important; }
+        .dark\:text-gray-300 { color: #4B5563 !important; }
+        .shadow-sm, .hover\:shadow-md { box-shadow: none !important; }
+        .border-gray-200 { border-color: #E5E7EB !important; }
     }
 </style>
 {% endblock %}
