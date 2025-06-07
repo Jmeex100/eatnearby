@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Order Confirmation{% endblock %}
+
 {% block content %}
-<div class="min-h-screen bg-gray-100 dark:bg-gray-900 pt-8 pb-8 flex justify-center px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex justify-center px-4 sm:px-6 lg:px-8 py-8">
     <div class="max-w-4xl w-full">
         <!-- Header -->
         <div class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold text-green-600 dark:text-green-400 mb-3">Order Placed Successfully!</h1>
-            <p class="text-gray-600 dark:text-gray-300 text-lg">Thank you for your order. Here are the details:</p>
+            <p class="text-lg text-gray-600 dark:text-gray-300">Thank you for your order. Here are the details:</p>
         </div>
 
         <!-- Messages -->
         {% if messages %}
-            <div class="mb-6">
-                {% for message in messages %}
-                    <div class="{% if message.tags == 'error' %}bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100{% endif %} px-4 py-3 rounded mb-2 text-center">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+        <div class="mb-6 space-y-2">
+            {% for message in messages %}
+            <div class="px-4 py-3 rounded text-center text-sm {% if message.tags == 'error' %}bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100{% endif %}">
+                {{ message }}
             </div>
+            {% endfor %}
+        </div>
         {% endif %}
 
         <!-- Ticket Container -->
@@ -32,7 +33,7 @@
                         <p class="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Order Confirmation</p>
                     </div>
                 </div>
-                <div class="ml-auto text-sm text-gray-600 dark:text-gray-400 hidden print:block sm:ml-auto">
+                <div class="ml-auto text-sm text-gray-600 dark:text-gray-400 hidden print:block">
                     Printed: {{ current_date }} {{ current_time }}
                 </div>
             </div>
@@ -60,12 +61,10 @@
                                 <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">{{ delivery_info.get_payment_method_display }}</p>
                             </div>
                         </div>
-                        
                         <div>
                             <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Delivery Location:</p>
                             <p class="text-gray-800 dark:text-gray-200 print:text-black">{{ delivery_info.address|default:delivery_info.get_predefined_address_display }}</p>
                         </div>
-                        
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Phone Number:</p>
@@ -78,11 +77,10 @@
                             </div>
                             {% endif %}
                         </div>
-                        
                         <div>
                             <p class="text-sm text-gray-500 dark:text-gray-400 font-medium print:text-gray-600">Status:</p>
                             <p class="text-gray-800 dark:text-gray-200 print:text-black font-medium">
-                                <span class="px-2 py-1 rounded text-sm 
+                                <span class="px-2 py-1 rounded text-sm
                                     {% if delivery_info.delivery_status == 'pending' %}bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200
                                     {% elif delivery_info.delivery_status == 'in_progress' %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200
                                     {% elif delivery_info.delivery_status == 'completed' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200
@@ -92,34 +90,46 @@
                             </p>
                         </div>
                     </div>
-                    
-                    <div class="flex justify-center items-center md:justify-end">
+                    <div class="flex justify-center md:justify-end">
                         {% if qr_image %}
-                            <div class="bg-white p-2 rounded border border-gray-200">
-                                <img src="data:image/png;base64,{{ qr_image }}" alt="Order QR Code" class="w-32 h-32 sm:w-40 sm:h-40 print:w-28 print:h-28">
-                            </div>
+                        <div class="bg-white p-2 rounded border border-gray-200">
+                            <img src="data:image/png;base64,{{ qr_image }}" alt="Order QR Code" class="w-32 h-32 sm:w-40 sm:h-40 print:w-28 print:h-28">
+                        </div>
                         {% else %}
-                            <p class="text-red-500 dark:text-red-400 text-sm print:text-black">QR code not available</p>
+                        <p class="text-red-500 dark:text-red-400 text-sm print:text-black">QR code not available</p>
                         {% endif %}
                     </div>
                 </div>
 
                 <!-- Status Feedback -->
-                <div class="mt-4 mb-6 p-4 rounded-lg 
+                <div class="mt-4 mb-6 p-4 rounded-lg
                     {% if delivery_info.delivery_status == 'pending' %}bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300
                     {% elif delivery_info.delivery_status == 'in_progress' %}bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300
                     {% elif delivery_info.delivery_status == 'completed' %}bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300
                     {% elif delivery_info.delivery_status == 'cancelled' %}bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300{% endif %}">
                     {% if delivery_info.delivery_status == 'pending' %}
-                        <p class="font-medium">Your order is being processed. Please wait.</p>
+                    <p class="font-medium">Your order is being processed. Please wait.</p>
                     {% elif delivery_info.delivery_status == 'in_progress' %}
-                        <p class="font-medium">Order accepted by staff. Please confirm delivery completion.</p>
+                    <p class="font-medium">Order accepted by staff. Please confirm delivery completion.</p>
                     {% elif delivery_info.delivery_status == 'completed' %}
-                        <p class="font-medium">Your order has been confirmed and completed.</p>
+                    <p class="font-medium">Your order has been confirmed and completed.</p>
                     {% elif delivery_info.delivery_status == 'cancelled' %}
-                        <p class="font-medium">Your order has been cancelled.</p>
+                    <p class="font-medium">Your order has been cancelled.</p>
                     {% endif %}
                 </div>
+
+                <!-- Delivery Tracking Map -->
+                {% if delivery_info.delivery_status == 'in_progress' %}
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 print:text-black">Delivery Tracking</h3>
+                    <div id="delivery-map" class="h-64 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-100">
+                        <p class="text-center py-20 text-gray-500" id="map-loading">Loading map...</p>
+                    </div>
+                    <div id="delivery-status" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                        Driver is on the way to your location.
+                    </div>
+                </div>
+                {% endif %}
 
                 <!-- Ordered Items Table -->
                 <div class="mt-6 overflow-x-auto">
@@ -135,26 +145,26 @@
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 {% if payment_history %}
-                                    {% for item in payment_history.items %}
-                                        <tr>
-                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">{{ item.name }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">x{{ item.quantity }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">K{{ item.subtotal|floatformat:2 }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                {% for item in payment_history.items %}
+                                <tr>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">{{ item.name }}</td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">x{{ item.quantity }}</td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">K{{ item.subtotal|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
                                 {% else %}
-                                    {% for item in cart.cartitem_set.all %}
-                                        <tr>
-                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">{{ item.get_product.name }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">x{{ item.quantity }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">K{{ item.subtotal|floatformat:2 }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                {% for item in cart.cartitem_set.all %}
+                                <tr>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">{{ item.get_product.name }}</td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">x{{ item.quantity }}</td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">K{{ item.subtotal|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
                                 {% endif %}
                                 <tr class="bg-gray-50 dark:bg-gray-700 font-bold print:bg-gray-100">
-                                    <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">Total</td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black"></td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-gray-800 dark:text-gray-200 print:text-black">K{% if payment_history %}{{ payment_history.total|floatformat:2 }}{% else %}{{ cart.total|floatformat:2 }}{% endif %}</td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">Total</td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black"></td>
+                                    <td class="px-4 py-3 text-gray-800 dark:text-gray-200 print:text-black">K{% if payment_history %}{{ payment_history.total|floatformat:2 }}{% else %}{{ cart.total|floatformat:2 }}{% endif %}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -172,19 +182,19 @@
         <!-- Action Buttons -->
         <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4 no-print">
             {% if delivery_info.delivery_status == 'in_progress' %}
-                <form method="post" class="w-full sm:w-auto">
-                    {% csrf_token %}
-                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-150 ease-in-out">
-                        Confirm Delivery
-                    </button>
-                </form>
+            <form method="post" class="w-full sm:w-auto">
+                {% csrf_token %}
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-150">
+                    Confirm Delivery
+                </button>
+            </form>
             {% endif %}
             {% if delivery_info.delivery_status == 'completed' %}
-                <button onclick="printOrder({{ delivery_info.id }})" class="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition duration-150 ease-in-out">
-                    Print Receipt
-                </button>
+            <button onclick="window.print()" class="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition duration-150">
+                Print Receipt
+            </button>
             {% endif %}
-            <a href="{% url 'cart:cart_view' %}" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out text-center">
+            <a href="{% url 'cart:cart_view' %}" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 text-center">
                 Back to Cart
             </a>
         </div>
@@ -194,60 +204,211 @@
 <!-- Print-Specific Styles -->
 <style>
     @media print {
-        @page {
-            size: A4 portrait;
-            margin: 1cm;
-        }
-        body {
-            background: white !important;
-            color: black !important;
-            font-size: 12pt;
-            line-height: 1.5;
-        }
-        .no-print, .print-button, nav, header, footer {
-            display: none !important;
-        }
-        .min-h-screen {
-            min-height: auto;
-            padding: 0 !important;
-        }
-        .max-w-4xl {
-            max-width: 100% !important;
-            margin: 0 !important;
-        }
-        .bg-white, .dark:bg-gray-800 {
-            background: white !important;
-            box-shadow: none !important;
-            border: 1px solid #ddd !important;
-        }
-        .header-print {
-            display: flex !important;
-            border-bottom: 2px solid #333 !important;
-        }
-        table {
-            width: 100% !important;
-            border-collapse: collapse !important;
-        }
-        th, td {
-            border: 1px solid #ddd !important;
-            padding: 8px !important;
-        }
-        th {
-            background-color: #f2f2f2 !important;
-        }
-        .footer-print {
-            border-top: 1px solid #ddd !important;
-        }
-        .overflow-x-auto {
-            overflow-x: visible !important;
-        }
+        @page { size: A4 portrait; margin: 1cm; }
+        body { background: white !important; color: black !important; font-size: 12pt; }
+        .no-print, #delivery-map, #delivery-status { display: none !important; }
+        .min-h-screen { min-height: auto; padding: 0 !important; }
+        .max-w-4xl { max-width: 100% !important; margin: 0 !important; }
+        .bg-white, .dark:bg-gray-800 { background: white !important; box-shadow: none !important; border: 1px solid #ddd !important; }
+        table { width: 100% !important; border-collapse: collapse !important; }
+        th, td { border: 1px solid #ddd !important; padding: 8px !important; }
+        th { background: #f2f2f2 !important; }
     }
 </style>
 
-<!-- JavaScript for Printing -->
+<!-- JavaScript for Delivery Tracking Map -->
 <script>
-    function printOrder(deliveryId) {
-        window.print();
+    // Configuration
+    const DELIVERY_ID = "{{ delivery_info.id }}";
+    const POLLING_INTERVAL = 10000; // 10 seconds
+    const RETRY_INTERVAL = 30000; // 30 seconds on error
+    const API_URL = "{% url 'payments:get_delivery_locations' delivery_info.id %}";
+    const CSRF_TOKEN = "{{ csrf_token }}";
+    const DEFAULT_LOCATION = { lat: -15.4167, lng: 28.2833 }; // Lusaka coordinates
+
+    // State
+    let map;
+    let restaurantMarker;
+    let driverMarker;
+    let routeLine;
+    let pollingInterval;
+
+    // Initialize the map
+    function initMap() {
+        try {
+            // Create map instance
+            map = L.map('delivery-map').setView([DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng], 13);
+            
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            // Start polling if delivery is in progress
+            {% if delivery_info.delivery_status == 'in_progress' %}
+            startPolling();
+            {% endif %}
+
+        } catch (error) {
+            console.error('Map initialization error:', error);
+            document.getElementById('map-loading').textContent = 'Error loading map';
+        }
     }
+
+    // Update map with new location data
+    function updateMap(data) {
+        try {
+            // Clear previous markers and route
+            if (restaurantMarker) map.removeLayer(restaurantMarker);
+            if (driverMarker) map.removeLayer(driverMarker);
+            if (routeLine) map.removeLayer(routeLine);
+
+            // Update status message
+            const statusElement = document.getElementById('delivery-status');
+            
+            if (data.status !== 'success') {
+                statusElement.textContent = 'Unable to load driver location: ' + (data.message || 'Unknown error');
+                return;
+            }
+
+            // Add restaurant marker if available
+            if (data.restaurant?.lat && data.restaurant?.lng) {
+                restaurantMarker = L.marker([data.restaurant.lat, data.restaurant.lng], {
+                    icon: L.divIcon({
+                        html: '<div class="bg-red-600 text-white p-1 rounded-full text-xs font-bold">R</div>',
+                        className: 'bg-transparent'
+                    })
+                }).addTo(map).bindPopup('Restaurant Location');
+            }
+
+            // Add driver marker if available
+            if (data.driver?.lat && data.driver?.lng) {
+                driverMarker = L.marker([data.driver.lat, data.driver.lng], {
+                    icon: L.divIcon({
+                        html: '<div class="bg-blue-600 text-white p-1 rounded-full text-xs font-bold">D</div>',
+                        className: 'bg-transparent'
+                    })
+                }).addTo(map).bindPopup('Driver Location');
+                
+                // Update status message
+                statusElement.textContent = 'Driver is on the way to your location';
+                
+                // Draw route between restaurant and driver if both exist
+                if (data.restaurant?.lat && data.restaurant?.lng) {
+                    const restaurantLatLng = L.latLng(data.restaurant.lat, data.restaurant.lng);
+                    const driverLatLng = L.latLng(data.driver.lat, data.driver.lng);
+                    
+                    // Create a polyline to connect the points
+                    routeLine = L.polyline([restaurantLatLng, driverLatLng], {
+                        color: '#3b82f6',
+                        weight: 3,
+                        dashArray: '5, 5'
+                    }).addTo(map);
+                    
+                    // Fit map to show both markers and the route
+                    const bounds = L.latLngBounds([restaurantLatLng, driverLatLng]);
+                    map.fitBounds(bounds, { padding: [50, 50] });
+                } else {
+                    map.setView([data.driver.lat, data.driver.lng], 13);
+                }
+            } else if (data.message) {
+                statusElement.textContent = data.message;
+            }
+
+            // Hide loading message
+            document.getElementById('map-loading').style.display = 'none';
+        } catch (error) {
+            console.error('Map update error:', error);
+            document.getElementById('delivery-status').textContent = 'Error updating map';
+        }
+    }
+
+    // Fetch delivery locations from API
+    async function fetchDeliveryLocations() {
+        try {
+            const response = await fetch(API_URL, {
+                headers: {
+                    "X-CSRFToken": CSRF_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Fetch error:', error);
+            throw error;
+        }
+    }
+
+    // Start polling for location updates
+    function startPolling() {
+        // Initial fetch
+        fetchDeliveryLocations()
+            .then(data => {
+                updateMap(data);
+                pollingInterval = setInterval(pollLocations, POLLING_INTERVAL);
+            })
+            .catch(error => {
+                console.error('Initial fetch error:', error);
+                document.getElementById('delivery-status').textContent = 'Error loading delivery data';
+                pollingInterval = setInterval(pollLocations, RETRY_INTERVAL);
+            });
+    }
+
+    // Poll locations with error handling
+    function pollLocations() {
+        fetchDeliveryLocations()
+            .then(updateMap)
+            .catch(error => {
+                console.error('Polling error:', error);
+                document.getElementById('delivery-status').textContent = 'Connection error - retrying...';
+            });
+    }
+
+    // Clean up polling when leaving the page
+    window.addEventListener('beforeunload', () => {
+        if (pollingInterval) {
+            clearInterval(pollingInterval);
+        }
+    });
+
+    // Load Leaflet.js dynamically
+    function loadLeaflet() {
+        return new Promise((resolve, reject) => {
+            if (typeof L !== 'undefined') {
+                resolve();
+                return;
+            }
+
+            const leafletCSS = document.createElement('link');
+            leafletCSS.rel = 'stylesheet';
+            leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            leafletCSS.onload = () => {
+                const leafletJS = document.createElement('script');
+                leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                leafletJS.onload = resolve;
+                leafletJS.onerror = reject;
+                document.head.appendChild(leafletJS);
+            };
+            leafletCSS.onerror = reject;
+            document.head.appendChild(leafletCSS);
+        });
+    }
+
+    // Initialize everything when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        {% if delivery_info.delivery_status == 'in_progress' %}
+        loadLeaflet()
+            .then(initMap)
+            .catch(error => {
+                console.error('Failed to load Leaflet:', error);
+                document.getElementById('map-loading').textContent = 'Failed to load map library';
+            });
+        {% endif %}
+    });
 </script>
 {% endblock %}

@@ -22,4 +22,9 @@ urlpatterns = [
     
     # pos_views
      path('sales', pos_views.sales, name='sales'),
+     #tracking
+       # Add these new URLs for delivery tracking
+    path('delivery-tracking/', views.DeliveryTrackingView.as_view(), name='delivery_tracking'),
+    path('delivery/<int:delivery_id>/update-location/', views.update_driver_location, name='update_driver_location'),
+    path('delivery/<int:delivery_id>/locations/', views.get_delivery_locations, name='get_delivery_locations'),
 ]

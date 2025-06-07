@@ -12,10 +12,10 @@ urlpatterns = [
     path('payment-success/<int:delivery_id>/', views.payment_success, name='payment_success'),
     path('payment-done/', views.payment_done, name='payment_done'),
     path('delivering/', views.in_progress_orders, name='in_progress_orders'),
-
     path('payment-cancelled/', views.payment_cancelled, name='payment_cancelled'),
     path('order-history/', views.order_history, name='order_history'),
     path('reorder/<int:payment_id>/', views.reorder, name='reorder'),
     path('mtn-callback/', views.mtn_callback, name='mtn_callback'),
     path('paypal/', paypal_views.ipn, name='paypal-ipn'),
+    path('delivery/<int:delivery_id>/locations/', views.get_delivery_locations, name='get_delivery_locations'),
 ]

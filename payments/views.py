@@ -1,24 +1,22 @@
-# Qrcode 
 import qrcode
 import io
 import base64
 import logging
 import uuid
-
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-
+from django.db import transaction
+from django.utils.timezone import now
+from django.core.paginator import Paginator
+from typing import Dict, Optional
 from cart.models import Cart, CartItem
 from auths.models import FastFood, Food, Drink
 from .models import DeliveryInfo, PaymentHistory
 from staffs.models import StaffAssignment, Notification
 from staffs.staffs_assignments import pick_staff_for_point
-
-# Payment integrations
-from django.db import transaction
 from .cards.paypal import initiate_paypal_payment
 from .cards.pesapal import initiate_pesapal_payment, verify_pesapal_payment
 from .cards.stripe import initiate_stripe_payment, verify_stripe_payment
@@ -29,9 +27,107 @@ from .mobile.twilio_utils import send_sms
 
 logger = logging.getLogger(__name__)
 
+EXCHANGE_RATE = 28.638  # 1 USD = 28.638 ZMW (March 2025)
+
+def clear_payment_session(request) -> None:
+    """Clear payment-related session keys."""
+    keys = [
+        'mobile_order_data', 'mobile_transaction_id', 'stripe_session_id',
+        'paypal_order_data', 'pesapal_order_data', 'pesapal_order_id',
+        'stripe_order_data', 'pending_order'
+    ]
+    for key in keys:
+        request.session.pop(key, None)
+
+def generate_qr_code(delivery_info: DeliveryInfo, payment_history: Optional[PaymentHistory], cart: Cart) -> Optional[str]:
+    """Generate a base64-encoded QR code for order details."""
+    try:
+        qr_data = (
+            f"Order ID: {delivery_info.id}\n"
+            f"Payment ID: {payment_history.id if payment_history else 'Pending'}\n"
+            f"Ordered By: {delivery_info.user.username}\n"
+            f"Delivery Location: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
+            f"Total: K{payment_history.total if payment_history else cart.total():.2f}\n"
+            f"Track: https://eatnearby.com/track/{delivery_info.id}"
+        )
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(qr_data)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        buffer = io.BytesIO()
+        img.save(buffer, format="PNG")
+        return base64.b64encode(buffer.getvalue()).decode('utf-8')
+    except Exception as e:
+        logger.error(f"Failed to generate QR code for delivery {delivery_info.id}: {str(e)}")
+        return None
+
+def create_delivery_info(request, order_data: Dict, cart: Cart) -> DeliveryInfo:
+    """Create DeliveryInfo and assign staff."""
+    try:
+        with transaction.atomic():
+            delivery_info = DeliveryInfo.objects.create(
+                user=request.user,
+                cart=cart,
+                address=order_data['address'] if not order_data['predefined_address'] else None,
+                predefined_address=order_data['predefined_address'],
+                payment_method=order_data['payment_method'],
+                payment_provider=order_data.get('payment_provider'),
+                phone_number=order_data['phone_number'],
+                secondary_phone_number=order_data.get('secondary_phone_number'),
+            )
+            logger.info(f"Created DeliveryInfo {delivery_info.id} with status {delivery_info.delivery_status}")
+
+            staff = pick_staff_for_point(delivery_info.predefined_address)
+            if staff:
+                StaffAssignment.objects.create(staff=staff, delivery=delivery_info)
+                Notification.objects.create(
+                    recipient=staff,
+                    message=f"New delivery at {delivery_info.get_predefined_address_display()} (Order ID: {delivery_info.id})",
+                    related_delivery=delivery_info,
+                    notification_type='new_order'
+                )
+                logger.info(f"Assigned delivery {delivery_info.id} to staff {staff.id}")
+            else:
+                logger.warning(f"No staff available for delivery {delivery_info.id}")
+
+            return delivery_info
+    except Exception as e:
+        logger.error(f"Failed to create DeliveryInfo: {str(e)}")
+        raise
+
+def create_payment_history(user, cart: Cart, delivery_info: DeliveryInfo, transaction_id: str) -> PaymentHistory:
+    """Create PaymentHistory for an order."""
+    items = [
+        {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
+        for item in cart.cartitem_set.all()
+    ]
+    return PaymentHistory.objects.create(
+        user=user,
+        cart=cart,
+        delivery_info=delivery_info,
+        total=cart.total(),
+        items=items,
+        transaction_id=transaction_id
+    )
+
+def validate_checkout_data(request, payment_method: str, payment_provider: str, phone_number: str, predefined_address: str) -> Optional[str]:
+    """Validate checkout form data."""
+    if not phone_number:
+        return "Phone number is required."
+    if payment_method in ('mobile_money', 'card') and not payment_provider:
+        return f"Select a provider for {payment_method.replace('_', ' ').title()}."
+    if not predefined_address:
+        return "Please select a delivery point."
+    return None
 
 @login_required
 def checkout(request):
+    """Handle checkout process for cart items."""
     try:
         cart = Cart.objects.get(user=request.user)
         if not cart.cartitem_set.exists():
@@ -41,7 +137,6 @@ def checkout(request):
         messages.error(request, "No cart found. Please add items to your cart.")
         return redirect('cart:cart_view')
 
-    EXCHANGE_RATE = 28.638  # 1 USD = 28.638 ZMW (March 2025)
     total_usd = float(cart.total()) / EXCHANGE_RATE
     total_zmw = float(cart.total())
 
@@ -63,17 +158,11 @@ def checkout(request):
         phone_number = request.POST.get('phone_number', '')
         secondary_phone_number = request.POST.get('secondary_phone_number', '')
 
-        if not phone_number:
-            messages.error(request, "Phone number is required.")
-            return render(request, 'payments/checkout.html', context)
-        if payment_method in ('mobile_money', 'card') and not payment_provider:
-            messages.error(request, f"Select a provider for {payment_method.replace('_', ' ').title()}.")
-            return render(request, 'payments/checkout.html', context)
-        if not predefined_address:
-            messages.error(request, "Please select a delivery point.")
+        error = validate_checkout_data(request, payment_method, payment_provider, phone_number, predefined_address)
+        if error:
+            messages.error(request, error)
             return render(request, 'payments/checkout.html', context)
 
-        # Store order details in session for non-cash payments
         order_data = {
             'cart_id': cart.id,
             'address': address,
@@ -85,9 +174,8 @@ def checkout(request):
         }
         request.session['pending_order'] = order_data
 
-        # Handle card payments
-        if payment_method == 'card':
-            try:
+        try:
+            if payment_method == 'card':
                 if payment_provider == 'paypal':
                     form = initiate_paypal_payment(request, cart, None, total_usd)
                     request.session['paypal_order_data'] = order_data
@@ -96,7 +184,7 @@ def checkout(request):
                     pesapal_data = initiate_pesapal_payment(request, cart, None, total_usd)
                     if pesapal_data.get('status') == 'down':
                         messages.warning(request, pesapal_data['message'])
-                        request.session.pop('pending_order', None)
+                        clear_payment_session(request)
                         return render(request, 'payments/checkout.html', context)
                     request.session['pesapal_order_data'] = order_data
                     request.session['pesapal_order_id'] = pesapal_data['order_id']
@@ -111,22 +199,13 @@ def checkout(request):
                     request.session['stripe_session_id'] = stripe_data['session_id']
                     request.session['stripe_order_data'] = order_data
                     return render(request, 'payments/stripe_checkout.html', stripe_data)
-            except Exception as e:
-                logger.error(f"{payment_provider.title()} payment initiation failed: {str(e)}")
-                messages.error(request, f"{payment_provider.title()} payment failed: {str(e)}")
-                request.session.pop('pending_order', None)
-                return render(request, 'payments/checkout.html', context)
-
-        # Handle mobile money payments
-        elif payment_method == 'mobile_money':
-            try:
-                if payment_provider == 'airtel':
-                    data = initiate_airtel_payment(request, cart, None, total_zmw)
-                elif payment_provider == 'zamtel':
-                    data = initiate_zamtel_payment(request, cart, None, total_zmw)
-                elif payment_provider == 'mtn':
-                    data = initiate_mtn_payment(request, cart, None, total_zmw, phone_number)
-
+            elif payment_method == 'mobile_money':
+                mobile_payment_map = {
+                    'airtel': initiate_airtel_payment,
+                    'zamtel': initiate_zamtel_payment,
+                    'mtn': lambda *args: initiate_mtn_payment(*args, phone_number=phone_number)
+                }
+                data = mobile_payment_map[payment_provider](request, cart, None, total_zmw)
                 if data['status'] == 'success':
                     messages.info(request, data['message'])
                     request.session['mobile_order_data'] = order_data
@@ -144,103 +223,28 @@ def checkout(request):
                     })
                 else:
                     messages.warning(request, data.get('message', f"{payment_provider.upper()} payment failed."))
-                    request.session.pop('pending_order', None)
-            except Exception as e:
-                logger.error(f"{payment_provider.title()} payment failed: {str(e)}")
-                messages.error(request, f"{payment_provider.title()} payment failed: {str(e)}")
-                request.session.pop('pending_order', None)
-            return render(request, 'payments/checkout.html', context)
-
-        # Cash payment
-        try:
-            delivery_info = DeliveryInfo.objects.create(
-                user=request.user,
-                cart=cart,
-                address=address if not predefined_address else None,
-                predefined_address=predefined_address,
-                payment_method=payment_method,
-                payment_provider=payment_provider or None,
-                phone_number=phone_number,
-                secondary_phone_number=secondary_phone_number or None,
-            )
-            logger.info(f"Created DeliveryInfo {delivery_info.id} for cash order with status {delivery_info.delivery_status}")
-
-            # Create PaymentHistory for cash payment
-            items = [
-                {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
-                for item in cart.cartitem_set.all()
-            ]
-            payment_history = PaymentHistory.objects.create(
-                user=request.user,
-                cart=cart,
-                delivery_info=delivery_info,
-                total=cart.total(),
-                items=items,
-                transaction_id=f"CASH-{str(uuid.uuid4())[:8]}"
-            )
-            logger.info(f"Created PaymentHistory {payment_history.id} for cash order")
-
-            staff = pick_staff_for_point(delivery_info.predefined_address)
-            if staff:
-                StaffAssignment.objects.create(staff=staff, delivery=delivery_info)
-                Notification.objects.create(
-                    recipient=staff,
-                    message=f"New cash delivery at {delivery_info.get_predefined_address_display()} (Order ID: {delivery_info.id})",
-                    related_delivery=delivery_info,
-                    notification_type='new_order'
+                    clear_payment_session(request)
+            else:  # Cash payment
+                delivery_info = create_delivery_info(request, order_data, cart)
+                payment_history = create_payment_history(
+                    request.user, cart, delivery_info, f"CASH-{str(uuid.uuid4())[:8]}"
                 )
-                logger.info(f"Assigned cash delivery {delivery_info.id} to staff {staff.id}")
-            else:
-                logger.warning(f"No staff available for cash delivery {delivery_info.id}")
-
-            messages.success(request, "Your cash order has been placed successfully.")
-            request.session.pop('pending_order', None)
-            return redirect('payments:payment_success', delivery_id=delivery_info.id)
-
+                logger.info(f"Created PaymentHistory {payment_history.id} for cash order")
+                messages.success(request, "Your cash order has been placed successfully.")
+                clear_payment_session(request)
+                return redirect('payments:payment_success', delivery_id=delivery_info.id)
         except Exception as e:
-            logger.error(f"Cash order processing failed: {str(e)}")
-            messages.error(request, f"Cash order failed: {str(e)}")
-            request.session.pop('pending_order', None)
+            logger.error(f"{payment_method.title()} order processing failed: {str(e)}")
+            messages.error(request, f"Order processing failed: {str(e)}")
+            clear_payment_session(request)
             return render(request, 'payments/checkout.html', context)
 
     return render(request, 'payments/checkout.html', context)
-def create_delivery_info(request, order_data, cart):
-    """Helper function to create DeliveryInfo and assign staff."""
-    try:
-        delivery_info = DeliveryInfo.objects.create(
-            user=request.user,
-            cart=cart,
-            address=order_data['address'] if not order_data['predefined_address'] else None,
-            predefined_address=order_data['predefined_address'],
-            payment_method=order_data['payment_method'],
-            payment_provider=order_data.get('payment_provider'),
-            phone_number=order_data['phone_number'],
-            secondary_phone_number=order_data.get('secondary_phone_number'),
-        )
-        logger.info(f"Created DeliveryInfo {delivery_info.id} with status {delivery_info.delivery_status}")
 
-        staff = pick_staff_for_point(delivery_info.predefined_address)
-        if staff:
-            StaffAssignment.objects.create(staff=staff, delivery=delivery_info)
-            Notification.objects.create(
-                recipient=staff,
-                message=f"New delivery at {delivery_info.get_predefined_address_display()} (Order ID: {delivery_info.id})",
-                related_delivery=delivery_info,
-                notification_type='new_order'
-            )
-            logger.info(f"Assigned delivery {delivery_info.id} to staff {staff.id}")
-        else:
-            logger.warning(f"No staff available for delivery {delivery_info.id}")
-
-        return delivery_info
-    except Exception as e:
-        logger.error(f"Failed to create DeliveryInfo: {str(e)}")
-        raise
-
-# Payment processing views for Airtel, Zamtel, MTN
 @login_required
 @csrf_exempt
-def simulate_mobile_payment(request, provider):
+def simulate_mobile_payment(request, provider: str):
+    """Process mobile money payments for Airtel, Zamtel, or MTN."""
     if request.method != 'POST':
         messages.error(request, "Invalid request method.")
         return redirect('payments:checkout')
@@ -252,7 +256,7 @@ def simulate_mobile_payment(request, provider):
 
     if not order_data or not transaction_id:
         messages.error(request, "Invalid session. Please try again.")
-        logger.warning(f"{provider.upper()} payment attempted with no order_data or transaction_id in session")
+        logger.warning(f"{provider.upper()} payment attempted with no order_data or transaction_id")
         return redirect('payments:checkout')
 
     if not phone or not amount:
@@ -263,29 +267,13 @@ def simulate_mobile_payment(request, provider):
     try:
         cart = Cart.objects.get(id=order_data['cart_id'], user=request.user)
         delivery_info = create_delivery_info(request, order_data, cart)
-
-        items = [
-            {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
-            for item in cart.cartitem_set.all()
-        ]
-        payment_history = PaymentHistory.objects.create(
-            user=request.user,
-            cart=cart,
-            delivery_info=delivery_info,
-            total=cart.total(),
-            items=items,
-            transaction_id=f"{provider.upper()}-{transaction_id or str(uuid.uuid4())}"
+        payment_history = create_payment_history(
+            request.user, cart, delivery_info, f"{provider.upper()}-{transaction_id or str(uuid.uuid4())}"
         )
-
         logger.info(f"{provider.title()} payment for {phone}, Amount: {amount} ZMW, Delivery {delivery_info.id}")
-        messages.success(request, f"{provider.title()} payment successfully!")
-
-        # Clear session
-        for key in ['mobile_order_data', 'mobile_transaction_id', 'pending_order']:
-            request.session.pop(key, None)
-
+        messages.success(request, f"{provider.title()} payment successful!")
+        clear_payment_session(request)
         return redirect('payments:payment_success', delivery_id=delivery_info.id)
-
     except Cart.DoesNotExist:
         messages.error(request, "Cart not found.")
         logger.error(f"Cart {order_data['cart_id']} not found for {provider.upper()} payment")
@@ -295,149 +283,110 @@ def simulate_mobile_payment(request, provider):
         messages.error(request, f"Payment processing failed: {str(e)}")
         return redirect('payments:checkout')
 
-# Aliases for each provider
+# Aliases for mobile payment providers
 airtel_payment_process = lambda request: simulate_mobile_payment(request, 'airtel')
 zamtel_payment_process = lambda request: simulate_mobile_payment(request, 'zamtel')
 mtn_payment_process = lambda request: simulate_mobile_payment(request, 'mtn')
 
 @login_required
 @csrf_exempt
-def payment_success(request, delivery_id):
+def payment_success(request, delivery_id: int):
+    """Handle order confirmation and display success page with QR code."""
     delivery_info = get_object_or_404(DeliveryInfo, id=delivery_id, user=request.user)
     cart = delivery_info.cart
     payment_history = PaymentHistory.objects.filter(delivery_info=delivery_info).first()
 
-    # Generate QR code with order details
-    qr_image_base64 = None
-    try:
-        qr_data = (
-            f"Order ID: {delivery_info.id}\n"
-            f"Payment ID: {payment_history.id if payment_history else 'Pending'}\n"
-            f"Ordered By: {delivery_info.user.username}\n"
-            f"Delivery Location: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
-            f"Total: K{payment_history.total if payment_history else cart.total():.2f}"
-        )
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        qr.add_data(qr_data)
-        qr.make(fit=True)
-
-        # Create an image from the QR Code
-        img = qr.make_image(fill_color="black", back_color="white")
-        buffer = io.BytesIO()
-        img.save(buffer, format="PNG")
-        qr_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-    except Exception as e:
-        logger.error(f"Failed to generate QR code for delivery {delivery_id}: {str(e)}")
-        messages.error(request, "Unable to generate QR code due to an error.")
+    qr_image_base64 = generate_qr_code(delivery_info, payment_history, cart)
+    if not qr_image_base64:
+        messages.warning(request, "Unable to generate QR code due to an error.")
 
     if request.method == 'POST' and delivery_info.delivery_status == 'in_progress':
         try:
-            delivery_info.delivery_status = 'completed'
-            delivery_info.save()
+            with transaction.atomic():
+                delivery_info.delivery_status = 'completed'
+                delivery_info.save()
 
-            staff_assignment = StaffAssignment.objects.filter(delivery=delivery_info).first()
-            if staff_assignment:
-                Notification.objects.create(
-                    recipient=staff_assignment.staff,
-                    message=f"Delivery at {delivery_info.get_predefined_address_display()} confirmed by customer.",
-                    related_delivery=delivery_info,
-                    notification_type='delivery_completed'
+                staff_assignment = StaffAssignment.objects.filter(delivery=delivery_info).first()
+                if staff_assignment:
+                    Notification.objects.create(
+                        recipient=staff_assignment.staff,
+                        message=f"Delivery at {delivery_info.get_predefined_address_display()} confirmed by customer.",
+                        related_delivery=delivery_info,
+                        notification_type='delivery_completed'
+                    )
+
+                total_amount = cart.total() if cart else 0.00
+                if cart:
+                    cart.cartitem_set.all().delete()
+
+                sms_body = (
+                    f"Order #{payment_history.id if payment_history else delivery_info.id} Confirmed!\n"
+                    f"Total: K{total_amount:.2f}\n"
+                    f"Delivery to: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
+                    f"Thank you for ordering with us!"
                 )
+                send_sms(delivery_info.phone_number, sms_body)
 
-            # Calculate total before deleting items
-            total_amount = cart.total() if cart else 0.00
-
-            cart.cartitem_set.all().delete()
-            for key in ['mobile_order_data', 'mobile_transaction_id', 'stripe_session_id', 'paypal_order_data', 'pesapal_order_data', 'stripe_order_data', 'pesapal_order_id', 'pending_order']:
-                request.session.pop(key, None)
-
-            sms_body = (
-                f"Order #{payment_history.id if payment_history else delivery_info.id} Confirmed!\n"
-                f"Total: K{total_amount:.2f}\n"
-                f"Delivery to: {delivery_info.address or delivery_info.get_predefined_address_display()}\n"
-                f"Thank you for ordering with us!"
-            )
-            send_sms(delivery_info.phone_number, sms_body)
-
-            messages.success(request, f"Order confirmed! SMS sent to {delivery_info.phone_number}")
-            logger.info(f"Delivery {delivery_id} confirmed by user {request.user.username}")
-
-            return redirect('payments:payment_success', delivery_id=delivery_id)
+                messages.success(request, f"Order confirmed! SMS sent to {delivery_info.phone_number}")
+                logger.info(f"Delivery {delivery_id} confirmed by user {request.user.username}")
 
         except Exception as e:
             logger.error(f"Error confirming delivery {delivery_id}: {str(e)}")
             messages.error(request, f"An error occurred: {str(e)}")
 
+        return redirect('payments:payment_success', delivery_id=delivery_id)
+
     context = {
         'delivery_info': delivery_info,
         'cart': cart,
         'payment_history': payment_history,
-        'qr_image': qr_image_base64,  # Pass the base64-encoded QR code image or None if failed
+        'qr_image': qr_image_base64,
+        'current_date': now().strftime('%B %d, %Y'),
+        'current_time': now().strftime('%I:%M %p'),
     }
     return render(request, 'payments/success.html', context)
 
 @login_required
 @csrf_exempt
 def payment_done(request):
-    logger.debug(f"payment_done called: session_keys={list(request.session.keys())}, "
-                 f"session_id={request.session.session_key}, "
-                 f"referer={request.META.get('HTTP_REFERER', 'None')}")
+    """Handle payment completion for PayPal, Stripe, and Pesapal."""
+    logger.debug(f"payment_done called: session_keys={list(request.session.keys())}, session_id={request.session.session_key}")
 
-    # Handle PayPal (unchanged)
-    paypal_order_data = request.session.get('paypal_order_data')
-    if paypal_order_data:
+    def process_payment(order_data: Dict, provider: str, transaction_id: str) -> Optional[redirect]:
         try:
-            cart = Cart.objects.get(id=paypal_order_data['cart_id'], user=request.user)
-            delivery_info = create_delivery_info(request, paypal_order_data, cart)
-
-            # Create PaymentHistory to make order visible to staff
-            items = [
-                {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
-                for item in cart.cartitem_set.all()
-            ]
-            payment_history = PaymentHistory.objects.create(
-                user=request.user,
-                cart=cart,
-                delivery_info=delivery_info,
-                total=cart.total(),
-                items=items,
-                transaction_id=f"PAYPAL-PENDING-{str(uuid.uuid4())[:8]}"
-            )
+            cart = Cart.objects.get(id=order_data['cart_id'], user=request.user)
+            delivery_info = create_delivery_info(request, order_data, cart)
+            payment_history = create_payment_history(request.user, cart, delivery_info, transaction_id)
             delivery_info.delivery_status = 'pending'
             delivery_info.save()
-
-            for key in ['paypal_order_data', 'pending_order']:
-                request.session.pop(key, None)
-            messages.success(request, "PayPal payment initiated. Awaiting confirmation.")
+            messages.success(request, f"{provider.title()} payment successful!")
+            clear_payment_session(request)
             return redirect('payments:payment_success', delivery_id=delivery_info.id)
-
         except Cart.DoesNotExist:
-            logger.error(f"Cart {paypal_order_data['cart_id']} not found for PayPal payment")
+            logger.error(f"Cart {order_data['cart_id']} not found for {provider} payment")
             messages.error(request, "Invalid payment session: Cart not found.")
             return redirect('payments:checkout')
         except Exception as e:
-            logger.error(f"PayPal payment processing failed: {str(e)}")
+            logger.error(f"{provider} payment processing failed: {str(e)}")
             messages.error(request, f"Payment processing failed: {str(e)}")
             return redirect('payments:checkout')
 
-    # Handle Stripe
+    # PayPal
+    paypal_order_data = request.session.get('paypal_order_data')
+    if paypal_order_data:
+        return process_payment(paypal_order_data, "PayPal", f"PAYPAL-PENDING-{str(uuid.uuid4())[:8]}")
+
+    # Stripe
     stripe_session_id = request.session.get('stripe_session_id')
     stripe_order_data = request.session.get('stripe_order_data')
-    # Fallback to query parameter if session data is missing
     if not (stripe_session_id and stripe_order_data):
         session_key = request.GET.get('session_key')
         if session_key and session_key == request.session.session_key:
             stripe_session_id = request.session.get('stripe_session_id')
             stripe_order_data = request.session.get('stripe_order_data')
-            logger.debug(f"Stripe session restored via query param: session_id={stripe_session_id}, order_data={stripe_order_data}")
+            logger.debug(f"Stripe session restored via query param: session_id={stripe_session_id}")
         else:
-            logger.error(f"Stripe session missing: session_id={stripe_session_id}, order_data={stripe_order_data}, "
-                         f"query_session_key={session_key}, current_session_key={request.session.session_key}")
+            logger.error(f"Stripe session missing: session_id={stripe_session_id}, query_session_key={session_key}")
             messages.error(request, "Invalid payment session.")
             return redirect('payments:checkout')
 
@@ -445,77 +394,27 @@ def payment_done(request):
         try:
             status = verify_stripe_payment(stripe_session_id)
             if status == 'paid':
-                cart = Cart.objects.get(id=stripe_order_data['cart_id'], user=request.user)
-                delivery_info = create_delivery_info(request, stripe_order_data, cart)
-
-                items = [
-                    {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
-                    for item in cart.cartitem_set.all()
-                ]
-                payment_history = PaymentHistory.objects.create(
-                    user=request.user,
-                    cart=cart,
-                    delivery_info=delivery_info,
-                    total=cart.total(),
-                    items=items,
-                    transaction_id=f"STRIPE-{str(uuid.uuid4())}"
-                )
-                delivery_info.delivery_status = 'pending'
-                delivery_info.save()
-
-                for key in ['stripe_session_id', 'stripe_order_data', 'pending_order']:
-                    request.session.pop(key, None)
-                messages.success(request, "Stripe payment successful!")
-                return redirect('payments:payment_success', delivery_id=delivery_info.id)
+                return process_payment(stripe_order_data, "Stripe", f"STRIPE-{str(uuid.uuid4())}")
             else:
                 logger.warning(f"Stripe payment not completed: status={status}")
                 messages.error(request, "Stripe payment was not completed.")
                 return redirect('payments:checkout')
-        except Cart.DoesNotExist:
-            logger.error(f"Cart {stripe_order_data['cart_id']} not found for Stripe payment")
-            messages.error(request, "Invalid payment session: Cart not found.")
-            return redirect('payments:checkout')
         except Exception as e:
             logger.error(f"Stripe payment verification failed: {str(e)}")
             messages.error(request, f"Payment verification failed: {str(e)}")
             return redirect('payments:checkout')
 
-    # Handle Pesapal (unchanged)
+    # Pesapal
     pesapal_order_data = request.session.get('pesapal_order_data')
     pesapal_order_id = request.session.get('pesapal_order_id')
     if pesapal_order_data and pesapal_order_id:
         try:
             status = verify_pesapal_payment(pesapal_order_id)
             if status == 'paid':
-                cart = Cart.objects.get(id=pesapal_order_data['cart_id'], user=request.user)
-                delivery_info = create_delivery_info(request, pesapal_order_data, cart)
-
-                items = [
-                    {"name": item.get_product().name, "quantity": item.quantity, "subtotal": float(item.subtotal())}
-                    for item in cart.cartitem_set.all()
-                ]
-                payment_history = PaymentHistory.objects.create(
-                    user=request.user,
-                    cart=cart,
-                    delivery_info=delivery_info,
-                    total=cart.total(),
-                    items=items,
-                    transaction_id=f"PESAPAL-{pesapal_order_id}"
-                )
-                delivery_info.delivery_status = 'pending'
-                delivery_info.save()
-
-                for key in ['pesapal_order_data', 'pesapal_order_id', 'pending_order']:
-                    request.session.pop(key, None)
-                messages.success(request, "Pesapal payment successful!")
-                return redirect('payments:payment_success', delivery_id=delivery_info.id)
+                return process_payment(pesapal_order_data, "Pesapal", f"PESAPAL-{pesapal_order_id}")
             else:
                 messages.error(request, "Pesapal payment was not completed.")
                 return redirect('payments:checkout')
-        except Cart.DoesNotExist:
-            logger.error(f"Cart {pesapal_order_data['cart_id']} not found for Pesapal payment")
-            messages.error(request, "Invalid payment session: Cart not found.")
-            return redirect('payments:checkout')
         except Exception as e:
             logger.error(f"Pesapal payment verification failed: {str(e)}")
             messages.error(request, f"Payment verification failed: {str(e)}")
@@ -528,19 +427,23 @@ def payment_done(request):
 @login_required
 @csrf_exempt
 def payment_cancelled(request):
-    for key in ['paypal_order_data', 'stripe_session_id', 'stripe_order_data', 'pesapal_order_data', 'pesapal_order_id', 'mobile_order_data', 'mobile_transaction_id', 'pending_order']:
-        request.session.pop(key, None)
+    """Handle payment cancellation."""
+    clear_payment_session(request)
     messages.error(request, "Payment was cancelled.")
     return redirect('payments:checkout')
 
 @login_required
 def order_history(request):
-    """Display the user's order history."""
-    history = PaymentHistory.objects.filter(user=request.user)
-    return render(request, 'payments/order_history.html', {'history': history})
+    """Display the user's order history with pagination."""
+    history = PaymentHistory.objects.filter(user=request.user).select_related('cart', 'delivery_info')
+    paginator = Paginator(history, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'payments/order_history.html', {'history': page_obj, 'page_obj': page_obj})
 
 @login_required
-def reorder(request, payment_id):
+def reorder(request, payment_id: int):
+    """Reorder a previous order by adding items to the cart."""
     if request.method != 'POST':
         return redirect('payments:order_history')
 
@@ -565,6 +468,7 @@ def reorder(request, payment_id):
 
 @csrf_exempt
 def mtn_callback(request):
+    """Handle MTN payment callback."""
     if request.method == 'PUT':
         try:
             data = request.body.decode('utf-8')
@@ -578,11 +482,7 @@ def mtn_callback(request):
 @login_required
 @csrf_exempt
 def in_progress_orders(request):
-    """
-    Display in-progress and cancelled orders for the logged-in customer.
-    Cancelled orders are shown as 'Declined' with decline reason from Notification.
-    Handles deletion of declined orders.
-    """
+    """Display in-progress and cancelled orders for the customer."""
     in_progress_orders = DeliveryInfo.objects.filter(
         user=request.user,
         delivery_status='in_progress'
@@ -599,12 +499,8 @@ def in_progress_orders(request):
             try:
                 with transaction.atomic():
                     delivery_info = get_object_or_404(
-                        DeliveryInfo,
-                        id=delivery_id,
-                        user=request.user,
-                        delivery_status='in_progress'
+                        DeliveryInfo, id=delivery_id, user=request.user, delivery_status='in_progress'
                     )
-
                     delivery_info.delivery_status = 'completed'
                     delivery_info.save()
 
@@ -645,10 +541,7 @@ def in_progress_orders(request):
             try:
                 with transaction.atomic():
                     delivery_info = get_object_or_404(
-                        DeliveryInfo,
-                        id=delete_delivery_id,
-                        user=request.user,
-                        delivery_status='cancelled'
+                        DeliveryInfo, id=delete_delivery_id, user=request.user, delivery_status='cancelled'
                     )
                     delivery_info.delete()
                     messages.success(request, f"Order {delete_delivery_id} deleted successfully.")
@@ -664,5 +557,24 @@ def in_progress_orders(request):
         'in_progress_orders': in_progress_orders,
         'declined_orders': declined_orders,
     }
-    logger.debug(f"In-progress orders context: {context}")
     return render(request, 'payments/in_progress_orders.html', context)
+
+@login_required
+def get_delivery_locations(request, delivery_id: int):
+    """Retrieve delivery locations for a specific delivery (customer access)."""
+    try:
+        delivery = get_object_or_404(DeliveryInfo, id=delivery_id, user=request.user)
+        return JsonResponse({
+            'status': 'success',
+            'restaurant': delivery.restaurant_location,
+            'driver': delivery.driver_location,
+            'destination': {
+                'address': delivery.address or delivery.get_predefined_address_display(),
+            }
+        })
+    except DeliveryInfo.DoesNotExist:
+        logger.warning(f"Delivery {delivery_id} not found for user {request.user.id}")
+        return JsonResponse({'status': 'error', 'message': 'Delivery not found'}, status=404)
+    except Exception as e:
+        logger.error(f"Error fetching delivery locations for {delivery_id}: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

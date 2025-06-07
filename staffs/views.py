@@ -1,5 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+from django.views.generic import TemplateView
+from django.http import JsonResponse
+import json
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.utils.timezone import now, timedelta
+from django.core.paginator import Paginator
+from django.db.models import Count, Q
+from django.contrib import messages
+from payments.models import DeliveryInfo, PaymentHistory
+from .models import StaffAssignment, Notification
+from .staffs_decorator import staff_view
+from django.contrib.auth import get_user_model
+from payments.mobile.twilio_utils import send_sms
+from .staffs_decorator import staff_view
+from django.contrib.auth import get_user_model
+from payments.mobile.twilio_utils import send_sms
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.utils.timezone import now, timedelta
@@ -12,9 +33,37 @@ from .staffs_decorator import staff_view
 from django.contrib.auth import get_user_model
 from payments.mobile.twilio_utils import send_sms
 import logging
+import json
+from typing import Dict, Optional
+import json
+from typing import Dict, Optional
+import logging
 
 User = get_user_model()
 logger = logging.getLogger(__name__)
+
+def get_badge_counts(staff):
+    """Calculate badge counts for dashboard, history, and availability notifications."""
+    today_start = now().replace(hour=0, minute=0, second=0, microsecond=0)
+    today_end = today_start + timedelta(days=1)
+    
+    return {
+        'dashboard_notifications': Notification.objects.filter(
+            recipient=staff,
+            is_read=False,
+            notification_type='new_order'
+        ).count(),
+        'history_notifications': Notification.objects.filter(
+            recipient=staff,
+            is_read=False,
+            notification_type__in=['delivery_completed', 'delivery_declined']
+        ).count(),
+        'availability_notifications': StaffAssignment.objects.filter(
+            staff=staff,
+            assigned_at__gte=today_start,
+            assigned_at__lt=today_end
+        ).count(),
+    }
 
 @login_required
 @staff_view
@@ -434,3 +483,68 @@ def mark_notification_read(request, notification_id):
 def mark_all_notifications_read(request):
     Notification.objects.filter(recipient=request.user, is_read=False).update(is_read=True)
     return JsonResponse({'status': 'success'})
+class DeliveryTrackingView(TemplateView):
+    """Display active deliveries for tracking."""
+    template_name = 'staffs/delivery_tracking.html'
+
+    def get_context_data(self, **kwargs) -> Dict:
+        context = super().get_context_data(**kwargs)
+        staff = self.request.user
+        context['active_deliveries'] = StaffAssignment.objects.filter(
+            staff=staff, delivery__delivery_status='in_progress'
+        ).select_related('delivery')
+        context.update(get_badge_counts(staff))
+        logger.debug(f"Delivery tracking rendered for staff {staff.id}")
+        return context
+
+@login_required
+@staff_view
+@require_POST
+def update_driver_location(request, delivery_id: int):
+    """Update the driver's location for a specific delivery (staff only)."""
+    try:
+        delivery = get_object_or_404(
+            DeliveryInfo, id=delivery_id, staff_assignments__staff=request.user
+        )
+        data = json.loads(request.body)
+        lat = float(data.get('lat'))
+        lng = float(data.get('lng'))
+
+        if not (-90 <= lat <= 90 and -180 <= lng <= 180):
+            logger.warning(f"Invalid coordinates for delivery {delivery_id}: lat={lat}, lng={lng}")
+            return JsonResponse({'status': 'error', 'message': 'Invalid coordinates'}, status=400)
+
+        delivery.driver_location = {'lat': lat, 'lng': lng}
+        delivery.last_location_update = now()
+        delivery.save()
+        logger.info(f"Driver location updated for delivery {delivery_id} by staff {request.user.id}")
+        return JsonResponse({'status': 'success'})
+    except (ValueError, TypeError) as e:
+        logger.error(f"Invalid location data for delivery {delivery_id}: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': f"Invalid location data: {str(e)}"}, status=400)
+    except Exception as e:
+        logger.error(f"Error updating driver location for delivery {delivery_id}: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+@login_required
+@staff_view
+def get_delivery_locations(request, delivery_id: int):
+    """Retrieve delivery locations for a specific delivery (staff access)."""
+    try:
+        delivery = get_object_or_404(
+            DeliveryInfo, id=delivery_id, staff_assignments__staff=request.user
+        )
+        return JsonResponse({
+            'status': 'success',
+            'restaurant': delivery.restaurant_location or {'lat': -15.4167, 'lng': 28.2833},
+            'driver': delivery.driver_location,
+            'destination': {
+                'address': delivery.address or delivery.get_predefined_address_display(),
+            }
+        })
+    except DeliveryInfo.DoesNotExist:
+        logger.warning(f"Delivery {delivery_id} not found for staff {request.user.id}")
+        return JsonResponse({'status': 'error', 'message': 'Delivery not found'}, status=404)
+    except Exception as e:
+        logger.error(f"Error fetching delivery locations for {delivery_id}: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

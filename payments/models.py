@@ -1,22 +1,32 @@
-# payments/models.py
 from django.db import models
+from django.core.validators import RegexValidator
+import logging
 from auths.models import User
 from cart.models import Cart
-import logging
 
 logger = logging.getLogger(__name__)
 
 class DeliveryInfo(models.Model):
+    """Model to store delivery information for an order."""
     id = models.BigAutoField(primary_key=True)
 
     DELIVERY_POINTS = [
-        ('evelyhone', 'Evelyn Hone College'),
+        ('evelynhone', 'Evelyn Hone College'),
         ('zambia_police', 'Zambia Police Headquarters'),
         ('zambia_accountancy', 'Zambia Centre for Accountancy'),
         ('mukuba_house', 'Mukuba Pension House'),
         ('bus_terminus', 'Lusaka Intercity Bus Terminus'),
         ('national_museum', 'Lusaka National Museum'),
     ]
+
+    DELIVERY_POINTS_COORDS = {
+        'evelynhone': {'lat': -15.4194, 'lng': 28.2993},  # Evelyn Hone College
+        'zambia_police': {'lat': -15.4211, 'lng': 28.3014},  # Zambia Police Headquarters
+        'zambia_accountancy': {'lat': -15.4163, 'lng': 28.2888},  # Zambia Centre for Accountancy
+        'mukuba_house': {'lat': -15.4182, 'lng': 28.2845},  # Mukuba Pension House
+        'bus_terminus': {'lat': -15.4204, 'lng': 28.2902},  # Lusaka Intercity Bus Terminus
+        'national_museum': {'lat': -15.4198, 'lng': 28.2877},  # Lusaka National Museum
+    }
 
     PAYMENT_METHODS = [
         ('cash', 'Cash'),
@@ -43,9 +53,22 @@ class DeliveryInfo(models.Model):
         ('cancelled', 'Cancelled'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    address = models.CharField(max_length=100, blank=True, null=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        help_text="User who placed the order"
+    )
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+        help_text="Cart containing order items"
+    )
+    address = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text="Custom delivery address, if not using predefined point"
+    )
     predefined_address = models.CharField(
         max_length=30,
         choices=DELIVERY_POINTS,
@@ -75,17 +98,37 @@ class DeliveryInfo(models.Model):
         null=True,
         help_text="Specific provider for Mobile Money or Card (e.g., Airtel, Stripe)"
     )
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(
+        max_length=20,
+        validators=[RegexValidator(r'^\+\d{10,15}$', 'Enter a valid phone number (e.g., +260973546375)')],
+        help_text="Primary contact number"
+    )
     secondary_phone_number = models.CharField(
         max_length=20,
         blank=True,
         null=True,
+        validators=[RegexValidator(r'^\+\d{10,15}$', 'Enter a valid phone number (e.g., +260973546375)')],
         help_text="Optional secondary contact number"
+    )
+    restaurant_location = models.JSONField(
+        default=dict,  # Use dict() instead of lambda
+        help_text="Fixed restaurant location coordinates"
+    )
+    driver_location = models.JSONField(
+        null=True,
+        blank=True,
+        help_text="Current driver location coordinates (latitude, longitude)"
+    )
+    last_location_update = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Timestamp of last location update"
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
+        """Override save to set address and restaurant location based on predefined_address."""
         if self.pk:
             try:
                 old_instance = DeliveryInfo.objects.get(pk=self.pk)
@@ -98,11 +141,21 @@ class DeliveryInfo(models.Model):
                 logger.warning(f"DeliveryInfo {self.id} not found during save")
         else:
             logger.info(f"New DeliveryInfo created with status {self.delivery_status}")
+
+        # Set restaurant_location based on predefined_address
+        if self.predefined_address in self.DELIVERY_POINTS_COORDS:
+            self.restaurant_location = self.DELIVERY_POINTS_COORDS[self.predefined_address]
+        if not self.restaurant_location:
+            self.restaurant_location = self.DELIVERY_POINTS_COORDS['evelynhone']  # Default to Evelyn Hone
+
+        # Set address from predefined_address if not provided
         if self.predefined_address and not self.address:
             self.address = self.get_predefined_address_display()
+
         super().save(*args, **kwargs)
 
     def __str__(self):
+        """String representation of the delivery."""
         address_display = self.address or self.get_predefined_address_display() or "N/A"
         return f"Delivery for {self.user.username} at {address_display}"
 
@@ -111,25 +164,46 @@ class DeliveryInfo(models.Model):
         verbose_name = "Delivery Info"
         verbose_name_plural = "Delivery Info"
 
-
 class PaymentHistory(models.Model):
+    """Model to store payment history for an order."""
     id = models.BigAutoField(primary_key=True)
-    transaction_id = models.CharField(max_length=100, blank=True, null=True)  # paypal transaction
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
+    transaction_id = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text="Transaction ID from payment provider (e.g., PayPal)"
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        help_text="User who made the payment"
+    )
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.SET_NULL,
+        null=True,
+        help_text="Cart associated with the payment"
+    )
     delivery_info = models.ForeignKey(
         DeliveryInfo,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='payment_histories'
+        related_name='payment_histories',
+        help_text="Associated delivery information"
     )
-    total = models.DecimalField(max_digits=10, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
+    total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        help_text="Total payment amount"
+    )
     items = models.JSONField(
+        default=list,  # Use list() instead of lambda
         help_text="List of items in the payment (e.g., [{'name': 'Pizza', 'quantity': 2, 'subtotal': 15.00}])"
     )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """String representation of the payment."""
         return f"Payment by {self.user.username} on {self.created_at}"
 
     class Meta:
