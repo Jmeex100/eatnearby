@@ -559,19 +559,54 @@ def in_progress_orders(request):
     }
     return render(request, 'payments/in_progress_orders.html', context)
 
+
+
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from .models import DeliveryInfo
+import logging
+from geopy.geocoders import Nominatim
+
+def geocode_address(address):
+    """
+    Convert a custom address to coordinates using Nominatim geocoding service.
+    
+    Args:
+        address (str): The address to geocode.
+    
+    Returns:
+        dict: Dictionary with 'lat' and 'lng' keys, or None if geocoding fails.
+    """
+    try:
+        geolocator = Nominatim(user_agent="eatnearby")
+        location = geolocator.geocode(address + ", Lusaka, Zambia")
+        if location:
+            return {"lat": location.latitude, "lng": location.longitude}
+        logger.warning(f"Geocoding failed for address: {address}")
+        return None
+    except Exception as e:
+        logger.error(f"Geocoding error for address {address}: {str(e)}")
+        return None
+
 @login_required
 def get_delivery_locations(request, delivery_id: int):
-    """Retrieve delivery locations for a specific delivery (customer access)."""
     try:
         delivery = get_object_or_404(DeliveryInfo, id=delivery_id, user=request.user)
-        return JsonResponse({
+        # Access DELIVERY_POINTS_COORDS via the DeliveryInfo class
+        destination_coords = DeliveryInfo.DELIVERY_POINTS_COORDS.get(delivery.predefined_address, None)
+        if delivery.address and not destination_coords:
+            destination_coords = geocode_address(delivery.address)
+        response_data = {
             'status': 'success',
             'restaurant': delivery.restaurant_location,
             'driver': delivery.driver_location,
             'destination': {
                 'address': delivery.address or delivery.get_predefined_address_display(),
+                'coords': destination_coords
             }
-        })
+        }
+        return JsonResponse(response_data)
     except DeliveryInfo.DoesNotExist:
         logger.warning(f"Delivery {delivery_id} not found for user {request.user.id}")
         return JsonResponse({'status': 'error', 'message': 'Delivery not found'}, status=404)

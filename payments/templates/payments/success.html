@@ -230,6 +230,7 @@
     let map;
     let restaurantMarker;
     let driverMarker;
+    let destinationMarker;
     let routeLine;
     let pollingInterval;
 
@@ -241,7 +242,7 @@
             
             // Add tile layer
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
             // Start polling if delivery is in progress
@@ -261,13 +262,14 @@
             // Clear previous markers and route
             if (restaurantMarker) map.removeLayer(restaurantMarker);
             if (driverMarker) map.removeLayer(driverMarker);
+            if (destinationMarker) map.removeLayer(destinationMarker);
             if (routeLine) map.removeLayer(routeLine);
 
             // Update status message
             const statusElement = document.getElementById('delivery-status');
             
             if (data.status !== 'success') {
-                statusElement.textContent = 'Unable to load driver location: ' + (data.message || 'Unknown error');
+                statusElement.textContent = 'Unable to load locations: ' + (data.message || 'Unknown error');
                 return;
             }
 
@@ -289,30 +291,44 @@
                         className: 'bg-transparent'
                     })
                 }).addTo(map).bindPopup('Driver Location');
-                
-                // Update status message
                 statusElement.textContent = 'Driver is on the way to your location';
-                
-                // Draw route between restaurant and driver if both exist
-                if (data.restaurant?.lat && data.restaurant?.lng) {
-                    const restaurantLatLng = L.latLng(data.restaurant.lat, data.restaurant.lng);
-                    const driverLatLng = L.latLng(data.driver.lat, data.driver.lng);
-                    
-                    // Create a polyline to connect the points
-                    routeLine = L.polyline([restaurantLatLng, driverLatLng], {
-                        color: '#3b82f6',
-                        weight: 3,
-                        dashArray: '5, 5'
-                    }).addTo(map);
-                    
-                    // Fit map to show both markers and the route
-                    const bounds = L.latLngBounds([restaurantLatLng, driverLatLng]);
-                    map.fitBounds(bounds, { padding: [50, 50] });
-                } else {
-                    map.setView([data.driver.lat, data.driver.lng], 13);
-                }
-            } else if (data.message) {
-                statusElement.textContent = data.message;
+            } else {
+                statusElement.textContent = 'Driver location unavailable';
+            }
+
+            // Add destination marker if available
+            if (data.destination?.coords?.lat && data.destination?.coords?.lng) {
+                destinationMarker = L.marker([data.destination.coords.lat, data.destination.coords.lng], {
+                    icon: L.divIcon({
+                        html: '<div class="bg-green-600 text-white p-1 rounded-full text-xs font-bold">Dest</div>',
+                        className: 'bg-transparent'
+                    })
+                }).addTo(map).bindPopup(data.destination.address);
+            } else {
+                statusElement.textContent = 'Destination coordinates unavailable';
+            }
+
+            // Fit map to show all markers
+            const bounds = L.latLngBounds([
+                data.restaurant && data.restaurant.lat && data.restaurant.lng ? [data.restaurant.lat, data.restaurant.lng] : null,
+                data.driver && data.driver.lat && data.driver.lng ? [data.driver.lat, data.driver.lng] : null,
+                data.destination?.coords?.lat && data.destination?.coords?.lng ? [data.destination.coords.lat, data.destination.coords.lng] : null
+            ].filter(Boolean));
+            if (bounds.isValid()) {
+                map.fitBounds(bounds, { padding: [50, 50] });
+            } else {
+                map.setView([DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng], 13);
+            }
+
+            // Draw route between restaurant and driver if both exist
+            if (data.restaurant?.lat && data.driver?.lat) {
+                const restaurantLatLng = L.latLng(data.restaurant.lat, data.restaurant.lng);
+                const driverLatLng = L.latLng(data.driver.lat, data.driver.lng);
+                routeLine = L.polyline([restaurantLatLng, driverLatLng], {
+                    color: '#3b82f6',
+                    weight: 3,
+                    dashArray: '5, 5'
+                }).addTo(map);
             }
 
             // Hide loading message

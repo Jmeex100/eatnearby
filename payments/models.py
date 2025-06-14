@@ -20,12 +20,12 @@ class DeliveryInfo(models.Model):
     ]
 
     DELIVERY_POINTS_COORDS = {
-        'evelynhone': {'lat': -15.4194, 'lng': 28.2993},  # Evelyn Hone College
-        'zambia_police': {'lat': -15.4211, 'lng': 28.3014},  # Zambia Police Headquarters
-        'zambia_accountancy': {'lat': -15.4163, 'lng': 28.2888},  # Zambia Centre for Accountancy
-        'mukuba_house': {'lat': -15.4182, 'lng': 28.2845},  # Mukuba Pension House
-        'bus_terminus': {'lat': -15.4204, 'lng': 28.2902},  # Lusaka Intercity Bus Terminus
-        'national_museum': {'lat': -15.4198, 'lng': 28.2877},  # Lusaka National Museum
+        "evelynhone": {"lat": -15.4163, "lng": 28.2993},  # Evelyn Hone College
+        "zambia_police": {"lat": -15.4211, "lng": 28.3014},  # Zambia Police Headquarters
+        "zambia_accountancy": {"lat": -15.4163, "lng": 28.2888},  # Zambia Centre for Accountancy
+        "mukuba_house": {"lat": -15.4182, "lng": 28.2845},  # Mukuba Pension House
+        "bus_terminus": {"lat": -15.4204, "lng": 28.2902},  # Lusaka Intercity Bus Terminus
+        "national_museum": {"lat": -15.4198, "lng": 28.2877},  # Lusaka National Museum
     }
 
     PAYMENT_METHODS = [
@@ -111,13 +111,14 @@ class DeliveryInfo(models.Model):
         help_text="Optional secondary contact number"
     )
     restaurant_location = models.JSONField(
-        default=dict,  # Use dict() instead of lambda
-        help_text="Fixed restaurant location coordinates"
+        null=True,
+        blank=True,
+        help_text="Restaurant coordinates {'lat': float, 'lng': float}"
     )
     driver_location = models.JSONField(
         null=True,
         blank=True,
-        help_text="Current driver location coordinates (latitude, longitude)"
+        help_text="Driver coordinates {'lat': float, 'lng': float}"
     )
     last_location_update = models.DateTimeField(
         blank=True,
@@ -127,8 +128,16 @@ class DeliveryInfo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_predefined_address_display(self):
+        """Return the display name of the predefined address."""
+        return dict(self.DELIVERY_POINTS).get(self.predefined_address, self.predefined_address)
+
+    def get_payment_method_display(self):
+        """Return the display name of the payment method."""
+        return dict(self.PAYMENT_METHODS).get(self.payment_method, self.payment_method)
+
     def save(self, *args, **kwargs):
-        """Override save to set address and restaurant location based on predefined_address."""
+        """Override save to set restaurant location and log status changes."""
         if self.pk:
             try:
                 old_instance = DeliveryInfo.objects.get(pk=self.pk)
@@ -142,11 +151,8 @@ class DeliveryInfo(models.Model):
         else:
             logger.info(f"New DeliveryInfo created with status {self.delivery_status}")
 
-        # Set restaurant_location based on predefined_address
-        if self.predefined_address in self.DELIVERY_POINTS_COORDS:
-            self.restaurant_location = self.DELIVERY_POINTS_COORDS[self.predefined_address]
-        if not self.restaurant_location:
-            self.restaurant_location = self.DELIVERY_POINTS_COORDS['evelynhone']  # Default to Evelyn Hone
+        # Always set restaurant_location to Zambia Centre for Accountancy
+        self.restaurant_location = self.DELIVERY_POINTS_COORDS['zambia_accountancy']
 
         # Set address from predefined_address if not provided
         if self.predefined_address and not self.address:
@@ -197,7 +203,7 @@ class PaymentHistory(models.Model):
         help_text="Total payment amount"
     )
     items = models.JSONField(
-        default=list,  # Use list() instead of lambda
+        default=list,
         help_text="List of items in the payment (e.g., [{'name': 'Pizza', 'quantity': 2, 'subtotal': 15.00}])"
     )
     created_at = models.DateTimeField(auto_now_add=True)
