@@ -1,167 +1,440 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
+{% block title %}In-Progress Orders{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-6xl mx-auto">
-        <!-- In-Progress Orders Section -->
-        <section class="mb-12 my-10">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">In-Progress Orders</h2>
-                <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-sm font-medium">
-                    {{ in_progress_orders|length }} active
-                </span>
-            </div>
+<div class="min-h-screen transition-colors duration-300" data-theme="dark">
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+            <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
+    </div>
 
-            {% if in_progress_orders %}
-            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-700">
-                            <tr>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Order #</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Items</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Delivery</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            {% for order in in_progress_orders %}
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">#{{ order.id }}</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.created_at|date:"M d, Y" }}</div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4">
-                                    <div class="text-sm text-gray-900 dark:text-gray-100">
-                                        {% for item in order.cart.cartitem_set.all %}
-                                        <div class="flex justify-between py-1">
-                                            <span>{{ item.get_product.name }}</span>
-                                            <span class="text-gray-500 dark:text-gray-400 ml-2">×{{ item.quantity }}</span>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900 dark:text-gray-100">{{ order.get_predefined_address_display }}</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.phone_number }}</div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                    K{{ order.cart.total|floatformat:2 }}
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="delivery_id" value="{{ order.id }}">
-                                        <button type="submit" class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 font-medium">
-                                            Confirm Delivery
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- In-Progress Orders Section -->
+            <section class="mb-12 my-10">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">In-Progress Orders</h2>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-sm font-medium">
+                        {{ in_progress_orders|length }} active
+                    </span>
                 </div>
-            </div>
-            {% else %}
-            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
-                <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No active orders</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You don't have any orders in progress right now.</p>
-            </div>
-            {% endif %}
-        </section>
 
-        <!-- Declined Orders Section -->
-        <section>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Declined Orders</h2>
-                <span class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 text-sm font-medium">
-                    {{ declined_orders|length }} declined
-                </span>
-            </div>
-
-            {% if declined_orders %}
-            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden border border-red-200 dark:border-red-800">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-red-50 dark:bg-red-900/20">
-                            <tr>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Order #</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Items</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Delivery</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Total</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Reason</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-right text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            {% for order in declined_orders %}
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">#{{ order.id }}</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.created_at|date:"M d, Y" }}</div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4">
-                                    <div class="text-sm text-gray-900 dark:text-gray-100">
-                                        {% for item in order.cart.cartitem_set.all %}
-                                        <div class="flex justify-between py-1">
-                                            <span>{{ item.get_product.name }}</span>
-                                            <span class="text-gray-500 dark:text-gray-400 ml-2">×{{ item.quantity }}</span>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900 dark:text-gray-100">{{ order.get_predefined_address_display }}</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.phone_number }}</div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                    K{{ order.cart.total|floatformat:2 }}
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
-                                    {% for notification in order.notifications.all %}
-                                        {% if notification.notification_type == 'delivery_declined' %}
-                                            {{ notification.message|slice:"16:" }}
-                                        {% endif %}
-                                    {% endfor %}
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="delete_delivery_id" value="{{ order.id }}">
-                                        <button type="submit" name="delete_single_order" value="true" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 font-medium">
-                                            Delete Order
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                {% if in_progress_orders %}
+                <div class="space-y-8">
+                    {% for order in in_progress_orders %}
+                    <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Order #</th>
+                                        <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Items</th>
+                                        <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Delivery</th>
+                                        <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total</th>
+                                        <th scope="col" class="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900 dark:text-gray-100">#{{ order.id }}</div>
+                                            <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.created_at|date:"M d, Y" }}</div>
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4">
+                                            <div class="text-sm text-gray-900 dark:text-gray-100">
+                                                {% for item in order.cart.cartitem_set.all %}
+                                                <div class="flex justify-between py-1">
+                                                    <span>{{ item.get_product.name }}</span>
+                                                    <span class="text-gray-500 dark:text-gray-400 ml-2">×{{ item.quantity }}</span>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 dark:text-gray-100">{{ order.get_predefined_address_display }}</div>
+                                            <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.phone_number }}</div>
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                            K{{ order.cart.total|floatformat:2 }}
+                                        </td>
+                                        <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="delivery_id" value="{{ order.id }}">
+                                                <button type="submit" class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 font-medium">
+                                                    Confirm Delivery
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Delivery Tracking Map -->
+                        <div class="p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Delivery Tracking</h3>
+                                <button id="toggle-map-{{ order.id }}" 
+                                        class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                                        onclick="toggleMap({{ order.id }})">
+                                    View Map
+                                </button>
+                            </div>
+                            <div id="delivery-map-container-{{ order.id }}" class="hidden">
+                                <div id="delivery-map-{{ order.id }}" class="h-64 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900">
+                                    <p class="text-center py-20 text-gray-500 dark:text-gray-400" id="map-loading-{{ order.id }}">Loading map...</p>
+                                </div>
+                                <div id="delivery-status-{{ order.id }}" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                    Driver is on the way to your location.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
+                {% else %}
+                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No active orders</h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You don't have any orders in progress right now.</p>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- Declined Orders Section -->
+            <section>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Declined Orders</h2>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 text-sm font-medium">
+                        {{ declined_orders|length }} declined
+                    </span>
+                </div>
+
+                {% if declined_orders %}
+                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden border border-red-200 dark:border-red-800">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-red-50 dark:bg-red-900/20">
+                                <tr>
+                                    <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Order #</th>
+                                    <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Items</th>
+                                    <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Delivery</th>
+                                    <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Total</th>
+                                    <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Reason</th>
+                                    <th scope="col" class="px-4 sm:px-6 py-3 text-right text-xs font-medium text-red-500 dark:text-red-400 uppercase tracking-wider">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                {% for order in declined_orders %}
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900 dark:text-gray-100">#{{ order.id }}</div>
+                                        <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.created_at|date:"M d, Y" }}</div>
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4">
+                                        <div class="text-sm text-gray-900 dark:text-gray-100">
+                                            {% for item in order.cart.cartitem_set.all %}
+                                            <div class="flex justify-between py-1">
+                                                <span>{{ item.get_product.name }}</span>
+                                                <span class="text-gray-500 dark:text-gray-400 ml-2">×{{ item.quantity }}</span>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900 dark:text-gray-100">{{ order.get_predefined_address_display }}</div>
+                                        <div class="text-sm text-gray-500 dark:text-gray-400">{{ order.phone_number }}</div>
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        K{{ order.cart.total|floatformat:2 }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                        {% for notification in order.notifications.all %}
+                                            {% if notification.notification_type == 'delivery_declined' %}
+                                                {{ notification.message|slice:"16:" }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="delete_delivery_id" value="{{ order.id }}">
+                                            <button type="submit" name="delete_single_order" value="true" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 font-medium">
+                                                Delete Order
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% else %}
+                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No declined orders</h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You don't have any declined orders.</p>
+                </div>
+                {% endif %}
+            </section>
+
+            <div class="flex justify-center mt-6">
+                <a href="{% url 'payments:order_history' %}"
+                   class="inline-block text-center bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 dark:hover:bg-red-800 transition">
+                    Order History
+                </a>
             </div>
-            {% else %}
-            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
-                <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No declined orders</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You don't have any declined orders.</p>
-            </div>
-            {% endif %}
-        </section>
-        
-        <div class="flex justify-center mt-6">
-            <a href="{% url 'payments:order_history' %}"
-               class="inline-block text-center bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 dark:hover:bg-red-800 transition">
-                Order History
-            </a>
         </div>
     </div>
 </div>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<!-- Print-Specific Styles -->
+<style>
+    @media print {
+        @page { size: A4 portrait; margin: 1cm; }
+        body { background: white !important; color: black !important; font-size: 12pt; }
+        .no-print, [id^="delivery-map-"], [id^="delivery-status-"] { display: none !important; }
+        .min-h-screen { min-height: auto; padding: 0 !important; }
+        .max-w-6xl { max-width: 100% !important; margin: 0 !important; }
+        .bg-white, .dark:bg-gray-800 { background: white !important; box-shadow: none !important; border: 1px solid #ddd !important; }
+        table { width: 100% !important; border-collapse: collapse !important; }
+        th, td { border: 1px solid #ddd !important; padding: 8px !important; }
+        th { background: #f2f2f2 !important; }
+    }
+</style>
+
+<!-- JavaScript for Theme Toggle and Delivery Tracking Maps -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Theme Toggle
+    const html = document.documentElement;
+    const toggleButton = document.getElementById('theme-toggle');
+    const toggleIcon = document.getElementById('theme-icon');
+
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    toggleIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+
+    toggleButton.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        toggleIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem('theme', newTheme);
+    });
+
+    // Map Configuration
+    const POLLING_INTERVAL = 10000; // 10 seconds
+    const RETRY_INTERVAL = 30000; // 30 seconds on error
+    const CSRF_TOKEN = "{{ csrf_token }}";
+    const DEFAULT_LOCATION = { lat: -15.4167, lng: 28.2833 }; // Lusaka coordinates
+
+    // State for each order's map
+    const maps = {};
+    const markers = {};
+    const routeLines = {};
+    const pollingIntervals = {};
+    const mapStates = {}; // Track whether maps are visible
+
+    // Toggle map visibility
+    function toggleMap(orderId) {
+        const container = document.getElementById(`delivery-map-container-${orderId}`);
+        const button = document.getElementById(`toggle-map-${orderId}`);
+        
+        if (container.classList.contains('hidden')) {
+            // Show map
+            container.classList.remove('hidden');
+            button.textContent = 'Hide Map';
+            
+            // Initialize map if not already done
+            if (!maps[orderId]) {
+                initMap(orderId);
+            } else {
+                // If map already exists, just invalidate its size to ensure proper rendering
+                maps[orderId].invalidateSize();
+            }
+        } else {
+            // Hide map
+            container.classList.add('hidden');
+            button.textContent = 'View Map';
+        }
+    }
+
+    // Initialize map for a specific order
+    function initMap(orderId) {
+        try {
+            const mapElement = document.getElementById(`delivery-map-${orderId}`);
+            if (!mapElement) return;
+
+            maps[orderId] = L.map(`delivery-map-${orderId}`).setView([DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(maps[orderId]);
+
+            markers[orderId] = { restaurant: null, driver: null, destination: null };
+            routeLines[orderId] = null;
+            startPolling(orderId);
+        } catch (error) {
+            console.error(`Map initialization error for order ${orderId}:`, error);
+            document.getElementById(`map-loading-${orderId}`).textContent = 'Error loading map';
+        }
+    }
+
+    // Update map with new location data
+    function updateMap(orderId, data) {
+        try {
+            const map = maps[orderId];
+            const statusElement = document.getElementById(`delivery-status-${orderId}`);
+
+            // Clear previous markers and route
+            if (markers[orderId].restaurant) map.removeLayer(markers[orderId].restaurant);
+            if (markers[orderId].driver) map.removeLayer(markers[orderId].driver);
+            if (markers[orderId].destination) map.removeLayer(markers[orderId].destination);
+            if (routeLines[orderId]) map.removeLayer(routeLines[orderId]);
+
+            if (data.status !== 'success') {
+                statusElement.textContent = 'Unable to load locations: ' + (data.message || 'Unknown error');
+                return;
+            }
+
+            // Add restaurant marker
+            if (data.restaurant?.lat && data.restaurant?.lng) {
+                markers[orderId].restaurant = L.marker([data.restaurant.lat, data.restaurant.lng], {
+                    icon: L.divIcon({
+                        html: '<div class="bg-red-600 text-white p-1 rounded-full text-xs font-bold">R</div>',
+                        className: 'bg-transparent'
+                    })
+                }).addTo(map).bindPopup('Restaurant Location');
+            }
+
+            // Add driver marker
+            if (data.driver?.lat && data.driver?.lng) {
+                markers[orderId].driver = L.marker([data.driver.lat, data.driver.lng], {
+                    icon: L.divIcon({
+                        html: '<div class="bg-blue-600 text-white p-1 rounded-full text-xs font-bold">D</div>',
+                        className: 'bg-transparent'
+                    })
+                }).addTo(map).bindPopup('Driver Location');
+                statusElement.textContent = 'Driver is on the way to your location';
+            } else {
+                statusElement.textContent = 'Driver location unavailable';
+            }
+
+            // Add destination marker
+            if (data.destination?.coords?.lat && data.destination?.coords?.lng) {
+                markers[orderId].destination = L.marker([data.destination.coords.lat, data.destination.coords.lng], {
+                    icon: L.divIcon({
+                        html: '<div class="bg-green-600 text-white p-1 rounded-full text-xs font-bold">Dest</div>',
+                        className: 'bg-transparent'
+                    })
+                }).addTo(map).bindPopup(data.destination.address);
+            } else {
+                statusElement.textContent = 'Destination coordinates unavailable';
+            }
+
+            // Fit map to show all markers
+            const bounds = L.latLngBounds([
+                data.restaurant && data.restaurant.lat && data.restaurant.lng ? [data.restaurant.lat, data.restaurant.lng] : null,
+                data.driver && data.driver.lat && data.driver.lng ? [data.driver.lat, data.driver.lng] : null,
+                data.destination?.coords?.lat && data.destination?.coords?.lng ? [data.destination.coords.lat, data.destination.coords.lng] : null
+            ].filter(Boolean));
+            if (bounds.isValid()) {
+                map.fitBounds(bounds, { padding: [50, 50] });
+            } else {
+                map.setView([DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng], 13);
+            }
+
+            // Draw route between restaurant and driver
+            if (data.restaurant?.lat && data.driver?.lat) {
+                const restaurantLatLng = L.latLng(data.restaurant.lat, data.restaurant.lng);
+                const driverLatLng = L.latLng(data.driver.lat, data.driver.lng);
+                routeLines[orderId] = L.polyline([restaurantLatLng, driverLatLng], {
+                    color: '#3b82f6',
+                    weight: 3,
+                    dashArray: '5, 5'
+                }).addTo(map);
+            }
+
+            // Hide loading message
+            document.getElementById(`map-loading-${orderId}`).style.display = 'none';
+        } catch (error) {
+            console.error(`Map update error for order ${orderId}:`, error);
+            statusElement.textContent = 'Error updating map';
+        }
+    }
+
+    // Fetch delivery locations
+    async function fetchDeliveryLocations(orderId) {
+        try {
+            const response = await fetch(`{% url 'payments:get_delivery_locations' 0 %}`.replace('0', orderId), {
+                headers: {
+                    "X-CSRFToken": CSRF_TOKEN,
+                    "Accept": "application/json"
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Fetch error for order ${orderId}:`, error);
+            throw error;
+        }
+    }
+
+    // Start polling for location updates
+    function startPolling(orderId) {
+        fetchDeliveryLocations(orderId)
+            .then(data => {
+                updateMap(orderId, data);
+                pollingIntervals[orderId] = setInterval(() => pollLocations(orderId), POLLING_INTERVAL);
+            })
+            .catch(error => {
+                console.error(`Initial fetch error for order ${orderId}:`, error);
+                document.getElementById(`delivery-status-${orderId}`).textContent = 'Error loading delivery data';
+                pollingIntervals[orderId] = setInterval(() => pollLocations(orderId), RETRY_INTERVAL);
+            });
+    }
+
+    // Poll locations
+    function pollLocations(orderId) {
+        fetchDeliveryLocations(orderId)
+            .then(data => updateMap(orderId, data))
+            .catch(error => {
+                console.error(`Polling error for order ${orderId}:`, error);
+                document.getElementById(`delivery-status-${orderId}`).textContent = 'Connection error - retrying...';
+            });
+    }
+
+    // Clean up polling on page unload
+    window.addEventListener('beforeunload', () => {
+        Object.values(pollingIntervals).forEach(interval => clearInterval(interval));
+    });
+</script>
+
+<!-- Tailwind CSS for dark mode support -->
+<style>
+    [data-theme="dark"] {
+        background-color: #1f2937; /* bg-gray-900 */
+    }
+    [data-theme="light"] {
+        background-color: #f3f4f6; /* bg-gray-100 */
+    }
+</style>
 {% endblock %}

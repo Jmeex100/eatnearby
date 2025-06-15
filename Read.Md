@@ -21,10 +21,13 @@ source .venv/Scripts/activate
 
 ./tailwindcss -i ./sim/static/css/input.css -o ./sim/static/css/output.css --watch
 
-User info:
-Username: staff
+User info: Password: 1000@****
+# staffs
+sam
 
-Password: Gu8WdGQwhXDO
+# customers
+Lingson
+
 
 # kill port 8000
 lsof -i :8000

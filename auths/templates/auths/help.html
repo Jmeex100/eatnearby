@@ -2,13 +2,20 @@
 {% block title %}Help{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-gray-900 pt-16 pb-8">
+<div class="min-h-screen transition-colors duration-300" data-theme="dark">
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+            <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
+    </div>
+
     <!-- How to Order Section -->
-    <div class="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 shadow-lg rounded-lg p-4 mx-4 mb-8">
-        <h2 class="text-2xl font-bold text-gray-100 mb-6 text-center">
+    <div class="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 shadow-lg rounded-lg p-4 mx-4 mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 my-8 dark:text-gray-100 mb-6 text-center">
             <i class="fas fa-question-circle mr-2"></i> How to Order
         </h2>
-        <p class="text-gray-300 mb-6 text-center text-sm">
+        <p class="text-gray-700 dark:text-gray-300 mb-6 text-center text-sm">
             Follow these simple steps to order our products:
         </p>
         <ol class="space-y-4">
@@ -17,7 +24,7 @@
                 <div class="absolute left-0 top-0 h-8 w-8 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
                     1
                 </div>
-                <p class="text-gray-300 text-sm ml-2">
+                <p class="text-gray-700 dark:text-gray-300 text-sm ml-2">
                     <i class="fas fa-utensils mr-2 text-blue-400"></i> Go to the menu and add items to your order.
                 </p>
             </li>
@@ -26,7 +33,7 @@
                 <div class="absolute left-0 top-0 h-8 w-8 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
                     2
                 </div>
-                <p class="text-gray-300 text-sm ml-2">
+                <p class="text-gray-700 dark:text-gray-300 text-sm ml-2">
                     <i class="fas fa-shopping-cart mr-2 text-blue-400"></i> Check your cart to see your order and total.
                 </p>
             </li>
@@ -35,7 +42,7 @@
                 <div class="absolute left-0 top-0 h-8 w-8 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
                     3
                 </div>
-                <p class="text-gray-300 text-sm ml-2">
+                <p class="text-gray-700 dark:text-gray-300 text-sm ml-2">
                     <i class="fas fa-credit-card mr-2 text-blue-400"></i> Select your payment method.
                 </p>
             </li>
@@ -44,19 +51,19 @@
                 <div class="absolute left-0 top-0 h-8 w-8 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
                     4
                 </div>
-                <p class="text-gray-300 text-sm ml-2">
+                <p class="text-gray-700 dark:text-gray-300 text-sm ml-2">
                     <i class="fas fa-check-circle mr-2 text-blue-400"></i> Complete payment to finalize your order.
                 </p>
             </li>
         </ol>
-        <p class="text-gray-300 text-center font-bold mt-6 text-sm">
+        <p class="text-gray-700 dark:text-gray-300 text-center font-bold mt-6 text-sm">
             <i class="fas fa-heart mr-2 text-red-400"></i> Thank you for your order! We’re excited to serve you!
         </p>
     </div>
 
     <!-- Contact Form Section -->
-    <div class="bg-gray-800 shadow-lg rounded-xl p-6 mx-4">
-        <h2 class="text-2xl font-bold text-gray-100 mb-6 text-center">
+    <div class="bg-gray-100 dark:bg-gray-800 shadow-lg rounded-xl p-6 mx-4">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
             <i class="fas fa-envelope mr-2"></i> Need Help? Contact Us
         </h2>
         <form action="{% url 'contact' %}" method="post" class="space-y-4">
@@ -64,14 +71,14 @@
 
             <!-- Name Field -->
             <div>
-                <label for="id_name" class="block text-sm font-medium text-gray-300 mb-1">
+                <label for="id_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     <i class="fas fa-user mr-2"></i> Your Name
                 </label>
                 <input
                     type="text"
                     name="name"
                     id="id_name"
-                    class="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-sm"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-sm"
                     placeholder="Enter your name"
                     required
                 >
@@ -84,14 +91,14 @@
 
             <!-- Email Field -->
             <div>
-                <label for="id_email" class="block text-sm font-medium text-gray-300 mb-1">
+                <label for="id_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     <i class="fas fa-envelope mr-2"></i> Your Email
                 </label>
                 <input
                     type="email"
                     name="email"
                     id="id_email"
-                    class="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-sm"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-sm"
                     placeholder="Enter your email"
                     required
                 >
@@ -104,14 +111,14 @@
 
             <!-- Message Field -->
             <div>
-                <label for="id_message" class="block text-sm font-medium text-gray-300 mb-1">
+                <label for="id_message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     <i class="fas fa-comment mr-2"></i> Your Message
                 </label>
                 <textarea
                     name="message"
                     id="id_message"
                     rows="4"
-                    class="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-sm"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-sm"
                     placeholder="Enter your message"
                     required
                 ></textarea>
@@ -137,4 +144,34 @@
 
 <!-- Font Awesome for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- JavaScript for Theme Toggle -->
+<script>
+    const html = document.documentElement;
+    const toggleButton = document.getElementById('theme-toggle');
+    const toggleIcon = document.getElementById('theme-icon');
+
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    toggleIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+
+    toggleButton.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        toggleIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem('theme', newTheme);
+    });
+</script>
+
+<!-- Tailwind CSS for dark mode support -->
+<style>
+    [data-theme="dark"] {
+        background-color: #1f2937; /* bg-gray-900 */
+    }
+    [data-theme="light"] {
+        background-color: #f3f4f6; /* bg-gray-100 */
+    }
+</style>
 {% endblock %}
