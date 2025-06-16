@@ -1,0 +1,15 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-dark-text mb-6">Restaurants</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-red-100 text-red-700 p-4 rounded mb-4">{{ message }}</div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-600 dark:text-gray-300">No restaurant available. Please contact the administrator.</p>
+    {% endif %}
+</div>
+{% endblock content %}

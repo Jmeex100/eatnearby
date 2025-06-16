@@ -1,0 +1,32 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <!-- Restaurant Header -->
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 transition-all duration-300">
+        <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-3" aria-label="Restaurant name: {{ restaurant.name }}">{{ restaurant.name }}</h1>
+                {% if restaurant.is_verified %}
+                    <span class="inline-block bg-green-500 text-white text-sm px-3 py-1 rounded-full mb-4" aria-label="Verified restaurant">Verified</span>
+                {% endif %}
+                <p class="text-gray-600 dark:text-gray-300 mb-4">{{ restaurant.description|default:"No description available" }}</p>
+                <div class="space-y-2 text-gray-600 dark:text-gray-300">
+                    <p><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>{{ restaurant.address }}, {{ restaurant.city }}, {{ restaurant.country }}</p>
+                    {% if restaurant.phone %}
+                        <p><i class="fas fa-phone mr-2" aria-hidden="true"></i>{{ restaurant.phone }}</p>
+                    {% endif %}
+                    {% if restaurant.email %}
+                        <p><i class="fas fa-envelope mr-2" aria-hidden="true"></i>{{ restaurant.email }}</p>
+                    {% endif %}
+                    {% if restaurant.website %}
+                        <p><i class="fas fa-globe mr-2" aria-hidden="true"></i><a href="{{ restaurant.website }}" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">{{ restaurant.website }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Removed restaurant.image check since Restaurant model doesn't have an image field -->
+        </div>
+    </div>
+
+{% endblock content %}

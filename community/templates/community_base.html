@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eat near-by</title>
+    <script>
+        // Check for dark mode preference immediately
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        /* Main navbar is fixed at top with highest z-index */
+        .main-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000; /* Highest z-index */
+        }
+        
+        /* Secondary navbar is fixed below main navbar and centered */
+        .secondary-navbar {
+            position: fixed;
+            top: 4rem; /* Height of main navbar */
+            left: 0;
+            right: 0;
+            z-index: 900; /* Below main navbar */
+            display: flex;
+            justify-content: center;
+        }
+        
+        /* Body padding to account for both navbars */
+        body {
+            padding-top: 8rem; /* Combined height of both navbars */
+        }
+        
+        /* Container for secondary nav links */
+        .secondary-nav-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px; /* Match your container size */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="dark:bg-dark-background text-gray-800 dark:text-dark-text">
+    <!-- Main Navbar (fixed at very top) -->
+    <div class="main-navbar">
+        {% include "navbar.html" %}
+    </div>
+    
+   <!-- Secondary Community Navigation (fixed below main navbar) -->
+<nav class="bg-white dark:bg-gray-800 shadow-md secondary-navbar border-b border-gray-200 dark:border-gray-700">
+    <div class="secondary-nav-container">
+        <div class="flex space-x-6 py-3">
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-200">
+                <i class="fas fa-utensils mr-1"></i> Restaurants
+            </a>
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-200">
+                <i class="fas fa-comments mr-1"></i> Community Posts
+            </a>
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-200">
+                <i class="fas fa-trophy mr-1"></i> Challenges
+            </a>
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-200">
+                <i class="fas fa-book mr-1"></i> Recipes
+            </a>
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-200">
+                <i class="fas fa-question-circle mr-1"></i> Ask the Chef
+            </a>
+        </div>
+    </div>
+</nav>
+
+    <main class="flex-grow container mx-auto px-4 py-6">
+        {% block content %}
+        {% endblock content %}
+        {% block extra_js %}{% endblock %}
+    </main>
+    
+    {% include "footer.html" %}
+</body>
+</html>

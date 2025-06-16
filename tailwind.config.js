@@ -15,6 +15,9 @@ module.exports = {
     './staffs/static/js/**/*.js',
     './superadmin/templates/**/*.html',
     './superadmin/static/js/**/*.js',
+      './Community/templates/**/*.html',
+    './Community/static/js/**/*.js',
+    
   ],
   theme: {
     extend: {

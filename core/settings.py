@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'payments.apps.PaymentsConfig',
     'paypal.standard.ipn',
     'pwa',
-    'staffs.apps.StaffsConfig',    
+    'staffs.apps.StaffsConfig', 
+    'community',
 
 ]
 
