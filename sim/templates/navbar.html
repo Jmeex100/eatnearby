@@ -1,270 +1,316 @@
 {% load static %}
 
 <nav class="shadow-lg fixed w-full z-10">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-            <div class="flex items-center">
-                <a href="{% if user.is_authenticated %}{% url 'index' %}{% else %}{% url 'home' %}{% endif %}" 
-                   class="text-xl font-bold flex items-center">
-                    <span class="logo-red">Eat-NEAR</span><span class="logo-green">-BY</span>
-                    <img src="{% static 'images/logo/icon-192x192.png' %}" 
-                         alt="Eat-NEAR-BY Logo" 
-                         title="Eat-NEAR-BY" 
-                         class="w-10 h-10 rounded-full">
-                </a>
-            </div>
-            <div class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2 items-center">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
-                    <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
-                    <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
-                    <!-- Notification Bell -->
-                    <div class="relative">
-                        <a href="{% url 'payments:in_progress_orders' %}" title="Notifications" class="hover:text-black">
-                            <svg class="w-6 h-6 text-gray-700 hover:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>
-                            {% if nav_total_notifications > 0 %}
-                                <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
-                                    {{ nav_total_notifications }}
-                                </span>
-                            {% endif %}
-                        </a>
-                    </div>
-                    <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
-                  
-                     <a href=" {% url 'community:restaurant' %}" class="hover:font-bold">Community</a>
-                {% else %}
-                    <a href="{% url 'home' %}" class="hover:font-bold">Home</a>
-                    <a href="{% url 'menu' %}" class="hover:font-bold">Menu</a>
-                    <a href="{% url 'about' %}" class="hover:font-bold">About Us</a>
-                    <a href="{% url 'contact' %}" class="hover:font-bold">Contact</a>
-                {% endif %}
-            </div>
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="{% if user.is_authenticated %}{% url 'index' %}{% else %}{% url 'home' %}{% endif %}" 
+           class="text-xl font-bold flex items-center">
+          <span class="logo-red">Eat-NEAR</span><span class="logo-green">-BY</span>
+          <img src="{% static 'images/logo/icon-192x192.png' %}" 
+               alt="Eat-NEAR-BY Logo" 
+               title="Eat-NEAR-BY" 
+               class="w-10 h-10 rounded-full">
+        </a>
+      </div>
 
-            <!-- Actions and Clock -->
-            <div class="flex items-center space-x-4">
-                <div id="clock" class="hidden md:inline-block clock">--:--:--</div>
-                <!-- Dark Mode Toggle -->
-                <button id="theme-toggle" type="button" class="theme-toggle rounded-lg text-sm p-2">
-                    <svg id="theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-                {% if user.is_authenticated %}
-                    <!-- Cart with order count -->
-                    <a href="{% url 'cart:cart_view' %}" class="relative">
-                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-1 5h10l-1-5M9 21h6m-6-6h6m-6-6h6m-6-6h6"></path>
-                        </svg>
-                        <span id="cartItemCount" class="cart-count absolute -top-1 -right-2 rounded-full text-xs px-2 py-0.5">0</span>
-                    </a>
-                    <!-- Profile thumbnail -->
-                    <a href="{% url 'profile' %}" class="hidden md:inline-block">
-                        {% if user.image and user.image.url != '/media/auths/images/empty.png' %}
-                            <img src="{{ user.image.url }}" alt="Profile" class="profile-img w-10 h-10 rounded-full border-2 object-cover">
-                        {% else %}
-                            <img src="{% static 'auths/images/empty.png' %}" alt="Profile" class="profile-img w-10 h-10 rounded-full border-2">
-                        {% endif %}
-                    </a>
-                    <a href="{% url 'logout' %}" class="hidden md:inline-block hover:font-bold">Logout</a>
-                {% else %}
-                    <!-- Order Now and Login -->
-                    <a href="{% url 'menu' %}" class="order-now hidden md:inline-block px-4 py-2 rounded-md transition duration-300">Order Now</a>
-                    <a href="{% url 'login' %}" class="hidden md:inline-block hover:font-bold">Login</a>
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2 items-center">
+        {% if user.is_authenticated %}
+          <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
+          <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
+          <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
+          
+          <!-- Notification Bell -->
+          {% if user.user_type == 'customer' %}
+            <div class="relative">
+              <a href="{% url 'payments:in_progress_orders' %}" title="Notifications" class="hover:text-black">
+                <svg class="w-6 h-6 text-gray-700 hover:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+                {% if nav_total_notifications > 0 %}
+                  <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                    {{ nav_total_notifications }}
+                  </span>
                 {% endif %}
-                <!-- Mobile Menu Button -->
-                <button id="menu-btn" class="md:hidden focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
+              </a>
             </div>
-        </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden shadow-lg">
-        <div class="flex flex-col items-center space-y-4 py-4">
-            {% if user.is_authenticated %}
-                <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
-                <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
-                <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
-                <a href="{% url 'payments:in_progress_orders' %}" class="hover:font-bold">Delivering</a>
-              
-                <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
-                 <a href="{% url 'community:restaurant' %}" class="hover:font-bold">Community</a>
-                <a href="{% url 'cart:cart_view' %}" class="relative hover:font-bold">
-                    <svg class="w-6 h-6 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-1 5h10l-1-5M9 21h6m-6-6h6m-6-6h6m-6-6h6"></path>
-                    </svg>
-                    Cart <span id="mobileCartItemCount" class="cart-count rounded-full text-xs px-2 py-0.5">0</span>
-                </a>
-                <a href="{% url 'profile' %}" class="hover:font-bold">Profile</a>
-                <a href="{% url 'logout' %}" class="hover:font-bold">Logout</a>
-            {% else %}
-                <a href="{% url 'home' %}" class="hover:font-bold">Home</a>
-                <a href="{% url 'menu' %}" class="hover:font-bold">Menu</a>
-                <a href="{% url 'about' %}" class="hover:font-bold">About Us</a>
-                <a href="{% url 'contact' %}" class="hover:font-bold">Contact</a>
-                <a href="{% url 'login' %}" class="hover:font-bold">Login</a>
-            {% endif %}
-            <!-- Dark Mode Toggle in Mobile Menu -->
-            <button id="mobile-theme-toggle" type="button" class="theme-toggle rounded-lg text-sm p-2">
-                <svg id="mobile-theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          {% elif user.user_type == 'staff' %}
+            <div class="relative">
+              <a href="{% url 'staffs:my_deliveries' %}" title="Pending Orders" class="hover:text-black">
+                <svg class="w-6 h-6 text-gray-700 hover:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                 </svg>
-                <svg id="mobile-theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                </svg>
-                Toggle Theme
-            </button>
-        </div>
-    </div>
-    <!-- Messages Pop-up Container -->
-     
-    <div id="message-popup" class="fixed top-16 right-4 z-50 w-80 max-h-96 overflow-y-auto hidden">
-        
-        {% if messages %}
-            {% for message in messages %}
-            <div class="message p-4 rounded-lg shadow-md mb-2 flex justify-between items-center" role="alert">
-                <p class="text-sm">{{ message }}</p>
-                <button class="close-message focus:outline-none">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
+                {% if nav_total_notifications > 0 %}
+                  <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                    {{ nav_total_notifications }}
+                  </span>
+                {% endif %}
+              </a>
             </div>
-            
-            {% endfor %}
+          {% elif user.user_type == 'admin' %}
+            <div class="relative">
+              <a href="{% url 'superadmin:dashboard' %}" title="Order Notifications" class="hover:text-black">
+                <svg class="w-6 h-6 text-gray-700 hover:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+                {% if nav_total_notifications > 0 %}
+                  <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                    {{ nav_total_notifications }}
+                  </span>
+                {% endif %}
+              </a>
+            </div>
+          {% endif %}
+          
+          <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
+          <a href="{% url 'community:restaurant' %}" class="hover:font-bold">Community</a>
+        {% else %}
+          <a href="{% url 'home' %}" class="hover:font-bold">Home</a>
+          <a href="{% url 'menu' %}" class="hover:font-bold">Menu</a>
+          <a href="{% url 'about' %}" class="hover:font-bold">About Us</a>
+          <a href="{% url 'contact' %}" class="hover:font-bold">Contact</a>
         {% endif %}
+      </div>
+
+      <!-- Actions and Clock -->
+      <div class="flex items-center space-x-4">
+        <div id="clock" class="hidden md:inline-block clock">--:--:--</div>
+        
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" type="button" class="theme-toggle rounded-lg text-sm p-2">
+          <svg id="theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+
+        {% if user.is_authenticated %}
+          <!-- Cart with order count -->
+          <a href="{% url 'cart:cart_view' %}" class="relative">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-1 5h10l-1-5M9 21h6m-6-6h6m-6-6h6m-6-6h6"></path>
+            </svg>
+            <span id="cartItemCount" class="cart-count absolute -top-1 -right-2 rounded-full text-xs px-2 py-0.5">0</span>
+          </a>
+          
+          <!-- Profile thumbnail -->
+          <a href="{% url 'profile' %}" class="hidden md:inline-block">
+            {% if user.image and user.image.url != '/media/auths/images/empty.png' %}
+              <img src="{{ user.image.url }}" alt="Profile" class="profile-img w-10 h-10 rounded-full border-2 object-cover">
+            {% else %}
+              <img src="{% static 'auths/images/empty.png' %}" alt="Profile" class="profile-img w-10 h-10 rounded-full border-2">
+            {% endif %}
+          </a>
+          <a href="{% url 'logout' %}" class="hidden md:inline-block hover:font-bold">Logout</a>
+        {% else %}
+          <!-- Order Now and Login -->
+          <a href="{% url 'menu' %}" class="order-now hidden md:inline-block px-4 py-2 rounded-md transition duration-300">Order Now</a>
+          <a href="{% url 'login' %}" class="hidden md:inline-block hover:font-bold">Login</a>
+        {% endif %}
+        
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden shadow-lg">
+    <div class="flex flex-col items-center space-y-4 py-4">
+      {% if user.is_authenticated %}
+        <a href="{% url 'index' %}" class="hover:font-bold">Home</a>
+        <a href="{% url 'orders' %}" class="hover:font-bold">Menu</a>
+        <a href="{% url 'payments:order_history' %}" class="hover:font-bold">Order History</a>
+        <a href="{% url 'payments:in_progress_orders' %}" class="hover:font-bold">Delivering</a>
+        <a href="{% url 'help' %}" class="hover:font-bold">Help</a>
+        <a href="{% url 'community:restaurant' %}" class="hover:font-bold">Community</a>
+        <a href="{% url 'cart:cart_view' %}" class="relative hover:font-bold">
+          <svg class="w-6 h-6 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3M7 13l-1 5h10l-1-5M9 21h6m-6-6h6m-6-6h6m-6-6h6"></path>
+          </svg>
+          Cart <span id="mobileCartItemCount" class="cart-count rounded-full text-xs px-2 py-0.5">0</span>
+        </a>
+        <a href="{% url 'profile' %}" class="hover:font-bold">Profile</a>
+        <a href="{% url 'logout' %}" class="hover:font-bold">Logout</a>
+      {% else %}
+        <a href="{% url 'home' %}" class="hover:font-bold">Home</a>
+        <a href="{% url 'menu' %}" class="hover:font-bold">Menu</a>
+        <a href="{% url 'about' %}" class="hover:font-bold">About Us</a>
+        <a href="{% url 'contact' %}" class="hover:font-bold">Contact</a>
+        <a href="{% url 'login' %}" class="hover:font-bold">Login</a>
+      {% endif %}
+      
+      <!-- Dark Mode Toggle in Mobile Menu -->
+      <button id="mobile-theme-toggle" type="button" class="theme-toggle rounded-lg text-sm p-2">
+        <svg id="mobile-theme-toggle-dark-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+        </svg>
+        <svg id="mobile-theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+        </svg>
+        Toggle Theme
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages Pop-up Container -->
+  <div id="message-popup" class="fixed top-16 right-4 z-50 w-80 max-h-96 overflow-y-auto hidden">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="message p-4 rounded-lg shadow-md mb-2 flex justify-between items-center" role="alert">
+          <p class="text-sm">{{ message }}</p>
+          <button class="close-message focus:outline-none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
 </nav>
 
 <script>
-    // Debug logs
-    console.log('Navbar script loaded');
-    // Dark mode toggle
-    const htmlElement = document.getElementById('html');
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
-    const mobileThemeToggleDarkIcon = document.getElementById('mobile-theme-toggle-dark-icon');
-    const mobileThemeToggleLightIcon = document.getElementById('mobile-theme-toggle-light-icon');
-    console.log('htmlElement:', htmlElement);
-    console.log('themeToggleBtn:', themeToggleBtn);
-    console.log('mobileThemeToggleBtn:', mobileThemeToggleBtn);
-    // Initialize theme
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        htmlElement.classList.add('dark');
-        themeToggleLightIcon.classList.remove('hidden');
-        themeToggleDarkIcon.classList.add('hidden');
-        if (mobileThemeToggleBtn) {
-            mobileThemeToggleLightIcon.classList.remove('hidden');
-            mobileThemeToggleDarkIcon.classList.add('hidden');
-        }
-        console.log('Initialized dark theme');
+  // Debug logs
+  console.log('Navbar script loaded');
+  
+  // Dark mode toggle
+  const htmlElement = document.documentElement;
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+  const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+  const mobileThemeToggleDarkIcon = document.getElementById('mobile-theme-toggle-dark-icon');
+  const mobileThemeToggleLightIcon = document.getElementById('mobile-theme-toggle-light-icon');
+
+  // Initialize theme
+  function initializeTheme() {
+    if (localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      htmlElement.classList.add('dark');
+      themeToggleLightIcon?.classList.remove('hidden');
+      themeToggleDarkIcon?.classList.add('hidden');
+      mobileThemeToggleLightIcon?.classList.remove('hidden');
+      mobileThemeToggleDarkIcon?.classList.add('hidden');
+      console.log('Initialized dark theme');
     } else {
-        htmlElement.classList.remove('dark');
-        themeToggleDarkIcon.classList.remove('hidden');
-        themeToggleLightIcon.classList.add('hidden');
-        if (mobileThemeToggleBtn) {
-            mobileThemeToggleDarkIcon.classList.remove('hidden');
-            mobileThemeToggleLightIcon.classList.add('hidden');
-        }
-        console.log('Initialized light theme');
+      htmlElement.classList.remove('dark');
+      themeToggleDarkIcon?.classList.remove('hidden');
+      themeToggleLightIcon?.classList.add('hidden');
+      mobileThemeToggleDarkIcon?.classList.remove('hidden');
+      mobileThemeToggleLightIcon?.classList.add('hidden');
+      console.log('Initialized light theme');
     }
-    // Toggle theme function
-    function toggleTheme() {
-        htmlElement.classList.toggle('dark');
-        const isDark = htmlElement.classList.contains('dark');
-        console.log('Dark mode:', isDark);
-        if (isDark) {
-            localStorage.setItem('theme', 'dark');
-            themeToggleLightIcon.classList.remove('hidden');
-            themeToggleDarkIcon.classList.add('hidden');
-            if (mobileThemeToggleBtn) {
-                mobileThemeToggleLightIcon.classList.remove('hidden');
-                mobileThemeToggleDarkIcon.classList.add('hidden');
-            }
-        } else {
-            localStorage.setItem('theme', 'light');
-            themeToggleDarkIcon.classList.remove('hidden');
-            themeToggleLightIcon.classList.add('hidden');
-            if (mobileThemeToggleBtn) {
-                mobileThemeToggleDarkIcon.classList.remove('hidden');
-                mobileThemeToggleLightIcon.classList.add('hidden');
-            }
-        }
+  }
+
+  // Toggle theme function
+  function toggleTheme() {
+    htmlElement.classList.toggle('dark');
+    const isDark = htmlElement.classList.contains('dark');
+    console.log('Dark mode:', isDark);
+    
+    if (isDark) {
+      localStorage.setItem('theme', 'dark');
+      themeToggleLightIcon?.classList.remove('hidden');
+      themeToggleDarkIcon?.classList.add('hidden');
+      mobileThemeToggleLightIcon?.classList.remove('hidden');
+      mobileThemeToggleDarkIcon?.classList.add('hidden');
+    } else {
+      localStorage.setItem('theme', 'light');
+      themeToggleDarkIcon?.classList.remove('hidden');
+      themeToggleLightIcon?.classList.add('hidden');
+      mobileThemeToggleDarkIcon?.classList.remove('hidden');
+      mobileThemeToggleLightIcon?.classList.add('hidden');
     }
-    themeToggleBtn.addEventListener('click', toggleTheme);
-    if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+  }
+
+  // Initialize and set up event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeTheme();
+    
+    // Theme toggle buttons
+    themeToggleBtn?.addEventListener('click', toggleTheme);
+    mobileThemeToggleBtn?.addEventListener('click', toggleTheme);
+
     // Mobile menu toggle
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        console.log('Mobile menu toggled');
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+      console.log('Mobile menu toggled');
     });
+
     // Clock update
     function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const clockElement = document.getElementById('clock');
+      if (clockElement) {
+        clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+      }
     }
     setInterval(updateClock, 1000);
     updateClock();
+
     // Cart count update
     function updateCartCount(count) {
-        document.getElementById('cartItemCount').textContent = count;
-        document.getElementById('mobileCartItemCount').textContent = count;
+      const cartItemCount = document.getElementById('cartItemCount');
+      const mobileCartItemCount = document.getElementById('mobileCartItemCount');
+      if (cartItemCount) cartItemCount.textContent = count;
+      if (mobileCartItemCount) mobileCartItemCount.textContent = count;
     }
-    // Initial cart count fetch
+
     {% if user.is_authenticated %}
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('{% url "cart:cart_view" %}', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then(response => response.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const cartItems = doc.querySelectorAll('.cart-item').length;
-            updateCartCount(cartItems);
-            console.log('Cart items:', cartItems);
-        })
-        .catch(error => console.error('Error fetching cart count:', error));
-        // Messages pop-up
-        const messagePopup = document.getElementById('message-popup');
-        if (messagePopup.children.length > 0) {
-            messagePopup.classList.remove('hidden');
-            setTimeout(() => {
-                messagePopup.classList.add('hidden');
-            }, 5000);
-        }
-        // Close messages
-        document.querySelectorAll('.close-message').forEach(button => {
-            button.addEventListener('click', () => {
-                button.parentElement.remove();
-                if (messagePopup.children.length === 0) {
-                    messagePopup.classList.add('hidden');
-                }
-            });
+      // Initial cart count fetch
+      fetch('{% url "cart:cart_view" %}', {
+        method: 'GET',
+        credentials: 'include'
+      })
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const cartItems = doc.querySelectorAll('.cart-item').length;
+        updateCartCount(cartItems);
+        console.log('Cart items:', cartItems);
+      })
+      .catch(error => console.error('Error fetching cart count:', error));
+
+      // Messages pop-up
+      const messagePopup = document.getElementById('message-popup');
+      if (messagePopup && messagePopup.children.length > 0) {
+        messagePopup.classList.remove('hidden');
+        setTimeout(() => {
+          messagePopup.classList.add('hidden');
+        }, 5000);
+      }
+
+      // Close messages
+      document.querySelectorAll('.close-message').forEach(button => {
+        button.addEventListener('click', () => {
+          button.parentElement.remove();
+          if (messagePopup && messagePopup.children.length === 0) {
+            messagePopup.classList.add('hidden');
+          }
         });
-    });
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'cartCount') {
-            updateCartCount(e.newValue);
-        }
-    });
+      });
     {% endif %}
+  });
+
+  // Listen for cart count changes from other tabs
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'cartCount') {
+      updateCartCount(e.newValue);
+    }
+  });
 </script>

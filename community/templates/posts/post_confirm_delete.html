@@ -1,0 +1,16 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 transition-all duration-300">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">Delete Post</h1>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">Are you sure you want to delete the post "{{ post.title }}"?</p>
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Confirm Delete</button>
+            <a href="{% url 'community:post-detail' post.pk %}" class="text-gray-600 dark:text-gray-400 hover:underline">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

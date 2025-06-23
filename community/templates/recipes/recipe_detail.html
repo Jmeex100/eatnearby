@@ -1,0 +1,75 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <!-- Recipe Header -->
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 transition-all duration-300">
+        <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-3">{{ recipe.title }}</h1>
+                <div class="flex items-center space-x-4 mb-4">
+                    <img class="h-10 w-10 rounded-full" src="{{ recipe.author.profile.profile_picture.url|default:'/static/images/default-profile.png' }}" alt="{{ recipe.author.username }} profile picture">
+                    <div>
+                        <p class="text-sm font-medium text-gray-900 dark:text-white">{{ recipe.author.username }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ recipe.created_at|timesince }} ago</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">{{ recipe.content }}</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-gray-600 dark:text-gray-300 mb-4">
+                    <p><i class="fas fa-clock mr-2"></i>Prep: {{ recipe.prep_time }} min</p>
+                    <p><i class="fas fa-fire mr-2"></i>Cook: {{ recipe.cook_time }} min</p>
+                    <p><i class="fas fa-utensils mr-2"></i>Servings: {{ recipe.servings }}</p>
+                    <p><i class="fas fa-star mr-2"></i>Difficulty: {{ recipe.get_difficulty_display }}</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    {% for tag in tags %}
+                        <span class="text-xs bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-2 py-1 rounded">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                {% if recipe.author == user %}
+                    <div class="flex space-x-4">
+                        <a href="{% url 'community:recipe-edit' recipe.pk %}" class="text-amber-600 dark:text-amber-400 hover:underline">Edit Recipe</a>
+                        <a href="{% url 'community:recipe-delete' recipe.pk %}" class="text-red-600 dark:text-red-400 hover:underline">Delete Recipe</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="w-full md:w-64 lg:w-80 flex-shrink-0">
+                {% if recipe.image %}
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="w-full h-48 sm:h-64 object-cover rounded-lg shadow-md" loading="lazy">
+                {% else %}
+                    <div class="w-full h-48 sm:h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 rounded-lg shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingredients Section -->
+    <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Ingredients</h2>
+        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+            {% for ingredient in ingredients %}
+                <li>{{ ingredient.name }}</li>
+            {% empty %}
+                <p>No ingredients listed.</p>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Instructions</h2>
+        <ol class="list-decimal list-inside text-gray-600 dark:text-gray-300 space-y-2">
+            {% for instruction in instructions %}
+                <li>{{ instruction.instruction }}</li>
+            {% empty %}
+                <p>No instructions provided.</p>
+            {% endfor %}
+        </ol>
+    </section>
+</div>
+{% endblock content %}

@@ -1,0 +1,101 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 transition-all duration-300">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">Edit Recipe</h1>
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Title</label>
+                <input type="text" name="title" id="title" value="{{ recipe.title }}" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+            </div>
+            <div>
+                <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Description</label>
+                <textarea name="content" id="content" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">{{ recipe.content }}</textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="prep_time" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Prep Time (minutes)</label>
+                    <input type="number" name="prep_time" id="prep_time" value="{{ recipe.prep_time }}" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+                <div>
+                    <label for="cook_time" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Cook Time (minutes)</label>
+                    <input type="number" name="cook_time" id="cook_time" value="{{ recipe.cook_time }}" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+                <div>
+                    <label for="servings" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Servings</label>
+                    <input type="number" name="servings" id="servings" value="{{ recipe.servings }}" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+            </div>
+            <div>
+                <label for="difficulty" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Difficulty</label>
+                <select name="difficulty" id="difficulty" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    {% for value, label in recipe.DIFFICULTY_CHOICES %}
+                        <option value="{{ value }}" {% if recipe.difficulty == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Image (Optional)</label>
+                <input type="file" name="image" id="image" accept="image/*" class="w-full p-2 border rounded">
+                {% if recipe.image %}
+                    <img src="{{ recipe.image.url }}" alt="Current image" class="mt-2 w-32 h-32 object-cover">
+                {% endif %}
+            </div>
+            <div>
+                <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tags (Optional)</label>
+                <select name="tags" id="tags" multiple class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    {% for tag in tags %}
+                        <option value="{{ tag.pk }}" {% if tag in recipe.tags.all %}selected{% endif %}>{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ingredients</label>
+                <div id="ingredients-container" class="space-y-2">
+                    {% for ingredient in ingredients %}
+                        <input type="text" name="ingredients" value="{{ ingredient.name }}" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    {% empty %}
+                        <input type="text" name="ingredients" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200" placeholder="e.g., 2 cups flour">
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-ingredient" class="mt-2 text-amber-600 dark:text-amber-400 hover:underline">Add Another Ingredient</button>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Instructions</label>
+                <div id="instructions-container" class="space-y-2">
+                    {% for instruction in instructions %}
+                        <textarea name="instructions" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">{{ instruction.instruction }}</textarea>
+                    {% empty %}
+                        <textarea name="instructions" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200" placeholder="e.g., Preheat oven to 350°F"></textarea>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-instruction" class="mt-2 text-amber-600 dark:text-amber-400 hover:underline">Add Another Instruction</button>
+            </div>
+            <button type="submit" class="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700">Save Changes</button>
+            <a href="{% url 'community:recipe-detail' recipe.pk %}" class="text-gray-600 dark:text-gray-400 hover:underline">Cancel</a>
+        </form>
+    </div>
+    <script>
+        document.getElementById('add-ingredient').addEventListener('click', function() {
+            const container = document.getElementById('ingredients-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'ingredients';
+            input.className = 'w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200';
+            input.placeholder = 'e.g., 1 tsp salt';
+            container.appendChild(input);
+        });
+        document.getElementById('add-instruction').addEventListener('click', function() {
+            const container = document.getElementById('instructions-container');
+            const textarea = document.createElement('textarea');
+            textarea.name = 'instructions';
+            textarea.className = 'w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200';
+            textarea.placeholder = 'e.g., Mix ingredients together';
+            container.appendChild(textarea);
+        });
+    </script>
+</div>
+{% endblock content %}

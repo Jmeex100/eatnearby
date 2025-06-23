@@ -16,6 +16,7 @@ class Restaurant(TimestampMixin):
     name = models.CharField(max_length=255)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True)
+    profile_image = models.ImageField(upload_to='Restaurant/', blank=True, null=True)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100, default='Zambia')

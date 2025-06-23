@@ -1,0 +1,71 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 transition-all duration-300">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">Edit Post</h1>
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Title</label>
+                <input type="text" name="title" id="title" value="{{ post.title }}" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+            </div>
+            <div>
+                <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Content</label>
+                <textarea name="content" id="content" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">{{ post.content }}</textarea>
+            </div>
+            <div>
+                <label for="post_type" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Post Type</label>
+                <select name="post_type" id="post_type" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    {% for value, label in post.POST_TYPES %}
+                        <option value="{{ value }}" {% if post.post_type == value %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="restaurant_id" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Restaurant (Optional)</label>
+                <select name="restaurant_id" id="restaurant_id" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    <option value="">-- Select a Restaurant --</option>
+                    {% for restaurant in restaurants %}
+                        <option value="{{ restaurant.pk }}" {% if post.restaurant.id == restaurant.id %}selected{% endif %}>{{ restaurant.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Image (Optional)</label>
+                <input type="file" name="image" id="image" accept="image/*" class="w-full p-2 border rounded">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Current image" class="mt-2 w-32 h-32 object-cover">
+                {% endif %}
+            </div>
+            <div id="review_fields" class="{% if post.post_type != 'REVIEW' %}hidden{% endif %} space-y-4">
+                <div>
+                    <label for="rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Overall Rating (1-5)</label>
+                    <input type="number" name="rating" id="rating" min="1" max="5" value="{{ review.rating|default:'' }}" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+                <div>
+                    <label for="food_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Food Rating (Optional, 1-5)</label>
+                    <input type="number" name="food_rating" id="food_rating" min="1" max="5" value="{{ review.food_rating|default:'' }}" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+                <div>
+                    <label for="service_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Service Rating (Optional, 1-5)</label>
+                    <input type="number" name="service_rating" id="service_rating" min="1" max="5" value="{{ review.service_rating|default:'' }}" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+                <div>
+                    <label for="ambiance_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ambiance Rating (Optional, 1-5)</label>
+                    <input type="number" name="ambiance_rating" id="ambiance_rating" min="1" max="5" value="{{ review.ambiance_rating|default:'' }}" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                </div>
+            </div>
+            <button type="submit" class="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700">Save Changes</button>
+            <a href="{% url 'community:post-detail' post.pk %}" class="text-gray-600 dark:text-gray-400 hover:underline">Cancel</a>
+        </form>
+    </div>
+    <script>
+        document.getElementById('post_type').addEventListener('change', function() {
+            const reviewFields = document.getElementById('review_fields');
+            reviewFields.classList.toggle('hidden', this.value !== 'REVIEW');
+        });
+    </script>
+</div>
+{% endblock content %}

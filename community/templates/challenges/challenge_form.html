@@ -1,0 +1,177 @@
+{% extends "community_base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-2xl">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">
+        {% if challenge %}Edit Challenge{% else %}Create New Challenge{% endif %}
+    </h1>
+    
+    {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="p-4 rounded-lg {% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="mb-4 p-4 bg-red-50 text-red-700 rounded-lg">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow-md">
+        {% csrf_token %}
+        <!-- Title -->
+        <div>
+            <label for="title" class="block text-sm font-medium text-gray-700 mb-1" id="title-label">
+                Challenge Title
+            </label>
+            <input type="text" name="title" id="title" value="{{ form.title.value|default:'' }}"
+                   required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                   placeholder="Enter challenge title"
+                   aria-labelledby="title-label"
+                   aria-describedby="title-help">
+            <p id="title-help" class="mt-1 text-xs text-gray-500">Choose a concise and engaging title (max 100 characters).</p>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1" id="description-label">
+                Description
+            </label>
+            <textarea name="description" id="description" rows="6" required
+                      class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                      placeholder="Describe the challenge in detail"
+                      aria-labelledby="description-label">{{ form.description.value|default:'' }}</textarea>
+            <p class="mt-1 text-xs text-gray-500">Provide clear instructions and goals for participants.</p>
+        </div>
+
+        <!-- Date Fields -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="start_date" class="block text-sm font-medium text-gray-700 mb-1" id="start-date-label">
+                    Start Date
+                </label>
+                <input type="date" name="start_date" id="start_date" 
+                       value="{{ form.start_date.value|date:'Y-m-d'|default:'' }}"
+                       required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                       aria-labelledby="start-date-label">
+            </div>
+            <div>
+                <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1" id="end-date-label">
+                    End Date
+                </label>
+                <input type="date" name="end_date" id="end_date" 
+                       value="{{ form.end_date.value|date:'Y-m-d'|default:'' }}"
+                       required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                       aria-labelledby="end-date-label">
+            </div>
+        </div>
+
+        <!-- Banner Image -->
+        <div>
+            <label for="banner_image" class="block text-sm font-medium text-gray-700 mb-1" id="banner-label">
+                Banner Image
+            </label>
+            <input type="file" name="banner_image" id="banner_image" accept="image/*"
+                   class="w-full p-3 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100"
+                   aria-labelledby="banner-label">
+            
+            <div id="banner-preview-container" class="mt-4">
+                {% if challenge.banner_image %}
+                    <p class="text-sm text-gray-600">Current Banner:</p>
+                    <img src="{{ challenge.banner_image.url }}" alt="Current banner" class="mt-2 w-48 h-48 object-cover rounded-lg">
+                {% endif %}
+            </div>
+            <p class="mt-1 text-xs text-gray-500">Recommended size: 1200x400px, max 5MB.</p>
+        </div>
+
+        <!-- Active Status -->
+        <div class="flex items-center">
+            <input type="checkbox" name="is_active" id="is_active" {% if form.is_active.value|default:True %}checked{% endif %}
+                   class="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded">
+            <label for="is_active" class="ml-2 block text-sm text-gray-700">Active Challenge</label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+            <a href="{% url 'community:challenge-list' %}" 
+               class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
+                Cancel
+            </a>
+            <button type="submit" 
+                    class="bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors">
+                {% if challenge %}Update Challenge{% else %}Create Challenge{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript for enhanced form functionality -->
+<script>
+    // Date Validation
+    const startDateInput = document.getElementById('start_date');
+    const endDateInput = document.getElementById('end_date');
+    
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    startDateInput.min = today;
+    
+    startDateInput.addEventListener('change', () => {
+        endDateInput.min = startDateInput.value;
+        if (endDateInput.value < startDateInput.value) {
+            endDateInput.value = startDateInput.value;
+        }
+    });
+
+    endDateInput.addEventListener('change', () => {
+        if (endDateInput.value < startDateInput.value) {
+            alert('End date cannot be before start date.');
+            endDateInput.value = startDateInput.value;
+        }
+    });
+
+    // Banner Image Preview
+    const bannerInput = document.getElementById('banner_image');
+    const previewContainer = document.getElementById('banner-preview-container');
+
+    bannerInput.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewContainer.innerHTML = `
+                    <p class="text-sm text-gray-600">New Banner Preview:</p>
+                    <img src="${e.target.result}" 
+                         alt="Preview" 
+                         class="mt-2 w-48 h-48 object-cover rounded-lg">
+                `;
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // Character counter for title
+    const titleInput = document.getElementById('title');
+    const titleHelp = document.getElementById('title-help');
+    
+    titleInput.addEventListener('input', function() {
+        const remaining = 100 - this.value.length;
+        titleHelp.textContent = `Choose a concise and engaging title (${remaining} characters remaining).`;
+        
+        if (remaining < 0) {
+            titleHelp.classList.add('text-red-500');
+            this.classList.add('border-red-500');
+        } else {
+            titleHelp.classList.remove('text-red-500');
+            this.classList.remove('border-red-500');
+        }
+    });
+</script>
+{% endblock %}

@@ -25,8 +25,19 @@
                     {% endif %}
                 </div>
             </div>
-            <!-- Removed restaurant.image check since Restaurant model doesn't have an image field -->
+            <!-- Profile Image -->
+            <div class="w-full md:w-64 lg:w-80 flex-shrink-0">
+                {% if restaurant.profile_image %}
+                    <img src="{{ restaurant.profile_image.url }}" alt="{{ restaurant.name }} profile image" class="w-full h-48 sm:h-64 object-cover rounded-lg shadow-md" loading="lazy">
+                {% else %}
+                    <div class="w-full h-48 sm:h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 rounded-lg shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-
+</div>
 {% endblock content %}
