@@ -8,7 +8,11 @@ from django.urls import reverse
 from django.forms import ModelForm
 from ..models import Challenge, ChallengeParticipation, User, Post
 from datetime import date
+from ..models import Challenge, ChallengeParticipation
+import logging
 
+# Configure logging
+logger = logging.getLogger(__name__)
 # Challenge Form for cleaner validation
 class ChallengeForm(ModelForm):
     class Meta:
@@ -98,36 +102,52 @@ def challenge_delete(request, pk):
     return render(request, 'challenges/challenge_confirm_delete.html', {'challenge': challenge})
 
 # Submit a challenge entry
+logger = logging.getLogger(__name__)
+
 @login_required
-def challenge_entry(request, pk):
-    challenge = get_object_or_404(Challenge, pk=pk)
+def challenge_entry(request, challenge_id):
+    challenge = get_object_or_404(Challenge, pk=challenge_id)
     if not challenge.is_active:
         messages.error(request, 'This challenge is no longer active.')
-        return HttpResponseRedirect(reverse('community:challenge-detail', args=[challenge.pk]))
+        logger.error(f"Challenge {challenge.id} is inactive, user {request.user.username} attempted to join.")
+        return redirect('community:challenge-detail', pk=challenge.pk)
+
+    if ChallengeParticipation.objects.filter(challenge=challenge, user=request.user).exists():
+        messages.error(request, 'You have already joined this challenge.')
+        logger.error(f"User {request.user.username} attempted to join challenge {challenge.id} multiple times.")
+        return redirect('community:challenge-detail', pk=challenge.pk)
 
     if request.method == 'POST':
-        post_id = request.POST.get('post_id')
-        post = get_object_or_404(Post, pk=post_id, author=request.user)
-        
-        if ChallengeParticipation.objects.filter(challenge=challenge, user=request.user, post=post).exists():
-            messages.error(request, 'You have already submitted this post for this challenge.')
-            return HttpResponseRedirect(reverse('community:challenge-detail', args=[challenge.pk]))
-
         participation = ChallengeParticipation(
             challenge=challenge,
             user=request.user,
-            post=post,
+            post=None,  # Explicitly set to None
             completed=False
         )
         participation.save()
-        messages.success(request, 'Your entry has been submitted successfully!')
-        return HttpResponseRedirect(reverse('community:challenge-detail', args=[challenge.pk]))
+        messages.success(request, 'You have successfully joined the challenge!')
+        logger.info(f"User {request.user.username} joined challenge {challenge.id}.")
+        return redirect('community:challenge-detail', pk=challenge.pk)
 
-    user_posts = Post.objects.filter(author=request.user, is_published=True)
     return render(request, 'challenges/challenge_entry_form.html', {
         'challenge': challenge,
-        'user_posts': user_posts,
     })
+@login_required
+def challenge_mark_completed(request, challenge_id, participation_id):
+    challenge = get_object_or_404(Challenge, pk=challenge_id)
+    participation = get_object_or_404(ChallengeParticipation, pk=participation_id, challenge=challenge)
+    if not request.user.is_staff:
+        raise PermissionDenied("Only staff can mark participations as completed.")
+    if request.method == 'POST':
+        participation.completed = True
+        participation.save()
+        messages.success(request, 'Participation marked as completed.')
+        return HttpResponseRedirect(reverse('community:challenge-detail', args=[challenge.pk]))
+    return render(request, 'challenges/challenge_mark_completed.html', {
+        'challenge': challenge,
+        'participation': participation,
+    })
+
 
 # Delete a challenge entry
 @login_required

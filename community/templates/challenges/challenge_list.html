@@ -62,6 +62,12 @@
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
                                 Active
                             </span>
+                            {% if user.is_authenticated and user not in challenge.participants.all %}
+                                <a href="{% url 'community:challenge-entry' challenge.pk %}" 
+                                   class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 hover:bg-green-200">
+                                    Join Now
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

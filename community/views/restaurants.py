@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import JsonResponse
 from django.conf import settings
+from auths.models import User
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import escape
@@ -11,6 +12,7 @@ from ..models import Restaurant, Post, RestaurantQuestion, Recipe, Challenge, Us
 import requests
 import json
 import logging
+from django.db.models import Count
 import time
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -40,6 +42,15 @@ def restaurant(request):
     top_foodies = UserProfile.objects.all().order_by('-user__post__count')[:5]
     recent_questions = RestaurantQuestion.objects.all().select_related('user', 'restaurant').prefetch_related('answer')[:2]
     featured_recipes = Recipe.objects.all()[:4]
+    
+    # Calculate top customers based on order count
+    top_customers = User.objects.filter(
+        user_type='customer',
+        paymenthistory__isnull=False
+    ).annotate(
+        order_count=Count('paymenthistory')
+    ).order_by('-order_count')[:5]
+
     context = {
         'restaurants': restaurants,
         'recent_posts': recent_posts,
@@ -48,6 +59,7 @@ def restaurant(request):
         'top_foodies': top_foodies,
         'recent_questions': recent_questions,
         'featured_recipes': featured_recipes,
+        'top_customers': top_customers,  # Add top_customers to context
     }
     return render(request, 'restaurant/restaurant.html', context)
 

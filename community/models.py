@@ -148,14 +148,14 @@ class Challenge(TimestampMixin):
 class ChallengeParticipation(TimestampMixin):
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
     completed = models.BooleanField(default=False)
     
     def __str__(self):
         return f"{self.user.username} in {self.challenge.title}"
 
     class Meta:
-        unique_together = ('challenge', 'user', 'post')
+        unique_together = ('challenge', 'user')  
 
 # ✅ Recipe
 class Recipe(ContentBase):

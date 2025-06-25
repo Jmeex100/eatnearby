@@ -2,126 +2,217 @@
 {% load static %}
 
 {% block content %}
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+<div class="container mx-auto px-4 py-8 max-w-7xl">
     <!-- Header -->
-    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 transition-all duration-300">
-        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">Community Posts</h1>
-        <p class="text-gray-600 dark:text-gray-300 mb-6">Share your stories, tips, questions, or reviews!</p>
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">Community Posts</h1>
+        <p class="text-gray-600 dark:text-gray-300">Share your stories, tips, questions, or reviews!</p>
     </div>
 
-    <!-- Create Post Form (for authenticated users) -->
+    <!-- Create Post Form -->
     {% if user.is_authenticated %}
-        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Create a New Post</h2>
-            <form method="post" enctype="multipart/form-data" class="space-y-4">
-                {% csrf_token %}
+    <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Create a New Post</h2>
+        
+        {% if messages %}
+        <div class="mb-4 space-y-2">
+            {% for message in messages %}
+            <div class="p-3 rounded-lg {% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" class="space-y-4" id="post-form">
+            {% csrf_token %}
+            
+            <!-- Post Form Fields -->
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Title -->
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Title</label>
-                    <input type="text" name="title" id="title" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    <label for="id_title" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Title*</label>
+                    <input type="text" name="title" id="id_title" 
+                           class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                           value="{{ post_form.title.value|default:'' }}" required>
+                    {% for error in post_form.title.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
                 </div>
+                
+                <!-- Content -->
                 <div>
-                    <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Content</label>
-                    <textarea name="content" id="content" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"></textarea>
+                    <label for="id_content" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Content*</label>
+                    <textarea name="content" id="id_content" rows="4"
+                              class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                              required>{{ post_form.content.value|default:'' }}</textarea>
+                    {% for error in post_form.content.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
                 </div>
+                
+                <!-- Post Type -->
                 <div>
-                    <label for="post_type" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Post Type</label>
-                    <select name="post_type" id="post_type" required class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                        {% for value, label in post.POST_TYPES %}
-                            <option value="{{ value }}">{{ label }}</option>
+                    <label for="id_post_type" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Post Type*</label>
+                    <select name="post_type" id="id_post_type" 
+                            class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                        {% for value, name in post_types %}
+                        <option value="{{ value }}" {% if post_form.post_type.value == value %}selected{% endif %}>{{ name }}</option>
                         {% endfor %}
                     </select>
+                    {% for error in post_form.post_type.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
                 </div>
+                
+                <!-- Restaurant -->
                 <div>
-                    <label for="restaurant_id" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Restaurant (Optional)</label>
-                    <select name="restaurant_id" id="restaurant_id" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                        <option value="">-- Select a Restaurant --</option>
+                    <label for="id_restaurant" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Restaurant</label>
+                    <select name="restaurant" id="id_restaurant" 
+                            class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                        <option value="">Select a restaurant</option>
                         {% for restaurant in restaurants %}
-                            <option value="{{ restaurant.pk }}">{{ restaurant.name }}</option>
+                        <option value="{{ restaurant.id }}" {% if post_form.restaurant.value == restaurant.id %}selected{% endif %}>
+                            {{ restaurant.name }}
+                        </option>
                         {% endfor %}
                     </select>
+                    {% for error in post_form.restaurant.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
                 </div>
+                
+                <!-- Image -->
                 <div>
-                    <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Image (Optional)</label>
-                    <input type="file" name="image" id="image" accept="image/*" class="w-full p-2 border rounded">
+                    <label for="id_image" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Image</label>
+                    <input type="file" name="image" id="id_image" 
+                           class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                    {% for error in post_form.image.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
                 </div>
-                <div id="review_fields" class="hidden space-y-4">
+            </div>
+            
+            <!-- Review Fields (Hidden by default) -->
+            <div id="review-fields" class="hidden space-y-4 mt-4">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Review Details</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Overall Rating -->
                     <div>
-                        <label for="rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Overall Rating (1-5)</label>
-                        <input type="number" name="rating" id="rating" min="1" max="5" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <label for="id_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Overall Rating*</label>
+                        <select name="rating" id="id_rating" 
+                                class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                            <option value="">Select rating</option>
+                            {% for i in "54321" %}
+                            <option value="{{ i }}" {% if review_form.rating.value == i %}selected{% endif %}>{{ i }} star{{ i|pluralize }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if review_form %}{% for error in review_form.rating.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}{% endif %}
                     </div>
+                    
+                    <!-- Food Rating -->
                     <div>
-                        <label for="food_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Food Rating (Optional, 1-5)</label>
-                        <input type="number" name="food_rating" id="food_rating" min="1" max="5" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <label for="id_food_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Food Rating</label>
+                        <select name="food_rating" id="id_food_rating" 
+                                class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                            <option value="">Select rating</option>
+                            {% for i in "54321" %}
+                            <option value="{{ i }}" {% if review_form.food_rating.value == i %}selected{% endif %}>{{ i }} star{{ i|pluralize }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if review_form %}{% for error in review_form.food_rating.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}{% endif %}
                     </div>
+                    
+                    <!-- Service Rating -->
                     <div>
-                        <label for="service_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Service Rating (Optional, 1-5)</label>
-                        <input type="number" name="service_rating" id="service_rating" min="1" max="5" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <label for="id_service_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Service Rating</label>
+                        <select name="service_rating" id="id_service_rating" 
+                                class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                            <option value="">Select rating</option>
+                            {% for i in "54321" %}
+                            <option value="{{ i }}" {% if review_form.service_rating.value == i %}selected{% endif %}>{{ i }} star{{ i|pluralize }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if review_form %}{% for error in review_form.service_rating.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}{% endif %}
                     </div>
+                    
+                    <!-- Ambiance Rating -->
                     <div>
-                        <label for="ambiance_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ambiance Rating (Optional, 1-5)</label>
-                        <input type="number" name="ambiance_rating" id="ambiance_rating" min="1" max="5" class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <label for="id_ambiance_rating" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Ambiance Rating</label>
+                        <select name="ambiance_rating" id="id_ambiance_rating" 
+                                class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                            <option value="">Select rating</option>
+                            {% for i in "54321" %}
+                            <option value="{{ i }}" {% if review_form.ambiance_rating.value == i %}selected{% endif %}>{{ i }} star{{ i|pluralize }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if review_form %}{% for error in review_form.ambiance_rating.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}{% endif %}
                     </div>
                 </div>
-                <button type="submit" class="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700">Create Post</button>
-            </form>
-        </section>
-        <script>
-            document.getElementById('post_type').addEventListener('change', function() {
-                const reviewFields = document.getElementById('review_fields');
-                reviewFields.classList.toggle('hidden', this.value !== 'REVIEW');
+            </div>
+            
+            <button type="submit" class="w-full md:w-auto bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors">
+                Create Post
+            </button>
+        </form>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const postTypeSelect = document.getElementById('id_post_type');
+            const reviewFields = document.getElementById('review-fields');
+            
+            function toggleReviewFields() {
+                if (postTypeSelect.value === 'REVIEW') {
+                    reviewFields.classList.remove('hidden');
+                    // Make restaurant required for reviews
+                    document.getElementById('id_restaurant').required = true;
+                } else {
+                    reviewFields.classList.add('hidden');
+                    document.getElementById('id_restaurant').required = false;
+                }
+            }
+            
+            // Initial check
+            toggleReviewFields();
+            
+            // Event listener for changes
+            postTypeSelect.addEventListener('change', toggleReviewFields);
+            
+            // Form validation
+            document.getElementById('post-form').addEventListener('submit', function(e) {
+                if (postTypeSelect.value === 'REVIEW') {
+                    const restaurant = document.getElementById('id_restaurant').value;
+                    const rating = document.getElementById('id_rating').value;
+                    
+                    if (!restaurant) {
+                        alert('Please select a restaurant for review posts.');
+                        e.preventDefault();
+                        return false;
+                    }
+                    
+                    if (!rating) {
+                        alert('Please provide an overall rating for review posts.');
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+                return true;
             });
-        </script>
+        });
+    </script>
     {% endif %}
 
     <!-- Posts List -->
-    <section>
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Recent Posts</h2>
-        <div class="space-y-4">
-            {% for post in posts %}
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-                    <div class="flex items-start space-x-4">
-                        <img class="h-10 w-10 rounded-full" src="{{ post.author.profile.profile_picture.url|default:'/static/images/default-profile.png' }}" alt="{{ post.author.username }} profile picture">
-                        <div class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">{{ post.author.username }}</p>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ post.created_at|timesince }} ago • {{ post.get_post_type_display }}</p>
-                                </div>
-                                {% if post.restaurant %}
-                                    <a href="{% url 'community:restaurant-detail' post.restaurant.id %}" class="text-xs text-amber-600 dark:text-amber-400 hover:underline">{{ post.restaurant.name }}</a>
-                                {% endif %}
-                            </div>
-                            <h4 class="mt-2 text-lg font-semibold text-gray-800 dark:text-white">{{ post.title }}</h4>
-                            <p class="mt-1 text-gray-600 dark:text-gray-300">{{ post.content|truncatechars:200 }}</p>
-                            {% if post.image %}
-                                <div class="mt-3 rounded-lg overflow-hidden max-w-xs">
-                                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full h-auto" loading="lazy">
-                                </div>
-                            {% endif %}
-                            <div class="mt-3 flex items-center space-x-4">
-                                <span class="text-sm text-gray-500 dark:text-gray-400">{{ post.comments.count }} comments</span>
-                                <span class="text-sm text-gray-500 dark:text-gray-400">{{ post.likes.count }} likes</span>
-                                {% if post.review %}
-                                    <div class="flex items-center">
-                                        {% for i in "12345" %}
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 {% if forloop.counter <= post.review.rating %}text-amber-500{% else %}text-gray-300 dark:text-gray-500{% endif %}" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                                {% if post.author == user %}
-                                    <a href="{% url 'community:post-edit' post.pk %}" class="text-amber-600 dark:text-amber-400 hover:underline text-sm">Edit</a>
-                                    <a href="{% url 'community:post-delete' post.pk %}" class="text-red-600 dark:text-red-400 hover:underline text-sm">Delete</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <p class="text-gray-600 dark:text-gray-300">No posts available.</p>
-            {% endfor %}
-        </div>
-    </section>
+    
 </div>
-{% endblock content %}
+{% endblock %}

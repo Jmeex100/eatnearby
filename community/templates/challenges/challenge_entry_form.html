@@ -1,0 +1,34 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-4xl">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">Join Challenge: {{ challenge.title }}</h1>
+    <p class="text-gray-600 dark:text-gray-300 mb-6">{{ challenge.description|default:"No description available" }}</p>
+
+    {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="p-4 rounded-lg {% if message.tags == 'error' %}bg-red-100 text-red-700{% elif message.tags == 'warning' %}bg-yellow-100 text-yellow-700{% else %}bg-green-100 text-green-700{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Are you ready to join the "{{ challenge.title }}" challenge?</p>
+        <form method="post" action="{% url 'community:challenge-entry' challenge.pk %}">
+            {% csrf_token %}
+            <div class="flex justify-end space-x-4">
+                <a href="{% url 'community:challenge-detail' challenge.pk %}" class="px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100">
+                    Cancel
+                </a>
+                <button type="submit" class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors">
+                    Join Challenge
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
