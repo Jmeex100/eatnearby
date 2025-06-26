@@ -9,8 +9,7 @@
             <div class="flex-1">
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-3">{{ recipe.title }}</h1>
                 <div class="flex items-center space-x-4 mb-4">
-                    <img class="h-10 w-10 rounded-full" src="{{ recipe.author.profile.profile_picture.url|default:'/static/images/default-profile.png' }}" alt="{{ recipe.author.username }} profile picture">
-                    <div>
+                    <img class="h-10 w-10 rounded-full" src="{{ recipe.author.image.url|default:'/static/images/default-profile.png' }}" alt="{{ recipe.author.username }} profile picture">  <div>
                         <p class="text-sm font-medium text-gray-900 dark:text-white">{{ recipe.author.username }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ recipe.created_at|timesince }} ago</p>
                     </div>

@@ -8,10 +8,8 @@ from .views.posts import post_list_create, post_detail, post_edit, post_delete, 
 # from .views.comments import comment_list_create, comment_edit, comment_delete, comment_reply
 
 from .views.challenges import challenge_list, challenge_detail, challenge_create, challenge_edit, challenge_delete, challenge_entry, challenge_entry_delete, challenge_mark_completed
-from .views.recipes import recipe_list_create, recipe_detail, recipe_edit, recipe_delete
-from .views.questions import question_list_create, question_detail, question_edit, question_delete
-# from .views.answers import answer_create, answer_edit, answer_delete
-
+from .views.recipes import recipe_list_create, recipe_detail, recipe_edit, recipe_delete, recipe_comment_create, recipe_comment_like
+from .views.questions import question_list_create, question_detail, question_edit, question_delete, answer_create, answer_edit, answer_delete
 app_name = 'community'
 
 
@@ -51,20 +49,25 @@ urlpatterns = [
     path('challenges/<int:challenge_id>/enter/', challenge_entry, name='challenge-entry'),
     path('challenges/<int:pk>/entries/<int:participation_id>/delete/', challenge_entry_delete, name='challenge-entry-delete'),
     path('challenges/<int:challenge_id>/entries/<int:participation_id>/mark-completed/', challenge_mark_completed, name='challenge-mark-completed'),
+   
     # Recipe URLs
     path('recipes/', recipe_list_create, name='recipe-list-create'),
     path('recipes/<int:pk>/', recipe_detail, name='recipe-detail'),
     path('recipes/<int:pk>/edit/', recipe_edit, name='recipe-edit'),
     path('recipes/<int:pk>/delete/', recipe_delete, name='recipe-delete'),
+    path('recipes/<int:pk>/comment/', recipe_comment_create, name='recipe-comment-create'),
+    path('comments/<int:pk>/like/', recipe_comment_like, name='recipe-comment-like'),
 
-# Question (Ask the Chef) URLs
-path('restaurants/<int:restaurant_id>/ask/', question_list_create, name='question-list-create'),
+
+
+  # Question (Ask the Chef) URLs
+    path('ask-chef/', question_list_create, name='question-list-create'),
+    path('restaurants/<int:restaurant_id>/ask/', question_list_create, name='question-list-create-specific'),
     path('questions/<int:pk>/', question_detail, name='question-detail'),
     path('questions/<int:pk>/edit/', question_edit, name='question-edit'),
     path('questions/<int:pk>/delete/', question_delete, name='question-delete'),
-    
-    # # Answer URLs
-    # path('questions/<int:question_id>/answer/', answer_create, name='answer-create'),
-    # path('answers/<int:pk>/edit/', answer_edit, name='answer-edit'),
-    # path('answers/<int:pk>/delete/', answer_delete, name='answer-delete'),
+    path('questions/<int:question_id>/answer/', answer_create, name='answer-create'),
+    path('answers/<int:pk>/edit/', answer_edit, name='answer-edit'),
+    path('answers/<int:pk>/delete/', answer_delete, name='answer-delete'),
+   
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

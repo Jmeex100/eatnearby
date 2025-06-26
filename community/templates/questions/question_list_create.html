@@ -1,0 +1,189 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style>
+    /* Anime-inspired custom styles */
+    .modal-glow {
+        position: relative;
+    }
+    .modal-glow::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 1rem;
+        background: linear-gradient(45deg, #00ffcc, #ff66cc, #66ccff);
+        filter: blur(8px);
+        opacity: 0.7;
+        z-index: -1;
+        animation: pulseGlow 2s infinite alternate;
+    }
+    @keyframes pulseGlow {
+        0% { opacity: 0.5; transform: scale(1); }
+        100% { opacity: 0.8; transform: scale(1.02); }
+    }
+    .ask-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+    }
+</style>
+{% endblock extra_head %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <!-- Header -->
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8 animate__animated animate__fadeIn">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            {% if restaurant %}
+                Questions for {{ restaurant.name }}
+            {% else %}
+                Ask a Chef
+            {% endif %}
+        </h1>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+            {% if restaurant %}
+                Ask and view questions about this restaurant.
+            {% else %}
+                Ask questions about any restaurant and get answers from chefs or staff.
+            {% endif %}
+        </p>
+    </div>
+
+    <!-- Question Creation Modal Trigger -->
+    {% if user.is_authenticated %}
+        {% if restaurants.exists or restaurant %}
+            <button id="openModalBtn" 
+                    class="bg-amber-600 text-white bg-green-600 px-4 py-2 rounded-lg hover:bg-amber-700 transition duration-300 ask-button animate__animated animate__pulse">
+                Ask a Question
+            </button>
+        {% else %}
+            <div class="bg-red-100 text-red-800 p-4 rounded-lg mb-8 animate__animated animate__fadeIn">
+                <p>No restaurants are available to ask a question. Please try again later or contact the site administrator.</p>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 p-4 rounded-lg mb-8 animate__animated animate__fadeIn">
+            <p>Please <a href="{% url 'login' %}?next={{ request.path }}" class="underline">log in</a> to ask a question.</p>
+        </div>
+    {% endif %}
+
+    <!-- Question Creation Modal -->
+    {% if user.is_authenticated and restaurants.exists or restaurant %}
+        <div id="questionModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden animate__animated animate__fadeIn">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 max-w-lg w-full modal-glow animate__animated animate__zoomIn">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Ask a Question</h2>
+                <form method="POST" action="{% if restaurant %}{% url 'community:question-list-create-specific' restaurant.pk %}{% else %}{% url 'community:question-list-create' %}{% endif %}">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="bg-red-100 text-red-800 p-4 rounded-lg mb-4 animate__animated animate__shakeX">
+                            <p>Please correct the errors below:</p>
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if not restaurant %}
+                        <div class="mb-4">
+                            <label for="{{ form.restaurant.id_for_label }}" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Select Restaurant</label>
+                            {{ form.restaurant }}
+                            {% if form.restaurant.errors %}
+                                <p class="text-red-600 text-sm mt-1">{{ form.restaurant.errors }}</p>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="mb-4 hidden">
+                            {{ form.restaurant }}
+                        </div>
+                    {% endif %}
+                    <div class="mb-4">
+                        <label for="{{ form.question.id_for_label }}" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Your Question</label>
+                        {{ form.question }}
+                        {% if form.question.errors %}
+                            <p class="text-red-600 text-sm mt-1">{{ form.question.errors }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" id="closeModalBtn" 
+                                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300 animate__animated animate__pulse">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition duration-300 ask-button animate__animated animate__pulse">
+                            Submit Question
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Questions List -->
+    <section class="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 animate__animated animate__fadeInUp">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Recent Questions</h2>
+        {% if questions.exists %}
+            <ul class="space-y-4">
+                {% for question in questions %}
+                    <li class="border-b border-gray-200 dark:border-gray-700 pb-4 animate__animated animate__fadeIn">
+                        <div class="flex items-start space-x-4">
+                          <div class="h-12 w-12 rounded-full flex items-center justify-center ring-2 ring-blue-400 bg-gray-100 dark:bg-gray-700 animate__animated animate__bounceIn">
+                                        👤
+                                    </div>
+
+                                 <div class="flex-1">
+                                <p class="text-gray-800 dark:text-gray-200 font-medium">{{ question.question }} 
+                                    {% if not restaurant %}(to {{ question.restaurant.name }}){% endif %}</p>
+                                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                                    <span>By {{ question.user.username }}</span>
+                                    <span>•</span>
+                                    <span>{{ question.created_at|timesince }} ago</span>
+                                </div>
+                                {% if question.is_answered %}
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">Answered by {{ question.answer.responder.username }}</p>
+                                {% endif %}
+                                <a href="{% url 'community:question-detail' question.pk %}" 
+                                   class="text-amber-600 dark:text-amber-400 hover:underline text-sm hover:scale-105 transition-transform">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-600 dark:text-gray-300">No questions have been asked yet.</p>
+        {% endif %}
+    </section>
+</div>
+
+{% block extra_js %}
+<script>
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const questionModal = document.getElementById('questionModal');
+
+    if (openModalBtn && questionModal) {
+        openModalBtn.addEventListener('click', () => {
+            questionModal.classList.remove('hidden');
+        });
+    }
+
+    if (closeModalBtn && questionModal) {
+        closeModalBtn.addEventListener('click', () => {
+            questionModal.classList.add('hidden');
+        });
+    }
+
+    // Close modal when clicking outside
+    questionModal.addEventListener('click', (e) => {
+        if (e.target === questionModal) {
+            questionModal.classList.add('hidden');
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

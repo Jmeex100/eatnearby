@@ -1,0 +1,41 @@
+answer_form.html{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8 mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            {% if form.instance.pk %}Edit Answer{% else %}Answer Question{% endif %}
+        </h1>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Question: {{ question.question }}</p>
+    </div>
+    <section class="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 mb-8">
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="bg-red-100 text-red-800 p-4 rounded-lg mb-4">
+                    <p>Please correct the errors below:</p>
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="mb-4">
+                <label for="{{ form.answer.id_for_label }}" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Your Answer</label>
+                {{ form.answer }}
+                {% if form.answer.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ form.answer.errors }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition duration-300">
+                {% if form.instance.pk %}Update Answer{% else %}Submit Answer{% endif %}
+            </button>
+            <a href="{% url 'community:question-detail' question.pk %}" class="text-gray-600 dark:text-gray-300 hover:underline ml-4">Cancel</a>
+        </form>
+    </section>
+</div>
+{% endblock %}

@@ -169,6 +169,7 @@ class Recipe(ContentBase):
     ])
     image = models.ImageField(upload_to='recipes/', blank=True, null=True)
     tags = models.ManyToManyField('RecipeTag', related_name='recipes')
+    comments = models.ManyToManyField(Comment, related_name='recipe_comments', blank=True)
     
     def __str__(self):
         return self.title

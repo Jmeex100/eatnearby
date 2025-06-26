@@ -17,6 +17,10 @@ module.exports = {
     './superadmin/static/js/**/*.js',
       './Community/templates/**/*.html',
     './Community/static/js/**/*.js',
+      './Community/templates/question/**/*.html',
+        './Community/templates/answer/**/*.html',
+      './Community/templates/posts/**/*.html',
+    './Community/static/js/**/*.js',
     
   ],
   theme: {

@@ -1,0 +1,214 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style>
+    /* Anime-inspired custom styles */
+    .anime-card {
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .anime-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.3), 0 0 30px rgba(255, 105, 180, 0.2);
+    }
+
+    .glow-effect {
+        position: absolute;
+        inset: -2px;
+        border-radius: 12px;
+        background: linear-gradient(45deg, #00ffcc, #ff66cc, #66ccff);
+        filter: blur(8px);
+        opacity: 0.7;
+        z-index: -1;
+        animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+        0% { opacity: 0.5; transform: scale(1); }
+        100% { opacity: 0.8; transform: scale(1.02); }
+    }
+
+    .answer-text {
+        background: linear-gradient(to right, #ffffff, #f0f0ff);
+        padding: 1rem;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+    }
+
+    .dark .answer-text {
+        background: linear-gradient(to right, #1f2937, #374151);
+    }
+
+    .submit-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+    }
+
+    .profile-img {
+        transition: transform 0.3s ease;
+    }
+
+    .profile-img:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+</style>
+{% endblock extra_head %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-4xl" role="main">
+    <!-- Question Card - Gradient border with AnimeCSS -->
+    <div class="relative p-0.5 rounded-xl mb-8 bg-gradient-to-r from-teal-400 to-purple-500 anime-card animate__animated animate__fadeIn">
+        <div class="glow-effect"></div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
+            <div class="p-6 sm:p-8">
+                <div class="flex items-start gap-4">
+                    <img class="h-12 w-12 rounded-full object-cover flex-shrink-0 ring-2 ring-teal-400 profile-img animate__animated animate__bounceIn" 
+                         src="{{ question.user.image.url|default:'/auths/images/empty.png' }}" 
+                         alt="{{ question.user.username }} profile picture" loading="lazy">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white animate__animated animate__fadeInUp">
+                                {{ question.question }}
+                            </h1>
+                            {% if question.user == user %}
+                            <div class="flex gap-3">
+                                {% if not question.is_answered %}
+                                <a href="{% url 'community:question-edit' question.pk %}" 
+                                   class="text-teal-500 dark:text-teal-400 hover:text-teal-600 dark:hover:text-teal-300 text-sm font-medium transition-colors animate__animated animate__fadeInRight">
+                                    Edit
+                                </a>
+                                {% endif %}
+                                <a href="{% url 'community:question-delete' question.pk %}" 
+                                   class="text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 text-sm font-medium transition-colors animate__animated animate__fadeInRight">
+                                    Delete
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400 mb-3 animate__animated animate__fadeIn">
+                            <span>Asked by {{ question.user.username }}</span>
+                            <span>•</span>
+                            <span>{{ question.created_at|timesince }} ago</span>
+                            <span>•</span>
+                            <span class="font-medium text-purple-500 dark:text-purple-400">
+                                To {{ question.restaurant.name }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Answer Section -->
+    <div class="space-y-6">
+        {% if answer %}
+        <!-- Existing Answer - Card with AnimeCSS -->
+        <div class="relative p-0.5 rounded-xl bg-gradient-to-br from-blue-400/20 to-purple-400/20 anime-card animate__animated animate__zoomIn">
+            <div class="glow-effect"></div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
+                <div class="p-6 sm:p-8">
+                    <div class="flex items-start gap-4">
+                        <img class="h-12 w-12 rounded-full object-cover flex-shrink-0 ring-2 ring-blue-400 profile-img animate__animated animate__bounceIn" 
+                             src="{{ answer.responder.image.url|default:'/auths/images/empty.png' }}" 
+                             alt="{{ answer.responder.username }} profile picture" loading="lazy">
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <h2 class="text-lg font-bold text-gray-800 dark:text-white">
+                                    <span class="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate__animated animate__fadeIn">
+                                        Answer from {{ answer.responder.username }}
+                                    </span>
+                                </h2>
+                                {% if user.is_authenticated and user.user_type == 'admin' or user == answer.responder %}
+                                <div class="flex gap-3">
+                                    <a href="{% url 'community:answer-edit' answer.pk %}" 
+                                       class="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 text-sm font-medium transition-colors animate__animated animate__fadeInRight">
+                                        Edit
+                                    </a>
+                                    <a href="{% url 'community:answer-delete' answer.pk %}" 
+                                       class="text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 text-sm font-medium transition-colors animate__animated animate__fadeInRight">
+                                        Delete
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200 answer-text animate__animated animate__fadeInUp">
+                                {{ answer.answer|linebreaks }}
+                            </div>
+                            
+                            <div class="mt-4 text-sm text-gray-500 dark:text-gray-400 animate__animated animate__fadeIn">
+                                Answered {{ answer.created_at|timesince }} ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- No Answer State - Card with animated border -->
+        <div class="relative group anime-card animate__animated animate__pulse">
+            <div class="glow-effect"></div>
+            <div class="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
+                <div class="p-6 sm:p-8">
+                    <div class="text-center py-8">
+                        <div class="mx-auto h-12 w-12 bg-gradient-to-r from-amber-400 to-pink-500 text-white rounded-full flex items-center justify-center mb-4 animate__animated animate__bounceIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-2 text-lg font-medium text-gray-900 dark:text-white animate__animated animate__fadeIn">
+                            No answer yet
+                        </h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300 animate__animated animate__fadeIn">
+                            Be the first to share your knowledge!
+                        </p>
+                        
+                        {% if user.is_authenticated and user.user_type in 'admin,staff' and not question.is_answered %}
+                            {% if user.user_type == 'staff' and user.restaurant != question.restaurant %}
+                            <div class="mt-6 p-4 bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-900/30 dark:to-amber-800/30 rounded-lg animate__animated animate__fadeIn">
+                                <p class="text-amber-700 dark:text-amber-300">
+                                    You can only answer questions for your own restaurant.
+                                </p>
+                            </div>
+                            {% else %}
+                            <div class="mt-8 max-w-md mx-auto animate__animated animate__fadeInUp">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">
+                                    Provide an answer
+                                </h4>
+                                <form method="POST" action="{% url 'community:answer-create' question.pk %}">
+                                    {% csrf_token %}
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="id_answer" class="sr-only">Your answer</label>
+                                            <textarea id="id_answer" name="answer" rows="5"
+                                                class="block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm 
+                                                       focus:border-purple-500 focus:ring-purple-500 bg-white dark:bg-gray-700 
+                                                       text-gray-900 dark:text-gray-200 transition-all duration-200 animate__animated animate__fadeIn"
+                                                placeholder="Share your expertise..."></textarea>
+                                        </div>
+                                        <button type="submit" 
+                                                class="w-full flex justify-center py-3 px-4 border border-transparent 
+                                                       rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r 
+                                                       from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 
+                                                       focus:outline-none focus:ring-2 focus:ring-offset-2 
+                                                       focus:ring-purple-500 transition-all duration-200 submit-button animate__animated animate__pulse">
+                                            Submit Answer
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl" role="main">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sm:p-8">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-4">Edit Question</h1>
+        <form method="POST" action="{% url 'community:question-edit' question.pk %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <textarea name="question" class="w-full p-3 border rounded-lg text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500" rows="4" required>{{ question.question }}</textarea>
+            </div>
+            <div class="flex space-x-4">
+                <button type="submit" class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition duration-300">Update Question</button>
+                <a href="{% url 'community:question-detail' question.pk %}" class="bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition duration-300">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

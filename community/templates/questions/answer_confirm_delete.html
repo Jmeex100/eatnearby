@@ -1,0 +1,76 @@
+{% extends "community_base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style>
+    .anime-card {
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .anime-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.3), 0 0 30px rgba(255, 105, 180, 0.2);
+    }
+    .glow-effect {
+        position: absolute;
+        inset: -2px;
+        border-radius: 12px;
+        background: linear-gradient(45deg, #00ffcc, #ff66cc, #66ccff);
+        filter: blur(8px);
+        opacity: 0.7;
+        z-index: -1;
+        animation: pulseGlow 2s infinite alternate;
+    }
+    @keyframes pulseGlow {
+        0% { opacity: 0.5; transform: scale(1); }
+        100% { opacity: 0.8; transform: scale(1.02); }
+    }
+    .delete-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(244, 63, 94, 0.5);
+    }
+    .cancel-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    }
+</style>
+{% endblock extra_head %}
+
+{% block content %}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-4xl" role="main">
+    <!-- Delete Confirmation Card -->
+    <div class="relative p-0.5 rounded-xl bg-gradient-to-r from-rose-400 to-purple-500 anime-card animate__animated animate__fadeIn">
+        <div class="glow-effect"></div>
+        <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
+            <div class="p-6 sm:p-8 text-center">
+                <h2 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4 animate__animated animate__fadeInUp">
+                    Confirm Answer Deletion
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 animate__animated animate__fadeIn">
+                    Are you sure you want to delete your answer to the question "<strong>{{ answer.question.question }}</strong>"? This action cannot be undone.
+                </p>
+                <form method="POST" action="{% url 'community:answer-delete' answer.pk %}">
+                    {% csrf_token %}
+                    <div class="flex justify-center gap-4">
+                        <button type="submit" 
+                                class="py-3 px-6 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white 
+                                       bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 
+                                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 
+                                       transition-all duration-200 delete-button animate__animated animate__pulse">
+                            Delete Answer
+                        </button>
+                        <a href="{% url 'community:question-detail' answer.question.pk %}" 
+                           class="py-3 px-6 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white 
+                                  bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 
+                                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+                                  transition-all duration-200 cancel-button animate__animated animate__pulse">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
