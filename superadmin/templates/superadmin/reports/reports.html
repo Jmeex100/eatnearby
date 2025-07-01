@@ -1,0 +1,371 @@
+
+{% extends 'superadmin/superadmin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Analytics Dashboard</h1>
+        <a href="{% url 'superadmin:generate_pdf_report' %}?download=true{% if request.GET %}&{{ request.GET.urlencode }}{% endif %}" 
+           class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center">
+            <i class="fas fa-file-pdf mr-2"></i> Download PDF Report
+        </a>
+    </div>
+
+    <!-- Filter Form -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Filter Reports</h2>
+        <form method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div>
+                <label for="{{ form.date_start.id_for_label }}" class="block text-gray-700 dark:text-gray-300">Start Date</label>
+                {{ form.date_start }}
+            </div>
+            <div>
+                <label for="{{ form.date_end.id_for_label }}" class="block text-gray-700 dark:text-gray-300">End Date</label>
+                {{ form.date_end }}
+            </div>
+            <div>
+                <label for="{{ form.user_type.id_for_label }}" class="block text-gray-700 dark:text-gray-300">User Type</label>
+                {{ form.user_type }}
+            </div>
+            <div>
+                <label for="{{ form.min_sales.id_for_label }}" class="block text-gray-700 dark:text-gray-300">Min Sales (K)</label>
+                {{ form.min_sales }}
+            </div>
+            <div>
+                <label for="{{ form.query.id_for_label }}" class="block text-gray-700 dark:text-gray-300">Search</label>
+                {{ form.query }}
+            </div>
+            <div class="col-span-1 md:col-span-5">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                    Apply Filters
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Summary Reports -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Summary Reports</h2>
+        
+        <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Monthly Sales</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Month</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total Sales</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Transactions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for item in summary_reports.monthly_sales %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.month }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ item.total_sales|floatformat:2 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.transaction_count }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Staff Performance</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Staff</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total Deliveries</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Completed</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Completion Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for item in summary_reports.staff_performance %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.username }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.total_deliveries }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.completed_deliveries }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.completion_rate }}%</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Customer Satisfaction</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Metric</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Overall Rating</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_rating|floatformat:1 }}</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Food Rating</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_food_rating|floatformat:1 }}</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Service Rating</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_service_rating|floatformat:1 }}</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Ambiance Rating</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_ambiance_rating|floatformat:1 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exception Reports -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Exception Reports</h2>
+        
+        <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">High Value Orders (>K100)</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Transaction ID</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Customer</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Amount</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for item in exception_reports.high_value_orders %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.transaction_id }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.user }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ item.total|floatformat:2 }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.created_at|date:"Y-m-d" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Low Inventory Items (<10)</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Product ID</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Name</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Category</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for item in exception_reports.low_inventory %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.product_id }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.name }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.category }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.quantity }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Reports -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Detailed Reports</h2>
+        
+        <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Recent Payments</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Transaction ID</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">User</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for payment in detailed_reports.payments %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.transaction_id }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.user }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ payment.total|floatformat:2 }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.created_at|date:"Y-m-d" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-4">
+                {% if detailed_reports.payments.has_other_pages %}
+                <nav class="flex justify-center">
+                    <ul class="inline-flex items-center -space-x-px">
+                        {% if detailed_reports.payments.has_previous %}
+                        <li>
+                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detailed_reports.payments.previous_page_number }}" 
+                               class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700">
+                                Previous
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% for num in detailed_reports.payments.paginator.page_range %}
+                        <li>
+                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}" 
+                               class="px-3 py-2 leading-tight {% if detailed_reports.payments.number == num %}text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:bg-gray-700 dark:border-gray-700 dark:text-white{% else %}text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700{% endif %}">
+                                {{ num }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                        {% if detailed_reports.payments.has_next %}
+                        <li>
+                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detailed_reports.payments.next_page_number }}" 
+                               class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700">
+                                Next
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">New Customers</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Full Name</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Email</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for customer in detailed_reports.customers %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ customer.full_name }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ customer.email }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ customer.phone_number }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trend Reports -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Trend Reports</h2>
+        
+        <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Sales Trend</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Month</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total Sales</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Growth (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for item in trend_reports.sales_trend %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.month }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ item.total_sales|floatformat:2 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.growth }}%</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Customer Acquisition Trend</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Month</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">New Customers</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for item in trend_reports.customer_trend %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.month }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.new_customers }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="2" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize any needed functionality
+    });
+</script>
+{% endblock %}
+

@@ -9,6 +9,8 @@ from . import cart_views
 from . import payment_views
 from . import staff_views
 from . import notification_views
+from . import reports_views
+
 
 app_name = 'superadmin'
 
@@ -66,4 +68,8 @@ path('customers/', user_views.customer_list, name='customer_list'),
     # Notification Management
     path('notifications/', notification_views.notification_list, name='notification_list'),
     path('notification/<int:pk>/', notification_views.notification_detail, name='notification_detail'),
+      # Reports
+    path('reports/', reports_views.reports, name='reports'),
+    path('reports/pdf/', reports_views.generate_pdf_report, name='generate_pdf_report'),
+
 ]

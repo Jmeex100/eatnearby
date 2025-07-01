@@ -1,4 +1,4 @@
-# C:\Users\Surecode\Documents\GitHub\django\coreEat\auths\models.py
+
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser

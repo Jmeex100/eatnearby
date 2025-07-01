@@ -174,6 +174,12 @@
                                 </li>
                             </ul>
                         </li>
+                      <!-- Reports -->
+                        <li>
+                            <a href="{% url 'superadmin:reports' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-900 transition {% if request.resolver_match.url_name == 'reports' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                                <i class="fas fa-chart-bar w-5 text-red-500"></i> Reports
+                            </a>
+                        </li>
                         <!-- Notifications -->
                         <li>
                             <a href="{% url 'superadmin:notification_list' %}" class="nav-icon nav-link flex items-center gap-x-3 p-3 rounded-lg hover:bg-red-100 dark:hover:bg-red-900 transition {% if request.resolver_match.url_name == 'notification_list' %}active{% else %}text-gray-700 dark:text-gray-300{% endif %}">
