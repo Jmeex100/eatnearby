@@ -71,7 +71,9 @@
                         <td class="p-4">{{ product.product_id }}</td>
                         <td class="p-4">{{ product.name }}</td>
                         <td class="p-4">{{ product.category.name }}</td>
-                        <td class="p-4">${{ product.price }}</td>
+                        <td class="p-4">ZMW
+                            <span style="color: red; font-weight: bold;"> {{ product.price }}</span>
+                            </td>
                         <td class="p-4">{{ product.quantity }}</td>
                         <td class="p-4">{{ product.created_at|date:"F d, Y" }}</td>
                         <td class="p-4 flex space-x-2">

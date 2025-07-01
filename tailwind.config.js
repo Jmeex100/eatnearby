@@ -21,6 +21,9 @@ module.exports = {
         './Community/templates/answer/**/*.html',
       './Community/templates/posts/**/*.html',
     './Community/static/js/**/*.js',
+    'payments/templates/payments',
+     'staffs/templates/sales',
+     'staffs/templates/staffs',
     
   ],
   theme: {

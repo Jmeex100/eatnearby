@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import uuid
 
 # ✅ Category Model
 class Category(models.Model):
@@ -18,7 +19,7 @@ class Category(models.Model):
 
 # ✅ Abstract Product Model
 class Product(models.Model):
-    product_id = models.CharField(max_length=100, unique=True, primary_key=True)
+    product_id = models.CharField(max_length=100, unique=True, primary_key=True, default=lambda: str(uuid.uuid4())[:8])
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)  

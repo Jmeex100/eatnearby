@@ -4,16 +4,16 @@ from auths.models import Food, Category
 from django.core.paginator import Paginator
 from django.forms import ModelForm
 from .decorators import superadmin_required
+import uuid
 
 class ProductForm(ModelForm):
     class Meta:
         model = Food
-        fields = ['product_id', 'name', 'category', 'price', 'quantity', 'description', 'image_url']  # Added quantity and product_id
+        fields = ['name', 'category', 'price', 'quantity', 'description', 'image_url']  # Removed product_id
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Optional: Customize field attributes (e.g., placeholders, classes)
-        self.fields['product_id'].widget.attrs.update({'class': 'w-full border-gray-300 rounded-lg p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-colors'})
+        # Customize field attributes
         self.fields['name'].widget.attrs.update({'class': 'w-full border-gray-300 rounded-lg p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-colors'})
         self.fields['category'].widget.attrs.update({'class': 'w-full border-gray-300 rounded-lg p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-colors'})
         self.fields['price'].widget.attrs.update({'class': 'w-full border-gray-300 rounded-lg p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-colors'})
@@ -39,7 +39,9 @@ def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
-            form.save()
+            product = form.save(commit=False)
+            product.product_id = str(uuid.uuid4())[:8]  # Generate unique product_id
+            product.save()
             messages.success(request, "Product created successfully.")
             return redirect('superadmin:product_list')
         else:
