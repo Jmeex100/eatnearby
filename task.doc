@@ -1,10 +1,767 @@
-views/
-├── __init__.py
-├── restaurants.py  # restaurant_list, restaurant_detail, restaurant_create, etc.
-├── posts.py        # post_list_create, post_detail, post_edit, post_delete
-├── ratings.py      # rating_create, rating_edit
-├── comments.py     # comment_list_create, comment_edit, comment_delete, comment_reply
-├── challenges.py   # challenge_list, challenge_detail, challenge_create, challenge_edit, challenge_delete, challenge_entry, challenge_entry_delete
-├── recipes.py      # recipe_list_create, recipe_detail, recipe_edit, recipe_delete
-├── questions.py    # question_list_create, question_detail, question_edit, question_delete
-├── answers.py      # answer_create, answer_edit, answer_delete
+-- Set default character set and collation for Unicode support
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0; -- Temporarily disable foreign key checks to avoid order issues
+
+-- Table: django_migrations
+CREATE TABLE IF NOT EXISTS `django_migrations` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `app` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `applied` DATETIME NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: sqlite_sequence (used for SQLite sequence tracking, optional in MySQL)
+CREATE TABLE IF NOT EXISTS `sqlite_sequence` (
+    `name` VARCHAR(255) NOT NULL,
+    `seq` BIGINT NOT NULL,
+    PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: django_content_type
+CREATE TABLE IF NOT EXISTS `django_content_type` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `app_label` VARCHAR(100) NOT NULL,
+    `model` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`, `model`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auth_group
+CREATE TABLE IF NOT EXISTS `auth_group` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(150) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auth_permission
+CREATE TABLE IF NOT EXISTS `auth_permission` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `content_type_id` BIGINT NOT NULL,
+    `codename` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`, `codename`),
+    INDEX `auth_permission_content_type_id_2f476e4b` (`content_type_id`),
+    CONSTRAINT `fk_auth_permission_content_type_id` FOREIGN KEY (`content_type_id`) 
+        REFERENCES `django_content_type` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auth_group_permissions
+CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `group_id` BIGINT NOT NULL,
+    `permission_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`, `permission_id`),
+    INDEX `auth_group_permissions_group_id_b120cbf9` (`group_id`),
+    INDEX `auth_group_permissions_permission_id_84c5c92e` (`permission_id`),
+    CONSTRAINT `fk_auth_group_permissions_group_id` FOREIGN KEY (`group_id`) 
+        REFERENCES `auth_group` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_auth_group_permissions_permission_id` FOREIGN KEY (`permission_id`) 
+        REFERENCES `auth_permission` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_category
+CREATE TABLE IF NOT EXISTS `auths_category` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `description` TEXT,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_user
+CREATE TABLE IF NOT EXISTS `auths_user` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `password` VARCHAR(128) NOT NULL,
+    `last_login` DATETIME,
+    `is_superuser` TINYINT(1) NOT NULL,
+    `username` VARCHAR(150) NOT NULL,
+    `email` VARCHAR(100),
+    `is_staff` TINYINT(1) NOT NULL,
+    `is_active` TINYINT(1) NOT NULL,
+    `date_joined` DATETIME NOT NULL,
+    `first_name` VARCHAR(100) NOT NULL,
+    `last_name` VARCHAR(100) NOT NULL,
+    `user_type` VARCHAR(10) NOT NULL,
+    `gender` VARCHAR(10),
+    `image` VARCHAR(100),
+    `phone_number` BIGINT,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `username` (`username`),
+    UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_user_groups
+CREATE TABLE IF NOT EXISTS `auths_user_groups` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+    `group_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `auths_user_groups_user_id_group_id_5a849a23_uniq` (`user_id`, `group_id`),
+    INDEX `auths_user_groups_user_id_ab88ce56` (`user_id`),
+    INDEX `auths_user_groups_group_id_9d606e8e` (`group_id`),
+    CONSTRAINT `fk_auths_user_groups_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_auths_user_groups_group_id` FOREIGN KEY (`group_id`) 
+        REFERENCES `auth_group` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_user_user_permissions
+CREATE TABLE IF NOT EXISTS `auths_user_user_permissions` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL,
+    `permission_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `auths_user_user_permissions_user_id_permission_id_a92a6680_uniq` (`user_id`, `permission_id`),
+    INDEX `auths_user_user_permissions_user_id_9513e64c` (`user_id`),
+    INDEX `auths_user_user_permissions_permission_id_89f365d3` (`permission_id`),
+    CONSTRAINT `fk_auths_user_user_permissions_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_auths_user_user_permissions_permission_id` FOREIGN KEY (`permission_id`) 
+        REFERENCES `auth_permission` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: django_admin_log
+CREATE TABLE IF NOT EXISTS `django_admin_log` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `object_id` TEXT,
+    `object_repr` VARCHAR(200) NOT NULL,
+    `action_flag` SMALLINT UNSIGNED NOT NULL,
+    `change_message` TEXT NOT NULL,
+    `content_type_id` BIGINT,
+    `user_id` BIGINT NOT NULL,
+    `action_time` DATETIME NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `django_admin_log_content_type_id_c4bce8eb` (`content_type_id`),
+    INDEX `django_admin_log_user_id_c564eba6` (`user_id`),
+    CONSTRAINT `fk_django_admin_log_content_type_id` FOREIGN KEY (`content_type_id`) 
+        REFERENCES `django_content_type` (`id`) ON DELETE SET NULL,
+    CONSTRAINT `fk_django_admin_log_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: django_session
+CREATE TABLE IF NOT EXISTS `django_session` (
+    `session_key` VARCHAR(40) NOT NULL,
+    `session_data` TEXT NOT NULL,
+    `expire_date` DATETIME NOT NULL,
+    PRIMARY KEY (`session_key`),
+    INDEX `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: cart_cart
+CREATE TABLE IF NOT EXISTS `cart_cart` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `cart_cart_user_id_9b4220b9` (`user_id`),
+    CONSTRAINT `fk_cart_cart_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_drink
+CREATE TABLE IF NOT EXISTS `auths_drink` (
+    `product_id` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(200) NOT NULL,
+    `price` DECIMAL(10,2) NOT NULL,
+    `description` TEXT,
+    `image_url` VARCHAR(300),
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `category_id` BIGINT NOT NULL,
+    `quantity` INTEGER UNSIGNED NOT NULL,
+    PRIMARY KEY (`product_id`),
+    INDEX `auths_drink_category_id_413a103d` (`category_id`),
+    CONSTRAINT `fk_auths_drink_category_id` FOREIGN KEY (`category_id`) 
+        REFERENCES `auths_category` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_fastfood
+CREATE TABLE IF NOT EXISTS `auths_fastfood` (
+    `product_id` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(200) NOT NULL,
+    `price` DECIMAL(10,2) NOT NULL,
+    `description` TEXT,
+    `image_url` VARCHAR(300),
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `category_id` BIGINT NOT NULL,
+    `quantity` INTEGER UNSIGNED NOT NULL,
+    PRIMARY KEY (`product_id`),
+    INDEX `auths_fastfood_category_id_8c5066ef` (`category_id`),
+    CONSTRAINT `fk_auths_fastfood_category_id` FOREIGN KEY (`category_id`) 
+        REFERENCES `auths_category` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: auths_food
+CREATE TABLE IF NOT EXISTS `auths_food` (
+    `product_id` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(200) NOT NULL,
+    `price` DECIMAL(10,2) NOT NULL,
+    `description` TEXT,
+    `image_url` VARCHAR(300),
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `category_id` BIGINT NOT NULL,
+    `quantity` INTEGER UNSIGNED NOT NULL,
+    PRIMARY KEY (`product_id`),
+    INDEX `auths_food_category_id_81b5a195` (`category_id`),
+    CONSTRAINT `fk_auths_food_category_id` FOREIGN KEY (`category_id`) 
+        REFERENCES `auths_category` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: cart_cartitem
+CREATE TABLE IF NOT EXISTS `cart_cartitem` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `quantity` INTEGER UNSIGNED NOT NULL,
+    `quality` VARCHAR(20) NOT NULL,
+    `cart_id` BIGINT NOT NULL,
+    `drink_id` VARCHAR(100),
+    `fast_food_id` VARCHAR(100),
+    `food_id` VARCHAR(100),
+    PRIMARY KEY (`id`),
+    INDEX `cart_cartitem_cart_id_370ad265` (`cart_id`),
+    INDEX `cart_cartitem_drink_id_d6a39484` (`drink_id`),
+    INDEX `cart_cartitem_fast_food_id_f229cdc1` (`fast_food_id`),
+    INDEX `cart_cartitem_food_id_7bb68841` (`food_id`),
+    CONSTRAINT `fk_cart_cartitem_cart_id` FOREIGN KEY (`cart_id`) 
+        REFERENCES `cart_cart` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_cart_cartitem_drink_id` FOREIGN KEY (`drink_id`) 
+        REFERENCES `auths_drink` (`product_id`) ON DELETE SET NULL,
+    CONSTRAINT `fk_cart_cartitem_fast_food_id` FOREIGN KEY (`fast_food_id`) 
+        REFERENCES `auths_fastfood` (`product_id`) ON DELETE SET NULL,
+    CONSTRAINT `fk_cart_cartitem_food_id` FOREIGN KEY (`food_id`) 
+        REFERENCES `auths_food` (`product_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: payments_deliveryinfo
+CREATE TABLE IF NOT EXISTS `payments_deliveryinfo` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `address` VARCHAR(100),
+    `predefined_address` VARCHAR(30),
+    `delivery_status` VARCHAR(20) NOT NULL,
+    `payment_method` VARCHAR(20) NOT NULL,
+    `phone_number` VARCHAR(20) NOT NULL,
+    `secondary_phone_number` VARCHAR(20),
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `cart_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    `payment_provider` VARCHAR(20),
+    `is_pos_order` TINYINT(1) NOT NULL,
+    `driver_location` TEXT,
+    `last_location_update` DATETIME,
+    `restaurant_location` TEXT,
+    PRIMARY KEY (`id`),
+    INDEX `payments_deliveryinfo_cart_id_5ca53b70` (`cart_id`),
+    INDEX `payments_deliveryinfo_user_id_4d164558` (`user_id`),
+    CONSTRAINT `fk_payments_deliveryinfo_cart_id` FOREIGN KEY (`cart_id`) 
+        REFERENCES `cart_cart` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_payments_deliveryinfo_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: payments_paymenthistory
+CREATE TABLE IF NOT EXISTS `payments_paymenthistory` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `total` DECIMAL(10,2) NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `cart_id` BIGINT,
+    `delivery_info_id` BIGINT,
+    `user_id` BIGINT NOT NULL,
+    `transaction_id` VARCHAR(100),
+    `items` TEXT NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `payments_paymenthistory_cart_id_fcf8ed0e` (`cart_id`),
+    INDEX `payments_paymenthistory_delivery_info_id_ee728190` (`delivery_info_id`),
+    INDEX `payments_paymenthistory_user_id_f963c89b` (`user_id`),
+    CONSTRAINT `fk_payments_paymenthistory_cart_id` FOREIGN KEY (`cart_id`) 
+        REFERENCES `cart_cart` (`id`) ON DELETE SET NULL,
+    CONSTRAINT `fk_payments_paymenthistory_delivery_info_id` FOREIGN KEY (`delivery_info_id`) 
+        REFERENCES `payments_deliveryinfo` (`id`) ON DELETE SET NULL,
+    CONSTRAINT `fk_payments_paymenthistory_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: paypal_ipn
+CREATE TABLE IF NOT EXISTS `paypal_ipn` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `business` VARCHAR(127) NOT NULL,
+    `charset` VARCHAR(255) NOT NULL,
+    `custom` VARCHAR(256) NOT NULL,
+    `notify_version` DECIMAL(10,2),
+    `parent_txn_id` VARCHAR(19) NOT NULL,
+    `receiver_email` VARCHAR(254) NOT NULL,
+    `receiver_id` VARCHAR(255) NOT NULL,
+    `residence_country` VARCHAR(2) NOT NULL,
+    `test_ipn` TINYINT(1) NOT NULL,
+    `txn_id` VARCHAR(255) NOT NULL,
+    `txn_type` VARCHAR(255) NOT NULL,
+    `verify_sign` VARCHAR(255) NOT NULL,
+    `address_country` VARCHAR(64) NOT NULL,
+    `address_city` VARCHAR(40) NOT NULL,
+    `address_country_code` VARCHAR(64) NOT NULL,
+    `address_name` VARCHAR(128) NOT NULL,
+    `address_state` VARCHAR(40) NOT NULL,
+    `address_status` VARCHAR(255) NOT NULL,
+    `address_street` VARCHAR(200) NOT NULL,
+    `address_zip` VARCHAR(20) NOT NULL,
+    `contact_phone` VARCHAR(20) NOT NULL,
+    `first_name` VARCHAR(64) NOT NULL,
+    `last_name` VARCHAR(64) NOT NULL,
+    `payer_business_name` VARCHAR(127) NOT NULL,
+    `payer_email` VARCHAR(127) NOT NULL,
+    `payer_id` VARCHAR(13) NOT NULL,
+    `auth_amount` DECIMAL(10,2),
+    `auth_exp` VARCHAR(28) NOT NULL,
+    `auth_id` VARCHAR(19) NOT NULL,
+    `auth_status` VARCHAR(255) NOT NULL,
+    `exchange_rate` DECIMAL(10,2),
+    `invoice` VARCHAR(127) NOT NULL,
+    `item_name` VARCHAR(127) NOT NULL,
+    `item_number` VARCHAR(127) NOT NULL,
+    `mc_currency` VARCHAR(32) NOT NULL,
+    `mc_fee` DECIMAL(10,2),
+    `mc_gross` DECIMAL(10,2),
+    `mc_handling` DECIMAL(10,2),
+    `mc_shipping` DECIMAL(10,2),
+    `memo` VARCHAR(255) NOT NULL,
+    `num_cart_items` INTEGER,
+    `option_name1` VARCHAR(64) NOT NULL,
+    `option_name2` VARCHAR(64) NOT NULL,
+    `payer_status` VARCHAR(255) NOT NULL,
+    `payment_date` DATETIME,
+    `payment_gross` DECIMAL(10,2),
+    `payment_status` VARCHAR(255) NOT NULL,
+    `payment_type` VARCHAR(255) NOT NULL,
+    `pending_reason` VARCHAR(255) NOT NULL,
+    `protection_eligibility` VARCHAR(255) NOT NULL,
+    `quantity` INTEGER,
+    `reason_code` VARCHAR(255) NOT NULL,
+    `remaining_settle` DECIMAL(10,2),
+    `settle_amount` DECIMAL(10,2),
+    `settle_currency` VARCHAR(32) NOT NULL,
+    `shipping` DECIMAL(10,2),
+    `shipping_method` VARCHAR(255) NOT NULL,
+    `tax` DECIMAL(10,2),
+    `transaction_entity` VARCHAR(255) NOT NULL,
+    `auction_buyer_id` VARCHAR(64) NOT NULL,
+    `auction_closing_date` DATETIME,
+    `auction_multi_item` INTEGER,
+    `for_auction` DECIMAL(10,2),
+    `amount` DECIMAL(10,2),
+    `amount_per_cycle` DECIMAL(10,2),
+    `initial_payment_amount` DECIMAL(10,2),
+    `next_payment_date` DATETIME,
+    `outstanding_balance` DECIMAL(10,2),
+    `payment_cycle` VARCHAR(255) NOT NULL,
+    `period_type` VARCHAR(255) NOT NULL,
+    `product_name` VARCHAR(255) NOT NULL,
+    `product_type` VARCHAR(255) NOT NULL,
+    `profile_status` VARCHAR(255) NOT NULL,
+    `recurring_payment_id` VARCHAR(255) NOT NULL,
+    `rp_invoice_id` VARCHAR(127) NOT NULL,
+    `time_created` DATETIME,
+    `amount1` DECIMAL(10,2),
+    `amount2` DECIMAL(10,2),
+    `amount3` DECIMAL(10,2),
+    `mc_amount1` DECIMAL(10,2),
+    `mc_amount2` DECIMAL(10,2),
+    `mc_amount3` DECIMAL(10,2),
+    `password` VARCHAR(24) NOT NULL,
+    `period1` VARCHAR(255) NOT NULL,
+    `period2` VARCHAR(255) NOT NULL,
+    `period3` VARCHAR(255) NOT NULL,
+    `reattempt` VARCHAR(1) NOT NULL,
+    `recur_times` INTEGER,
+    `recurring` VARCHAR(1) NOT NULL,
+    `retry_at` DATETIME,
+    `subscr_date` DATETIME,
+    `subscr_effective` DATETIME,
+    `subscr_id` VARCHAR(19) NOT NULL,
+    `username` VARCHAR(64) NOT NULL,
+    `case_creation_date` DATETIME,
+    `case_id` VARCHAR(255) NOT NULL,
+    `case_type` VARCHAR(255) NOT NULL,
+    `receipt_id` VARCHAR(255) NOT NULL,
+    `currency_code` VARCHAR(32) NOT NULL,
+    `handling_amount` DECIMAL(10,2),
+    `transaction_subject` VARCHAR(256) NOT NULL,
+    `ipaddress` CHAR(39),
+    `flag` TINYINT(1) NOT NULL,
+    `flag_code` VARCHAR(16) NOT NULL,
+    `flag_info` TEXT NOT NULL,
+    `query` TEXT NOT NULL,
+    `response` TEXT NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `from_view` VARCHAR(6),
+    `mp_id` VARCHAR(128),
+    `option_selection1` VARCHAR(200) NOT NULL,
+    `option_selection2` VARCHAR(200) NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `paypal_ipn_txn_id_8fa22c44` (`txn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: staffs_notification
+CREATE TABLE IF NOT EXISTS `staffs_notification` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `message` TEXT NOT NULL,
+    `is_read` TINYINT(1) NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `recipient_id` BIGINT NOT NULL,
+    `related_delivery_id` BIGINT,
+    `notification_type` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `staffs_notification_recipient_id_722904b5` (`recipient_id`),
+    INDEX `staffs_notification_related_delivery_id_7f56dc41` (`related_delivery_id`),
+    CONSTRAINT `fk_staffs_notification_recipient_id` FOREIGN KEY (`recipient_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_staffs_notification_related_delivery_id` FOREIGN KEY (`related_delivery_id`) 
+        REFERENCES `payments_deliveryinfo` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: staffs_staffassignment
+CREATE TABLE IF NOT EXISTS `staffs_staffassignment` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `assigned_at` DATETIME NOT NULL,
+    `delivery_id` BIGINT NOT NULL,
+    `staff_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `staffs_staffassignment_staff_id_delivery_id_50191464_uniq` (`staff_id`, `delivery_id`),
+    INDEX `staffs_staffassignment_delivery_id_e8197f7b` (`delivery_id`),
+    INDEX `staffs_staffassignment_staff_id_36825fb2` (`staff_id`),
+    CONSTRAINT `fk_staffs_staffassignment_delivery_id` FOREIGN KEY (`delivery_id`) 
+        REFERENCES `payments_deliveryinfo` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_staffs_staffassignment_staff_id` FOREIGN KEY (`staff_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: staffs_staffservicearea
+CREATE TABLE IF NOT EXISTS `staffs_staffservicearea` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `point` VARCHAR(30) NOT NULL,
+    `staff_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `staffs_staffservicearea_staff_id_point_6356b9d4_uniq` (`staff_id`, `point`),
+    INDEX `staffs_staffservicearea_staff_id_fa11e1cd` (`staff_id`),
+    CONSTRAINT `fk_staffs_staffservicearea_staff_id` FOREIGN KEY (`staff_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_restaurant
+CREATE TABLE IF NOT EXISTS `community_restaurant` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(254),
+    `phone` VARCHAR(20) NOT NULL,
+    `address` VARCHAR(255) NOT NULL,
+    `city` VARCHAR(100) NOT NULL,
+    `description` TEXT NOT NULL,
+    `website` VARCHAR(200),
+    `is_verified` TINYINT(1) NOT NULL,
+    `country` VARCHAR(100) NOT NULL,
+    `profile_image` VARCHAR(100),
+    PRIMARY KEY (`id`),
+    INDEX `community_r_name_ff4ff3_idx` (`name`),
+    INDEX `community_r_city_059990_idx` (`city`, `country`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_recipetag
+CREATE TABLE IF NOT EXISTS `community_recipetag` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    `slug` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `name` (`name`),
+    UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_challenge
+CREATE TABLE IF NOT EXISTS `community_challenge` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `title` VARCHAR(150) NOT NULL,
+    `slug` VARCHAR(150) NOT NULL,
+    `description` TEXT NOT NULL,
+    `banner_image` VARCHAR(100),
+    `start_date` DATE NOT NULL,
+    `end_date` DATE NOT NULL,
+    `is_active` TINYINT(1) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_post
+CREATE TABLE IF NOT EXISTS `community_post` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `title` VARCHAR(200) NOT NULL,
+    `content` TEXT NOT NULL,
+    `is_published` TINYINT(1) NOT NULL,
+    `post_type` VARCHAR(10) NOT NULL,
+    `image` VARCHAR(100),
+    `author_id` BIGINT NOT NULL,
+    `restaurant_id` BIGINT,
+    PRIMARY KEY (`id`),
+    INDEX `community_p_post_ty_df85f8_idx` (`post_type`),
+    INDEX `community_p_restaur_20e158_idx` (`restaurant_id`),
+    INDEX `community_post_author_id_a6c5f564` (`author_id`),
+    INDEX `community_post_restaurant_id_64116e43` (`restaurant_id`),
+    CONSTRAINT `fk_community_post_author_id` FOREIGN KEY (`author_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_post_restaurant_id` FOREIGN KEY (`restaurant_id`) 
+        REFERENCES `community_restaurant` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_comment
+CREATE TABLE IF NOT EXISTS `community_comment` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `content` TEXT NOT NULL,
+    `author_id` BIGINT NOT NULL,
+    `post_id` BIGINT NOT NULL,
+    `parent_id` BIGINT,
+    PRIMARY KEY (`id`),
+    INDEX `community_comment_author_id_51c65c2a` (`author_id`),
+    INDEX `community_comment_post_id_12b521a8` (`post_id`),
+    INDEX `community_comment_parent_id_2fd9f894` (`parent_id`),
+    CONSTRAINT `fk_community_comment_author_id` FOREIGN KEY (`author_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_comment_post_id` FOREIGN KEY (`post_id`) 
+        REFERENCES `community_post` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_comment_parent_id` FOREIGN KEY (`parent_id`) 
+        REFERENCES `community_comment` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_commentlike
+CREATE TABLE IF NOT EXISTS `community_commentlike` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `comment_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_commentlike_user_id_comment_id_d5bf7daa_uniq` (`user_id`, `comment_id`),
+    INDEX `community_commentlike_comment_id_c9100f6d` (`comment_id`),
+    INDEX `community_commentlike_user_id_d542ecfe` (`user_id`),
+    CONSTRAINT `fk_community_commentlike_comment_id` FOREIGN KEY (`comment_id`) 
+        REFERENCES `community_comment` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_commentlike_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_postlike
+CREATE TABLE IF NOT EXISTS `community_postlike` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `post_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_postlike_user_id_post_id_cd1ec41b_uniq` (`user_id`, `post_id`),
+    INDEX `community_postlike_post_id_115f08b9` (`post_id`),
+    INDEX `community_postlike_user_id_8f4704b7` (`user_id`),
+    CONSTRAINT `fk_community_postlike_post_id` FOREIGN KEY (`post_id`) 
+        REFERENCES `community_post` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_postlike_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_recipe
+CREATE TABLE IF NOT EXISTS `community_recipe` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `title` VARCHAR(200) NOT NULL,
+    `content` TEXT NOT NULL,
+    `is_published` TINYINT(1) NOT NULL,
+    `prep_time` INTEGER UNSIGNED NOT NULL,
+    `cook_time` INTEGER UNSIGNED NOT NULL,
+    `servings` SMALLINT UNSIGNED NOT NULL,
+    `difficulty` VARCHAR(20) NOT NULL,
+    `image` VARCHAR(100),
+    `author_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `community_recipe_author_id_f5899a72` (`author_id`),
+    CONSTRAINT `fk_community_recipe_author_id` FOREIGN KEY (`author_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_recipe_comments
+CREATE TABLE IF NOT EXISTS `community_recipe_comments` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `recipe_id` BIGINT NOT NULL,
+    `comment_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_recipe_comments_recipe_id_comment_id_737efa1e_uniq` (`recipe_id`, `comment_id`),
+    INDEX `community_recipe_comments_recipe_id_cd78b4ea` (`recipe_id`),
+    INDEX `community_recipe_comments_comment_id_0a16517d` (`comment_id`),
+    CONSTRAINT `fk_community_recipe_comments_recipe_id` FOREIGN KEY (`recipe_id`) 
+        REFERENCES `community_recipe` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_recipe_comments_comment_id` FOREIGN KEY (`comment_id`) 
+        REFERENCES `community_comment` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_recipe_tags
+CREATE TABLE IF NOT EXISTS `community_recipe_tags` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `recipe_id` BIGINT NOT NULL,
+    `recipetag_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_recipe_tags_recipe_id_recipetag_id_b9509f89_uniq` (`recipe_id`, `recipetag_id`),
+    INDEX `community_recipe_tags_recipe_id_0d831768` (`recipe_id`),
+    INDEX `community_recipe_tags_recipetag_id_8644154f` (`recipetag_id`),
+    CONSTRAINT `fk_community_recipe_tags_recipe_id` FOREIGN KEY (`recipe_id`) 
+        REFERENCES `community_recipe` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_recipe_tags_recipetag_id` FOREIGN KEY (`recipetag_id`) 
+        REFERENCES `community_recipetag` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_recipeingredient
+CREATE TABLE IF NOT EXISTS `community_recipeingredient` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `quantity` VARCHAR(50) NOT NULL,
+    `notes` VARCHAR(100) NOT NULL,
+    `recipe_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `community_recipeingredient_recipe_id_85fcea90` (`recipe_id`),
+    CONSTRAINT `fk_community_recipeingredient_recipe_id` FOREIGN KEY (`recipe_id`) 
+        REFERENCES `community_recipe` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_recipeinstruction
+CREATE TABLE IF NOT EXISTS `community_recipeinstruction` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `step_number` SMALLINT UNSIGNED NOT NULL,
+    `instruction` TEXT NOT NULL,
+    `recipe_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_recipeinstruction_recipe_id_step_number_9fc90259_uniq` (`recipe_id`, `step_number`),
+    INDEX `community_recipeinstruction_recipe_id_fdc890ff` (`recipe_id`),
+    CONSTRAINT `fk_community_recipeinstruction_recipe_id` FOREIGN KEY (`recipe_id`) 
+        REFERENCES `community_recipe` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_restaurantquestion
+CREATE TABLE IF NOT EXISTS `community_restaurantquestion` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `question` TEXT NOT NULL,
+    `is_answered` TINYINT(1) NOT NULL,
+    `restaurant_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `community_restaurantquestion_restaurant_id_31e07fa6` (`restaurant_id`),
+    INDEX `community_restaurantquestion_user_id_ded68395` (`user_id`),
+    CONSTRAINT `fk_community_restaurantquestion_restaurant_id` FOREIGN KEY (`restaurant_id`) 
+        REFERENCES `community_restaurant` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_restaurantquestion_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_restaurantanswer
+CREATE TABLE IF NOT EXISTS `community_restaurantanswer` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `answer` TEXT NOT NULL,
+    `responder_id` BIGINT NOT NULL,
+    `question_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `question_id` (`question_id`),
+    INDEX `community_restaurantanswer_responder_id_7bda25da` (`responder_id`),
+    CONSTRAINT `fk_community_restaurantanswer_responder_id` FOREIGN KEY (`responder_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_restaurantanswer_question_id` FOREIGN KEY (`question_id`) 
+        REFERENCES `community_restaurantquestion` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_review
+CREATE TABLE IF NOT EXISTS `community_review` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `rating` SMALLINT UNSIGNED NOT NULL,
+    `food_rating` SMALLINT UNSIGNED,
+    `service_rating` SMALLINT UNSIGNED,
+    `ambiance_rating` SMALLINT UNSIGNED,
+    `post_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `post_id` (`post_id`),
+    CONSTRAINT `fk_community_review_post_id` FOREIGN KEY (`post_id`) 
+        REFERENCES `community_post` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_userprofile
+CREATE TABLE IF NOT EXISTS `community_userprofile` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `bio` TEXT NOT NULL,
+    `profile_picture` VARCHAR(100),
+    `dietary_preferences` VARCHAR(255) NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `user_id` (`user_id`),
+    CONSTRAINT `fk_community_userprofile_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_userprofile_favorite_restaurants
+CREATE TABLE IF NOT EXISTS `community_userprofile_favorite_restaurants` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `userprofile_id` BIGINT NOT NULL,
+    `restaurant_id` BIGINT NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_userprofile_favorite_restaurants_userprofile_id_restaurant_id_2af3a1e4_uniq` (`userprofile_id`, `restaurant_id`),
+    INDEX `community_userprofile_favorite_restaurants_userprofile_id_0cb67ed2` (`userprofile_id`),
+    INDEX `community_userprofile_favorite_restaurants_restaurant_id_4c484ac4` (`restaurant_id`),
+    CONSTRAINT `fk_community_userprofile_favorite_restaurants_userprofile_id` FOREIGN KEY (`userprofile_id`) 
+        REFERENCES `community_userprofile` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_userprofile_favorite_restaurants_restaurant_id` FOREIGN KEY (`restaurant_id`) 
+        REFERENCES `community_restaurant` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table: community_challengeparticipation
+CREATE TABLE IF NOT EXISTS `community_challengeparticipation` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `completed` TINYINT(1) NOT NULL,
+    `challenge_id` BIGINT NOT NULL,
+    `user_id` BIGINT NOT NULL,
+    `post_id` BIGINT,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `community_challengeparticipation_challenge_id_user_id_2cf98c74_uniq` (`challenge_id`, `user_id`),
+    INDEX `community_challengeparticipation_challenge_id_2b6a2daa` (`challenge_id`),
+    INDEX `community_challengeparticipation_user_id_50338762` (`user_id`),
+    INDEX `community_challengeparticipation_post_id_bd39ced6` (`post_id`),
+    CONSTRAINT `fk_community_challengeparticipation_challenge_id` FOREIGN KEY (`challenge_id`) 
+        REFERENCES `community_challenge` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_challengeparticipation_user_id` FOREIGN KEY (`user_id`) 
+        REFERENCES `auths_user` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_community_challengeparticipation_post_id` FOREIGN KEY (`post_id`) 
+        REFERENCES `community_post` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;

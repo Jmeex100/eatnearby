@@ -17,6 +17,7 @@
                         <p><strong>Location:</strong> {{ delivery.address|default:delivery.get_predefined_address_display }}</p>
                         <p><strong>Phone:</strong> {{ delivery.phone_number }}</p>
                         <p><strong>Status:</strong> {{ delivery.get_delivery_status_display }}</p>
+                        <p><strong>Payment Method:</strong> {{ delivery.get_payment_method_display }}</p>
                         <p><strong>Total:</strong> K{{ delivery.cart.total|floatformat:2 }}</p>
                         <div class="mt-4 flex space-x-2">
                             <!-- Accept Form -->
@@ -55,6 +56,7 @@
                         <p><strong>Location:</strong> {{ delivery.address|default:delivery.get_predefined_address_display }}</p>
                         <p><strong>Phone:</strong> {{ delivery.phone_number }}</p>
                         <p><strong>Status:</strong> {{ delivery.get_delivery_status_display }}</p>
+                        <p><strong>Payment Method:</strong> {{ delivery.get_payment_method_display }}</p>
                         <p><strong>Total:</strong> K{{ delivery.cart.total|floatformat:2 }}</p>
                         <p class="text-green-600 mt-2">Accepted - Awaiting customer confirmation</p>
                     </div>

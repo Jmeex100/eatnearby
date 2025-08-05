@@ -10,7 +10,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',       # Localhost
     'localhost',       # Localhost
-    '192.168.119.40',      # Your local IP address
+    '192.168.35.40',      # Your local IP address
     '0.0.0.0',         # For binding to all network interfaces (optional)
     '192.168.43.172',   # GUEST
   'd31c-45-215-255-168.ngrok-free.app',  # Your ngrok domain
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'pwa',
     'staffs.apps.StaffsConfig', 
     'community',
+     
 
 ]
 
