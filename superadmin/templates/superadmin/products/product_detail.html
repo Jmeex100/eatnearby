@@ -48,7 +48,7 @@
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{{ product.name }}</h2>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Type:</strong> {{ product_type|default:"Food" }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Product ID:</strong> {{ product.product_id }}</p>
-                <p class="text-gray-600 dark:text-gray-400"><strong>Price:</strong> ${{ product.price }}</p>
+                <p class="text-gray-600 dark:text-gray-400"><strong>Price:</strong> ZMW :{{ product.price }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Quantity:</strong> {{ product.quantity }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Category:</strong> {{ product.category.name }}</p>
                 <p class="text-gray-600 dark:text-gray-400"><strong>Description:</strong> {{ product.description|default:"No description" }}</p>

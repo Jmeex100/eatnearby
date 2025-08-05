@@ -54,7 +54,7 @@
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 dark:text-gray-400">Subtotal</p>
-                            <p class="font-medium text-gray-800 dark:text-gray-200">${{ payment.total|floatformat:2 }}</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-200">ZMW {{ payment.total|floatformat:2 }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500 dark:text-gray-400">User</p>
@@ -101,8 +101,8 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="font-medium text-gray-800 dark:text-gray-200">${{ item.subtotal|floatformat:2 }}</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">${{ item.product.price|floatformat:2 }} each</p>
+                                <p class="font-medium text-gray-800 dark:text-gray-200">ZMW {{ item.subtotal|floatformat:2 }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">ZMW {{ item.product.price|floatformat:2 }} each</p>
                             </div>
                         </div>
                         {% endfor %}
@@ -110,7 +110,7 @@
                     <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
                         <div class="flex justify-between items-center">
                             <span class="font-semibold text-gray-800 dark:text-gray-200">Total</span>
-                            <span class="text-xl font-bold text-gray-800 dark:text-gray-200">${{ payment.total|floatformat:2 }}</span>
+                            <span class="text-xl font-bold text-gray-800 dark:text-gray-200">ZMW {{ payment.total|floatformat:2 }}</span>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                                 <p class="text-sm text-gray-500 dark:text-gray-400">{{ event.timestamp|date:"M d, Y h:i A" }}</p>
                                 <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                                     <span class="font-medium">Method:</span> {{ event.metadata.method }} |
-                                    <span class="font-medium">Amount:</span> ${{ event.metadata.amount|floatformat:2 }}
+                                    <span class="font-medium">Amount:</span> ZMW {{ event.metadata.amount|floatformat:2 }}
                                 </div>
                             </div>
                         </div>
