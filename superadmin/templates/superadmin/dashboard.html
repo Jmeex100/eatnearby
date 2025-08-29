@@ -12,7 +12,7 @@
             <p class="text-gray-600 dark:text-gray-300">Welcome back, {{ request.user.get_full_name|default:request.user.username }}</p>
         </div>
         <div class="flex flex-wrap gap-2">
-            <button onclick="window.print()" class="print-button bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
+            <button onclick="printTable()" class="print-button bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
                 <i class="fas fa-print mr-2 text-gray-600 dark:text-gray-300"></i>Print
             </button>
             <a href="{% url 'superadmin:delivery_list' %}" class="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center">
@@ -135,7 +135,7 @@
                     View all
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 notifications-table">
                 {% for notification in notification_counts.recent %}
                 <div class="p-3 rounded-lg transition-all duration-200 {% if notification.is_read %}bg-gray-50 dark:bg-gray-700/50{% else %}bg-red-50 dark:bg-red-900/20 border-l-2 border-red-500{% endif %}">
                     <div class="flex items-start gap-3">
@@ -174,7 +174,7 @@
                     View all
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 users-table">
                 {% for user in recent_users %}
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
@@ -208,7 +208,7 @@
                     View all
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 assignments-table">
                 {% for assignment in recent_assignments %}
                 <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex items-center gap-3">
@@ -273,7 +273,7 @@
                     View all
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 categories-table">
                 {% for category in category_counts.categories %}
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex-1 min-w-0">
@@ -301,7 +301,7 @@
                     View all
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 payments-table">
                 {% for payment in payment_counts.recent %}
                 <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex items-center gap-3">
@@ -346,7 +346,7 @@
                     View all
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 service-areas-table">
                 {% for area in staff_service_areas %}
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <div class="flex-1 min-w-0">
@@ -458,6 +458,84 @@
         deliveryChart.update();
         productChart.update();
     });
+
+    // Print function
+    function printTable() {
+        const statsContent = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4.gap-4.mb-6').innerHTML;
+        const notificationsContent = document.querySelector('.notifications-table').innerHTML;
+        const usersContent = document.querySelector('.users-table').innerHTML;
+        const assignmentsContent = document.querySelector('.assignments-table').innerHTML;
+        const categoriesContent = document.querySelector('.categories-table').innerHTML;
+        const paymentsContent = document.querySelector('.payments-table').innerHTML;
+        const serviceAreasContent = document.querySelector('.service-areas-table').innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = `
+            <html>
+                <head>
+                    <title>Admin Dashboard Report - Eat Nearby</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+                        h2 { font-size: 1.25rem; margin: 1rem 0; }
+                        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem; }
+                        .stats-card { padding: 1rem; border: 1px solid #e5e7eb; }
+                        .table-container { margin-bottom: 2rem; }
+                        .table-container > div { padding: 0.5rem; border: 1px solid #e5e7eb; margin-bottom: 0.5rem; }
+                        .flex { display: flex; align-items: center; gap: 0.75rem; }
+                        .text-sm { font-size: 0.875rem; }
+                        .text-xs { font-size: 0.75rem; }
+                        .font-medium { font-weight: 500; }
+                        .font-bold { font-weight: bold; }
+                        .text-gray-800 { color: #1F2937; }
+                        .text-gray-600 { color: #4B5563; }
+                        .text-gray-500 { color: #6B7280; }
+                        .bg-gray-50 { background-color: #F9FAFB; }
+                        .bg-red-50 { background-color: #FEF2F2; }
+                        .bg-blue-100 { background-color: #DBEAFE; }
+                        .bg-green-100 { background-color: #D1FAE5; }
+                        .bg-purple-100 { background-color: #E9D5FF; }
+                        .bg-teal-100 { background-color: #CCFBF1; }
+                        .bg-yellow-100 { background-color: #FEF3C7; }
+                        .text-blue-800 { color: #1E40AF; }
+                        .text-green-800 { color: #065F46; }
+                        .text-purple-800 { color: #6B21A8; }
+                        .text-teal-800 { color: #115E59; }
+                        .text-yellow-800 { color: #92400E; }
+                        .rounded-lg { border-radius: 0.5rem; }
+                        .rounded-full { border-radius: 9999px; }
+                        .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+                        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+                        .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Admin Dashboard Report - {{ today|date:"F j, Y" }}</h1>
+                    <h2>Statistics</h2>
+                    <div class="stats-grid">${statsContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <h2>Recent Notifications</h2>
+                    <div class="table-container">${notificationsContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <h2>Recent Users</h2>
+                    <div class="table-container">${usersContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <h2>Recent Staff Assignments</h2>
+                    <div class="table-container">${assignmentsContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <h2>Top Categories</h2>
+                    <div class="table-container">${categoriesContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <h2>Recent Payments</h2>
+                    <div class="table-container">${paymentsContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <h2>Staff Service Areas</h2>
+                    <div class="table-container">${serviceAreasContent.replace(/dark:[^\s"]+/g, '')}</div>
+                    <div style="margin-top: 20px; font-size: 0.75rem; text-align: right;">
+                        Generated on ${new Date().toLocaleString()}
+                    </div>
+                </body>
+            </html>
+        `;
+        
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload();
+    }
 </script>
 
 <!-- Print Styles -->

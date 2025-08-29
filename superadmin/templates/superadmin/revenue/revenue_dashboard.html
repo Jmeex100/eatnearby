@@ -5,18 +5,23 @@
 
 {% block content %}
 <div class="p-4 md:p-6">
-    <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white mb-4">Revenue Dashboard</h1>
-    
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">Revenue Dashboard</h1>
+            <button onclick="printTable()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-200"
+                    aria-label="Print Report">
+                <i class="fas fa-print mr-2"></i> Print
+            </button>
+        </div>
+    </div>
+
     <!-- Date Range Selector -->
     <div class="mb-6 flex justify-between items-center">
-        <div>
-            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">{{ range_label }}</h2>
-        </div>
+        <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">{{ range_label|default:"This Month" }}</h2>
         <div class="flex space-x-2">
             <button onclick="changeRange('today')" class="px-3 py-1 {% if date_range == 'today' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Today</button>
-            <button onclick="changeRange('week')" class="px-3 py-1 {% if date_range == 'week' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Week</button>
-            <button onclick="changeRange('month')" class="px-3 py-1 {% if date_range == 'month' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Month</button>
-            <button onclick="changeRange('year')" class="px-3 py-1 {% if date_range == 'year' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Year</button>
+            <button onclick="changeRange('this_week')" class="px-3 py-1 {% if date_range == 'this_week' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Week</button>
+            <button onclick="changeRange('this_month')" class="px-3 py-1 {% if date_range == 'this_month' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Month</button>
+            <button onclick="changeRange('this_year')" class="px-3 py-1 {% if date_range == 'this_year' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Year</button>
             <button onclick="changeRange('custom')" class="px-3 py-1 {% if date_range == 'custom' %}bg-red-600 text-white{% else %}bg-gray-200 dark:bg-gray-700{% endif %} rounded text-sm">Custom</button>
         </div>
     </div>
@@ -28,11 +33,11 @@
             <div class="flex space-x-4">
                 <div>
                     <label for="start_date" class="text-sm text-gray-700 dark:text-gray-300">Start Date</label>
-                    <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}" class="p-2 border rounded dark:bg-gray-700 dark:text-white" required>
+                    <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d'|default:'' }}" class="p-2 border rounded dark:bg-gray-700 dark:text-white" required>
                 </div>
                 <div>
                     <label for="end_date" class="text-sm text-gray-700 dark:text-gray-300">End Date</label>
-                    <input type="date" id="end_date" name="end_date" value="{{ end_date|date:'Y-m-d' }}" class="p-2 border rounded dark:bg-gray-700 dark:text-white" required>
+                    <input type="date" id="end_date" name="end_date" value="{{ end_date|date:'Y-m-d'|default:'' }}" class="p-2 border rounded dark:bg-gray-700 dark:text-white" required>
                 </div>
                 <div>
                     <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded text-sm mt-6">Apply</button>
@@ -45,69 +50,63 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-red-500">
             <p class="text-gray-500 dark:text-gray-400 text-sm">Total Revenue</p>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ revenue.total|default:"0" }}</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">All payment methods ({{ range_label }})</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ revenue.total|floatformat:2|default:"0.00" }}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">All methods ({{ range_label|default:"This Month" }})</p>
         </div>
         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
             <p class="text-gray-500 dark:text-gray-400 text-sm">Today's Revenue</p>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ revenue.today|default:"0" }}</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ revenue.today|floatformat:2|default:"0.00" }}</p>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ timezone.now|date:"F j, Y" }}</p>
         </div>
         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border-l-4 border-green-500">
-            <p class="text-gray-500 dark:text-gray-400 text-sm">Average Daily Revenue</p>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">
-                {% if revenue.daily_average %}K{{ revenue.daily_average|default:"0" }}{% else %}N/A{% endif %}
-            </p>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ range_label }}</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Daily Average</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ revenue.daily_average|floatformat:2|default:"0.00" }}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ range_label|default:"This Month" }}</p>
         </div>
     </div>
-    
+
     <!-- Payment Methods Breakdown -->
     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm mb-6">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Payment Methods Breakdown</h2>
-        
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Payment Methods</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {% for method in payment_methods %}
             <div class="p-4 border rounded hover:shadow-md transition-shadow">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">{{ method.display_name }}</p>
-                        <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ method.total|default:"0" }}</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">{{ method.display_name|default:"Unknown" }}</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">K{{ method.total|floatformat:2|default:"0.00" }}</p>
                     </div>
                     <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">
-                        {{ method.percentage|floatformat:2 }}% of total
+                        {{ method.percentage|floatformat:2|default:"0.00" }}%
                     </span>
                 </div>
                 <div class="mt-3">
                     <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div class="bg-red-600 h-2 rounded-full" style="width: {{ method.percentage }}%"></div>
+                        <div class="bg-red-600 h-2 rounded-full" style="width: {{ method.percentage|default:0 }}%"></div>
                     </div>
                 </div>
                 <div class="mt-2 flex justify-between text-xs text-gray-500 dark:text-gray-400">
-                    <span>Today: K{{ method.today|default:"0" }}</span>
-                    <a href="{% url 'superadmin:revenue_detail' method.name %}?range={{ date_range }}{% if date_range == 'custom' %}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}{% endif %}" class="text-red-600 dark:text-red-400 hover:underline">View Details →</a>
+                    <span>Today: K{{ method.today|floatformat:2|default:"0.00" }}</span>
+                    <a href="{% url 'superadmin:revenue_detail' method.name %}?range={{ date_range|default:'this_month' }}{% if date_range == 'custom' %}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}{% endif %}" class="text-red-600 dark:text-red-400 hover:underline">Details</a>
                 </div>
             </div>
             {% empty %}
-            <div class="col-span-3 p-4 text-center text-gray-500 dark:text-gray-400">
-                No payment methods found
-            </div>
+            <div class="col-span-3 p-4 text-center text-gray-500 dark:text-gray-400">No payment methods found</div>
             {% endfor %}
         </div>
     </div>
-    
+
     <!-- Recent Transactions -->
     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white">Recent Transactions</h2>
-            <a href="{% url 'superadmin:revenue_detail' 'all' %}?range={{ date_range }}{% if date_range == 'custom' %}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}{% endif %}" class="text-sm text-red-600 dark:text-red-400 hover:underline">View All</a>
+            <a href="{% url 'superadmin:revenue_detail' 'all' %}?range={{ date_range|default:'this_month' }}{% if date_range == 'custom' %}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}{% endif %}" class="text-sm text-red-600 dark:text-red-400 hover:underline">View All</a>
         </div>
-        
         <div class="overflow-x-auto">
             <table class="w-full border-collapse text-sm">
                 <thead>
                     <tr class="bg-gray-100 dark:bg-gray-700">
-                        <th class="px-4 py-2 text-left">Transaction ID</th>
+                        <th class="px-4 py-2 text-left">ID</th>
                         <th class="px-4 py-2 text-left">Date</th>
                         <th class="px-4 py-2 text-left">Customer</th>
                         <th class="px-4 py-2 text-left">Method</th>
@@ -118,15 +117,15 @@
                 <tbody>
                     {% for transaction in recent_transactions %}
                     <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-4 py-3">{{ transaction.transaction_id|truncatechars:10 }}</td>
-                        <td class="px-4 py-3">{{ transaction.created_at|date:"M j, Y H:i" }}</td>
+                        <td class="px-4 py-3">{{ transaction.transaction_id|truncatechars:10|default:"N/A" }}</td>
+                        <td class="px-4 py-3">{{ transaction.created_at|date:"M j, Y H:i"|default:"N/A" }}</td>
                         <td class="px-4 py-3">{{ transaction.user.get_full_name|default:transaction.user.username }}</td>
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">
-                                {{ transaction.delivery_info.get_payment_method_display }}
+                                {{ transaction.delivery_info.get_payment_method_display|default:"Unknown" }}
                             </span>
                         </td>
-                        <td class="px-4 py-3 font-medium">K{{ transaction.total }}</td>
+                        <td class="px-4 py-3 font-medium">K{{ transaction.total|floatformat:2|default:"0.00" }}</td>
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs">
                                 Completed
@@ -135,7 +134,7 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="6" class="px-4 py-4 text-center text-gray-500 dark:text-gray-400">No recent transactions found</td>
+                        <td colspan="6" class="px-4 py-4 text-center text-gray-500 dark:text-gray-400">No transactions found</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -146,20 +145,65 @@
 
 <script>
 function changeRange(range) {
-    if (range === 'custom') {
-        toggleCustomForm();
-        return;
-    }
     const url = new URL(window.location);
     url.searchParams.set('range', range);
-    url.searchParams.delete('start_date');
-    url.searchParams.delete('end_date');
-    window.location.href = url.toString();
+    if (range !== 'custom') {
+        url.searchParams.delete('start_date');
+        url.searchParams.delete('end_date');
+        window.location.href = url.toString();
+    } else {
+        document.getElementById('custom-date-form').classList.toggle('hidden');
+    }
 }
 
-function toggleCustomForm() {
-    const form = document.getElementById('custom-date-form');
-    form.classList.toggle('hidden');
+function printTable() {
+    const tableContent = document.querySelector('.overflow-x-auto').innerHTML;
+    const summaryContent = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-3.gap-4.mb-6').innerHTML;
+    const paymentMethodsContent = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-3.gap-4.mb-6').innerHTML;
+    const rangeLabel = "{{ range_label|default:'This Month' }}";
+    const originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = `
+        <html>
+            <head>
+                <title>Revenue Report - Eat Nearby</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+                    h2 { font-size: 1.25rem; margin: 1rem 0; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+                    th { text-align: left; background-color: #f3f4f6; padding: 0.5rem; border: 1px solid #e5e7eb; }
+                    td { padding: 0.5rem; border: 1px solid #e5e7eb; }
+                    .status-completed { background-color: #d1fae5; color: #065f46; }
+                    .text-xs { font-size: 0.75rem; }
+                    .text-sm { font-size: 0.875rem; }
+                    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+                    .summary-card { padding: 1rem; border: 1px solid #e5e7eb; }
+                    .payment-methods-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+                    .payment-card { padding: 1rem; border: 1px solid #e5e7eb; }
+                    .font-bold { font-weight: bold; }
+                    .text-2xl { font-size: 1.5rem; }
+                    .text-gray-500 { color: #6b7280; }
+                </style>
+            </head>
+            <body>
+                <h1>Revenue Report - {{ timezone.now|date:"F j, Y" }} (${rangeLabel})</h1>
+                <h2>Summary</h2>
+                <div class="summary-grid">${summaryContent.replace(/dark:[^\s"]+/g, '')}</div>
+                <h2>Payment Methods</h2>
+                <div class="payment-methods-grid">${paymentMethodsContent.replace(/dark:[^\s"]+/g, '')}</div>
+                <h2>Recent Transactions</h2>
+                <table>${tableContent.replace(/dark:[^\s"]+/g, '')}</table>
+                <div style="margin-top: 20px; font-size: 0.75rem; text-align: right;">
+                    Generated on ${new Date().toLocaleString()}
+                </div>
+            </body>
+        </html>
+    `;
+    
+    window.print();
+    document.body.innerHTML = originalContents;
+    window.location.reload();
 }
 </script>
 {% endblock %}

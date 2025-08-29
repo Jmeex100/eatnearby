@@ -1,43 +1,212 @@
-
 {% extends 'superadmin/superadmin_base.html' %}
-{% load static %}
+{% load static report_filters %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Analytics Dashboard</h1>
         <a href="{% url 'superadmin:generate_pdf_report' %}?download=true{% if request.GET %}&{{ request.GET.urlencode }}{% endif %}" 
-           class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center">
+           class="bg-red-600 dark:bg-red-700 hover:bg-red-700 dark:hover:bg-red-800 text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-200"
+           aria-label="Download PDF Report">
             <i class="fas fa-file-pdf mr-2"></i> Download PDF Report
         </a>
     </div>
 
+    <!-- Applied Filters -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+            <svg class="w-5 h-5 mr-2 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </svg>
+            Applied Filters
+        </h2>
+        <div class="text-gray-700 dark:text-gray-300">
+            {% if form.cleaned_data %}
+                <ul class="space-y-2">
+                    {% if form.cleaned_data.date_range and form.cleaned_data.date_range != 'custom' %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-blue-100 text-blue-800 rounded-full dark:bg-blue-900 dark:text-blue-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </span>
+                            <span>Period: <span class="font-medium text-gray-900 dark:text-white">{{ form.date_range.field.choices|dictlookup:form.cleaned_data.date_range }}</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.date_start %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </span>
+                            <span>Start Date: <span class="font-medium text-gray-900 dark:text-white">{{ form.cleaned_data.date_start }}</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.date_end %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-red-100 text-red-800 rounded-full dark:bg-red-900 dark:text-red-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </span>
+                            <span>End Date: <span class="font-medium text-gray-900 dark:text-white">{{ form.cleaned_data.date_end }}</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.user_type %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-purple-100 text-purple-800 rounded-full dark:bg-purple-900 dark:text-purple-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </span>
+                            <span>User Type: <span class="font-medium text-gray-900 dark:text-white">{{ form.cleaned_data.user_type|capfirst }}</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.min_sales %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-900 dark:text-yellow-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </span>
+                            <span>Minimum Sales: <span class="font-medium text-gray-900 dark:text-white">K{{ form.cleaned_data.min_sales }}</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.max_sales %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-900 dark:text-yellow-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </span>
+                            <span>Maximum Sales: <span class="font-medium text-gray-900 dark:text-white">K{{ form.cleaned_data.max_sales }}</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.query %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-indigo-100 text-indigo-800 rounded-full dark:bg-indigo-900 dark:text-indigo-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </span>
+                            <span>Search: <span class="font-medium text-gray-900 dark:text-white">'{{ form.cleaned_data.query }}'</span></span>
+                        </li>
+                    {% endif %}
+                    {% if form.cleaned_data.report_type %}
+                        <li class="flex items-start">
+                            <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-xs bg-pink-100 text-pink-800 rounded-full dark:bg-pink-900 dark:text-pink-200">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </span>
+                            <span>Report Types: 
+                                {% for r in form.cleaned_data.report_type %}
+                                    <span class="font-medium text-gray-900 dark:text-white">{{ form.report_type.field.choices|dictlookup:r }}</span>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% else %}
+                <div class="flex items-center p-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-700 dark:text-blue-400" role="info">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                        <span class="font-medium">No filters applied.</span> Showing default data for this month.
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
     <!-- Filter Form -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6 border border-gray-200 dark:border-gray-700">
         <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Filter Reports</h2>
-        <form method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div>
-                <label for="{{ form.date_start.id_for_label }}" class="block text-gray-700 dark:text-gray-300">Start Date</label>
-                {{ form.date_start }}
+        <form method="GET" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Date Range -->
+            <div class="space-y-2">
+                <label for="{{ form.date_range.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date Range</label>
+                <select name="{{ form.date_range.name }}" id="{{ form.date_range.id_for_label }}" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                    {% for value, label in form.date_range.field.choices %}
+                        <option value="{{ value }}" {% if form.date_range.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <div>
-                <label for="{{ form.date_end.id_for_label }}" class="block text-gray-700 dark:text-gray-300">End Date</label>
-                {{ form.date_end }}
+            
+            <!-- Start Date -->
+            <div class="space-y-2">
+                <label for="{{ form.date_start.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Start Date</label>
+                <input type="date" name="{{ form.date_start.name }}" id="{{ form.date_start.id_for_label }}" 
+                    value="{{ form.date_start.value|default_if_none:'' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
             </div>
-            <div>
-                <label for="{{ form.user_type.id_for_label }}" class="block text-gray-700 dark:text-gray-300">User Type</label>
-                {{ form.user_type }}
+            
+            <!-- End Date -->
+            <div class="space-y-2">
+                <label for="{{ form.date_end.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">End Date</label>
+                <input type="date" name="{{ form.date_end.name }}" id="{{ form.date_end.id_for_label }}" 
+                    value="{{ form.date_end.value|default_if_none:'' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
             </div>
-            <div>
-                <label for="{{ form.min_sales.id_for_label }}" class="block text-gray-700 dark:text-gray-300">Min Sales (K)</label>
-                {{ form.min_sales }}
+            
+            <!-- User Type -->
+            <div class="space-y-2">
+                <label for="{{ form.user_type.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">User Type</label>
+                <select name="{{ form.user_type.name }}" id="{{ form.user_type.id_for_label }}" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                    {% for value, label in form.user_type.field.choices %}
+                        <option value="{{ value }}" {% if form.user_type.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <div>
-                <label for="{{ form.query.id_for_label }}" class="block text-gray-700 dark:text-gray-300">Search</label>
-                {{ form.query }}
+            
+            <!-- Search Query -->
+            <div class="space-y-2">
+                <label for="{{ form.query.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Search</label>
+                <input type="text" name="{{ form.query.name }}" id="{{ form.query.id_for_label }}" 
+                    value="{{ form.query.value|default_if_none:'' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
             </div>
-            <div class="col-span-1 md:col-span-5">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+            
+            <!-- Min Sales -->
+            <div class="space-y-2">
+                <label for="{{ form.min_sales.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Min Sales (K)</label>
+                <input type="number" name="{{ form.min_sales.name }}" id="{{ form.min_sales.id_for_label }}" 
+                    value="{{ form.min_sales.value|default_if_none:'' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
+            </div>
+            
+            <!-- Max Sales -->
+            <div class="space-y-2">
+                <label for="{{ form.max_sales.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Max Sales (K)</label>
+                <input type="number" name="{{ form.max_sales.name }}" id="{{ form.max_sales.id_for_label }}" 
+                    value="{{ form.max_sales.value|default_if_none:'' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400">
+            </div>
+            
+            <!-- Report Types -->
+            <div class="space-y-2 lg:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Report Types</label>
+                <div class="flex flex-wrap gap-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md">
+                    {% for choice in form.report_type %}
+                        <div class="flex items-center">
+                            <input type="checkbox" name="{{ form.report_type.name }}" id="{{ choice.id_for_label }}" 
+                                value="{{ choice.data.value }}" {% if choice.data.selected %}checked{% endif %}
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="{{ choice.id_for_label }}" class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                {{ choice.choice_label }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="lg:col-span-4 flex justify-end">
+                <button type="submit" class="bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-800 text-white px-6 py-2 rounded-lg transition-colors duration-200 font-medium">
                     Apply Filters
                 </button>
             </div>
@@ -51,12 +220,14 @@
         <div class="mb-6">
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Monthly Sales</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Month</th>
                             <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total Sales</th>
                             <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Transactions</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Avg. Order Value</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Growth</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
@@ -65,10 +236,20 @@
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.month }}</td>
                             <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ item.total_sales|floatformat:2 }}</td>
                             <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.transaction_count }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ item.avg_order_value|floatformat:2 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">
+                                {% if item.growth is not None %}
+                                    <span class="{% if item.growth > 0 %}text-green-600{% elif item.growth < 0 %}text-red-600{% endif %}">
+                                        {% if item.growth > 0 %}▲{% elif item.growth < 0 %}▼{% endif %} {{ item.growth|floatformat:1 }}%
+                                    </span>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="3" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                            <td colspan="5" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -79,7 +260,7 @@
         <div class="mb-6">
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Staff Performance</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Staff</th>
@@ -109,7 +290,7 @@
         <div>
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Customer Satisfaction</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Metric</th>
@@ -119,19 +300,19 @@
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Overall Rating</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_rating|floatformat:1 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_rating|floatformat:1 }}/5</td>
                         </tr>
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Food Rating</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_food_rating|floatformat:1 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_food_rating|floatformat:1 }}/5</td>
                         </tr>
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Service Rating</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_service_rating|floatformat:1 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_service_rating|floatformat:1 }}/5</td>
                         </tr>
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Ambiance Rating</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_ambiance_rating|floatformat:1 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ summary_reports.customer_satisfaction.average_ambiance_rating|floatformat:1 }}/5</td>
                         </tr>
                     </tbody>
                 </table>
@@ -146,7 +327,7 @@
         <div class="mb-6">
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">High Value Orders (>K100)</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Transaction ID</th>
@@ -176,7 +357,7 @@
         <div>
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Low Inventory Items (<10)</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Product ID</th>
@@ -191,7 +372,7 @@
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.product_id }}</td>
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.name }}</td>
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.category }}</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.quantity }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300 {% if item.quantity < 5 %}text-red-600 font-semibold{% endif %}">{{ item.quantity }}</td>
                         </tr>
                         {% empty %}
                         <tr>
@@ -205,32 +386,66 @@
     </div>
 
     <!-- Detailed Reports -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
         <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Detailed Reports</h2>
         
         <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Top Selling Products</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Product</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Category</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Units Sold</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Revenue</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">% of Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for product in detailed_reports.top_products %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ product.name }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ product.category }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ product.units_sold }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ product.revenue|floatformat:2 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ product.percentage }}%</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mb-6">
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Recent Payments</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Transaction ID</th>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">User</th>
                             <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total</th>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Date</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Payment Method</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
-                        {% for payment in detailed_reports.payments %}
+                        {% for payment in detailed_reports.payments_page %}
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.transaction_id }}</td>
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.user }}</td>
                             <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ payment.total|floatformat:2 }}</td>
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.created_at|date:"Y-m-d" }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ payment.payment_method }}</td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="4" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                            <td colspan="5" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -238,29 +453,31 @@
             </div>
             <!-- Pagination -->
             <div class="mt-4">
-                {% if detailed_reports.payments.has_other_pages %}
+                {% if detailed_reports.payments_page.has_other_pages %}
                 <nav class="flex justify-center">
                     <ul class="inline-flex items-center -space-x-px">
-                        {% if detailed_reports.payments.has_previous %}
+                        {% if detailed_reports.payments_page.has_previous %}
                         <li>
-                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detailed_reports.payments.previous_page_number }}" 
-                               class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700">
+                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detailed_reports.payments_page.previous_page_number }}" 
+                               class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors duration-200">
                                 Previous
                             </a>
                         </li>
                         {% endif %}
-                        {% for num in detailed_reports.payments.paginator.page_range %}
-                        <li>
-                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}" 
-                               class="px-3 py-2 leading-tight {% if detailed_reports.payments.number == num %}text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:bg-gray-700 dark:border-gray-700 dark:text-white{% else %}text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700{% endif %}">
-                                {{ num }}
-                            </a>
-                        </li>
+                        {% for num in detailed_reports.payments_page.paginator.page_range %}
+                            {% if num <= detailed_reports.payments_page.number|add:3 and num >= detailed_reports.payments_page.number|add:-3 %}
+                            <li>
+                                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}" 
+                                   class="px-3 py-2 leading-tight {% if detailed_reports.payments_page.number == num %}text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:bg-gray-700 dark:border-gray-700 dark:text-white{% else %}text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700{% endif %} transition-colors duration-200">
+                                    {{ num }}
+                                </a>
+                            </li>
+                            {% endif %}
                         {% endfor %}
-                        {% if detailed_reports.payments.has_next %}
+                        {% if detailed_reports.payments_page.has_next %}
                         <li>
-                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detailed_reports.payments.next_page_number }}" 
-                               class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700">
+                            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ detailed_reports.payments_page.next_page_number }}" 
+                               class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors duration-200">
                                 Next
                             </a>
                         </li>
@@ -271,15 +488,52 @@
             </div>
         </div>
 
+        <div class="mb-6">
+            <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Recent Customer Reviews</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
+                    <thead class="bg-gray-100 dark:bg-gray-600">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">User</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Comment</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Rating</th>
+                            <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for review in detailed_reports.recent_reviews %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ review.user }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ review.comment|truncatechars:50 }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">
+                                <div class="flex items-center justify-end">
+                                    <span class="mr-1">{{ review.rating }}</span>
+                                    <i class="fas fa-star text-yellow-500"></i>
+                                </div>
+                            </td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ review.date }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+
         <div>
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">New Customers</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Full Name</th>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Email</th>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Phone Number</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Order Count</th>
+                            <th class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">Total Spent</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
@@ -287,11 +541,13 @@
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ customer.full_name }}</td>
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ customer.email }}</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ customer.phone_number }}</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ customer.phone_number }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ customer.order_count }}</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ customer.total_spent|floatformat:2 }}</td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="3" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
+                            <td colspan="5" class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">No data available</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -307,7 +563,7 @@
         <div class="mb-6">
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Sales Trend</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Month</th>
@@ -320,7 +576,11 @@
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">{{ item.month }}</td>
                             <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">K{{ item.total_sales|floatformat:2 }}</td>
-                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">{{ item.growth }}%</td>
+                            <td class="py-3 px-4 text-right text-gray-700 dark:text-gray-300">
+                                <span class="{% if item.growth > 0 %}text-green-600{% elif item.growth < 0 %}text-red-600{% endif %}">
+                                    {% if item.growth > 0 %}▲{% elif item.growth < 0 %}▼{% endif %} {{ item.growth|floatformat:1 }}%
+                                </span>
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>
@@ -335,7 +595,7 @@
         <div>
             <h3 class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">Customer Acquisition Trend</h3>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                <table class="w-full bg-white dark:bg-gray-700 rounded-lg">
                     <thead class="bg-gray-100 dark:bg-gray-600">
                         <tr>
                             <th class="py-3 px-4 text-left text-gray-700 dark:text-gray-300">Month</th>
@@ -361,11 +621,123 @@
 </div>
 {% endblock %}
 
+{% block extra_css %}
+<style>
+    /* Custom styles for form elements */
+    select, input[type="text"], input[type="date"], input[type="number"] {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        background-color: #fff;
+        color: #374151;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    select:focus, input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* Dark mode styles */
+    .dark select, 
+    .dark input[type="text"], 
+    .dark input[type="date"], 
+    .dark input[type="number"] {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #e5e7eb;
+    }
+    
+    .dark select:focus, 
+    .dark input:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+    }
+    
+    /* Checkbox styling */
+    input[type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 0.25rem;
+        border: 1px solid #d1d5db;
+        background-color: #fff;
+        color: #3b82f6;
+    }
+    
+    .dark input[type="checkbox"] {
+        background-color: #4b5563;
+        border-color: #6b7280;
+    }
+    
+    input[type="checkbox"]:checked {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+    }
+    
+    .dark input[type="checkbox"]:checked {
+        background-color: #60a5fa;
+        border-color: #60a5fa;
+    }
+    
+    /* Placeholder styling */
+    ::placeholder {
+        color: #9ca3af;
+    }
+    
+    .dark ::placeholder {
+        color: #9ca3af;
+    }
+</style>
+{% endblock %}
+
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize any needed functionality
+        {% if charts.sales_trend %}
+        const salesTrendData = {{ charts.sales_trend_json|safe }};
+        const ctx = document.getElementById('salesTrendChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: salesTrendData.labels,
+                datasets: [{
+                    label: 'Sales (K)',
+                    data: salesTrendData.values,
+                    backgroundColor: '#f59e0b',
+                    borderColor: '#d97706',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Sales Amount (K)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Month'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+        {% endif %}
     });
 </script>
 {% endblock %}
-
