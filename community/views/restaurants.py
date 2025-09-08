@@ -82,13 +82,14 @@ def chatbot(request):
     try:
         data = json.loads(request.body)
         user_message = escape(data.get("message", "")).strip()
+        user_type = data.get("user_type", "guest")
 
         if not user_message:
             return JsonResponse({"error": "No message provided"}, status=400)
 
-        logger.info(f"Chatbot request: {user_message}")
+        logger.info(f"Chatbot request: {user_message} (User Type: {user_type})")
 
-        response_text = get_gemini_response(user_message)
+        response_text = get_gemini_response(user_message, user_type)
 
         return JsonResponse({"response": response_text})
 

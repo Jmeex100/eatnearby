@@ -1,7 +1,7 @@
 from django.db import models
 from auths.models import User
 from payments.models import DeliveryInfo
-
+# staffs/models.py
 class StaffServiceArea(models.Model):
     """
     Maps staff members to the predefined delivery points they can serve.

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <script>
-        // Check for dark mode preference immediately
+        // Check for dark mode preference
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -136,7 +136,7 @@
         /* Body padding */
         body {
             padding-top: 8rem;
-            padding-bottom: 5rem; /* Space for mobile footer */
+            padding-bottom: 5rem;
         }
         
         /* Responsive adjustments */
@@ -144,10 +144,9 @@
             .desktop-secondary-navbar {
                 display: none;
             }
-            
             body {
-                padding-top: 4rem; /* Only main navbar */
-                padding-bottom: 5rem; /* Mobile footer height */
+                padding-top: 4rem;
+                padding-bottom: 5rem;
             }
         }
         
@@ -155,9 +154,8 @@
             .mobile-footer-navbar {
                 display: none;
             }
-            
             body {
-                padding-top: 8rem; /* Main + secondary navbar */
+                padding-top: 8rem;
                 padding-bottom: 0;
             }
         }
@@ -169,64 +167,54 @@
         {% include "navbar.html" %}
     </div>
     
-    <!-- Desktop Secondary Navigation (hidden on mobile) -->
-<!-- Desktop Secondary Navigation (hidden on mobile) -->
-<nav class="desktop-secondary-navbar dark:bg-gray-800 dark:border-gray-700 py-3 shadow-sm">
-    <div class="secondary-nav-container">
-        <div class="flex space-x-8 items-center justify-center">
-            <a href="{% url 'community:restaurant' %}" 
-               class="secondary-nav-link group dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
-                <i class="fas fa-utensils mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
-                <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Restaurants</span>
-                <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
-            </a>
-            
-            <a href="{% url 'community:challenge-list' %}" 
-               class="secondary-nav-link group dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
-                <i class="fas fa-trophy mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
-                <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Challenges</span>
-                <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
-            </a>
-            
-            <a href="{% url 'community:recipe-list-create' %}" 
-               class="secondary-nav-link group dark:text-gray-300 hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
-                <i class="fas fa-book mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
-                <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Recipes</span>
-                <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
-            </a>
-            
-            <a href="{% url 'community:question-list-create' %}" 
-               class="secondary-nav-link group  hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
-                <i class="fas fa-question-circle mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
-                <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Ask Chef</span>
-                <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
-            </a>
-
-          <button
-  id="chatbot-toggle"
-  aria-label="Toggle chatbot"
-  role="button"
-  class="bg-amber-600 hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 text-white p-4 rounded-full shadow-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
->
-  chat bot <br>
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-  </svg>
-</button>
+    <!-- Desktop Secondary Navigation -->
+    <nav class="desktop-secondary-navbar dark:bg-gray-800 dark:border-gray-700 py-3 shadow-sm">
+        <div class="secondary-nav-container">
+            <div class="flex space-x-8 items-center justify-center">
+                <a href="{% url 'community:restaurant' %}" 
+                   class="secondary-nav-link group dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
+                    <i class="fas fa-utensils mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
+                    <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Restaurants</span>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
+                </a>
+                <a href="{% url 'community:challenge-list' %}" 
+                   class="secondary-nav-link group dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
+                    <i class="fas fa-trophy mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
+                    <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Challenges</span>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
+                </a>
+                <a href="{% url 'community:recipe-list-create' %}" 
+                   class="secondary-nav-link group dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
+                    <i class="fas fa-book mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
+                    <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Recipes</span>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
+                </a>
+                <a href="{% url 'community:question-list-create' %}" 
+                   class="secondary-nav-link group dark:text-gray-300 px-3 py-2 rounded-lg transition-all duration-200 flex items-center">
+                    <i class="fas fa-question-circle mr-2 text-lg w-6 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400"></i>
+                    <span class="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Ask Chef</span>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-200"></div>
+                </a>
+                <button id="chatbot-toggle" 
+                        aria-label="Toggle chatbot" 
+                        role="button" 
+                        class="relative bg-amber-600 hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 text-white p-4 rounded-full shadow-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <span class="absolute top-1 right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md">AI</span>
+                </button>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-6">
         {% block content %}
         {% endblock content %}
-        
-        {% block extra_js %}
-        <script src="{% static 'js/chatbot.js' %}"></script>
-        {% endblock %}
     </main>
     
-    <!-- Mobile Footer Navigation (hidden on desktop) -->
+    <!-- Mobile Footer Navigation -->
     <nav class="mobile-footer-navbar dark:bg-gray-800 dark:border-gray-700">
         <div class="mobile-nav-container">
             <a href="{% url 'community:restaurant' %}" class="mobile-nav-link dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
@@ -248,12 +236,58 @@
         </div>
     </nav>
     
+    <!-- Chatbot Widget -->
+    <div class="fixed bottom-8 right-8 z-[100]">
+        <div id="chatbot-window" class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-xl w-80 sm:w-96 h-[32rem] flex flex-col border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div class="bg-amber-600 dark:bg-amber-700 text-white p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h3 class="text-lg font-semibold">EatNear BY Assistant</h3>
+                </div>
+                <button id="chatbot-close" class="text-white hover:text-amber-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50 dark:bg-gray-900 space-y-3">
+                <div class="chatbot-message bot-message bg-amber-100 dark:bg-amber-900/30 text-gray-800 dark:text-gray-200 p-3 rounded-lg max-w-[85%]">
+                    {% if user.is_authenticated %}
+                        {% if user.user_type == 'admin' %}
+                            Hello, Admin! Ask me about managing restaurants, challenges, or moderating content.
+                        {% elif user.user_type == 'customer' %}
+                            Hello! I'm your EatNear BY Assistant. Ask me about restaurants, recipes, or challenges!
+                        {% elif user.user_type == 'staff' %}
+                            Hello, Staff! Ask me about your restaurant's questions, posts, or recipes.
+                        {% else %}
+                            Hello! I'm your EatNear BY Assistant. Sign in to get personalized recommendations!
+                        {% endif %}
+                    {% else %}
+                        Hello! I'm your EatNear BY Assistant. Sign in to get personalized recommendations!
+                    {% endif %}
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <form id="chatbot-form" class="flex space-x-2">
+                    {% csrf_token %}
+                    <input type="text" id="chatbot-input" class="flex-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Type your question..." autocomplete="off">
+                    <button type="submit" class="bg-amber-600 hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation and Chatbot JavaScript -->
     <script>
-        // Make secondary nav links active when their route matches
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Make secondary nav links active
             const currentPath = window.location.pathname;
-            
-            // Desktop links
             const desktopLinks = document.querySelectorAll('.secondary-nav-link');
             desktopLinks.forEach(link => {
                 if (link.getAttribute('href') === currentPath) {
@@ -261,22 +295,19 @@
                     link.classList.add('text-blue-600', 'dark:text-blue-400');
                 }
             });
-            
-            // Mobile links
             const mobileLinks = document.querySelectorAll('.mobile-nav-link');
             mobileLinks.forEach(link => {
                 if (link.getAttribute('href') === currentPath) {
                     link.classList.add('text-blue-600', 'dark:text-blue-400');
                 }
             });
-            
-            // Toggle dark mode for navigation elements
+
+            // Toggle dark mode for navigation
             const htmlElement = document.documentElement;
             const desktopNav = document.querySelector('.desktop-secondary-navbar');
             const mobileNav = document.querySelector('.mobile-footer-navbar');
-            
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
                     if (mutation.attributeName === 'class') {
                         if (htmlElement.classList.contains('dark')) {
                             desktopNav?.classList.add('dark');
@@ -288,10 +319,156 @@
                     }
                 });
             });
-            
-            observer.observe(htmlElement, {
-                attributes: true
-            });
+            observer.observe(htmlElement, { attributes: true });
+
+            // Chatbot functionality
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotForm = document.getElementById('chatbot-form');
+
+            if (chatbotToggle && chatbotClose && chatbotWindow && chatbotForm) {
+                // Toggle chatbot window
+                chatbotToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    chatbotWindow.classList.toggle('hidden');
+                    if (!chatbotWindow.classList.contains('hidden')) {
+                        document.getElementById('chatbot-input')?.focus();
+                    }
+                });
+
+                // Close chatbot window
+                chatbotClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    chatbotWindow.classList.add('hidden');
+                });
+
+                // Handle form submission
+                chatbotForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const inputField = document.getElementById('chatbot-input');
+                    const message = inputField?.value.trim();
+                    
+                    if (!message) return;
+
+                    // Add user message
+                    addMessage(message, 'user');
+                    inputField.value = '';
+
+                    try {
+                        // Show thinking indicator
+                        const thinkingIndicator = addThinkingIndicator();
+                        
+                        // Get CSRF token
+                        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+                        if (!csrfToken) throw new Error('CSRF token not found');
+
+                        // Get user type
+                        const userType = "{{ request.user.user_type|default:'guest' }}";
+                        
+                        // Send request to server
+                        const response = await fetch('/community/chatbot/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': csrfToken,
+                            },
+                            body: JSON.stringify({ message, user_type: userType }),
+                        });
+
+                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                        
+                        const data = await response.json();
+                        thinkingIndicator.remove();
+                        
+                        // Add bot response with typing effect
+                        await typeMessage(data.error ? `Error: ${data.error}` : data.response, 'bot');
+                    } catch (error) {
+                        console.error('Chatbot error:', error);
+                        document.getElementById('thinking-indicator')?.remove();
+                        await typeMessage('Sorry, something went wrong. Please try again later.', 'bot');
+                    }
+                });
+
+                // Keyboard shortcut (Ctrl+Shift+C)
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                        e.preventDefault();
+                        chatbotWindow.classList.toggle('hidden');
+                        if (!chatbotWindow.classList.contains('hidden')) {
+                            document.getElementById('chatbot-input')?.focus();
+                        }
+                    }
+                });
+            }
+
+            // Helper function to simulate typing
+            async function typeMessage(text, sender) {
+                const chatbotMessages = document.getElementById('chatbot-messages');
+                if (!chatbotMessages) return;
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('chatbot-message', 'p-3', 'rounded-lg', 'max-w-[85%]', 'mb-2');
+                
+                if (sender === 'user') {
+                    messageDiv.classList.add('ml-auto', 'bg-blue-100', 'dark:bg-blue-900/30', 'text-gray-800', 'dark:text-gray-200');
+                } else {
+                    messageDiv.classList.add('bg-amber-100', 'dark:bg-amber-900/30', 'text-gray-800', 'dark:text-gray-200');
+                }
+                
+                chatbotMessages.appendChild(messageDiv);
+                const baseSpeed = 30;
+                const lengthFactor = Math.min(text.length / 100, 0.7);
+                const speed = baseSpeed * (1 - lengthFactor);
+                
+                for (let i = 0; i < text.length; i++) {
+                    messageDiv.textContent = text.substring(0, i + 1);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    const randomVariation = 1 + (Math.random() * 0.4 - 0.2);
+                    await new Promise(resolve => setTimeout(resolve, speed * randomVariation));
+                    if (text[i] === ' ' && Math.random() < 0.1) {
+                        await new Promise(resolve => setTimeout(resolve, speed * 5));
+                    }
+                }
+            }
+
+            // Add message instantly
+            function addMessage(text, sender) {
+                const chatbotMessages = document.getElementById('chatbot-messages');
+                if (!chatbotMessages) return;
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('chatbot-message', 'p-3', 'rounded-lg', 'max-w-[85%]', 'mb-2');
+                
+                if (sender === 'user') {
+                    messageDiv.classList.add('ml-auto', 'bg-blue-100', 'dark:bg-blue-900/30', 'text-gray-800', 'dark:text-gray-200');
+                } else {
+                    messageDiv.classList.add('bg-amber-100', 'dark:bg-amber-900/30', 'text-gray-800', 'dark:text-gray-200');
+                }
+                
+                messageDiv.textContent = text;
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            // Thinking indicator
+            function addThinkingIndicator() {
+                const chatbotMessages = document.getElementById('chatbot-messages');
+                if (!chatbotMessages) return;
+                const thinkingDiv = document.createElement('div');
+                thinkingDiv.id = 'thinking-indicator';
+                thinkingDiv.classList.add('chatbot-message', 'bot-message', 'bg-amber-100', 'dark:bg-amber-900/30', 
+                                        'p-3', 'rounded-lg', 'max-w-[85%]', 'mb-2', 'flex', 'space-x-1');
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('w-2', 'h-2', 'bg-amber-500', 'rounded-full', 'animate-bounce');
+                    dot.style.animationDelay = `${i * 0.15}s`;
+                    thinkingDiv.appendChild(dot);
+                }
+                
+                chatbotMessages.appendChild(thinkingDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                return thinkingDiv;
+            }
         });
     </script>
 </body>
