@@ -1,0 +1,22 @@
+[
+  {
+    "type": "user",
+    "content": "hello",
+    "time": "2025-09-08T09:17:37.071731"
+  },
+  {
+    "type": "assistant",
+    "content": "Hello there! How can I help you today?\n",
+    "time": "2025-09-08T09:17:37.072158"
+  },
+  {
+    "type": "user",
+    "content": "3-3",
+    "time": "2025-09-08T09:17:52.228094"
+  },
+  {
+    "type": "assistant",
+    "content": "3 - 3 = 0\n",
+    "time": "2025-09-08T09:17:52.228243"
+  }
+]
