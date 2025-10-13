@@ -10,7 +10,7 @@ class TimestampMixin(models.Model):
 
     class Meta:
         abstract = True
-
+# /home/surecode/Documents/Django/GitHub/eatnearby/community/models.py
 # ✅ Restaurant (3NF compliant - all attributes depend on PK)
 class Restaurant(TimestampMixin):
     name = models.CharField(max_length=255)

@@ -144,20 +144,39 @@ def user_create(request):
             logo_url = request.build_absolute_uri('/static/images/logo/icon-192x192.png') if request.is_secure() else 'http://localhost:8000/static/images/logo/icon-192x192.png'
             subject = 'Welcome to Eat Nearby!'
             html_message = f"""
-                <h1 style="color: #1a73e8;">Welcome, {user.first_name}!</h1>
-                <img src="{logo_url}" alt="Eat Nearby Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
-                <p style="color: #333;">Your account has been created by an administrator.</p>
-                <p style="font-size: 16px; color: #555;">
-                    <strong style="color: #e91e63;">Username:</strong> {user.username}
-                </p>
-                <p style="font-size: 16px; color: #555;">
-                    <strong style="color: #e91e63;">Password:</strong> {password}
-                </p>
-                <p style="color: #d32f2f; font-weight: bold;">Please log in with these credentials and change your password.</p>
-                <p style="color: #388e3c;">Best regards,<br>The Eat Nearby Team</p>
-                <hr style="border: 1px solid #ddd;">
-                <p style="font-size: 12px; color: #888;">This is an automated message. Please do not reply.</p>
-            """
+    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #fff8f0; border-radius: 10px;">
+    <img src="{logo_url}" alt="Welcome to CoreEat" 
+            style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+    
+    <h1 style="color: #d84315; text-align: center;">Welcome, {user.first_name}! 🎉</h1>
+    
+    <p style="color: #444; font-size: 16px; text-align: center;">
+        Thanks for joining <strong>CoreEat</strong> — your gateway to tasty meals nearby!
+    </p>
+    
+    <div style="margin: 20px auto; padding: 15px; border: 1px solid #f1c40f; background: #fff3cd; border-radius: 8px; max-width: 400px;">
+        <p style="font-size: 16px; color: #333; margin: 8px 0;">
+            🍔 <strong>Username:</strong> {user.username}
+        </p>
+        <p style="font-size: 16px; color: #333; margin: 8px 0;">
+            🍕 <strong>Password:</strong> {password}
+        </p>
+    </div>
+
+    <p style="color: #d32f2f; font-weight: bold; text-align: center;">
+        Please log in and change your password for security 🔑
+    </p>
+    
+    <p style="color: #388e3c; text-align: center; font-size: 15px;">
+        Bon appétit,<br>The CoreEat Team 🍴
+    </p>
+    
+    <hr style="border: 1px solid #eee; margin: 30px 0;">
+    <p style="font-size: 12px; color: #888; text-align: center;">
+        This is an automated message. Please do not reply.
+    </p>
+</div>
+"""
             email = EmailMessage(
                 subject,
                 html_message,

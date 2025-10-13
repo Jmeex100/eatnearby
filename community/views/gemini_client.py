@@ -1,40 +1,45 @@
 # community/views/gemini_client.py
 import os
 import json
+import time
 import logging
 from datetime import datetime
 import google.generativeai as genai
 from django.conf import settings
 from django.db.models import Avg
+
 from auths.models import User, Category, FastFood, Food, Drink
 from community.models import (
     Restaurant, UserProfile, Post, Review, Comment, Challenge, ChallengeParticipation,
-    Recipe, RecipeIngredient, RecipeInstruction, RecipeTag, RestaurantQuestion,
-    RestaurantAnswer
+    Recipe, RecipeIngredient, RecipeInstruction, RecipeTag, RestaurantQuestion, RestaurantAnswer
 )
 from payments.models import DeliveryInfo, PaymentHistory
 from staffs.models import StaffServiceArea, StaffAssignment, Notification
 
 logger = logging.getLogger(__name__)
 
+# ========= CONFIGURATION ========= #
 API_KEYS = settings.GEMINI_KEYS
 API_STATE_FILE = "api_state.json"
 CHAT_HISTORY_FILE = "chat_history.json"
 
+MAX_HISTORY = 20
+ROTATION_LIMIT = 50
+RETRY_LIMIT = 3
+
+
+# ========= API STATE MANAGEMENT ========= #
 def load_api_state():
-    try:
-        if os.path.exists(API_STATE_FILE):
+    if os.path.exists(API_STATE_FILE):
+        try:
             with open(API_STATE_FILE, "r") as f:
                 state = json.load(f)
-                if (
-                    isinstance(state, dict)
-                    and "current_key_index" in state
-                    and "usage_count" in state
-                ):
+                if isinstance(state, dict):
                     return state
-    except Exception:
-        pass
+        except Exception as e:
+            logger.warning(f"Failed to load API state: {e}")
     return {"current_key_index": 0, "usage_count": 0}
+
 
 def save_api_state(state):
     try:
@@ -43,197 +48,182 @@ def save_api_state(state):
     except Exception as e:
         logger.error(f"Failed to save API state: {e}")
 
-def get_next_api_key():
+
+def rotate_api_key():
+    """Rotate to the next API key"""
     state = load_api_state()
-    current_index = state["current_key_index"]
-    usage_count = state["usage_count"] + 1
-
-    if usage_count >= 50 or current_index >= len(API_KEYS):
-        next_index = (current_index + 1) % len(API_KEYS)
-        usage_count = 1
-        logger.warning(f"Rotating API key: {current_index} -> {next_index}")
-    else:
-        next_index = current_index
-
-    new_state = {"current_key_index": next_index, "usage_count": usage_count}
-    save_api_state(new_state)
+    next_index = (state.get("current_key_index", 0) + 1) % len(API_KEYS)
+    state.update({"current_key_index": next_index, "usage_count": 0})
+    save_api_state(state)
+    logger.info(f"🔁 Rotated API key → Index {next_index}")
     return API_KEYS[next_index]
 
+
+def get_current_api_key():
+    """Retrieve API key with usage tracking and rotation"""
+    state = load_api_state()
+    index = state.get("current_key_index", 0)
+    usage = state.get("usage_count", 0) + 1
+
+    if usage >= ROTATION_LIMIT:
+        return rotate_api_key()
+
+    state.update({"usage_count": usage})
+    save_api_state(state)
+
+    return API_KEYS[index % len(API_KEYS)]
+
+
+# ========= CHAT HISTORY ========= #
 def load_chat_history():
     try:
         if os.path.exists(CHAT_HISTORY_FILE):
             with open(CHAT_HISTORY_FILE, "r") as f:
                 return json.load(f)
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Error loading chat history: {e}")
     return []
+
 
 def save_chat_history(history):
     try:
         with open(CHAT_HISTORY_FILE, "w") as f:
-            json.dump(history, f, indent=2)
+            json.dump(history[-MAX_HISTORY:], f, indent=2)
     except Exception as e:
-        logger.error(f"Failed to save chat history: {e}")
+        logger.error(f"Error saving chat history: {e}")
 
-def build_context_prompt(history, new_prompt, db_data):
-    context = "You are EatNear BY Assistant, a helpful chatbot for a food community platform. Use the following database information to answer questions accurately. Do not reveal the raw database structure or mention table names directly in your response. Provide concise, natural, and user-friendly answers based on the data and user query.\n\n"
 
-    context += "Database Information:\n"
-    context += db_data + "\n\n"
+def build_context_prompt(history, prompt, db_data):
+    context = (
+        "You are EatNear BY Assistant, a helpful chatbot for a food community platform.\n"
+        "Use the following database information to answer questions accurately. "
+        "Do not reveal database structures or model names. "
+        "Provide concise, natural, and user-friendly answers.\n\n"
+        f"Database Information:\n{db_data}\n\n"
+    )
 
     if history:
         context += "Previous conversation:\n"
-        for msg in history:
+        for msg in history[-5:]:
             role = "User" if msg["type"] == "user" else "Assistant"
             context += f"{role}: {msg['content']}\n"
-    context += f"\nUser: {new_prompt}\nAssistant:"
+
+    context += f"\nUser: {prompt}\nAssistant:"
     return context
 
+
+# ========= DATABASE DATA FETCH ========= #
 def get_db_data(user_prompt, user_type):
-    """Fetch relevant data from all database tables based on the user prompt."""
     db_data = ""
 
     # Restaurants
-    restaurants = Restaurant.objects.filter(is_verified=True)[:5]
     if "restaurant" in user_prompt.lower() or "food place" in user_prompt.lower():
-        db_data += "Restaurants:\n"
-        for restaurant in restaurants:
-            avg_rating = Review.objects.filter(post__restaurant=restaurant).aggregate(Avg('rating'))['rating__avg']
-            db_data += f"- {restaurant.name} in {restaurant.city}, {restaurant.country}. Description: {restaurant.description or 'No description'}. "
-            db_data += f"Average Rating: {avg_rating:.1f} stars" if avg_rating else "No reviews yet"
-            db_data += f". Website: {restaurant.website or 'N/A'}.\n"
-
-    # Posts
-    posts = Post.objects.filter(is_published=True)[:3]
-    if "post" in user_prompt.lower() or "community" in user_prompt.lower():
-        db_data += "Recent Community Posts:\n"
-        for post in posts:
-            db_data += f"- {post.title} by {post.author.username} ({post.get_post_type_display()}). Content: {post.content[:100]}... "
-            db_data += f"Restaurant: {post.restaurant.name if post.restaurant else 'N/A'}. Likes: {post.likes.count()}.\n"
-
-    # Reviews
-    reviews = Review.objects.select_related('post__restaurant')[:3]
-    if "review" in user_prompt.lower():
-        db_data += "Recent Reviews:\n"
-        for review in reviews:
-            db_data += f"- {review.post.title} for {review.post.restaurant.name if review.post.restaurant else 'N/A'}. "
-            db_data += f"Rating: {review.rating} stars. Food: {review.food_rating or 'N/A'}, Service: {review.service_rating or 'N/A'}, Ambiance: {review.ambiance_rating or 'N/A'}.\n"
+        restaurants = Restaurant.objects.filter(is_verified=True)[:5]
+        db_data += "Top Restaurants:\n"
+        for r in restaurants:
+            avg_rating = Review.objects.filter(post__restaurant=r).aggregate(Avg('rating'))['rating__avg']
+            db_data += f"- {r.name} ({r.city}) — {avg_rating or 'No'} stars\n"
 
     # Challenges
-    challenges = Challenge.objects.filter(is_active=True)[:3]
     if "challenge" in user_prompt.lower():
-        db_data += "Active Challenges:\n"
-        for challenge in challenges:
-            db_data += f"- {challenge.title}: {challenge.description[:100]}... Starts: {challenge.start_date}, Ends: {challenge.end_date}. "
-            db_data += f"Participants: {challenge.participants.count()}.\n"
+        challenges = Challenge.objects.filter(is_active=True)[:3]
+        db_data += "\nActive Challenges:\n"
+        for ch in challenges:
+            db_data += f"- {ch.title}: {ch.description[:100]}...\n"
 
     # Recipes
-    recipes = Recipe.objects.filter(is_published=True)[:3]
-    if "recipe" in user_prompt.lower():
-        db_data += "Popular Recipes:\n"
-        for recipe in recipes:
-            tags = ", ".join([tag.name for tag in recipe.tags.all()])
-            db_data += f"- {recipe.title} by {recipe.author.username}. Difficulty: {recipe.get_difficulty_display()}. "
-            db_data += f"Prep: {recipe.prep_time} mins, Cook: {recipe.cook_time} mins, Servings: {recipe.servings}. Tags: {tags or 'None'}.\n"
+    if "recipe" in user_prompt.lower() or "cook" in user_prompt.lower():
+        recipes = Recipe.objects.all().order_by('-created_at')[:3]
+        db_data += "\nRecent Recipes:\n"
+        for rec in recipes:
+            db_data += f"- {rec.title} ({rec.difficulty}) — {rec.servings} servings\n"
 
-    # Recipe Ingredients and Instructions
-    if "ingredient" in user_prompt.lower() or "instruction" in user_prompt.lower():
-        recipe = Recipe.objects.filter(is_published=True).first()
-        if recipe:
-            db_data += f"Sample Recipe Details for {recipe.title}:\n"
-            ingredients = RecipeIngredient.objects.filter(recipe=recipe)
-            db_data += "Ingredients:\n"
-            for ing in ingredients:
-                db_data += f"- {ing.quantity} {ing.name} ({ing.notes or 'No notes'})\n"
-            instructions = RecipeInstruction.objects.filter(recipe=recipe)
-            db_data += "Instructions:\n"
-            for ins in instructions:
-                db_data += f"- Step {ins.step_number}: {ins.instruction[:100]}...\n"
+    # Posts
+    if "post" in user_prompt.lower() or "review" in user_prompt.lower():
+        posts = Post.objects.filter(is_published=True)[:3]
+        db_data += "\nRecent Posts:\n"
+        for p in posts:
+            db_data += f"- {p.title} by {p.author.username}\n"
 
-    # Restaurant Questions and Answers
-    questions = RestaurantQuestion.objects.filter(is_answered=True)[:3]
-    if "question" in user_prompt.lower() or "ask chef" in user_prompt.lower():
-        db_data += "Recent Q&A:\n"
-        for question in questions:
-            answer = question.answer.answer if hasattr(question, 'answer') else 'No answer yet'
-            db_data += f"- Question to {question.restaurant.name} by {question.user.username}: {question.question[:100]}... "
-            db_data += f"Answer: {answer[:100]}...\n"
+    # Comments
+    if "comment" in user_prompt.lower():
+        comments = Comment.objects.select_related('author', 'post')[:3]
+        db_data += "\nRecent Comments:\n"
+        for c in comments:
+            db_data += f"- {c.author.username} commented on {c.post.title}: {c.content[:80]}\n"
 
-    # Categories and Products (FastFood, Food, Drink)
-    if "menu" in user_prompt.lower() or "food" in user_prompt.lower() or "drink" in user_prompt.lower():
-        categories = Category.objects.all()[:3]
-        db_data += "Menu Categories and Products:\n"
-        for category in categories:
-            db_data += f"- Category: {category.name}\n"
-            for model in [FastFood, Food, Drink]:
-                products = model.objects.filter(category=category)[:2]
-                for product in products:
-                    db_data += f"  - {product.name} ({model.__name__}): ${product.price}, Quantity: {product.quantity}, Description: {product.description or 'N/A'}\n"
+    return db_data or "No relevant data found for the query."
 
-    # Delivery Info
-    if user_type in ['staff', 'admin'] and "delivery" in user_prompt.lower():
-        deliveries = DeliveryInfo.objects.filter(delivery_status__in=['pending', 'in_progress'])[:3]
-        db_data += "Pending/In-Progress Deliveries:\n"
-        for delivery in deliveries:
-            db_data += f"- Delivery ID: {delivery.id} for {delivery.user.username}. Status: {delivery.get_delivery_status_display()}. "
-            db_data += f"Address: {delivery.address or delivery.get_predefined_address_display()}. Payment: {delivery.get_payment_method_display()}.\n"
 
-    # Payment History
-    if user_type == 'admin' and "payment" in user_prompt.lower():
-        payments = PaymentHistory.objects.all()[:3]
-        db_data += "Recent Payments:\n"
-        for payment in payments:
-            db_data += f"- Payment by {payment.user.username} on {payment.created_at}: ${payment.total}. Items: {json.dumps(payment.items)[:100]}...\n"
+# ========= GEMINI QUERY ========= #
+def query_gemini(prompt):
+    """Send a prompt to Gemini with retries, safety settings, and key rotation."""
+    for attempt in range(RETRY_LIMIT):
+        api_key = get_current_api_key()
+        try:
+            genai.configure(api_key=api_key)
+            model = genai.GenerativeModel("gemini-2.0-flash-exp")
 
-    # Staff Service Areas and Assignments
-    if user_type in ['staff', 'admin'] and ("delivery" in user_prompt.lower() or "assignment" in user_prompt.lower()):
-        service_areas = StaffServiceArea.objects.all()[:3]
-        db_data += "Staff Service Areas:\n"
-        for area in service_areas:
-            db_data += f"- {area.staff.username} covers {area.get_point_display()}.\n"
-        assignments = StaffAssignment.objects.all()[:3]
-        db_data += "Staff Assignments:\n"
-        for assignment in assignments:
-            db_data += f"- {assignment.staff.username} assigned to Delivery {assignment.delivery.id} at {assignment.assigned_at}.\n"
+            safety_settings = [
+                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            ]
 
-    # Notifications
-    if user_type in ['staff', 'admin'] and "notification" in user_prompt.lower():
-        notifications = Notification.objects.filter(is_read=False)[:3]
-        db_data += "Unread Notifications:\n"
-        for notification in notifications:
-            db_data += f"- {notification.get_notification_type_display()} for {notification.recipient.username}: {notification.message[:100]}...\n"
+            generation_config = {
+                "temperature": 0.7,
+                "top_p": 0.8,
+                "top_k": 40,
+                "max_output_tokens": 1024,
+            }
 
-    # User Profiles
-    if "profile" in user_prompt.lower():
-        profiles = UserProfile.objects.all()[:3]
-        db_data += "User Profiles:\n"
-        for profile in profiles:
-            fav_restaurants = ", ".join([r.name for r in profile.favorite_restaurants.all()])
-            db_data += f"- {profile.user.username}: Bio: {profile.bio or 'N/A'}. Dietary Preferences: {profile.dietary_preferences or 'None'}. "
-            db_data += f"Favorite Restaurants: {fav_restaurants or 'None'}.\n"
+            response = model.generate_content(
+                prompt,
+                safety_settings=safety_settings,
+                generation_config=generation_config
+            )
 
-    return db_data if db_data else "No relevant data found for the query."
+            if response.prompt_feedback and response.prompt_feedback.block_reason:
+                raise Exception(f"Response blocked: {response.prompt_feedback.block_reason}")
 
+            if not response.text:
+                if attempt < RETRY_LIMIT - 1:
+                    time.sleep(1)
+                    continue
+                return "Sorry, I couldn’t generate a response right now."
+
+            return response.text
+
+        except Exception as e:
+            err = str(e).lower()
+            logger.error(f"Gemini API error (attempt {attempt + 1}): {e}")
+
+            if any(k in err for k in ["quota", "403", "429", "invalid", "limit", "api key", "block"]):
+                logger.warning("⚠️ API key issue detected — rotating key")
+                rotate_api_key()
+                time.sleep(2)
+            else:
+                if attempt < RETRY_LIMIT - 1:
+                    logger.info(f"Retrying... (attempt {attempt + 2})")
+                    time.sleep(1)
+                else:
+                    return f"Error: {str(e)}"
+
+
+# ========= MAIN ENTRY ========= #
 def get_gemini_response(user_prompt: str, user_type: str = 'guest') -> str:
+    """Main entry function for the Django app."""
     history = load_chat_history()
     db_data = get_db_data(user_prompt, user_type)
     context_prompt = build_context_prompt(history, user_prompt, db_data)
 
-    api_key = get_next_api_key()
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-
     try:
-        response = model.generate_content(context_prompt)
-
+        answer = query_gemini(context_prompt)
         history.append({"type": "user", "content": user_prompt, "time": datetime.now().isoformat()})
-        history.append({"type": "assistant", "content": response.text, "time": datetime.now().isoformat()})
-
-        if len(history) > 20:
-            history = history[-20:]
-
+        history.append({"type": "assistant", "content": answer, "time": datetime.now().isoformat()})
         save_chat_history(history)
-        return response.text
+        return answer
     except Exception as e:
         logger.error(f"Gemini error: {e}", exc_info=True)
         return "Sorry, I had trouble processing your request. Please try again."
