@@ -140,6 +140,9 @@ def checkout(request):
     total_usd = float(cart.total()) / EXCHANGE_RATE
     total_zmw = float(cart.total())
 
+    # Fetch the logged-in user's phone number
+    user_phone_number = request.user.phone_number if hasattr(request.user, 'phone_number') and request.user.phone_number else ''
+
     context = {
         'cart': cart,
         'delivery_points': DeliveryInfo.DELIVERY_POINTS,
@@ -148,6 +151,7 @@ def checkout(request):
         'card_providers': DeliveryInfo.CARD_PROVIDERS,
         'total_usd': total_usd,
         'total_zmw': total_zmw,
+        'user_phone_number': user_phone_number,  # Add user's phone number to context
     }
 
     if request.method == 'POST':

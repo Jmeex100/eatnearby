@@ -90,53 +90,66 @@
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Menu</h1>
         </div>
+        <div class="w-full md:w-3/4 z-[1]">
+    <div class="flex justify-between items-center mb-6">
+        {% comment %} <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Menu</h1> {% endcomment %}
+    </div>
 
-        <!-- Fast Food Section -->
-        <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Fast Food</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {% for item in fast_foods %}
-                <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
-                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
-                        <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
-                           data-product-id="{{ item.product_id }}"
-                           data-name="{{ item.name }}" 
-                           data-price="{{ item.price }}" 
-                           data-description="{{ item.description }}" 
-                           onclick="openModal(event, this)"></a>
-                    </div>
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
-                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
-                        <div class="text-center mt-4">
-                            <a href="{% url 'order' item.product_id 'fastfood' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
-                        </div>
-                    </div>
+    {% if not fast_foods and not foods and not drinks and query %}
+        <div class="text-center mt-8">
+            <p class="text-gray-600 dark:text-gray-300 text-lg font-semibold">
+                No menu items found matching “{{ query }}”.
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Fast Food Section -->
+
+      <!-- Fast Food Section -->
+<div class="mt-12">
+    {% comment %} <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Fast Food</h2> {% endcomment %}
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {% for item in fast_foods %}
+        <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
+            <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
+                <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
+                   data-product-id="{{ item.product_id }}"
+                   data-name="{{ item.name }}" 
+                   data-price="{{ item.price }}" 
+                   data-description="{{ item.description }}" 
+                   onclick="openModal(event, this)"></a>
+            </div>
+            <div class="p-6">
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
+
+              
+                <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
+                <div class="text-center mt-4">
+                    <a href="{% url 'order' item.product_id 'fastfood' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                 </div>
-                {% endfor %}
             </div>
         </div>
+        {% endfor %}
+    </div>
+</div>
+
 
         <!-- Food Section -->
         <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Food</h2>
+            {% comment %} <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Food</h2> {% endcomment %}
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {% for item in foods %}
                 <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
                     <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
-                        <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
-                           data-product-id="{{ item.product_id }}"
-                           data-name="{{ item.name }}" 
-                           data-price="{{ item.price }}" 
-                           data-description="{{ item.description }}" 
-                           onclick="openModal(event, this)">Order This</a>
-                    </div>
+                    
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
                         <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
+                          <!-- ✅ Add Free Nshima line here -->
+                <p class="text-green-600 dark:text-green-400 font-semibold mb-2">Free Nshima</p>
+
                         <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
                         <div class="text-center mt-4">
                             <a href="{% url 'order' item.product_id 'food' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
@@ -149,7 +162,7 @@
 
         <!-- Drinks Section -->
         <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2>
+            {% comment %} <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2> {% endcomment %}
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {% for item in drinks %}
                 <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">

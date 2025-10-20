@@ -3,17 +3,17 @@
 {% block title %}Order Confirmation{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex justify-center px-4 sm:px-6 lg:px-8 py-8">
+<div class="min-h-screen bg-gray-100 dark:bg-gray-950 flex justify-center px-4 sm:px-6 lg:px-8 py-8">
     <div class="max-w-4xl w-full">
         <!-- Header -->
-        <div class="text-center mb-8">
+        <div class="text-center py-10 mb-8 no-print">
             <h1 class="text-3xl sm:text-4xl font-bold text-green-600 dark:text-green-400 mb-3">Order Placed Successfully!</h1>
             <p class="text-lg text-gray-600 dark:text-gray-300">Thank you for your order. Here are the details:</p>
         </div>
 
         <!-- Messages -->
         {% if messages %}
-        <div class="mb-6 space-y-2">
+        <div class="mb-6 space-y-2 no-print">
             {% for message in messages %}
             <div class="px-4 py-3 rounded text-center text-sm {% if message.tags == 'error' %}bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100{% endif %}">
                 {{ message }}
@@ -23,10 +23,10 @@
         {% endif %}
 
         <!-- Ticket Container -->
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 print:shadow-none print:border-none">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 print-area">
             <!-- Ticket Header -->
             <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-b border-gray-200 dark:border-gray-600 flex flex-col sm:flex-row items-center print:border-b-2 print:border-gray-600">
-                <div class="flex items-center mb-4 sm:mb-0">
+                <div class="flex items-center mb-4 sm:mb-0 mx-auto text-center">
                     <img src="{% static 'images/logo.png' %}" alt="EatNearby Logo" class="h-10 sm:h-12 mr-3 print:h-10">
                     <div>
                         <h1 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 print:text-black">EatNearby Order Receipt</h1>
@@ -102,7 +102,7 @@
                 </div>
 
                 <!-- Status Feedback -->
-                <div class="mt-4 mb-6 p-4 rounded-lg
+                <div class="mt-4 mb-6 p-4 rounded-lg no-print
                     {% if delivery_info.delivery_status == 'pending' %}bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300
                     {% elif delivery_info.delivery_status == 'in_progress' %}bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300
                     {% elif delivery_info.delivery_status == 'completed' %}bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300
@@ -120,8 +120,8 @@
 
                 <!-- Delivery Tracking Map -->
                 {% if delivery_info.delivery_status == 'in_progress' %}
-                <div class="mt-6">
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 print:text-black">Delivery Tracking</h3>
+                <div class="mt-6 no-print">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Delivery Tracking</h3>
                     <div id="delivery-map" class="h-64 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-100">
                         <p class="text-center py-20 text-gray-500" id="map-loading">Loading map...</p>
                     </div>
@@ -170,12 +170,12 @@
                         </table>
                     </div>
                 </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600 text-center text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">
-                <p>Thank you for choosing EatNearby!</p>
-                <p class="mt-1">Contact us at support@eatnearby.com | Phone: (123) 456-7890</p>
+                <!-- Footer -->
+                <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600 text-center text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">
+                    <p>Thank you for choosing EatNearby!</p>
+                    <p class="mt-1">Contact us at support@eatnearby.com | Phone: (123) 456-7890</p>
+                </div>
             </div>
         </div>
 
@@ -189,11 +189,9 @@
                 </button>
             </form>
             {% endif %}
-            {% if delivery_info.delivery_status == 'completed' %}
             <button onclick="window.print()" class="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition duration-150">
-                Print Receipt
+                🖨️ Print Receipt
             </button>
-            {% endif %}
             <a href="{% url 'cart:cart_view' %}" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 text-center">
                 Back to Cart
             </a>
@@ -203,17 +201,56 @@
 
 <!-- Print-Specific Styles -->
 <style>
-    @media print {
-        @page { size: A4 portrait; margin: 1cm; }
-        body { background: white !important; color: black !important; font-size: 12pt; }
-        .no-print, #delivery-map, #delivery-status { display: none !important; }
-        .min-h-screen { min-height: auto; padding: 0 !important; }
-        .max-w-4xl { max-width: 100% !important; margin: 0 !important; }
-        .bg-white, .dark:bg-gray-800 { background: white !important; box-shadow: none !important; border: 1px solid #ddd !important; }
-        table { width: 100% !important; border-collapse: collapse !important; }
-        th, td { border: 1px solid #ddd !important; padding: 8px !important; }
-        th { background: #f2f2f2 !important; }
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 1cm;
     }
+
+    /* Hide everything except the print-area */
+    body * {
+        visibility: hidden !important;
+    }
+
+    .print-area, .print-area * {
+        visibility: visible !important;
+    }
+
+    .print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    /* Hide non-essential elements */
+    .no-print, #delivery-map, #delivery-status, header, footer, nav {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+    }
+
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    th, td {
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+    }
+
+    th {
+        background: #f2f2f2 !important;
+    }
+}
 </style>
 
 <!-- JavaScript for Delivery Tracking Map -->
