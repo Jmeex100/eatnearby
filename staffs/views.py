@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.generic import TemplateView
@@ -127,40 +128,73 @@ def dashboard(request):
         'staff_name': staff.get_full_name() or staff.username,
     }
     return render(request, 'staffs/dashboard.html', context)
+
+from django.db.models import Sum, F
+from django.db.models import Sum
+from django.utils.timezone import timedelta
+# ──────────────────────────────────────────────────────────────────────
+#  my_deliveries  (staff view)
+# ──────────────────────────────────────────────────────────────────────
 @login_required
 @staff_view
 def my_deliveries(request):
     today = now().date()
     staff = request.user
 
+    # ── Stats ───────────────────────────────────────────────────────
     stats = StaffAssignment.objects.filter(staff=staff).aggregate(
         active_count=Count('id', filter=Q(delivery__delivery_status='in_progress')),
-        completed_today_count=Count('id', filter=Q(delivery__delivery_status='completed', delivery__updated_at__date=today)),
+        completed_today_count=Count('id', filter=Q(delivery__delivery_status='completed',
+                                                delivery__updated_at__date=today)),
         total_completed_count=Count('id', filter=Q(delivery__delivery_status='completed')),
         pending_count=Count('id', filter=Q(delivery__delivery_status='pending'))
     )
 
+    # ── Deliveries ───────────────────────────────────────────────────
     pending_deliveries = DeliveryInfo.objects.filter(
         staff_assignments__staff=staff,
         delivery_status='pending'
     ).filter(
         Q(payment_histories__isnull=False) | Q(payment_method='cash')
-    ).select_related('user', 'cart').order_by('-created_at')
+    ).select_related('user', 'cart').prefetch_related(
+        'cart__cartitem_set__fast_food',
+        'cart__cartitem_set__food',
+        'cart__cartitem_set__drink',
+        'payment_histories'
+    ).order_by('-created_at')
 
     in_progress_deliveries = DeliveryInfo.objects.filter(
         staff_assignments__staff=staff,
         delivery_status='in_progress'
-    ).select_related('user', 'cart').order_by('-created_at')
+    ).select_related('user', 'cart').prefetch_related(
+        'cart__cartitem_set__fast_food',
+        'cart__cartitem_set__food',
+        'cart__cartitem_set__drink',
+        'payment_histories'
+    ).order_by('-created_at')
 
-    # Badge counts
+    # ── “About to be delivered” ─────────────────────────────────────
+    about_to_complete = DeliveryInfo.objects.filter(
+        staff_assignments__staff=staff,
+        delivery_status='in_progress',
+        updated_at__gte=now() - timedelta(hours=1)
+    ).order_by('-updated_at')
+
+    # ── Totals ───────────────────────────────────────────────────────
+
+
+    total_amount = DeliveryInfo.objects.filter(
+        staff_assignments__staff=staff,
+        delivery_status__in=['pending', 'in_progress'],
+        payment_histories__isnull=False  # optional: only include deliveries with payments
+    ).aggregate(total=Sum('payment_histories__total'))['total'] or 0
+
+    # ── Badge counts ─────────────────────────────────────────────────
     dashboard_notifications = Notification.objects.filter(
-        recipient=staff,
-        is_read=False,
-        notification_type='new_order'
+        recipient=staff, is_read=False, notification_type='new_order'
     ).count()
     history_notifications = Notification.objects.filter(
-        recipient=staff,
-        is_read=False,
+        recipient=staff, is_read=False,
         notification_type__in=['delivery_completed', 'delivery_declined']
     ).count()
     availability_notifications = StaffAssignment.objects.filter(
@@ -168,21 +202,51 @@ def my_deliveries(request):
         assigned_at__gte=now().replace(hour=0, minute=0, second=0, microsecond=0),
         assigned_at__lt=now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
     ).count()
+    # ── Helper: attach items + total to each delivery ─────────────────
+    def _attach_items(deliveries):
+        for d in deliveries:
+            # 1. Prefer PaymentHistory (already has the exact items)
+            ph = d.payment_histories.first()
+            if ph and ph.items:
+                d.order_items = ph.items
+                d.order_total = ph.total
+            else:
+                # 2. Fallback to Cart → CartItem
+                items = []
+                for ci in d.cart.cartitem_set.select_related(
+                        'fast_food', 'food', 'drink').all():
+                    product = ci.fast_food or ci.food or ci.drink
+                    items.append({
+                        'name': product.name,
+                        'quantity': ci.quantity,
+                        'subtotal': float(ci.subtotal())
+                    })
+                d.order_items = items
+                d.order_total = float(d.cart.total()) if d.cart else 0.0
+        return deliveries
 
+    pending_deliveries   = _attach_items(pending_deliveries)
+    in_progress_deliveries = _attach_items(in_progress_deliveries)
+
+    # ── Context ──────────────────────────────────────────────────────
     context = {
         'my_deliveries': {
             'active_count': stats['active_count'],
-            'completed_today': stats['completed_today_count'],
-            'on_time_rate': 0 if stats['total_completed_count'] == 0 else round((stats['completed_today_count'] / stats['total_completed_count']) * 100),
-            'pending_count': stats['pending_count']
+            'completed_today_count': stats['completed_today_count'],
+            'on_time_rate': 0 if stats['total_completed_count'] == 0 else round(
+                (stats['completed_today_count'] / stats['total_completed_count']) * 100),
+            'pending_count': stats['pending_count'],
+            'total_amount': total_amount
         },
         'pending_deliveries': pending_deliveries,
         'in_progress_deliveries': in_progress_deliveries,
+        'about_to_complete': about_to_complete,
         'dashboard_notifications': dashboard_notifications,
         'history_notifications': history_notifications,
         'availability_notifications': availability_notifications,
     }
     return render(request, 'staffs/my_deliveries.html', context)
+
 
 @login_required
 @staff_view
@@ -237,24 +301,40 @@ def accept_delivery(request, delivery_id):
     if delivery.delivery_status != 'pending':
         messages.warning(request, "This delivery has already been accepted or processed.")
         return redirect('staffs:my_deliveries')
+
     assignment = StaffAssignment.objects.filter(staff=request.user, delivery=delivery).first()
     if not assignment:
         messages.error(request, "You are not assigned to this delivery.")
         return redirect('staffs:my_deliveries')
+
     if delivery.payment_method != 'cash' and not PaymentHistory.objects.filter(delivery_info=delivery).exists():
         messages.error(request, "Cannot accept delivery: Payment not confirmed.")
         return redirect('staffs:my_deliveries')
+
     try:
-        delivery.delivery_status = 'in_progress'
-        delivery.save()
-        messages.success(request, "Delivery accepted and is now in progress.")
-        logger.info(f"Delivery {delivery_id} accepted by user {request.user.id}, status updated to in_progress")
-        send_sms(
-            delivery.phone_number,
-            f"Your order #{delivery.id} has been accepted and is in progress. Delivery to: {delivery.address or delivery.get_predefined_address_display()}"
-        )
+        with transaction.atomic():
+            # Deduct stock
+            for item in delivery.cart.cartitem_set.select_related('fast_food', 'food', 'drink'):
+                product = item.fast_food or item.food or item.drink
+                if product.quantity < item.quantity:
+                    raise ValueError(f"Insufficient stock for {product.name}")
+                product.quantity -= item.quantity
+                product.save(update_fields=['quantity'])
+
+            # Update status
+            delivery.delivery_status = 'in_progress'
+            delivery.save()
+
+            messages.success(request, "Delivery accepted and is now in progress.")
+            logger.info(f"Delivery {delivery_id} accepted by user {request.user.id}")
+            send_sms(
+                delivery.phone_number,
+                f"Your order #{delivery.id} has been accepted and is in progress. Delivery to: {delivery.address or delivery.get_predefined_address_display()}"
+            )
     except Exception as e:
-        messages.error(request, f"An error occurred: {str(e)}")
+        messages.error(request, f"Error: {str(e)}")
+        logger.error(f"Accept failed for delivery {delivery_id}: {str(e)}")
+
     return redirect('staffs:my_deliveries')
 
 @login_required

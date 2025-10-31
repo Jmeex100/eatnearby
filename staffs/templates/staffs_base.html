@@ -103,7 +103,10 @@
 
       <!-- Main Content Area -->
       <section class="flex-1 bg-white dark:bg-gray-800 rounded-none md:rounded-2xl shadow-md p-4 md:p-6">
-        {% include 'staffs/Stats.html' %}
+        {% if request.resolver_match.url_name != 'sales' %}
+    {% include 'staffs/Stats.html' %}
+  {% endif %}
+
         {% block content %}{% endblock %}
       </section>
 

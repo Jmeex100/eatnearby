@@ -1,102 +1,102 @@
 [
   {
     "type": "user",
-    "content": "challenges",
-    "time": "2025-10-13T15:23:04.602412"
+    "content": "hello gemini",
+    "time": "2025-10-30T11:19:00.451107"
   },
   {
     "type": "assistant",
-    "content": "I don't have any specific information about \"challenges\" right now. Could you clarify what kind of challenges you're interested in? For example, are you looking for cooking challenges, food-related contests, or something else entirely? Knowing what you're looking for will help me search for relevant information on EatNear BY.\n",
-    "time": "2025-10-13T15:23:04.602448"
+    "content": null,
+    "time": "2025-10-30T11:19:00.451166"
+  },
+  {
+    "type": "user",
+    "content": "hello gemini",
+    "time": "2025-10-30T11:20:43.028498"
+  },
+  {
+    "type": "assistant",
+    "content": null,
+    "time": "2025-10-30T11:20:43.028537"
+  },
+  {
+    "type": "user",
+    "content": "hello gemini",
+    "time": "2025-10-30T11:21:03.587807"
+  },
+  {
+    "type": "assistant",
+    "content": null,
+    "time": "2025-10-30T11:21:03.587883"
   },
   {
     "type": "user",
     "content": "hello",
-    "time": "2025-10-13T15:36:53.492679"
+    "time": "2025-10-30T09:25:59.685925"
   },
   {
     "type": "assistant",
-    "content": "Hello! How can I help you today on EatNear BY?\n",
-    "time": "2025-10-13T15:36:53.492701"
+    "content": null,
+    "time": "2025-10-30T09:25:59.685944"
   },
   {
     "type": "user",
-    "content": "what are the challeges",
-    "time": "2025-10-13T15:37:17.663592"
+    "content": "hello gemini",
+    "time": "2025-10-30T11:26:17.166968"
   },
   {
     "type": "assistant",
-    "content": "I still don't have any specific information about \"challenges\" on EatNear BY. Could you clarify what kind of challenges you're interested in? For example, are you looking for cooking challenges, food-eating contests, or something else entirely? Knowing what you're looking for will help me search for relevant information.\n",
-    "time": "2025-10-13T15:37:17.663628"
+    "content": null,
+    "time": "2025-10-30T11:26:17.167055"
   },
   {
     "type": "user",
-    "content": "what what is eat nearby",
-    "time": "2025-10-13T15:38:20.647744"
+    "content": "hello gemini",
+    "time": "2025-10-30T11:33:14.230140"
   },
   {
     "type": "assistant",
-    "content": "EatNear BY is a food community platform. I can help you find information about food, restaurants, recipes, and more! What are you interested in learning about today?\n",
-    "time": "2025-10-13T15:38:20.647780"
+    "content": null,
+    "time": "2025-10-30T11:33:14.230200"
   },
   {
     "type": "user",
-    "content": "recipes",
-    "time": "2025-10-13T15:38:36.020192"
+    "content": "hey",
+    "time": "2025-10-30T09:54:37.269257"
   },
   {
     "type": "assistant",
-    "content": "Okay! Here are some recent recipes on EatNear BY:\n\n*   Rice with Egg (MEDIUM) \u2014 35 servings\n*   African samp (MEDIUM) \u2014 10 servings\n*   Vitumbuwa (Zambian Sweet Rice Fritters) (MEDIUM) \u2014 9 servings\n\n",
-    "time": "2025-10-13T15:38:36.020229"
+    "content": "Hey there! How can I help you find something delicious today?\n",
+    "time": "2025-10-30T09:54:37.269318"
   },
   {
     "type": "user",
-    "content": "recipes",
-    "time": "2025-10-13T15:38:49.622299"
+    "content": "how many challenges  do we have",
+    "time": "2025-10-30T09:55:07.873826"
   },
   {
     "type": "assistant",
-    "content": "Here are some recent recipes on EatNear BY:\n\n*   Rice with Egg (MEDIUM) \u2014 35 servings\n*   African samp (MEDIUM) \u2014 10 servings\n*   Vitumbuwa (Zambian Sweet Rice Fritters) (MEDIUM) \u2014 9 servings\n",
-    "time": "2025-10-13T15:38:49.622360"
+    "content": "We have two active challenges: \"7days active challenge\" and \"top customer\".\n",
+    "time": "2025-10-30T09:55:07.873865"
   },
   {
     "type": "user",
-    "content": "challenges",
-    "time": "2025-10-13T15:39:06.846009"
+    "content": "boi",
+    "time": "2025-10-30T09:57:31.337617"
   },
   {
     "type": "assistant",
-    "content": "Okay! Here are the active challenges on EatNear BY:\n\n*   7days active challege: Order using the system for all 7 days to get a discount.\n*   top customer: Top customer gets free meals for the first 6 months of the year.\n",
-    "time": "2025-10-13T15:39:06.846051"
+    "content": "I'm sorry, I don't understand. Can you please rephrase your question or tell me what you're looking for?\n",
+    "time": "2025-10-30T09:57:31.337653"
   },
   {
     "type": "user",
-    "content": "restaurants",
-    "time": "2025-10-13T15:39:23.934825"
+    "content": "hello",
+    "time": "2025-10-30T09:57:58.074578"
   },
   {
     "type": "assistant",
-    "content": "Here are some top-rated restaurants on EatNear BY:\n\n*   happy customers (lusaka)\n*   Shi Bupe's Matebeto Restaurant (Lusaka)\n",
-    "time": "2025-10-13T15:39:23.934866"
-  },
-  {
-    "type": "user",
-    "content": "what are the asked questions",
-    "time": "2025-10-13T15:40:07.545826"
-  },
-  {
-    "type": "assistant",
-    "content": "I can answer questions about recipes, challenges, and restaurants on EatNear BY. What would you like to know?\n",
-    "time": "2025-10-13T15:40:07.545865"
-  },
-  {
-    "type": "user",
-    "content": "HELLO",
-    "time": "2025-10-15T13:18:10.380783"
-  },
-  {
-    "type": "assistant",
-    "content": "Hello! How can I help you today?\n",
-    "time": "2025-10-15T13:18:10.380793"
+    "content": "Hello! How can I help you find something tasty today?\n",
+    "time": "2025-10-30T09:57:58.074594"
   }
 ]

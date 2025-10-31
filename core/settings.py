@@ -220,7 +220,7 @@ TWILIO_ENABLED = True
 
 GEMINI_KEYS = [
    
-    "AIzaSyAW0hNz5fVDORqfL21BLw8PSwDdqUesLP8",
-    "AIzaSyDsDJnTy7ZWGaCtLd84mt6b4mDu4tfNr34",
-     "AIzaSyAHFqqjfPBh-OQcKl22Froced5khhgUivQ",
+    # "AIzaSyAW0hNz5fVDORqfL21BLw8PSwDdqUesLP8",
+    # "AIzaSyDsDJnTy7ZWGaCtLd84mt6b4mDu4tfNr34",
+     "AIzaSyC3z1QK44KpUe4S3bPFzicty8sK5LWxGvk",
 ]

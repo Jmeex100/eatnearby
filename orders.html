@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% block title %}Menu{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+
+    <!-- Mobile Filter Button -->
+    <div class="md:hidden fixed bottom-20 right-4 z-[500]">
+        <button id="mobileFilterButton" class="flex items-center justify-center bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300 dark:text-white transition-colors duration-300 hover:shadow-2xl animate-pulse" style="width: 56px; height: 56px;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Filter Overlay -->
+    <div id="mobileFilterOverlay" class="fixed inset-0 bg-black/50 dark:bg-black/60 z-[600] hidden transition-opacity duration-300">
+        <div class="absolute top-0 right-0 w-full max-w-sm bg-white dark:bg-gray-900 p-6 h-full overflow-y-auto transform transition-transform duration-300 translate-x-full shadow-xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white">Filter Menu</h2>
+                <button id="closeMobileFilter" class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form method="get" action="{% url 'orders' %}" class="space-y-4">
+                <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min Price" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max Price" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                </div>
+                <select name="category" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="sort" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="">Sort By</option>
+                    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                    <option value="name_asc" {% if sort == 'name_asc' %}selected{% endif %}>Name: A to Z</option>
+                    <option value="name_desc" {% if sort == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
+                </select>
+                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300">Apply Filters</button>
+                <button type="reset" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Reset</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="hidden md:block w-1/4">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg sticky top-4">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Filter Menu</h2>
+            <form method="get" action="{% url 'orders' %}" class="space-y-6">
+                <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min Price" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max Price" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                </div>
+                <select name="category" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="sort" class="w-full px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="">Sort By</option>
+                    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                    <option value="name_asc" {% if sort == 'name_asc' %}selected{% endif %}>Name: A to Z</option>
+                    <option value="name_desc" {% if sort == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
+                </select>
+                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300">Apply Filters</button>
+                <button type="reset" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Reset</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div class="w-full md:w-3/4">
+
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">Menu</h1>
+
+        {% for section_name, items in [('Fast Food', fast_foods), ('Foods', foods), ('Drinks', drinks)] %}
+        {% if items %}
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">{{ section_name }}</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                {% for item in items %}
+                {% if item.quantity > 0 %}
+                <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300">
+                        <button class="text-white font-semibold px-4 py-2 bg-red-500 rounded hover:bg-red-600" 
+                                data-product-id="{{ item.product_id }}"
+                                data-name="{{ item.name }}"
+                                data-price="{{ item.price }}"
+                                data-description="{{ item.description }}"
+                                onclick="openModalFromButton(this)">
+                            Order This
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-1">{{ item.name }}</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2 text-sm">{{ item.description }}</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold mb-2">K{{ item.price }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Stock: {{ item.quantity }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% endfor %}
+
+        {% if not fast_foods and not foods and not drinks %}
+        <div class="mt-12 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">No items found</h2>
+            <p class="text-gray-600 dark:text-gray-400">Try adjusting your filters or search terms.</p>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<!-- Order Modal -->
+<div id="orderModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[700] hidden">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
+        <h3 id="modalTitle" class="text-xl font-bold text-gray-800 dark:text-white mb-2"></h3>
+        <p id="modalDescription" class="text-gray-600 dark:text-gray-300 mb-4"></p>
+        <p id="modalPrice" class="text-red-600 dark:text-red-400 font-semibold mb-4"></p>
+        
+        <div class="mb-4">
+            <label for="modalQuantity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quantity:</label>
+            <input type="number" id="modalQuantity" name="quantity" value="1" min="1" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                   onchange="updateTotalPrice()">
+        </div>
+        
+        <p id="modalTotalPrice" class="text-lg font-semibold text-gray-800 dark:text-white mb-4"></p>
+        
+        <input type="hidden" id="modalProductId">
+        
+        <div class="flex gap-3">
+            <button onclick="addToCart()" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-400">
+                Add to Cart
+            </button>
+            <button onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Open modal from any button
+    function openModalFromButton(button) {
+        const productId = button.dataset.productId;
+        const name = button.dataset.name;
+        const price = parseFloat(button.dataset.price);
+        const description = button.dataset.description;
+
+        document.getElementById('modalProductId').value = productId;
+        document.getElementById('modalTitle').textContent = name;
+        document.getElementById('modalDescription').textContent = description;
+        document.getElementById('modalPrice').textContent = 'Price: K' + price.toFixed(2);
+        document.getElementById('modalTotalPrice').textContent = 'Total: K' + price.toFixed(2);
+        document.getElementById('modalQuantity').value = 1;
+        document.getElementById('orderModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('orderModal').classList.add('hidden');
+    }
+
+    function updateTotalPrice() {
+        const price = parseFloat(document.getElementById('modalPrice').textContent.replace('Price: K',''));
+        const quantity = parseInt(document.getElementById('modalQuantity').value) || 1;
+        document.getElementById('modalTotalPrice').textContent = 'Total: K' + (price*quantity).toFixed(2);
+    }
+
+    function addToCart() {
+        const productId = document.getElementById('modalProductId').value;
+        const quantity = document.getElementById('modalQuantity').value;
+
+        fetch('{% url "cart:add_to_cart" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ product_id: productId, quantity })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) {
+                closeModal();
+                alert('Item added to cart!');
+            } else {
+                alert('Error: ' + (data.error || 'Unknown'));
+            }
+        })
+        .catch(err => console.error(err));
+    }
+</script>
+{% endblock %}

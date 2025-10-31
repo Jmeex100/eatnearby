@@ -8,7 +8,7 @@
     <div class="md:hidden fixed bottom-20 right-4 z-[500]">
         <button id="mobileFilterButton" class="flex items-center justify-center bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300 dark:text-white transition-colors duration-300 hover:shadow-2xl animate-pulse" style="width: 56px; height: 56px;">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 0 0-.293-.707L3.293 7.293A1 1 0 0 1 3 6.586V4z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
         </button>
     </div>
@@ -48,7 +48,7 @@
                     <option value="name_desc" {% if sort == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
                 </select>
                 <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition dark:bg-blue-400 dark:hover:bg-blue-300">Apply Filters</button>
-                <button type="reset" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">Reset</button>
+                <button type="button" onclick="this.form.reset(); this.form.submit();" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">Reset</button>
             </form>
         </div>
     </div>
@@ -80,167 +80,149 @@
                     <option value="name_desc" {% if sort == 'name_desc' %}selected{% endif %}>Name: Z to A</option>
                 </select>
                 <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition dark:bg-blue-400 dark:hover:bg-blue-300">Apply Filters</button>
-                <button type="reset" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">Reset</button>
+                <button type="button" onclick="this.form.reset(); this.form.submit();" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">Reset</button>
             </form>
         </div>
     </div>
 
     <!-- Main Content (Right Column) -->
     <div class="w-full md:w-3/4 z-[1]">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Menu</h1>
-        </div>
-        <div class="w-full md:w-3/4 z-[1]">
-    <div class="flex justify-between items-center mb-6">
-        {% comment %} <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Menu</h1> {% endcomment %}
-    </div>
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Menu</h1>
 
-    {% if not fast_foods and not foods and not drinks and query %}
-        <div class="text-center mt-8">
-            <p class="text-gray-600 dark:text-gray-300 text-lg font-semibold">
-                No menu items found matching “{{ query }}”.
-            </p>
-        </div>
-    {% endif %}
-
-    <!-- Fast Food Section -->
-
-      <!-- Fast Food Section -->
-<div class="mt-12">
-    {% comment %} <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Fast Food</h2> {% endcomment %}
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {% for item in fast_foods %}
-        <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
-            <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
-                <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
-                   data-product-id="{{ item.product_id }}"
-                   data-name="{{ item.name }}" 
-                   data-price="{{ item.price }}" 
-                   data-description="{{ item.description }}" 
-                   onclick="openModal(event, this)"></a>
-            </div>
-            <div class="p-6">
-                <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
-
-              
-                <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
-                <div class="text-center mt-4">
-                    <a href="{% url 'order' item.product_id 'fastfood' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-
-        <!-- Food Section -->
-        <div class="mt-12">
-            {% comment %} <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Food</h2> {% endcomment %}
+        {% comment %} Fast Food Section {% endcomment %}
+        {% if fast_foods %}
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Fast Food</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {% for item in foods %}
+                {% for item in fast_foods %}
+                {% if item.quantity > 0 %}
                 <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
                     <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-                    
+                  
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
                         <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
-                          <!-- ✅ Add Free Nshima line here -->
-                <p class="text-green-600 dark:text-green-400 font-semibold mb-2">Free Nshima</p>
-
                         <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
+                        {% if request.user.is_authenticated and request.user.user_type in "customer,staff,admin" %}
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">In stock: {{ item.quantity }}</p>
+                        {% endif %}
                         <div class="text-center mt-4">
-                            <a href="{% url 'order' item.product_id 'food' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
+                            <a href="{% url 'order' item.product_id 'fastfood' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
-        </div>
+        </section>
+        {% endif %}
 
-        <!-- Drinks Section -->
-        <div class="mt-12">
-            {% comment %} <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2> {% endcomment %}
+        {% comment %} Foods Section {% endcomment %}
+        {% if foods %}
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Foods</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                {% for item in foods %}
+                {% if item.quantity > 0 %}
+                <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-1">{{ item.name }}</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2 text-sm">{{ item.description }}</p>
+                        <p class="text-green-600 dark:text-green-400 text-sm mb-1">Free Nshima</p>
+                        <p class="text-red-600 dark:text-red-400 font-semibold mb-2">K{{ item.price }}</p>
+                        {% if request.user.is_authenticated and request.user.user_type in "customer,staff,admin" %}
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">In stock: {{ item.quantity }}</p>
+                        {% endif %}
+                        {% if request.user.is_authenticated and request.user.user_type == "customer" %}
+                        <div class="mt-3">
+                            <a href="{% url 'order' item.product_id 'food' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% comment %} Drinks Section {% endcomment %}
+        {% if drinks %}
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {% for item in drinks %}
+                {% if item.quantity > 0 %}
                 <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
                     <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300" style="pointer-events: none;">
-                        <a href="javascript:void(0)" class="text-white text-lg font-semibold hover:underline" style="pointer-events: auto;" 
-                           data-product-id="{{ item.product_id }}"
-                           data-name="{{ item.name }}" 
-                           data-price="{{ item.price }}" 
-                           data-description="{{ item.description }}" 
-                           onclick="openModal(event, this)">Order This</a>
-                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300">
+                     
                     <div class="p-6">
                         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
                         <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
                         <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
+                        {% if request.user.is_authenticated and request.user.user_type in "customer,staff,admin" %}
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">In stock: {{ item.quantity }}</p>
+                        {% endif %}
                         <div class="text-center mt-4">
                             <a href="{% url 'order' item.product_id 'drink' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
+        </section>
+        {% endif %}
+        <!-- Empty State -->
+        {% if not fast_foods and not foods and not drinks %}
+        <div class="mt-12 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">No items found</h2>
+            <p class="text-gray-600 dark:text-gray-400">Try adjusting your filters or search terms.</p>
         </div>
+        {% endif %}
     </div>
 </div>
 
-<!-- Modal -->
-<div id="orderModal" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-black/60 hidden justify-center items-center z-[550]">
-    <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-xl max-w-sm w-full">
-        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white" onclick="closeModal()">✖</button>
-        <h2 id="modalTitle" class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Item Name</h2>
-        <p id="modalDescription" class="text-gray-700 dark:text-gray-300 mb-4">Item description</p>
-        <p id="modalPrice" class="text-red-600 dark:text-red-400 font-semibold">Price: K0.00</p>
-        <p id="modalTotalPrice" class="text-red-600 dark:text-red-400 font-semibold mt-4">Total: K0.00</p>
-        <div class="flex mt-4">
-            <input type="number" id="modalQuantity" value="1" class="w-16 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white" min="1" onchange="updateTotalPrice()">
-            <button class="ml-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300 dark:text-white transition-colors duration-200" onclick="addToCart()">Add To Cart</button>
-        </div>
-        <input type="hidden" id="modalProductId">
-    </div>
-</div>
-</div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
         // Mobile filter toggle
         const mobileFilterButton = document.getElementById('mobileFilterButton');
         const closeMobileFilter = document.getElementById('closeMobileFilter');
         const mobileFilterOverlay = document.getElementById('mobileFilterOverlay');
-        const mobileFilterPanel = mobileFilterOverlay?.querySelector('div');
+        const mobileFilterPanel = mobileFilterOverlay ? mobileFilterOverlay.querySelector('div') : null;
 
-        if (!mobileFilterButton || !mobileFilterOverlay || !mobileFilterPanel || !closeMobileFilter) {
-            console.warn('Mobile filter elements missing. Ensure IDs exist: mobileFilterButton, mobileFilterButton, closeMobileFilter, and a div inside mobileFilterOverlay');
-            return;
-        }
+        if (mobileFilterButton && mobileFilterOverlay && mobileFilterPanel && closeMobileFilter) {
+            mobileFilterButton.addEventListener('click', function() {
+                mobileFilterOverlay.classList.remove('hidden');
+                setTimeout(function() {
+                    mobileFilterOverlay.classList.add('opacity-100');
+                    mobileFilterPanel.classList.remove('translate-x-full');
+                }, 10);
+            });
 
-        mobileFilterButton.addEventListener('click', () => {
-            mobileFilterOverlay.classList.remove('hidden');
-            mobileFilterOverlay.classList.add('opacity-mobile100');
-            mobileFilterPanel.classList.remove('translate-x-full');
-        });
-
-        closeMobileFilter.addEventListener('click', () => {
-            mobileFilterOverlay.classList.remove('opacity-100');
-            mobileFilterPanel.classList.add('translate-x-full');
-            setTimeout(() => mobileFilterOverlay.classList.add('hidden'), 300);
-        });
-
-        mobileFilterOverlay.addEventListener('click', (e) => {
-            if (e.target === mobileFilterOverlay) {
+            closeMobileFilter.addEventListener('click', function() {
                 mobileFilterOverlay.classList.remove('opacity-100');
                 mobileFilterPanel.classList.add('translate-x-full');
-                setTimeout(() => mobileFilterOverlay.classList.add('hidden'), 300);
-            }
-        });
+                setTimeout(function() {
+                    mobileFilterOverlay.classList.add('hidden');
+                }, 300);
+            });
+
+            mobileFilterOverlay.addEventListener('click', function(e) {
+                if (e.target === mobileFilterOverlay) {
+                    mobileFilterOverlay.classList.remove('opacity-100');
+                    mobileFilterPanel.classList.add('translate-x-full');
+                    setTimeout(function() {
+                        mobileFilterOverlay.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        }
 
         // Modal functions
         window.openModal = function(event, element) {
@@ -249,6 +231,7 @@
             const name = element.getAttribute('data-name');
             const price = parseFloat(element.getAttribute('data-price'));
             const description = element.getAttribute('data-description');
+            
             document.getElementById('modalProductId').value = productId;
             document.getElementById('modalTitle').textContent = name;
             document.getElementById('modalDescription').textContent = description;
@@ -263,8 +246,9 @@
         };
 
         window.updateTotalPrice = function() {
-            const price = parseFloat(document.getElementById('modalPrice').textContent.replace('Price: K', ''));
-            const quantity = parseInt(document.getElementById('modalQuantity').value);
+            const priceText = document.getElementById('modalPrice').textContent;
+            const price = parseFloat(priceText.replace('Price: K', ''));
+            const quantity = parseInt(document.getElementById('modalQuantity').value) || 1;
             const total = price * quantity;
             document.getElementById('modalTotalPrice').textContent = 'Total: K' + total.toFixed(2);
         };
@@ -272,27 +256,36 @@
         window.addToCart = function() {
             const productId = document.getElementById('modalProductId').value;
             const quantity = document.getElementById('modalQuantity').value;
+            
             fetch('{% url "cart:add_to_cart" %}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': '{{ csrf_token }}'
                 },
-                body: JSON.stringify({ product_id: productId, quantity })
+                body: JSON.stringify({ 
+                    product_id: productId, 
+                    quantity: quantity 
+                })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
-                    updateCartIcon(data.cart_count);
+                    updateCartIcon(data.cart_count || 0);
                     closeModal();
-                    showToast('Item added to cart!');
+                    showToast('Item added to cart successfully!');
                 } else {
-                    showToast('Error adding item: ' + (data.error || 'Unknown error'), 'error');
+                    showToast('Error: ' + (data.error || 'Unable to add item to cart'), 'error');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                showToast('An error occurred', 'error');
+                showToast('An error occurred while adding item to cart', 'error');
             });
         };
 
@@ -300,32 +293,73 @@
             const cartCountElement = document.getElementById('cartItemCount');
             if (cartCountElement) {
                 cartCountElement.textContent = count;
+                cartCountElement.classList.toggle('hidden', count === 0);
             }
         }
 
         function showToast(message, type = 'success') {
+            // Remove existing toasts
+            const existingToasts = document.querySelectorAll('.custom-toast');
+            existingToasts.forEach(toast => toast.remove());
+
             const toast = document.createElement('div');
-            toast.className = `fixed bottom-4 right-4 px-4 py-2 rounded-md text-white transition-opacity duration-300 z-[700] shadow-lg ${
-                type === 'success' ? 'bg-blue-600' : 'bg-red-600'
-            } opacity-0`;
+            toast.className = `custom-toast fixed bottom-4 right-4 px-6 py-3 rounded-md text-white transition-all duration-300 z-[800] shadow-lg ${
+                type === 'success' ? 'bg-green-600' : 'bg-red-600'
+            } transform translate-y-10 opacity-0`;
             toast.textContent = message;
             document.body.appendChild(toast);
-            setTimeout(() => toast.classList.remove('opacity-0'), 10);
+            
+            // Animate in
             setTimeout(() => {
-                toast.classList.add('opacity-0');
+                toast.classList.remove('translate-y-10', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+            }, 10);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-10', 'opacity-0');
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
 
-        // Initialize cart count
-        fetch('{% url "cart:cart_view" %}')
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                updateCartIcon(doc.querySelectorAll('.cart-item').length);
-            })
-            .catch(error => console.error('Cart count fetch error:', error));
+        // Close modal when clicking outside
+        document.getElementById('orderModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize cart count on page load
+        function initializeCartCount() {
+            fetch('{% url "cart:cart_view" %}')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const cartItems = doc.querySelectorAll('.cart-item, [data-cart-item]');
+                    updateCartIcon(cartItems.length);
+                })
+                .catch(error => {
+                    console.error('Cart count initialization error:', error);
+                    updateCartIcon(0);
+                });
+        }
+
+        // Initialize when page loads
+        initializeCartCount();
     });
 </script>
 {% endblock %}

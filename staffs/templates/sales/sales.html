@@ -30,7 +30,8 @@
             </div>
             <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[calc(100vh-250px)] overflow-y-auto">
                 {% for product in products %}
-                    <div class="product-card bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                    <div class="product-card bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden hover:shadow-lg transition-shadow duration-200"
+                         data-stock="{{ product.quantity }}">
                         {% if product.image_url %}
                         <div class="h-40 overflow-hidden">
                             <img src="{{ product.image_url }}" alt="{{ product.name }}" 
@@ -156,24 +157,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMoneyProviderDiv = document.getElementById('mobile-money-provider');
     let orderItems = [];
 
-    // Toggle mobile money provider dropdown
+    // Toggle mobile money
     function toggleMobileMoneyProvider() {
-        if (paymentMethodSelect.value === 'mobile_money') {
-            mobileMoneyProviderDiv.classList.remove('hidden');
-        } else {
-            mobileMoneyProviderDiv.classList.add('hidden');
-        }
+        mobileMoneyProviderDiv.classList.toggle('hidden', paymentMethodSelect.value !== 'mobile_money');
     }
 
     // Update order summary
     function updateOrderSummary() {
         orderItems = [];
         let subtotal = 0;
-        
-        // Clear order items display
         orderItemsDiv.innerHTML = '';
-        
-        // Process each product
+
         quantityInputs.forEach(input => {
             const quantity = parseInt(input.value) || 0;
             if (quantity > 0) {
@@ -185,26 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const itemSubtotal = price * quantity;
                 subtotal += itemSubtotal;
 
-                // Add to order items array
-                orderItems.push({
-                    product_id: productId,
-                    type: productType,
-                    quantity: quantity,
-                    subtotal: itemSubtotal
-                });
+                orderItems.push({ product_id: productId, type: productType, quantity, subtotal: itemSubtotal });
 
-                // Create order item display
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'flex items-center bg-gray-50 dark:bg-gray-700 p-3 rounded-lg gap-3';
                 itemDiv.innerHTML = `
-                    ${productImage ? 
-                        `<img src="${productImage}" alt="${productName}" class="w-12 h-12 object-cover rounded-md">` : 
+                    ${productImage ? `<img src="${productImage}" alt="${productName}" class="w-12 h-12 object-cover rounded-md">` : 
                         `<div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-md flex items-center justify-center">
                             <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                        </div>`
-                    }
+                        </div>`}
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-gray-800 dark:text-white truncate">${productName}</p>
                         <div class="flex items-center mt-1">
@@ -222,106 +207,85 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Calculate tax and total (0% tax for promotion)
-        const tax = 0;  // Set tax to zero
-        const total = subtotal;  // Total is just subtotal
+        const tax = 0;
+        const total = subtotal;
 
-        // Update display
-        subtotalAmountSpan.textContent = `${subtotal.toFixed(2)}`;
-        taxAmountSpan.textContent = `0.00`;
-        totalAmountSpan.textContent = `${total.toFixed(2)}`;
+        subtotalAmountSpan.textContent = `ZMW: ${subtotal.toFixed(2)}`;
+        taxAmountSpan.textContent = `ZMW: 0.00`;
+        totalAmountSpan.textContent = `ZMW: ${total.toFixed(2)}`;
         itemsInput.value = JSON.stringify(orderItems);
 
-        // Toggle empty cart message
-        if (orderItems.length > 0) {
-            emptyCartMessage.style.display = 'none';
-            checkoutBtn.disabled = false;
-        } else {
-            emptyCartMessage.style.display = 'block';
-            checkoutBtn.disabled = true;
-        }
+        emptyCartMessage.style.display = orderItems.length > 0 ? 'none' : 'block';
+        checkoutBtn.disabled = orderItems.length === 0;
 
-        // Add event listeners to dynamically created buttons
+        // Re-attach dynamic buttons
         document.querySelectorAll('.item-increase').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const productId = e.target.dataset.productId;
-                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+            btn.onclick = e => {
+                const input = document.querySelector(`.quantity-input[data-product-id="${e.target.dataset.productId}"]`);
                 input.value = parseInt(input.value) + 1;
                 input.dispatchEvent(new Event('input'));
-            });
+            };
         });
-
         document.querySelectorAll('.item-decrease').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const productId = e.target.dataset.productId;
-                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+            btn.onclick = e => {
+                const input = document.querySelector(`.quantity-input[data-product-id="${e.target.dataset.productId}"]`);
                 if (parseInt(input.value) > 0) {
                     input.value = parseInt(input.value) - 1;
                     input.dispatchEvent(new Event('input'));
                 }
-            });
+            };
         });
-
         document.querySelectorAll('.item-remove').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const productId = e.target.dataset.productId;
-                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+            btn.onclick = e => {
+                const input = document.querySelector(`.quantity-input[data-product-id="${e.target.dataset.productId}"]`);
                 input.value = 0;
                 input.dispatchEvent(new Event('input'));
-            });
+            };
         });
     }
 
-    // Event listeners for quantity inputs
+    // Quantity input
     quantityInputs.forEach(input => {
         input.addEventListener('input', function() {
             const max = parseInt(this.max);
-            if (parseInt(this.value) > max) {
-                this.value = max;
-            }
+            if (parseInt(this.value) > max) this.value = max;
             updateOrderSummary();
         });
     });
 
-    // Event listeners for increase buttons
-    increaseBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const productId = this.dataset.productId;
-            const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
-            input.value = parseInt(input.value) + 1;
+    // Increase/Decrease buttons
+    increaseBtns.forEach(btn => btn.addEventListener('click', () => {
+        const input = document.querySelector(`.quantity-input[data-product-id="${btn.dataset.productId}"]`);
+        input.value = parseInt(input.value) + 1;
+        input.dispatchEvent(new Event('input'));
+    }));
+    decreaseBtns.forEach(btn => btn.addEventListener('click', () => {
+        const input = document.querySelector(`.quantity-input[data-product-id="${btn.dataset.productId}"]`);
+        if (parseInt(input.value) > 0) {
+            input.value = parseInt(input.value) - 1;
             input.dispatchEvent(new Event('input'));
-        });
-    });
+        }
+    }));
 
-    // Event listeners for decrease buttons
-    decreaseBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const productId = this.dataset.productId;
-            const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
-            if (parseInt(input.value) > 0) {
-                input.value = parseInt(input.value) - 1;
-                input.dispatchEvent(new Event('input'));
-            }
-        });
-    });
-
-    // Product search functionality
+    // Search: hide out-of-stock
     productSearch.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
+        const term = this.value.toLowerCase();
         document.querySelectorAll('.product-card').forEach(card => {
-            const productName = card.querySelector('h4').textContent.toLowerCase();
-            if (productName.includes(searchTerm)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
+            const name = card.querySelector('h4').textContent.toLowerCase();
+            const inStock = parseInt(card.dataset.stock) > 0;
+            card.style.display = (name.includes(term) && inStock) ? 'block' : 'none';
         });
     });
 
-    // Payment method change listener
+    // Hide out-of-stock on load
+    document.querySelectorAll('.product-card').forEach(card => {
+        if (parseInt(card.dataset.stock) <= 0) card.style.display = 'none';
+    });
+
+    // Payment method
     paymentMethodSelect.addEventListener('change', toggleMobileMoneyProvider);
 
-    // Initialize
+    // Init
     toggleMobileMoneyProvider();
     updateOrderSummary();
 });
@@ -329,12 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <style>
 .quantity-input::-webkit-inner-spin-button,
-.quantity-input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.quantity-input {
-    -moz-appearance: textfield;
-}
+.quantity-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.quantity-input { -moz-appearance: textfield; }
 </style>
 {% endblock %}

@@ -4,67 +4,307 @@
 {% block title %}My Deliveries{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 mt-20">
-    <!-- Pending Deliveries -->
-    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-8">
-        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Pending Deliveries</h2>
-        {% if pending_deliveries %}
-            <div class="space-y-4">
-                {% for delivery in pending_deliveries %}
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900">
-                        <p><strong>Order ID:</strong> {{ delivery.id }}</p>
-                        <p><strong>Customer:</strong> {{ delivery.user.username }}</p>
-                        <p><strong>Location:</strong> {{ delivery.address|default:delivery.get_predefined_address_display }}</p>
-                        <p><strong>Phone:</strong> {{ delivery.phone_number }}</p>
-                        <p><strong>Status:</strong> {{ delivery.get_delivery_status_display }}</p>
-                        <p><strong>Payment Method:</strong> {{ delivery.get_payment_method_display }}</p>
-                        <p><strong>Total:</strong> K{{ delivery.cart.total|floatformat:2 }}</p>
-                        <div class="mt-4 flex space-x-2">
-                            <!-- Accept Form -->
-                            <form method="post" action="{% url 'staffs:accept_delivery' delivery_id=delivery.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 flex items-center">
-                                    <i class="fas fa-check mr-2"></i> Accept Order
-                                </button>
-                            </form>
-                            <!-- Decline Form -->
-                            <form method="post" action="{% url 'staffs:decline_delivery' delivery_id=delivery.id %}">
-                                {% csrf_token %}
-                                <textarea name="decline_reason" class="w-full p-2 border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200 mt-2" rows="3" placeholder="Reason for declining (e.g., Out of stock)" required></textarea>
-                                <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center mt-2">
-                                    <i class="fas fa-times mr-2"></i> Decline Order
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p class="text-gray-600 dark:text-gray-400">No pending deliveries assigned to you.</p>
-        {% endif %}
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+
+  {# ────────────────────── HEADER ────────────────────── #}
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Delivery Management</h1>
+    <p class="text-gray-600 dark:text-gray-400">Manage your pending and in-progress deliveries</p>
+  </div>
+
+  {# ────────────────────── PENDING DELIVERIES ────────────────────── #}
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-8">
+    <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-white/20 rounded-lg">
+            <i class="fas fa-clock text-white text-lg"></i>
+          </div>
+          <h2 class="text-xl font-bold text-white">Pending Deliveries</h2>
+        </div>
+        <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium">
+          {{ pending_deliveries|length }} waiting
+        </span>
+      </div>
     </div>
 
-    <!-- In-Progress Deliveries -->
-    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
-        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">In-Progress Deliveries</h2>
-        {% if in_progress_deliveries %}
-            <div class="space-y-4">
-                {% for delivery in in_progress_deliveries %}
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900">
-                        <p><strong>Order ID:</strong> {{ delivery.id }}</p>
-                        <p><strong>Customer:</strong> {{ delivery.user.username }}</p>
-                        <p><strong>Location:</strong> {{ delivery.address|default:delivery.get_predefined_address_display }}</p>
-                        <p><strong>Phone:</strong> {{ delivery.phone_number }}</p>
-                        <p><strong>Status:</strong> {{ delivery.get_delivery_status_display }}</p>
-                        <p><strong>Payment Method:</strong> {{ delivery.get_payment_method_display }}</p>
-                        <p><strong>Total:</strong> K{{ delivery.cart.total|floatformat:2 }}</p>
-                        <p class="text-green-600 mt-2">Accepted - Awaiting customer confirmation</p>
+    <div class="p-6">
+      {% if pending_deliveries %}
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+          {% for delivery in pending_deliveries %}
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50/50 dark:bg-gray-900/50 hover:shadow-md transition-shadow duration-200">
+              <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                {# Delivery Info #}
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                      Order #{{ delivery.id }}
+                    </h3>
+                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium dark:bg-yellow-900 dark:text-yellow-300">
+                      Pending
+                    </span>
+                  </div>
+                  
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="space-y-2">
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-user mr-2 w-4"></i>
+                        <span>{{ delivery.user.get_full_name|default:delivery.user.username }}</span>
+                      </div>
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-map-marker-alt mr-2 w-4"></i>
+                        <span>{{ delivery.address|default:delivery.get_predefined_address_display }}</span>
+                      </div>
                     </div>
-                {% endfor %}
+                    <div class="space-y-2">
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-phone mr-2 w-4"></i>
+                        <span>{{ delivery.phone_number }}</span>
+                      </div>
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-credit-card mr-2 w-4"></i>
+                        <span>{{ delivery.get_payment_method_display }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {# Action Buttons #}
+                <div class="flex flex-col space-y-3 min-w-[200px]">
+                  <form method="post" action="{% url 'staffs:accept_delivery' delivery.id %}" class="w-full">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="w-full bg-green-600 text-white py-2.5 px-4 rounded-lg hover:bg-green-700 transition-colors duration-200 flex items-center justify-center font-medium">
+                      <i class="fas fa-check-circle mr-2"></i> Accept Delivery
+                    </button>
+                  </form>
+
+                  <button onclick="openDeclineModal('{{ delivery.id }}')"
+                          class="w-full bg-red-600 text-white py-2.5 px-4 rounded-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center font-medium">
+                    <i class="fas fa-times-circle mr-2"></i> Decline
+                  </button>
+                </div>
+              </div>
+
+              {# Order Items Table #}
+              <div class="mt-5 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <i class="fas fa-shopping-basket mr-2"></i> Order Items
+                </h4>
+                <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Item</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Quantity</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      {% for itm in delivery.order_items %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                          <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">{{ itm.name }}</td>
+                          <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">x{{ itm.quantity }}</td>
+                          <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">K{{ itm.subtotal|floatformat:2 }}</td>
+                        </tr>
+                      {% empty %}
+                        <tr>
+                          <td colspan="3" class="px-4 py-4 text-sm text-gray-500 dark:text-gray-400 text-center">No items in this order</td>
+                        </tr>
+                      {% endfor %}
+                      <tr class="bg-gray-50 dark:bg-gray-700 font-bold">
+                        <td colspan="2" class="px-4 py-3 text-sm text-gray-900 dark:text-white">Total Amount</td>
+                        <td class="px-4 py-3 text-sm text-green-600 dark:text-green-400">K{{ delivery.order_total|floatformat:2 }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-        {% else %}
-            <p class="text-gray-600 dark:text-gray-400">No in-progress deliveries assigned to you.</p>
-        {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-12">
+          <div class="mx-auto w-24 h-24 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-check-circle text-blue-500 text-3xl"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No Pending Deliveries</h3>
+          <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+            All deliveries have been processed. New orders will appear here when they're ready for delivery.
+          </p>
+        </div>
+      {% endif %}
     </div>
+  </div>
+
+  {# ────────────────────── IN-PROGRESS DELIVERIES ────────────────────── #}
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-white/20 rounded-lg">
+            <i class="fas fa-truck-moving text-white text-lg"></i>
+          </div>
+          <h2 class="text-xl font-bold text-white">In-Progress Deliveries</h2>
+        </div>
+        <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium">
+          {{ in_progress_deliveries|length }} active
+        </span>
+      </div>
+    </div>
+
+    <div class="p-6">
+      {% if in_progress_deliveries %}
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+          {% for delivery in in_progress_deliveries %}
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50/50 dark:bg-gray-900/50 hover:shadow-md transition-shadow duration-200">
+              <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                {# Delivery Info #}
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                      Order #{{ delivery.id }}
+                    </h3>
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium dark:bg-green-900 dark:text-green-300">
+                      In Progress
+                    </span>
+                  </div>
+                  
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="space-y-2">
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-user mr-2 w-4"></i>
+                        <span>{{ delivery.user.get_full_name|default:delivery.user.username }}</span>
+                      </div>
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-map-marker-alt mr-2 w-4"></i>
+                        <span>{{ delivery.address|default:delivery.get_predefined_address_display }}</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-phone mr-2 w-4"></i>
+                        <span>{{ delivery.phone_number }}</span>
+                      </div>
+                      <div class="flex items-start text-green-600 dark:text-green-400">
+                        <i class="fas fa-info-circle mr-2 w-4 mt-0.5"></i>
+                        <span>Accepted – awaiting customer confirmation</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {# Order Items Table #}
+              <div class="mt-5 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <i class="fas fa-shopping-basket mr-2"></i> Order Items
+                </h4>
+                <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Item</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Quantity</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      {% for itm in delivery.order_items %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                          <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">{{ itm.name }}</td>
+                          <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">x{{ itm.quantity }}</td>
+                          <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">K{{ itm.subtotal|floatformat:2 }}</td>
+                        </tr>
+                      {% empty %}
+                        <tr>
+                          <td colspan="3" class="px-4 py-4 text-sm text-gray-500 dark:text-gray-400 text-center">No items in this order</td>
+                        </tr>
+                      {% endfor %}
+                      <tr class="bg-gray-50 dark:bg-gray-700 font-bold">
+                        <td colspan="2" class="px-4 py-3 text-sm text-gray-900 dark:text-white">Total Amount</td>
+                        <td class="px-4 py-3 text-sm text-green-600 dark:text-green-400">K{{ delivery.order_total|floatformat:2 }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-12">
+          <div class="mx-auto w-24 h-24 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-truck text-green-500 text-3xl"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No Active Deliveries</h3>
+          <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+            All deliveries have been completed. Accepted orders will appear here while in progress.
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
 </div>
+
+{# ────────────────────── DECLINE MODAL ────────────────────── #}
+<div id="declineModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full transform transition-all">
+    <div class="p-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
+          <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400"></i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Decline Delivery</h3>
+      </div>
+      
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Please provide a reason for declining this delivery. This will be shared with the customer.
+      </p>
+      
+      <form id="declineForm" method="post">
+        {% csrf_token %}
+        <textarea name="decline_reason"
+                  class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  rows="4"
+                  placeholder="Enter reason for declining this delivery..."
+                  required></textarea>
+        
+        <div class="flex space-x-3 mt-6">
+          <button type="button"
+                  onclick="closeDeclineModal()"
+                  class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2.5 px-4 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors duration-200 font-medium">
+            Cancel
+          </button>
+          <button type="submit"
+                  class="flex-1 bg-red-600 text-white py-2.5 px-4 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium flex items-center justify-center">
+            <i class="fas fa-times-circle mr-2"></i> Decline Delivery
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function openDeclineModal(orderId) {
+  const modal = document.getElementById('declineModal');
+  const form = document.getElementById('declineForm');
+  form.action = "{% url 'staffs:decline_delivery' 0 %}".replace('0', orderId);
+  modal.classList.remove('hidden');
+}
+
+function closeDeclineModal() {
+  const modal = document.getElementById('declineModal');
+  modal.classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.getElementById('declineModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeDeclineModal();
+  }
+});
+</script>
 {% endblock %}
