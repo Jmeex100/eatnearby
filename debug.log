@@ -91210,3 +91210,4565 @@ Pending deliveries for user 7: 0
 History notifications for user 7: 75
 Availability notifications for user 7: 0
 Total notifications for user 7: 75
+Watching for file changes with StatReloader
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 75
+Availability notifications for user 7: 0
+Total notifications for user 7: 75
+Not Found: /favicon.ico
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 75
+Availability notifications for user 7: 0
+Total notifications for user 7: 75
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 75
+Availability notifications for user 7: 0
+Total notifications for user 7: 75
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 75
+Availability notifications for user 7: 0
+Total notifications for user 7: 75
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 566 with status pending
+Assigned delivery 566 to staff 7
+Created PaymentHistory 319 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 75
+Availability notifications for user 7: 0
+Total notifications for user 7: 76
+DeliveryInfo 566 status changed from pending to in_progress
+Delivery 566 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e2533710>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 75
+Availability notifications for user 7: 0
+Total notifications for user 7: 75
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 566 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e07a9290>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Delivery 566 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 77
+Availability notifications for user 7: 0
+Total notifications for user 7: 77
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 77
+Availability notifications for user 7: 0
+Total notifications for user 7: 77
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 77
+Availability notifications for user 7: 0
+Total notifications for user 7: 77
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/319/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 567 with status pending
+Assigned delivery 567 to staff 7
+Created PaymentHistory 320 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 77
+Availability notifications for user 7: 0
+Total notifications for user 7: 78
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 77
+Availability notifications for user 7: 0
+Total notifications for user 7: 78
+DeliveryInfo 567 status changed from pending to in_progress
+Delivery 567 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e2547850>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 77
+Availability notifications for user 7: 0
+Total notifications for user 7: 77
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 567 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e03b9290>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Delivery 567 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 79
+Availability notifications for user 7: 0
+Total notifications for user 7: 79
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 568 with status pending
+Assigned delivery 568 to staff 7
+Created PaymentHistory 321 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 79
+Availability notifications for user 7: 0
+Total notifications for user 7: 80
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 79
+Availability notifications for user 7: 0
+Total notifications for user 7: 80
+DeliveryInfo 568 status changed from pending to in_progress
+Delivery 568 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e2541290>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 79
+Availability notifications for user 7: 0
+Total notifications for user 7: 79
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 568 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e1abb710>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Delivery 568 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 81
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Simulated Airtel payment initiated for 0974238112, Amount: 1530.0 ZMW, Transaction ID: f5695ef0-66b7-4684-b7ab-3b125060644f
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 569 with status pending
+Assigned delivery 569 to staff 7
+Airtel payment for 0974238112, Amount: 1530.00 ZMW, Delivery 569
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 82
+DeliveryInfo 569 status changed from pending to in_progress
+Delivery 569 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e25057d0>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 81
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 81
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 570 with status pending
+Assigned delivery 570 to staff 7
+Created PaymentHistory 323 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 82
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 82
+DeliveryInfo 570 status changed from pending to in_progress
+Delivery 570 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e248bbd0>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 81
+Availability notifications for user 7: 0
+Total notifications for user 7: 81
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 570 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+Unexpected error sending SMS: HTTPSConnectionPool(host='api.twilio.com', port=443): Max retries exceeded with url: /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f35e1af4110>: Failed to establish a new connection: [Errno 111] Connection refused')))
+Delivery 570 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 83
+Availability notifications for user 7: 0
+Total notifications for user 7: 83
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Not Found: /accounts/login/
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 571 with status pending
+Assigned delivery 571 to staff 7
+Created PaymentHistory 324 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/324/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Internal Server Error: /payments/reorder/323/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/reports_views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 572 with status pending
+Assigned delivery 572 to staff 7
+Created PaymentHistory 325 for cash order
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+DeliveryInfo 572 status changed from pending to completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+DeliveryInfo 571 status changed from pending to completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 573 with status pending
+Assigned delivery 573 to staff 7
+Created PaymentHistory 326 for cash order
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+DeliveryInfo 573 status changed from pending to completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 86
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 86
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 86
+New DeliveryInfo created with status pending
+Created DeliveryInfo 574 with status pending
+Assigned delivery 574 to staff 7
+Created PaymentHistory 327 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+Accept failed for delivery 574: Insufficient stock for Goat Meat
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+Accept failed for delivery 574: Insufficient stock for Goat Meat
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 575 with status pending
+Assigned delivery 575 to staff 7
+Created PaymentHistory 328 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 2
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 88
+DeliveryInfo 574 status changed from pending to in_progress
+Delivery 574 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:50:47 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQd8715924233879efd4a43a762e3ffc50', 'Twilio-Request-Duration': '0.013', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 48e6a6d1a9a73801e2e4b070b68f66d6.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'WvswZaHtfw20Zhc84D_26z-wjtUeWIiR8TZKO0-Zca4QxUZvqdLv4Q==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 87
+DeliveryInfo 575 status changed from pending to in_progress
+Delivery 575 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:51:03 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ2f447073eac8d124b8a738318454c5c0', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 a3efa1801023fa39b0810945bbc5fed0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'ZK_Uu9-Z4xo07gqoolOcUYaiOMHInqGrNIz5C44EoSN-PPHWBEcpJw==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 86
+Availability notifications for user 7: 0
+Total notifications for user 7: 86
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 575 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:51:09 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQdd3be37ea495ed2322e48de7ad8f55c2', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 038b8581beae8686112f69a45f987e7a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'BLs5JqExi_cecsAkxE7SC0-eScPBJpGQ15zyJgtgolMVbMUTruIheg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 575 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/328/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 574 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:51:47 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ38fad28063b39b7751242d9f21dd878f', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 b6c20c2652eb66bf5f2b77f797891932.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '45aOlhq_VVd5zo9y3mdzcSMg60NkHe6Mr3Nn09EnpbRFWxC6MaqpWg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 574 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 569 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:51:50 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ3f2042d48c40247bc1d60179a047dc8d', 'Twilio-Request-Duration': '0.009', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 038b8581beae8686112f69a45f987e7a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'tb2GES7j3CjXb93RpkVG5z8ypTrbxi7t4sg81GPTXl1LHuSR1Ii9PA==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 569 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 92
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 576 with status pending
+Assigned delivery 576 to staff 7
+Created PaymentHistory 329 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 93
+Accept failed for delivery 576: Insufficient stock for chikanda
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 93
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 93
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 93
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 93
+DeliveryInfo 576 status changed from pending to in_progress
+Delivery 576 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:52:57 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ0629ff526d738706155de921f44ef3e1', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 ed39c404583c1e95693253e26db3325e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'NJWSb8ravLdPVngC3iJEo8lUgfAQZoNZfN50ojraWaPGY7UsnEzC9A==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 92
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 92
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 577 with status pending
+Assigned delivery 577 to staff 7
+Created PaymentHistory 330 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 93
+DeliveryInfo 577 status changed from pending to in_progress
+Delivery 577 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:53:45 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ54df740da26a01618b617354ff5dc0b8', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 6140aac990323a743c341794c765cd2c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'cxHlPuBXadC9nfc8foN35Y_FEgkEvi13g4x4XAe2NeCGXc7RHKz4qQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 92
+Availability notifications for user 7: 0
+Total notifications for user 7: 92
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 577 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:53:50 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ91144e26d03b599bf01a0de2ee05d3ba', 'Twilio-Request-Duration': '0.006', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 9238906dda44b39932be27cd5030b10e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'WiCQ8nH-lvztY5FsoHjirLUAfdPNF824l5OfpFfVAzLi2dXizUlOpA==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 577 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 578 with status pending
+Assigned delivery 578 to staff 7
+Created PaymentHistory 331 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 94
+Availability notifications for user 7: 0
+Total notifications for user 7: 95
+DeliveryInfo 578 status changed from pending to in_progress
+Delivery 578 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:54:24 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ4918f78679a50f530906d96b43612e2d', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 5a5dde1798daaaffdd9219c44f0745f0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'XJlGxHawPU8Y9rlilnl5bqqi8S0ozRpBCVoq02gnWH9upSkNRG2vQg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 94
+Availability notifications for user 7: 0
+Total notifications for user 7: 94
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 94
+Availability notifications for user 7: 0
+Total notifications for user 7: 94
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 578 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Tue, 04 Nov 2025 09:54:47 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ065f30e11da21528554b515fa1ffa2b5', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 e594c961a988ff445141b3bc908bf770.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '3S7XbgYSu1NMW293Qrilu8vafGJfFwons9uLgz9PRi9cfiBkM6qvyg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 578 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 96
+Availability notifications for user 7: 0
+Total notifications for user 7: 96
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 96
+Availability notifications for user 7: 0
+Total notifications for user 7: 96
+Not Found: /favicon.ico
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 96
+Availability notifications for user 7: 0
+Total notifications for user 7: 96
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 96
+Availability notifications for user 7: 0
+Total notifications for user 7: 96
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /staff
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+New DeliveryInfo created with status completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 580 with status pending
+Assigned delivery 580 to staff 7
+Created PaymentHistory 333 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+DeliveryInfo 580 status changed from pending to completed
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 581 with status pending
+Assigned delivery 581 to staff 7
+Created PaymentHistory 334 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 98
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 98
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 98
+DeliveryInfo 581 status changed from pending to in_progress
+Delivery 581 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 06 Nov 2025 10:42:30 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQbce2f72ea8941fefe7a4dc8d546cc943', 'Twilio-Request-Duration': '0.021', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 830ab990947abdf70292b0982048c184.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'qVm2yRibeCFZuU47Qm5N-OWqK0WgMBfT-5eKLiVCUZDNp47iRrSpHQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 97
+Availability notifications for user 7: 0
+Total notifications for user 7: 97
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 581 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 06 Nov 2025 10:42:57 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ2c3200bfd7d930dcdc99ed0f80d2b0e0', 'Twilio-Request-Duration': '0.013', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 9866340aacbb1f006016dcfe8e9a4d04.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '6z_ZPeddW72y64v9rtHuvOHcbrx-Ju1J28jSbLscremEfZ4C6hUGcQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 581 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 576 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Thu, 06 Nov 2025 10:42:58 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQaa42c94b4584130ff757f89d762d1079', 'Twilio-Request-Duration': '0.007', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 89fef83988c94b39f58d14fb4db012e6.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '_rKUVfLpaFLMneadX7gM9OZUQBN0acYFgXmUKNISEJGZf90S9Uuc2Q==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 576 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Notifications for user 7: [1468, 1467, 1466, 1465, 1464, 1463, 1462, 1461, 1460, 1459]
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /favicon.ico
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+User not authenticated, returning zero notification counts
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+User not authenticated, returning zero notification counts
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+User not authenticated, returning zero notification counts
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Forbidden (CSRF token from POST incorrect.): /login/
+User not authenticated, returning zero notification counts
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Forbidden (CSRF token from POST incorrect.): /login/
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Forbidden (CSRF token from POST incorrect.): /login/
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Notifications for user 7: [1468, 1467, 1466, 1465, 1464, 1463, 1462, 1461, 1460, 1459]
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 582 with status pending
+Assigned delivery 582 to staff 7
+Created PaymentHistory 335 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: what are the challenges   avaliable (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 14.078668958s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 14
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 10.76969746s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 10
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 7.364924974s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 7
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 43.317778498s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 43
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 39.975348603s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 39
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 36.648895429s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 36
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 102
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 102
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 102
+DeliveryInfo 582 status changed from pending to in_progress
+Delivery 582 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 21 Nov 2025 01:00:30 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQf8fd4d7a12aece9eae0008544cde12a1', 'Twilio-Request-Duration': '0.021', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 4ec88a002f40a457d78312a00a1f28d0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'lU22xDww-f4QN-yWBw1RPnhA7bxQTVphat0SG_vd3N5vJMbLQ1P_Yw==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 101
+Availability notifications for user 7: 0
+Total notifications for user 7: 101
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Not Found: /favicon.ico
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /accounts/login/
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+DeliveryInfo 582 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 21 Nov 2025 01:06:40 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQb10a3a8fe100b134f597f8f2ff6f4b8d', 'Twilio-Request-Duration': '0.020', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 d1e0911fa6d456578d91481606727406.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MXP53-P6', 'X-Amz-Cf-Id': 'O_lxNaSv1YIqUbFbPDhTc1gY9XzzGT1BJm4VtD6ddHe6HeOufKZarQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 582 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 583 with status pending
+Assigned delivery 583 to staff 7
+Created PaymentHistory 336 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+DeliveryInfo 583 status changed from pending to in_progress
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 583 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 21 Nov 2025 01:11:47 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ20f34606cb75dca5bc1db54480c84d9c', 'Twilio-Request-Duration': '0.020', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 9238906dda44b39932be27cd5030b10e.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'yHSz9VC8Il0ud1K3ihs8uV3OVk0NwmGOdhyiU0p_REKzT-_cdfAwjg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 583 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /favicon.ico

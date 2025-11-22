@@ -1,0 +1,32 @@
+{
+    "name": "Eat Nearby",
+    "short_name": "EatNearby",
+    "description": "Find and order food from nearby restaurants",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "orientation": "any",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/static/images/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "splash_screens": [
+        {
+            "src": "/static/images/splash.png",
+            "sizes": "320x568",
+            "type": "image/png"
+        }
+    ]
+}

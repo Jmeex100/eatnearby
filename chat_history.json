@@ -2,26 +2,6 @@
   {
     "type": "user",
     "content": "hello gemini",
-    "time": "2025-10-30T11:19:00.451107"
-  },
-  {
-    "type": "assistant",
-    "content": null,
-    "time": "2025-10-30T11:19:00.451166"
-  },
-  {
-    "type": "user",
-    "content": "hello gemini",
-    "time": "2025-10-30T11:20:43.028498"
-  },
-  {
-    "type": "assistant",
-    "content": null,
-    "time": "2025-10-30T11:20:43.028537"
-  },
-  {
-    "type": "user",
-    "content": "hello gemini",
     "time": "2025-10-30T11:21:03.587807"
   },
   {
@@ -98,5 +78,25 @@
     "type": "assistant",
     "content": "Hello! How can I help you find something tasty today?\n",
     "time": "2025-10-30T09:57:58.074594"
+  },
+  {
+    "type": "user",
+    "content": "what are the challenges   avaliable",
+    "time": "2025-11-21T00:46:54.855124"
+  },
+  {
+    "type": "assistant",
+    "content": null,
+    "time": "2025-11-21T00:46:54.855193"
+  },
+  {
+    "type": "user",
+    "content": "hello",
+    "time": "2025-11-21T00:47:25.550146"
+  },
+  {
+    "type": "assistant",
+    "content": null,
+    "time": "2025-11-21T00:47:25.550211"
   }
 ]

@@ -7,11 +7,11 @@ from django.utils.timezone import now, localtime
 from django.http import JsonResponse
 from django.conf import settings
 from django import forms
-from auths.models import User, FastFood, Food, Drink
+from auths.models import User, FastFood, Food, Drink, Category
 from payments.models import PaymentHistory, DeliveryInfo
 from cart.models import Cart, CartItem
-from staffs.models import StaffAssignment
-from community.models import Review
+from staffs.models import StaffAssignment, StaffServiceArea, Notification
+from community.models import Review, Post, Restaurant, Challenge, Recipe, RestaurantQuestion, RestaurantAnswer, Comment
 from io import BytesIO
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from reportlab.lib.pagesizes import A4
@@ -25,8 +25,8 @@ from datetime import timedelta
 import json
 from collections import defaultdict
 import os
-# superadmin/reports_views.py
-# Enhanced Filter Form
+
+
 class AnalyticsFilterForm(forms.Form):
     DATE_RANGE_CHOICES = [
         ('today', 'Today'),
@@ -39,7 +39,7 @@ class AnalyticsFilterForm(forms.Form):
         ('this_year', 'This Year'),
         ('custom', 'Custom Date Range')
     ]
-    
+
     date_range = forms.ChoiceField(choices=DATE_RANGE_CHOICES, required=False, initial='this_month', label="Date Range")
     date_start = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date', 'class': 'date-input'}), label="Start Date")
     date_end = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date', 'class': 'date-input'}), label="End Date")
@@ -50,6 +50,10 @@ class AnalyticsFilterForm(forms.Form):
     report_type = forms.MultipleChoiceField(
         choices=[('sales', 'Sales Reports'), ('users', 'User Reports'), ('inventory', 'Inventory Reports'), ('staff', 'Staff Performance'), ('customer', 'Customer Satisfaction')],
         required=False, widget=forms.CheckboxSelectMultiple, label="Report Types"
+    )
+    product_performance = forms.ChoiceField(
+        choices=[('', 'All Products'), ('top_selling', 'Top Selling Products'), ('low_selling', 'Lowest Selling Products')],
+        required=False, label="Product Performance"
     )
 
 @login_required
@@ -63,11 +67,11 @@ def generate_pdf_report(request):
     styles = getSampleStyleSheet()
     
     # Custom styles
-    title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=18, spaceAfter=30, textColor=colors.HexColor('#1f2937'))
-    heading_style = ParagraphStyle('CustomHeading', parent=styles['Heading2'], fontSize=14, spaceAfter=12, spaceBefore=12, textColor=colors.HexColor('#374151'))
+    title_style = ParagraphStyle('CustomTitle', parent=styles['Title'], fontSize=18, spaceAfter=30, textColor=colors.HexColor('#1f2937'), alignment=1)
+    heading_style = ParagraphStyle('CustomHeading', parent=styles['Heading2'], fontSize=14, spaceAfter=12, spaceBefore=12, textColor=colors.HexColor('#374151'), alignment=0)
     subheading_style = ParagraphStyle('CustomSubHeading', parent=styles['Heading3'], fontSize=12, spaceAfter=6, textColor=colors.HexColor('#4b5563'))
     normal_style = styles['BodyText']
-    small_style = ParagraphStyle('SmallText', parent=styles['BodyText'], fontSize=8)
+    small_style = ParagraphStyle('SmallText', parent=styles['BodyText'], fontSize=8, alignment=1)
 
     # Header with logo
     logo_path = os.path.join(getattr(settings, 'STATIC_ROOT', ''), 'img', 'logo.png')
@@ -77,9 +81,15 @@ def generate_pdf_report(request):
     elements.append(Paragraph("EATNEAR-BY ANALYTICS DASHBOARD REPORT", title_style))
     elements.append(Paragraph(f"Generated on: {localtime(now()).strftime('%Y-%m-%d %H:%M')}", normal_style))
     
-    # Display applied filters
+    # Get filter parameters from request
     form = AnalyticsFilterForm(request.GET)
+    filters_applied = False
+    report_types = []
+    product_performance = None
+    user_type = None
+    
     if form.is_valid():
+        filters_applied = True
         date_start = form.cleaned_data.get('date_start')
         date_end = form.cleaned_data.get('date_end')
         date_range = form.cleaned_data.get('date_range')
@@ -88,8 +98,9 @@ def generate_pdf_report(request):
         max_sales = form.cleaned_data.get('max_sales')
         query = form.cleaned_data.get('query')
         report_types = form.cleaned_data.get('report_type', [])
-        
-        filter_text = "Filters Applied: "
+        product_performance = form.cleaned_data.get('product_performance')
+
+        # Display applied filters
         filters = []
         if date_range and date_range != 'custom':
             filters.append(f"Period: {dict(form.fields['date_range'].choices)[date_range]}")
@@ -108,64 +119,104 @@ def generate_pdf_report(request):
         if report_types:
             type_names = [dict(form.fields['report_type'].choices).get(t, t) for t in report_types]
             filters.append(f"Report Types: {', '.join(type_names)}")
-        
-        filter_text += ", ".join(filters) if filters else "None"
-        elements.append(Paragraph(filter_text, normal_style))
+
+        if product_performance:
+            if product_performance == 'top_selling':
+                filters.append("Product Performance: Top Selling Products")
+            elif product_performance == 'low_selling':
+                filters.append("Product Performance: Lowest Selling Products")
+
+        if filters:
+            elements.append(Paragraph("FILTERS APPLIED", subheading_style))
+            for filter_item in filters:
+                elements.append(Paragraph(f"• {filter_item}", normal_style))
+            elements.append(Spacer(1, 0.1 * inch))
+        else:
+            elements.append(Paragraph("FILTERS APPLIED: None", subheading_style))
+            elements.append(Spacer(1, 0.1 * inch))
+    else:
+        # Default to all report types if no filters
+        report_types = ['sales', 'users', 'inventory', 'staff', 'customer']
+        elements.append(Paragraph("FILTERS APPLIED: None (Showing all data)", subheading_style))
+        elements.append(Spacer(1, 0.1 * inch))
     
     elements.append(Spacer(1, 0.25 * inch))
 
-    report_data = get_enhanced_report_data(form.cleaned_data if form.is_valid() else {})
-
-    # Executive Summary
-    elements.append(Paragraph("EXECUTIVE SUMMARY", heading_style))
-    summary = report_data['summary']
-    summary_data = [
-        ["Metric", "Value", "Comparison", "Trend"],
-        ["Total Revenue", f"K{summary['total_revenue']:,.2f}", f"{summary['revenue_growth']}% vs previous", "📈" if summary['revenue_growth'] > 0 else "📉"],
-        ["Total Orders", f"{summary['total_orders']:,}", f"{summary['orders_growth']}% vs previous", "📈" if summary['orders_growth'] > 0 else "📉"],
-        ["Average Order Value", f"K{summary['avg_order_value']:,.2f}", f"{summary['aov_growth']}% vs previous", "📈" if summary['aov_growth'] > 0 else "📉"],
-        ["New Customers", f"{summary['new_customers']:,}", f"{summary['customer_growth']}% vs previous", "📈" if summary['customer_growth'] > 0 else "📉"],
-        ["Customer Satisfaction", f"{summary['avg_rating']:.1f}/5", "Based on reviews", "⭐" * int(round(summary['avg_rating']))],
-    ]
-    
-    summary_table = Table(summary_data, colWidths=[2*inch, 1.5*inch, 2*inch, 0.5*inch])
-    summary_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f59e0b')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 9),
-        ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#fffbeb')]),
-    ]))
-    elements.append(summary_table)
-    elements.append(Spacer(1, 0.5 * inch))
-
-    # Sales Chart
-    if report_data['charts'].get('sales_trend'):
-        elements.append(Paragraph("SALES TREND", heading_style))
-        drawing = Drawing(400, 200)
-        bc = VerticalBarChart()
-        bc.x = 50
-        bc.y = 50
-        bc.height = 125
-        bc.width = 300
-        bc.data = [report_data['charts']['sales_trend']['values']]
-        bc.strokeColor = colors.white
-        bc.valueAxis.valueMin = 0
-        bc.valueAxis.valueMax = max(report_data['charts']['sales_trend']['values']) * 1.1 if report_data['charts']['sales_trend']['values'] else 100
-        bc.categoryAxis.categoryNames = report_data['charts']['sales_trend']['labels']
-        bc.bars[0].fillColor = colors.HexColor('#f59e0b')
-        drawing.add(bc)
-        elements.append(drawing)
-        elements.append(Spacer(1, 0.25 * inch))
+    # Get filtered report data based on request parameters
+    filter_params = {}
+    if filters_applied:
+        filter_params = form.cleaned_data
     else:
-        elements.append(Paragraph("SALES TREND: No data available", heading_style))
-        elements.append(Spacer(1, 0.25 * inch))
+        filter_params = {'report_type': report_types}
+    
+    report_data = get_enhanced_report_data(filter_params or {})
 
-    # Top Products
-    if report_data['detailed_reports'].get('top_products'):
-        elements.append(Paragraph("TOP SELLING PRODUCTS", heading_style))
+    # Check if we should exclude certain sections for staff users
+    exclude_executive_sections = False
+    if user_type == 'staff':
+        exclude_executive_sections = True
+
+    # Executive Summary - Only include if sales report type is selected and not staff user
+    if not exclude_executive_sections and ('sales' in report_types or not report_types):
+        elements.append(Paragraph("EXECUTIVE SUMMARY", heading_style))
+        summary = report_data['summary']
+        summary_data = [
+            ["Metric", "Value", "Comparison", "Trend"],
+            ["Total Revenue", f"K{summary['total_revenue']:,.2f}", f"{summary['revenue_growth']}% vs previous", "📈" if summary['revenue_growth'] > 0 else "📉"],
+            ["Total Orders", f"{summary['total_orders']:,}", f"{summary['orders_growth']}% vs previous", "📈" if summary['orders_growth'] > 0 else "📉"],
+            ["Average Order Value", f"K{summary['avg_order_value']:,.2f}", f"{summary['aov_growth']}% vs previous", "📈" if summary['aov_growth'] > 0 else "📉"],
+            ["New Customers", f"{summary['new_customers']:,}", f"{summary['customer_growth']}% vs previous", "📈" if summary['customer_growth'] > 0 else "📉"],
+            ["Customer Satisfaction", f"{summary['avg_rating']:.1f}/5", "Based on reviews", "⭐" * int(round(summary['avg_rating']))],
+        ]
+
+        summary_table = Table(summary_data, colWidths=[2.5*inch, 1.5*inch, 2.5*inch, 0.8*inch])
+        summary_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 10),
+            ('FONTSIZE', (0, 1), (-1, -1), 9),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
+            ('ALIGN', (0, 1), (0, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 8),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ('LEFTPADDING', (0, 0), (-1, -1), 6),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 6),
+        ]))
+        elements.append(summary_table)
+        elements.append(Spacer(1, 0.5 * inch))
+
+    # Sales Chart - Only include if sales report type is selected and not staff user
+    if not exclude_executive_sections and ('sales' in report_types or not report_types):
+        if report_data['charts'].get('sales_trend'):
+            elements.append(Paragraph("SALES TREND", heading_style))
+            drawing = Drawing(600, 200)
+            bc = VerticalBarChart()
+            bc.x = 50
+            bc.y = 50
+            bc.height = 125
+            bc.width = 500
+            bc.data = [report_data['charts']['sales_trend']['values']]
+            bc.strokeColor = colors.white
+            bc.valueAxis.valueMin = 0
+            bc.valueAxis.valueMax = max(report_data['charts']['sales_trend']['values']) * 1.1 if report_data['charts']['sales_trend']['values'] else 100
+            bc.categoryAxis.categoryNames = report_data['charts']['sales_trend']['labels']
+            bc.bars[0].fillColor = colors.HexColor('#f59e0b')
+            drawing.add(bc)
+            elements.append(drawing)
+            elements.append(Spacer(1, 0.25 * inch))
+
+    # Top Products - Only include if sales report type is selected
+    if ('sales' in report_types or not report_types) and report_data['detailed_reports'].get('top_products'):
+        product_perf_title = "TOP SELLING PRODUCTS"
+        if product_performance == 'low_selling':
+            product_perf_title = "LOWEST SELLING PRODUCTS"
+        elements.append(Paragraph(product_perf_title, heading_style))
         top_products_data = [["Product", "Category", "Units Sold", "Revenue", "% of Total"]]
         for product in report_data['detailed_reports']['top_products']:
             top_products_data.append([
@@ -176,50 +227,67 @@ def generate_pdf_report(request):
                 f"{product['percentage']:.1f}%"
             ])
         
-        top_products_table = Table(top_products_data, colWidths=[1.5*inch, 1*inch, 0.8*inch, 1*inch, 0.7*inch])
+        top_products_table = Table(top_products_data, colWidths=[2*inch, 1.2*inch, 0.9*inch, 1.2*inch, 0.8*inch])
         top_products_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#374151')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
             ('ALIGN', (2, 1), (-1, -1), 'RIGHT'),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f9fafb')]),
+            ('ALIGN', (0, 1), (1, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
         ]))
         elements.append(top_products_table)
         elements.append(Spacer(1, 0.25 * inch))
 
-    # Monthly Sales
-    elements.append(Paragraph("MONTHLY SALES PERFORMANCE", heading_style))
-    monthly_sales_data = [["Month", "Total Sales", "Transactions", "Avg. Order Value", "Growth"]]
-    for item in report_data['summary_reports']['monthly_sales']:
-        growth = item.get('growth')
-        growth_symbol = "▲" if growth and growth > 0 else "▼" if growth and growth < 0 else "➖"
-        # growth_color = colors.green if growth and growth > 0 else colors.red if growth and growth < 0 else colors.gray
-        monthly_sales_data.append([
-            item['month'],
-            f"K{item['total_sales']:,.2f}",
-            f"{item['transaction_count']:,}",
-            f"K{item.get('avg_order_value', 0):,.2f}",
-            f"{growth_symbol} {abs(growth):.1f}%" if growth is not None else "N/A"
-        ])
-    
-    monthly_sales_table = Table(monthly_sales_data, colWidths=[1.2*inch, 1*inch, 0.8*inch, 1*inch, 0.8*inch])
-    monthly_sales_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#374151')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 8),
-        ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f9fafb')]),
-        # ('TEXTCOLOR', (-1, 1), (-1, -1), growth_color),
-    ]))
-    elements.append(monthly_sales_table)
-    elements.append(Spacer(1, 0.25 * inch))
+    # Monthly Sales - Only include if sales report type is selected
+    if 'sales' in report_types or not report_types:
+        elements.append(Paragraph("MONTHLY SALES PERFORMANCE", heading_style))
+        monthly_sales_data = [["Month", "Total Sales", "Transactions", "Avg. Order Value", "Growth"]]
+        for item in report_data['summary_reports']['monthly_sales']:
+            growth = item.get('growth')
+            growth_symbol = "▲" if growth and growth > 0 else "▼" if growth and growth < 0 else "➖"
+            monthly_sales_data.append([
+                item['month'],
+                f"K{item['total_sales']:,.2f}",
+                f"{item['transaction_count']:,}",
+                f"K{item.get('avg_order_value', 0):,.2f}",
+                f"{growth_symbol} {abs(growth):.1f}%" if growth is not None else "N/A"
+            ])
+        
+        monthly_sales_table = Table(monthly_sales_data, colWidths=[1.5*inch, 1.2*inch, 1*inch, 1.3*inch, 1*inch])
+        monthly_sales_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
+            ('ALIGN', (0, 1), (0, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(monthly_sales_table)
+        elements.append(Spacer(1, 0.25 * inch))
 
-    # Staff Performance
-    if report_data['summary_reports'].get('staff_performance'):
+    # Staff Performance - Only include if staff report type is selected
+    if 'staff' in report_types and report_data['summary_reports'].get('staff_performance'):
         elements.append(Paragraph("STAFF PERFORMANCE", heading_style))
         staff_performance_data = [["Staff", "Total Deliveries", "Completed", "Completion Rate"]]
         for item in report_data['summary_reports']['staff_performance']:
@@ -230,45 +298,65 @@ def generate_pdf_report(request):
                 f"{item['completion_rate']:.1f}%"
             ])
         
-        staff_table = Table(staff_performance_data, colWidths=[1.5*inch, 1*inch, 1*inch, 1*inch])
+        staff_table = Table(staff_performance_data, colWidths=[2*inch, 1.2*inch, 1.2*inch, 1.2*inch])
         staff_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#374151')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
             ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f0f9ff')]),
+            ('ALIGN', (0, 1), (0, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
         ]))
         elements.append(staff_table)
         elements.append(Spacer(1, 0.25 * inch))
 
-    # Customer Satisfaction
-    elements.append(Paragraph("CUSTOMER SATISFACTION", heading_style))
-    customer_satisfaction = report_data['summary_reports'].get('customer_satisfaction', {})
-    customer_satisfaction_data = [
-        ["Metric", "Rating", "Trend"],
-        ["Overall Rating", f"{customer_satisfaction.get('average_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_rating', 0)))],
-        ["Food Rating", f"{customer_satisfaction.get('average_food_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_food_rating', 0)))],
-        ["Service Rating", f"{customer_satisfaction.get('average_service_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_service_rating', 0)))],
-        ["Ambiance Rating", f"{customer_satisfaction.get('average_ambiance_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_ambiance_rating', 0)))],
-    ]
-    
-    customer_satisfaction_table = Table(customer_satisfaction_data, colWidths=[1.5*inch, 1*inch, 2*inch])
-    customer_satisfaction_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#374151')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, -1), 9),
-        ('ALIGN', (1, 1), (1, -1), 'CENTER'),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f0fdf4')]),
-    ]))
-    elements.append(customer_satisfaction_table)
-    elements.append(Spacer(1, 0.25 * inch))
+    # Customer Satisfaction - Only include if customer report type is selected
+    if 'customer' in report_types or not report_types:
+        elements.append(Paragraph("CUSTOMER SATISFACTION", heading_style))
+        customer_satisfaction = report_data['summary_reports'].get('customer_satisfaction', {})
+        customer_satisfaction_data = [
+            ["Metric", "Rating", "Trend"],
+            ["Overall Rating", f"{customer_satisfaction.get('average_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_rating', 0)))],
+            ["Food Rating", f"{customer_satisfaction.get('average_food_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_food_rating', 0)))],
+            ["Service Rating", f"{customer_satisfaction.get('average_service_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_service_rating', 0)))],
+            ["Ambiance Rating", f"{customer_satisfaction.get('average_ambiance_rating', 0):.1f}/5", "⭐" * int(round(customer_satisfaction.get('average_ambiance_rating', 0)))],
+        ]
+        
+        customer_satisfaction_table = Table(customer_satisfaction_data, colWidths=[2*inch, 1.2*inch, 2.5*inch])
+        customer_satisfaction_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (1, 1), (1, -1), 'CENTER'),
+            ('ALIGN', (0, 1), (0, -1), 'LEFT'),
+            ('ALIGN', (2, 1), (2, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(customer_satisfaction_table)
+        elements.append(Spacer(1, 0.25 * inch))
 
-    # Recent Reviews
-    if report_data['detailed_reports'].get('recent_reviews'):
+    # Recent Reviews - Only include if customer report type is selected
+    if 'customer' in report_types and report_data['detailed_reports'].get('recent_reviews'):
         elements.append(Paragraph("RECENT CUSTOMER REVIEWS", heading_style))
         for i, review in enumerate(report_data['detailed_reports']['recent_reviews'][:5]):
             review_text = f"\"{review['comment'][:100]}{'...' if len(review['comment']) > 100 else ''}\""
@@ -278,33 +366,202 @@ def generate_pdf_report(request):
             if i < len(report_data['detailed_reports']['recent_reviews'][:5]) - 1:
                 elements.append(Spacer(1, 0.1 * inch))
 
-    # High-Value Orders
-    if report_data['exception_reports'].get('high_value_orders'):
+    # High-Value Orders - Only include if sales report type is selected
+    if 'sales' in report_types and report_data['exception_reports'].get('high_value_orders'):
         elements.append(Paragraph("HIGH VALUE ORDERS (>K100)", heading_style))
         high_value_data = [["Transaction ID", "Customer", "Amount", "Date"]]
         for order in report_data['exception_reports']['high_value_orders']:
+            # Truncate long transaction IDs to fit better
+            transaction_id = order['transaction_id'] or ''
+            if len(transaction_id) > 25:
+                transaction_id = transaction_id[:22] + '...'
             high_value_data.append([
-                order['transaction_id'],
+                transaction_id,
                 order['user'],
                 f"K{order['total']:,.2f}",
                 order['created_at'].strftime('%Y-%m-%d')
             ])
-        
-        high_value_table = Table(high_value_data, colWidths=[1.5*inch, 1.5*inch, 1*inch, 1*inch])
+
+        high_value_table = Table(high_value_data, colWidths=[2.5*inch, 1.5*inch, 1.2*inch, 1.2*inch])
         high_value_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#374151')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
             ('ALIGN', (2, 1), (2, -1), 'RIGHT'),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f9fafb')]),
+            ('ALIGN', (0, 1), (1, -1), 'LEFT'),
+            ('ALIGN', (3, 1), (3, -1), 'CENTER'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
         ]))
         elements.append(high_value_table)
         elements.append(Spacer(1, 0.25 * inch))
 
-    # Low Inventory
-    if report_data['exception_reports'].get('low_inventory'):
+    # Recent Payments - Only include if sales report type is selected
+    if 'sales' in report_types and report_data['detailed_reports'].get('payments'):
+        elements.append(Paragraph("RECENT PAYMENTS", heading_style))
+        recent_payments_data = [["Transaction ID", "User", "Total", "Date", "Payment Method"]]
+        for payment in report_data['detailed_reports']['payments']:
+            # Truncate long transaction IDs
+            transaction_id = payment['transaction_id'] or ''
+            if len(transaction_id) > 20:
+                transaction_id = transaction_id[:17] + '...'
+            recent_payments_data.append([
+                transaction_id,
+                payment['user'],
+                f"K{payment['total']:,.2f}",
+                payment['created_at'].strftime('%Y-%m-%d'),
+                payment['payment_method']
+            ])
+
+        recent_payments_table = Table(recent_payments_data, colWidths=[2.2*inch, 1.3*inch, 1.2*inch, 1.2*inch, 1.5*inch])
+        recent_payments_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (2, 1), (2, -1), 'RIGHT'),
+            ('ALIGN', (0, 1), (1, -1), 'LEFT'),
+            ('ALIGN', (3, 1), (4, -1), 'CENTER'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(recent_payments_table)
+        elements.append(Spacer(1, 0.25 * inch))
+
+    # New Customers - Only include if users report type is selected
+    if 'users' in report_types and report_data['detailed_reports'].get('customers'):
+        elements.append(Paragraph("NEW CUSTOMERS", heading_style))
+        new_customers_data = [["Full Name", "Email", "Phone Number", "Order Count", "Total Spent"]]
+        for customer in report_data['detailed_reports']['customers']:
+            # Truncate long names and emails to fit better
+            full_name = customer['full_name'] or ''
+            if len(full_name) > 20:
+                full_name = full_name[:17] + '...'
+
+            email = customer['email'] or ''
+            if len(email) > 25:
+                email = email[:22] + '...'
+
+            phone = str(customer['phone_number'] or 'N/A')
+            if len(phone) > 12:
+                phone = phone[:9] + '...'
+
+            new_customers_data.append([
+                full_name,
+                email,
+                phone,
+                f"{customer['order_count']:,}",
+                f"K{customer['total_spent']:,.2f}"
+            ])
+
+        new_customers_table = Table(new_customers_data, colWidths=[1.8*inch, 2.2*inch, 1.3*inch, 1.2*inch, 1.2*inch])
+        new_customers_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (3, 1), (-1, -1), 'RIGHT'),
+            ('ALIGN', (0, 1), (2, -1), 'LEFT'),
+            ('ALIGN', (3, 1), (3, -1), 'CENTER'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(new_customers_table)
+        elements.append(Spacer(1, 0.25 * inch))
+
+    # Sales Trend - Only include if sales report type is selected
+    if 'sales' in report_types and report_data['trend_reports'].get('sales_trend'):
+        elements.append(Paragraph("SALES TREND", heading_style))
+        sales_trend_data = [["Month", "Total Sales", "Growth (%)"]]
+        for item in report_data['trend_reports']['sales_trend']:
+            growth_symbol = "▲" if item['growth'] > 0 else "▼" if item['growth'] < 0 else "➖"
+            sales_trend_data.append([
+                item['month'],
+                f"K{item['total_sales']:,.2f}",
+                f"{growth_symbol} {abs(item['growth']):.1f}%"
+            ])
+
+        sales_trend_table = Table(sales_trend_data, colWidths=[2.5*inch, 1.8*inch, 1.8*inch])
+        sales_trend_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (1, 1), (-1, -1), 'RIGHT'),
+            ('ALIGN', (0, 1), (0, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(sales_trend_table)
+        elements.append(Spacer(1, 0.25 * inch))
+
+    # Customer Acquisition Trend - Only include if users report type is selected
+    if 'users' in report_types and report_data['trend_reports'].get('customer_trend'):
+        elements.append(Paragraph("CUSTOMER ACQUISITION TREND", heading_style))
+        customer_trend_data = [["Month", "New Customers"]]
+        for item in report_data['trend_reports']['customer_trend']:
+            customer_trend_data.append([
+                item['month'],
+                f"{item['new_customers']:,}"
+            ])
+
+        customer_trend_table = Table(customer_trend_data, colWidths=[2.5*inch, 1.8*inch])
+        customer_trend_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('ALIGN', (1, 1), (1, -1), 'RIGHT'),
+            ('ALIGN', (0, 1), (0, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(customer_trend_table)
+        elements.append(Spacer(1, 0.25 * inch))
+
+    # Low Inventory - Only include if inventory report type is selected
+    if 'inventory' in report_types and report_data['exception_reports'].get('low_inventory'):
         elements.append(Paragraph("LOW INVENTORY ITEMS (<10)", heading_style))
         low_inventory_data = [["Product ID", "Name", "Category", "Quantity"]]
         for item in report_data['exception_reports']['low_inventory']:
@@ -314,16 +571,25 @@ def generate_pdf_report(request):
                 item['category'],
                 f"{item['quantity']:,}"
             ])
-        
-        low_inventory_table = Table(low_inventory_data, colWidths=[1*inch, 1.5*inch, 1*inch, 0.8*inch])
+
+        low_inventory_table = Table(low_inventory_data, colWidths=[1.2*inch, 2*inch, 1.2*inch, 1*inch])
         low_inventory_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#374151')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#eab308')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('FONTSIZE', (0, 0), (-1, 0), 9),
+            ('FONTSIZE', (0, 1), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
             ('ALIGN', (3, 1), (3, -1), 'RIGHT'),
-            ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f9fafb')]),
+            ('ALIGN', (0, 1), (2, -1), 'LEFT'),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('BOX', (0, 0), (-1, -1), 2, colors.black),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#eff6ff'), colors.white]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#bfdbfe')),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
         ]))
         elements.append(low_inventory_table)
         elements.append(Spacer(1, 0.25 * inch))
@@ -343,6 +609,51 @@ def generate_pdf_report(request):
     buffer.close()
     return response
 
+@login_required
+def reports(request):
+    if not request.user.is_superuser:
+        return render(request, 'superadmin/permission_denied.html', status=403)
+    
+    form = AnalyticsFilterForm(request.GET or {
+        'date_range': 'this_year',
+        'report_type': ['sales', 'users', 'inventory', 'staff', 'customer'],
+        'product_performance': 'top_selling'
+    })
+    
+    context = {'form': form}
+    if form.is_valid():
+        context.update(get_enhanced_report_data(form.cleaned_data))
+    else:
+        context.update(get_enhanced_report_data())
+    
+    # Pagination for payments
+    payments = context['detailed_reports'].get('payments', [])
+    paginator = Paginator(payments, 10)
+    page_number = request.GET.get('page')
+    context['detailed_reports']['payments_page'] = paginator.get_page(page_number)
+    
+    # Chart data
+    if context['charts'].get('sales_trend'):
+        context['charts']['sales_trend_json'] = json.dumps(context['charts']['sales_trend'])
+    
+    return render(request, 'superadmin/reports/reports.html', context)
+
+@login_required
+def reports_data(request):
+    if not request.user.is_superuser:
+        return JsonResponse({'error': 'Unauthorized'}, status=401)
+    
+    form = AnalyticsFilterForm(request.GET)
+    if form.is_valid():
+        data = get_enhanced_report_data(form.cleaned_data)
+    else:
+        data = get_enhanced_report_data()
+    
+    return JsonResponse({
+        'sales_trend': data.get('charts', {}).get('sales_trend', {}),
+        'summary': data.get('summary', {})
+    })
+
 def get_enhanced_report_data(filters=None):
     if filters is None:
         filters = {}
@@ -350,7 +661,7 @@ def get_enhanced_report_data(filters=None):
     # Determine date range
     date_range = filters.get('date_range', 'this_month')
     today = now().date()
-    
+
     if date_range == 'today':
         date_start = today
         date_end = today
@@ -381,7 +692,7 @@ def get_enhanced_report_data(filters=None):
     else:
         date_start = filters.get('date_start') or today.replace(day=1)
         date_end = filters.get('date_end') or today
-    
+
     # Comparison period
     period_days = (date_end - date_start).days + 1 if date_start and date_end else 30
     comp_date_start = date_start - timedelta(days=period_days) if date_start else None
@@ -393,6 +704,7 @@ def get_enhanced_report_data(filters=None):
     max_sales = filters.get('max_sales')
     query = filters.get('query')
     report_types = filters.get('report_type', ['sales', 'users', 'inventory', 'staff', 'customer'])
+    product_performance = filters.get('product_performance')
 
     data = {
         'summary': {},
@@ -408,19 +720,42 @@ def get_enhanced_report_data(filters=None):
     user_qs = User.objects.all()
     review_qs = Review.objects.select_related('post__author')
     delivery_qs = DeliveryInfo.objects.all()
-    
+    post_qs = Post.objects.select_related('author', 'restaurant')
+    restaurant_qs = Restaurant.objects.all()
+    challenge_qs = Challenge.objects.all()
+    recipe_qs = Recipe.objects.select_related('author')
+    question_qs = RestaurantQuestion.objects.select_related('user', 'restaurant')
+    comment_qs = Comment.objects.select_related('author', 'post')
+    category_qs = Category.objects.all()
+    staff_service_qs = StaffServiceArea.objects.select_related('staff')
+    notification_qs = Notification.objects.select_related('recipient', 'related_delivery')
+
     if date_start:
         payment_qs = payment_qs.filter(created_at__date__gte=date_start)
         user_qs = user_qs.filter(date_joined__date__gte=date_start)
         review_qs = review_qs.filter(created_at__date__gte=date_start)
         delivery_qs = delivery_qs.filter(created_at__date__gte=date_start)
-    
+        post_qs = post_qs.filter(created_at__date__gte=date_start)
+        restaurant_qs = restaurant_qs.filter(created_at__date__gte=date_start)
+        challenge_qs = challenge_qs.filter(created_at__date__gte=date_start)
+        recipe_qs = recipe_qs.filter(created_at__date__gte=date_start)
+        question_qs = question_qs.filter(created_at__date__gte=date_start)
+        comment_qs = comment_qs.filter(created_at__date__gte=date_start)
+        notification_qs = notification_qs.filter(created_at__date__gte=date_start)
+
     if date_end:
         payment_qs = payment_qs.filter(created_at__date__lte=date_end)
         user_qs = user_qs.filter(date_joined__date__lte=date_end)
         review_qs = review_qs.filter(created_at__date__lte=date_end)
         delivery_qs = delivery_qs.filter(created_at__date__lte=date_end)
-    
+        post_qs = post_qs.filter(created_at__date__lte=date_end)
+        restaurant_qs = restaurant_qs.filter(created_at__date__lte=date_end)
+        challenge_qs = challenge_qs.filter(created_at__date__lte=date_end)
+        recipe_qs = recipe_qs.filter(created_at__date__lte=date_end)
+        question_qs = question_qs.filter(created_at__date__lte=date_end)
+        comment_qs = comment_qs.filter(created_at__date__lte=date_end)
+        notification_qs = notification_qs.filter(created_at__date__lte=date_end)
+
     # Comparison querysets
     comp_payment_qs = PaymentHistory.objects.all()
     comp_user_qs = User.objects.all()
@@ -430,22 +765,22 @@ def get_enhanced_report_data(filters=None):
     if comp_date_end:
         comp_payment_qs = comp_payment_qs.filter(created_at__date__lte=comp_date_end)
         comp_user_qs = comp_user_qs.filter(date_joined__date__lte=comp_date_end)
-    
+
     # Apply additional filters
     if user_type:
         payment_qs = payment_qs.filter(user__user_type=user_type)
         user_qs = user_qs.filter(user_type=user_type)
         comp_payment_qs = comp_payment_qs.filter(user__user_type=user_type)
         comp_user_qs = comp_user_qs.filter(user_type=user_type)
-    
+
     if min_sales:
         payment_qs = payment_qs.filter(total__gte=min_sales)
         comp_payment_qs = comp_payment_qs.filter(total__gte=min_sales)
-    
+
     if max_sales:
         payment_qs = payment_qs.filter(total__lte=max_sales)
         comp_payment_qs = comp_payment_qs.filter(total__lte=max_sales)
-    
+
     if query:
         payment_qs = payment_qs.filter(
             Q(transaction_id__icontains=query) |
@@ -464,6 +799,37 @@ def get_enhanced_report_data(filters=None):
             Q(post__title__icontains=query) |
             Q(post__content__icontains=query)
         )
+        post_qs = post_qs.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(author__username__icontains=query)
+        )
+        restaurant_qs = restaurant_qs.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query) |
+            Q(city__icontains=query)
+        )
+        challenge_qs = challenge_qs.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
+        recipe_qs = recipe_qs.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(author__username__icontains=query)
+        )
+        question_qs = question_qs.filter(
+            Q(question__icontains=query) |
+            Q(user__username__icontains=query)
+        )
+        comment_qs = comment_qs.filter(
+            Q(content__icontains=query) |
+            Q(author__username__icontains=query)
+        )
+        category_qs = category_qs.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
 
     # Summary metrics
     total_revenue = payment_qs.aggregate(Sum('total'))['total__sum'] or 0
@@ -471,15 +837,54 @@ def get_enhanced_report_data(filters=None):
     avg_order_value = total_revenue / total_orders if total_orders > 0 else 0
     new_customers = user_qs.filter(user_type='customer').count()
     avg_rating = review_qs.aggregate(Avg('rating'))['rating__avg'] or 0
-    
+
+    # Additional comprehensive metrics
+    total_users = user_qs.count()
+    total_staff = user_qs.filter(user_type='staff').count()
+    total_admins = user_qs.filter(user_type='admin').count()
+    total_restaurants = restaurant_qs.count()
+    total_posts = post_qs.count()
+    total_reviews = review_qs.count()
+    total_challenges = challenge_qs.count()
+    total_recipes = recipe_qs.count()
+    total_questions = question_qs.count()
+    total_comments = comment_qs.count()
+    total_categories = category_qs.count()
+    total_notifications = notification_qs.count()
+
+    # Community engagement metrics
+    posts_per_user = total_posts / total_users if total_users > 0 else 0
+    reviews_per_restaurant = total_reviews / total_restaurants if total_restaurants > 0 else 0
+    comments_per_post = total_comments / total_posts if total_posts > 0 else 0
+    questions_per_restaurant = total_questions / total_restaurants if total_restaurants > 0 else 0
+
+    # Content quality metrics
+    avg_post_length = post_qs.aggregate(avg_length=Avg('content'))['avg_length'] or 0
+    avg_recipe_servings = recipe_qs.aggregate(Avg('servings'))['servings__avg'] or 0
+    avg_recipe_prep_time = recipe_qs.aggregate(Avg('prep_time'))['prep_time__avg'] or 0
+    avg_recipe_cook_time = recipe_qs.aggregate(Avg('cook_time'))['cook_time__avg'] or 0
+
+    # Staff performance metrics
+    total_staff_assignments = StaffAssignment.objects.filter(
+        delivery__created_at__date__gte=date_start if date_start else now().date() - timedelta(days=30),
+        delivery__created_at__date__lte=date_end if date_end else now().date()
+    ).count()
+    active_staff = user_qs.filter(user_type='staff').count()
+    assignments_per_staff = total_staff_assignments / active_staff if active_staff > 0 else 0
+
+    # System health metrics
+    unread_notifications = notification_qs.filter(is_read=False).count()
+    unanswered_questions = question_qs.filter(is_answered=False).count()
+    unverified_restaurants = restaurant_qs.filter(is_verified=False).count()
+
     comp_total_revenue = comp_payment_qs.aggregate(Sum('total'))['total__sum'] or 0
     comp_total_orders = comp_payment_qs.count()
     comp_avg_order_value = comp_total_revenue / comp_total_orders if comp_total_orders > 0 else 0
     comp_new_customers = comp_user_qs.filter(user_type='customer').count()
-    
-    revenue_growth = ((total_revenue - comp_total_revenue) / comp_total_revenue * 100) if comp_total_revenue > 0 else 0
+
+    revenue_growth = ((float(total_revenue) - float(comp_total_revenue)) / float(comp_total_revenue) * 100) if comp_total_revenue > 0 else 0
     orders_growth = ((total_orders - comp_total_orders) / comp_total_orders * 100) if comp_total_orders > 0 else 0
-    aov_growth = ((avg_order_value - comp_avg_order_value) / comp_avg_order_value * 100) if comp_avg_order_value > 0 else 0
+    aov_growth = ((float(avg_order_value) - float(comp_avg_order_value)) / float(comp_avg_order_value) * 100) if comp_avg_order_value > 0 else 0
     customer_growth = ((new_customers - comp_new_customers) / comp_new_customers * 100) if comp_new_customers > 0 else 0
 
     data['summary'] = {
@@ -496,6 +901,37 @@ def get_enhanced_report_data(filters=None):
         'period_end': date_end,
         'comparison_start': comp_date_start,
         'comparison_end': comp_date_end,
+        # System-wide metrics
+        'total_users': total_users,
+        'total_staff': total_staff,
+        'total_admins': total_admins,
+        'total_restaurants': total_restaurants,
+        'total_posts': total_posts,
+        'total_reviews': total_reviews,
+        'total_challenges': total_challenges,
+        'total_recipes': total_recipes,
+        'total_questions': total_questions,
+        'total_comments': total_comments,
+        'total_categories': total_categories,
+        'total_notifications': total_notifications,
+        # Engagement metrics
+        'posts_per_user': round(posts_per_user, 2),
+        'reviews_per_restaurant': round(reviews_per_restaurant, 2),
+        'comments_per_post': round(comments_per_post, 2),
+        'questions_per_restaurant': round(questions_per_restaurant, 2),
+        # Content quality metrics
+        'avg_post_length': round(avg_post_length, 0),
+        'avg_recipe_servings': round(avg_recipe_servings, 1),
+        'avg_recipe_prep_time': round(avg_recipe_prep_time, 1),
+        'avg_recipe_cook_time': round(avg_recipe_cook_time, 1),
+        # Staff metrics
+        'total_staff_assignments': total_staff_assignments,
+        'active_staff': active_staff,
+        'assignments_per_staff': round(assignments_per_staff, 1),
+        # System health
+        'unread_notifications': unread_notifications,
+        'unanswered_questions': unanswered_questions,
+        'unverified_restaurants': unverified_restaurants,
     }
 
     # Monthly Sales
@@ -506,7 +942,7 @@ def get_enhanced_report_data(filters=None):
         transaction_count=Count('id'),
         avg_order_value=Avg('total')
     ).order_by('month')
-    
+
     monthly_sales_list = []
     prev_sales = None
     for item in monthly_sales:
@@ -522,9 +958,9 @@ def get_enhanced_report_data(filters=None):
             'growth': round(growth, 1) if growth is not None else None
         })
         prev_sales = current_sales
-    
+
     data['summary_reports']['monthly_sales'] = monthly_sales_list
-    
+
     # Sales trend for charts
     if monthly_sales_list and 'sales' in report_types:
         data['charts']['sales_trend'] = {
@@ -541,10 +977,10 @@ def get_enhanced_report_data(filters=None):
             total_deliveries=Count('id'),
             completed_deliveries=Count('id', filter=Q(delivery__delivery_status='completed'))
         )
-        
+
         if query:
             staff_performance = staff_performance.filter(staff__username__icontains=query)
-        
+
         data['summary_reports']['staff_performance'] = [
             {
                 'username': item['staff__username'],
@@ -578,16 +1014,16 @@ def get_enhanced_report_data(filters=None):
             } for r in review_qs.order_by('-created_at')[:10]
         ]
 
-    # Top Selling Products
+    # Top Selling Products and Lowest Selling Products
     if 'sales' in report_types:
         cart_ids = payment_qs.values_list('cart_id', flat=True)
         product_sales = defaultdict(lambda: {'units_sold': 0, 'revenue': 0})
-        
+
         for cart_id in cart_ids:
             try:
                 cart = Cart.objects.get(id=cart_id)
                 items = CartItem.objects.filter(cart=cart).select_related('fast_food', 'food', 'drink')
-                
+
                 for item in items:
                     if item.fast_food:
                         product = item.fast_food
@@ -606,7 +1042,7 @@ def get_enhanced_report_data(filters=None):
                         product_price = product.price
                     else:
                         continue
-                    
+
                     key = f"{product_name}|{product_category}"
                     product_sales[key]['units_sold'] += item.quantity
                     product_sales[key]['revenue'] += item.quantity * product_price
@@ -614,9 +1050,9 @@ def get_enhanced_report_data(filters=None):
                     product_sales[key]['category'] = product_category
             except Cart.DoesNotExist:
                 continue
-        
+
         total_revenue_for_products = sum(item['revenue'] for item in product_sales.values())
-        top_products = [
+        all_products = [
             {
                 'name': values['name'],
                 'category': values['category'],
@@ -625,7 +1061,14 @@ def get_enhanced_report_data(filters=None):
                 'percentage': round((values['revenue'] / total_revenue_for_products * 100), 1) if total_revenue_for_products > 0 else 0
             } for key, values in product_sales.items()
         ]
-        data['detailed_reports']['top_products'] = sorted(top_products, key=lambda x: x['revenue'], reverse=True)[:10]
+
+        # Filter based on product_performance
+        if product_performance == 'top_selling':
+            data['detailed_reports']['top_products'] = sorted(all_products, key=lambda x: x['revenue'], reverse=True)[:10]
+        elif product_performance == 'low_selling':
+            data['detailed_reports']['top_products'] = sorted(all_products, key=lambda x: x['revenue'])[:10]
+        else:
+            data['detailed_reports']['top_products'] = sorted(all_products, key=lambda x: x['revenue'], reverse=True)[:10]
 
     # High-value Orders
     if 'sales' in report_types:
@@ -715,48 +1158,4 @@ def get_enhanced_report_data(filters=None):
         ]
 
     return data
-
-@login_required
-def reports(request):
-    if not request.user.is_superuser:
-        return render(request, 'superadmin/permission_denied.html', status=403)
-    
-    form = AnalyticsFilterForm(request.GET or {
-        'date_range': 'this_month',
-        'report_type': ['sales', 'users', 'inventory', 'staff', 'customer']
-    })
-    
-    context = {'form': form}
-    if form.is_valid():
-        context.update(get_enhanced_report_data(form.cleaned_data))
-    else:
-        context.update(get_enhanced_report_data())
-    
-    # Pagination for payments
-    payments = context['detailed_reports'].get('payments', [])
-    paginator = Paginator(payments, 10)
-    page_number = request.GET.get('page')
-    context['detailed_reports']['payments_page'] = paginator.get_page(page_number)
-    
-    # Chart data
-    if context['charts'].get('sales_trend'):
-        context['charts']['sales_trend_json'] = json.dumps(context['charts']['sales_trend'])
-    
-    return render(request, 'superadmin/reports/reports.html', context)
-
-@login_required
-def reports_data(request):
-    if not request.user.is_superuser:
-        return JsonResponse({'error': 'Unauthorized'}, status=401)
-    
-    form = AnalyticsFilterForm(request.GET)
-    if form.is_valid():
-        data = get_enhanced_report_data(form.cleaned_data)
-    else:
-        data = get_enhanced_report_data()
-    
-    return JsonResponse({
-        'sales_trend': data.get('charts', {}).get('sales_trend', {}),
-        'summary': data.get('summary', {})
-    })
 
