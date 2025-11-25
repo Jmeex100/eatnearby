@@ -73,8 +73,15 @@
                         <td class="p-4">{{ product.category.name }}</td>
                         <td class="p-4">ZMW
                             <span style="color: red; font-weight: bold;"> {{ product.price }}</span>
-                            </td>
-                        <td class="p-4">{{ product.quantity }}</td>
+                        </td>
+                        <td class="p-4">
+                            <span class="{% if product.quantity < 10 %}text-red-600 dark:text-red-400 font-bold{% else %}text-gray-800 dark:text-gray-200{% endif %}">
+                                {{ product.quantity }}
+                                {% if product.quantity < 10 %}
+                                <span class="text-xs ml-1">(Low Stock)</span>
+                                {% endif %}
+                            </span>
+                        </td>
                         <td class="p-4">{{ product.created_at|date:"F d, Y" }}</td>
                         <td class="p-4 flex space-x-2">
                             <a href="{% url 'superadmin:product_detail' product.product_id %}" 
