@@ -12,7 +12,7 @@ ALLOWED_HOSTS = [
     'localhost',       # Localhost
     '192.168.35.40',      # Your local IP address
     '0.0.0.0',         # For binding to all network interfaces (optional)
-    '192.168.43.172',   # GUEST
+    '10.0.23.179',   # GUEST
   'd31c-45-215-255-168.ngrok-free.app',  # Your ngrok domain
     '10.0.23.179',
     '192.168.1.189',# SCHOOL WIFI
@@ -222,5 +222,5 @@ GEMINI_KEYS = [
    
     # "AIzaSyAW0hNz5fVDORqfL21BLw8PSwDdqUesLP8",
     # "AIzaSyDsDJnTy7ZWGaCtLd84mt6b4mDu4tfNr34",
-     "AIzaSyC3z1QK44KpUe4S3bPFzicty8sK5LWxGvk",
+     "AIzaSyCKqIBWGpTGX4yY5JU6JSKwwjYj05au6SQ",
 ]

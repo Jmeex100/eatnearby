@@ -22,20 +22,30 @@
                             <h3 class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ item.get_product.name }}</h3>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">K{{ item.get_product.price|floatformat:2 }}</p>
                             
+                            <!-- Stock Information -->
+                            <div class="mt-1">
+                                <span class="text-xs text-gray-500 dark:text-gray-400">
+                                    {{ item.get_product.quantity }} available
+                                </span>
+                            </div>
+                            
                             <!-- Quantity Controls -->
                             <div class="mt-2 flex items-center">
                                 <button class="quantity-btn w-6 h-6 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 
-                                            flex items-center justify-center transition-colors duration-200" 
-                                        data-action="decrement" data-item-id="{{ item.id }}">
+                                            flex items-center justify-center transition-colors duration-200 {% if item.quantity <= 1 %}opacity-50 cursor-not-allowed{% endif %}" 
+                                        data-action="decrement" data-item-id="{{ item.id }}"
+                                        {% if item.quantity <= 1 %}disabled{% endif %}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                                     </svg>
                                 </button>
                                 <input type="number" class="quantity w-10 text-center border-0 bg-transparent text-sm font-medium text-gray-900 dark:text-white mx-1" 
-                                       value="{{ item.quantity }}" min="1" data-item-id="{{ item.id }}">
+                                       value="{{ item.quantity }}" min="1" max="{{ item.get_product.quantity }}" 
+                                       data-item-id="{{ item.id }}" data-max-quantity="{{ item.get_product.quantity }}">
                                 <button class="quantity-btn w-6 h-6 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 
-                                            flex items-center justify-center transition-colors duration-200" 
-                                        data-action="increment" data-item-id="{{ item.id }}">
+                                            flex items-center justify-center transition-colors duration-200 {% if item.quantity >= item.get_product.quantity %}opacity-50 cursor-not-allowed{% endif %}" 
+                                        data-action="increment" data-item-id="{{ item.id }}"
+                                        {% if item.quantity >= item.get_product.quantity %}disabled{% endif %}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
@@ -111,32 +121,48 @@ $(document).ready(function() {
                 quantity: quantity
             }),
             contentType: 'application/json',
-            headers: {'X-CSRFToken': '{{ csrf_token }}'},
+            headers: {'X-CSRFToken': '{{ csrf_token }}', 'X-Requested-With': 'XMLHttpRequest'},
             success: function(response) {
                 if (response.success) {
                     if (quantity <= 0) {
                         $(`.cart-item[data-item-id="${itemId}"]`).remove();
                     } else {
                         $(`.cart-item[data-item-id="${itemId}"] .subtotal`).text('K' + response.subtotal.toFixed(2));
+                        $(`.cart-item[data-item-id="${itemId}"] .quantity`).val(quantity);
+                        
+                        // Update button states
+                        const $decrementBtn = $(`.cart-item[data-item-id="${itemId}"] [data-action="decrement"]`);
+                        const $incrementBtn = $(`.cart-item[data-item-id="${itemId}"] [data-action="increment"]`);
+                        const maxQuantity = $(`.cart-item[data-item-id="${itemId}"] .quantity`).data('max-quantity');
+                        
+                        // Update decrement button
+                        if (quantity <= 1) {
+                            $decrementBtn.addClass('opacity-50 cursor-not-allowed').prop('disabled', true);
+                        } else {
+                            $decrementBtn.removeClass('opacity-50 cursor-not-allowed').prop('disabled', false);
+                        }
+                        
+                        // Update increment button
+                        if (quantity >= maxQuantity) {
+                            $incrementBtn.addClass('opacity-50 cursor-not-allowed').prop('disabled', true);
+                        } else {
+                            $incrementBtn.removeClass('opacity-50 cursor-not-allowed').prop('disabled', false);
+                        }
                     }
                     $('#cart-total').text('K' + response.cart_total.toFixed(2));
                     
                     // If cart is empty, show empty cart message
                     if (response.cart_count === 0) {
-                        $('.bg-white.dark\\:bg-gray-900').html(`
-                            <div class="p-8 text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Your cart is empty</p>
-                                <a href="{% url 'orders' %}" 
-                                   class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 dark:bg-blue-400 hover:bg-blue-700 dark:hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-                                    Start Shopping
-                                </a>
-                            </div>
-                        `);
+                        location.reload();
                     }
+                } else {
+                    alert(response.error || 'Failed to update cart');
+                    location.reload();
                 }
+            },
+            error: function() {
+                alert('Failed to update cart. Please try again.');
+                location.reload();
             }
         });
     }
@@ -147,9 +173,15 @@ $(document).ready(function() {
         const action = $(this).data('action');
         const $quantityInput = $(`.quantity[data-item-id="${itemId}"]`);
         let quantity = parseInt($quantityInput.val());
+        const maxQuantity = $quantityInput.data('max-quantity');
 
         if (action === 'increment') {
-            quantity += 1;
+            if (quantity < maxQuantity) {
+                quantity += 1;
+            } else {
+                alert(`Only ${maxQuantity} items available in stock`);
+                return;
+            }
         } else if (action === 'decrement' && quantity > 1) {
             quantity -= 1;
         }
@@ -162,11 +194,20 @@ $(document).ready(function() {
     $('.quantity').change(function() {
         const itemId = $(this).data('item-id');
         let quantity = parseInt($(this).val());
-        if (quantity >= 1) {
-            updateCart(itemId, quantity);
-        } else {
-            $(this).val(1); // Reset to minimum if invalid
+        const maxQuantity = $(this).data('max-quantity');
+        
+        if (isNaN(quantity) || quantity < 1) {
+            $(this).val(1);
+            quantity = 1;
         }
+        
+        if (quantity > maxQuantity) {
+            alert(`Only ${maxQuantity} items available in stock`);
+            $(this).val(maxQuantity);
+            quantity = maxQuantity;
+        }
+        
+        updateCart(itemId, quantity);
     });
 });
 </script>

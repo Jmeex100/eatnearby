@@ -451,24 +451,65 @@ def reorder(request, payment_id: int):
     if request.method != 'POST':
         return redirect('payments:order_history')
 
-    payment_history = get_object_or_404(PaymentHistory, id=payment_id, user=request.user)
-    cart, _ = Cart.objects.get_or_create(user=request.user)
-    cart.cartitem_set.all().delete()
+    try:
+        payment_history = get_object_or_404(PaymentHistory, id=payment_id, user=request.user)
+        cart, _ = Cart.objects.get_or_create(user=request.user)
+        cart.cartitem_set.all().delete()
 
-    for item in payment_history.items:
-        for model in [FastFood, Food, Drink]:
-            try:
-                product = model.objects.get(name=item['name'])
-                model_field = 'fast_food' if model.__name__ == 'FastFood' else model.__name__.lower()
-                CartItem.objects.create(cart=cart, **{model_field: product}, quantity=item['quantity'], quality='standard')
-                break
-            except model.DoesNotExist:
-                continue
+        items_added = 0
+        items_failed = 0
+
+        for item in payment_history.items:
+            product = None
+            model_used = None
+            
+            # Try to find the product in each model type
+            for model in [FastFood, Food, Drink]:
+                try:
+                    # Get the first matching product
+                    product = model.objects.filter(name=item['name']).first()
+                    if product:
+                        model_used = model
+                        break
+                except Exception as e:
+                    logger.warning(f"Error querying {model.__name__} for '{item['name']}': {str(e)}")
+                    continue
+            
+            if product and model_used:
+                try:
+                    model_field = 'fast_food' if model_used.__name__ == 'FastFood' else model_used.__name__.lower()
+                    CartItem.objects.create(
+                        cart=cart, 
+                        **{model_field: product}, 
+                        quantity=item['quantity'], 
+                        quality='standard'
+                    )
+                    items_added += 1
+                except Exception as e:
+                    logger.error(f"Error adding {item['name']} to cart: {str(e)}")
+                    items_failed += 1
+            else:
+                items_failed += 1
+                logger.warning(f"Product '{item['name']}' not found in any model")
+
+        # User-friendly success message
+        if items_added > 0:
+            if items_failed == 0:
+                messages.success(request, f"All {items_added} items from your previous order have been added to your cart!")
+            else:
+                messages.warning(
+                    request, 
+                    f"{items_added} items added to cart. {items_failed} items were unavailable."
+                )
         else:
-            messages.warning(request, f"Product '{item['name']}' is no longer available.")
+            messages.error(request, "No items could be added to your cart. Please contact support.")
 
-    messages.success(request, "Order has been added to your cart!")
-    return redirect('cart:cart_view')
+        return redirect('cart:cart_view')
+
+    except Exception as e:
+        logger.error(f"Error in reorder for payment {payment_id}: {str(e)}")
+        messages.error(request, "Sorry, we couldn't process your reorder. Please try again.")
+        return redirect('payments:order_history')
 
 @csrf_exempt
 def mtn_callback(request):

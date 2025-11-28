@@ -96177,3 +96177,3016 @@ Pending deliveries for user 1: 0
 History notifications for user 1: 0
 Availability notifications for user 1: 0
 Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /favicon.ico
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+🤖 Chatbot incoming message: helo (User: Ms. admin manage (Admin))
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 6.426769493s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 6
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 3.771376973s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 3
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 1.123258449s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 1
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 33.917930019s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 33
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 31.191848552s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 31
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 28.608277605s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 28
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Error loading chat history: Expecting value: line 1 column 1 (char 0)
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 4.781709028s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 4
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 2.072686911s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 2
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 59.411924177s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 59
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+/home/surecode/Documents/Django/GitHub/eatnearby/core/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/core/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 400 API key expired. Please renew the API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key expired. Please renew the API key."
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 400 API key expired. Please renew the API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key expired. Please renew the API key."
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 400 API Key not found. Please pass a valid API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API Key not found. Please pass a valid API key."
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': None
+...
+🤖 Chatbot incoming message: how are you (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'how are you': I am doing well, thank you for asking! How can I help you with food-related information today?
+...
+🤖 Chatbot incoming message: hello so what information  on this sytem (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello so what information  on this sytem': I can help you with food-related information! What are you interested in? I can provide details abou...
+🤖 Chatbot incoming message: challenges (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'challenges': We have two active challenges: "7days active challenge" which offers a discount for ordering through...
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+🤖 Chatbot incoming message: hey (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 48.451398848s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 48
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 45.847557962s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 45
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 43.321665115s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 43
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 49.505640108s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 49
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 2): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 46.058987818s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 46
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Gemini API error (attempt 3): 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 43.224851606s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 43
+}
+]
+⚠️ API key issue detected — rotating key
+🔁 Rotated API key → Index 0
+Chatbot internal error: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py", line 169, in chatbot
+    logger.info(f"Chatbot response generated for '{user_message}': {response_text[:100]}...")
+                                                                    ~~~~~~~~~~~~~^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Internal Server Error: /community/chatbot/
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: challenges! (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'challenges!': We have two active challenges: "7days active challenge" which offers a discount for ordering through...
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: recipes, (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'recipes,': We have these recent recipes: Rice with Egg (MEDIUM, 35 servings), African samp (MEDIUM, 10 servings...
+User not authenticated, returning zero notification counts
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/336/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Internal Server Error: /payments/reorder/336/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Not Found: /payments/reorder
+Not Found: /payments/
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/334/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/336/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /payments/reorder/333/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py", line 461, in reorder
+    product = model.objects.get(name=item['name'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 636, in get
+    raise self.model.MultipleObjectsReturned(
+auths.models.Food.MultipleObjectsReturned: get() returned more than one Food -- it returned 2!
+/home/surecode/Documents/Django/GitHub/eatnearby/payments/views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py", line 108, in cart_view
+    return render(request, 'cart/cart.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 1531, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 1127, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'filter_attr'
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/cart/views.py", line 108, in cart_view
+    return render(request, 'cart/cart.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 1531, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 1127, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'filter_attr'
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 584 with status pending
+Assigned delivery 584 to staff 7
+Created PaymentHistory 337 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 105
+Availability notifications for user 7: 0
+Total notifications for user 7: 106
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 105
+Availability notifications for user 7: 0
+Total notifications for user 7: 106
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 105
+Availability notifications for user 7: 0
+Total notifications for user 7: 106
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 105
+Availability notifications for user 7: 0
+Total notifications for user 7: 106
+DeliveryInfo 584 status changed from pending to in_progress
+Delivery 584 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Wed, 26 Nov 2025 16:42:41 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ46bd1107fd9e0a23557adc396de9ab20', 'Twilio-Request-Duration': '0.021', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 66e541e2e0ebad8589f58c47fa05e1fc.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '9sDNAfQjHDecGudzRBkkG5r3fAYsGgoVKh38Ahu7IIMcU8ltlVgnqA==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 105
+Availability notifications for user 7: 0
+Total notifications for user 7: 105
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 584 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Wed, 26 Nov 2025 16:44:23 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ86b3293fc613365dac747c65615eca09', 'Twilio-Request-Duration': '0.011', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 038b8581beae8686112f69a45f987e7a.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'OEpXxnYu_ixXLD9Lc__zkLkoDuNjtnQguZF04XWgX9QVbQQVvYkr0A==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 584 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Simulated Airtel payment initiated for +260973546375, Amount: 180.0 ZMW, Transaction ID: 6ee1fa36-c993-4a36-a22f-5dc3d79a311d
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 585 with status pending
+Assigned delivery 585 to staff 7
+Airtel payment for +260973546375, Amount: 180.00 ZMW, Delivery 585
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 107
+Availability notifications for user 7: 0
+Total notifications for user 7: 108
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 107
+Availability notifications for user 7: 0
+Total notifications for user 7: 108
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 107
+Availability notifications for user 7: 0
+Total notifications for user 7: 108
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 107
+Availability notifications for user 7: 0
+Total notifications for user 7: 108
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 107
+Availability notifications for user 7: 0
+Total notifications for user 7: 108
+DeliveryInfo 585 status changed from pending to in_progress
+Delivery 585 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Wed, 26 Nov 2025 16:50:28 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQbe589dfed4aa3d1272f2e8f64d7e12af', 'Twilio-Request-Duration': '0.020', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 b44eb5ebbd602f74d4314ff5d01125e2.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'WruqI30qpI0qwocTA17G5COYlgwSACQBFK99JhEgNjbtGD0ko-k24Q==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 107
+Availability notifications for user 7: 0
+Total notifications for user 7: 107
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 585 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Wed, 26 Nov 2025 17:02:55 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ0d55138b52da1853add6be4bc0019c1f', 'Twilio-Request-Duration': '0.014', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 4ec88a002f40a457d78312a00a1f28d0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': '0f-i6LZJsHnaAcxZXjvVBSJuZ9IrTumViMij3AsF9OOcxoFsHnLt4w==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 585 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /favicon.ico
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+/home/surecode/Documents/Django/GitHub/eatnearby/sim/views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+/home/surecode/Documents/Django/GitHub/eatnearby/sim/views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+/home/surecode/Documents/Django/GitHub/eatnearby/staffs/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/auths/views/auth_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/auths/views/auth_views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+User not authenticated, returning zero notification counts
+Watching for file changes with StatReloader
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hi there! How can I help you today?
+...
+🤖 Chatbot incoming message: what are the chalenges  in the  system (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'what are the chalenges  in the  system': We have two active challenges: "7days active challenge" which offers a discount for ordering through...
+🤖 Chatbot incoming message: how to join (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'how to join': To join the "7days active challenge", simply order through the system for 7 days. For the "top custo...
+🤖 Chatbot incoming message: okay  thank you (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'okay  thank you': You're welcome! Is there anything else I can help you with?
+...
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hello! How can I help you today?
+...
+🤖 Chatbot incoming message: i need contact information on this system (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'i need contact information on this system': I am sorry, I do not have access to contact information.
+...
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/restaurants.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 404 models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+Retrying... (attempt 2)
+Gemini API error (attempt 2): 404 models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+Retrying... (attempt 3)
+Gemini API error (attempt 3): 404 models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+Chatbot response generated for 'hello': Error: 404 models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for g...
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: 4=4 (User: Mr. Lingson Tonga (Customer))
+Gemini API error (attempt 1): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+Retrying... (attempt 2)
+Gemini API error (attempt 2): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+Retrying... (attempt 3)
+Gemini API error (attempt 3): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+Chatbot response generated for '4=4': Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for gene...
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hello!
+...
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hello! How can I help you find something delicious today?
+...
+🤖 Chatbot incoming message: yes (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'yes': Yes, how can I help you find something delicious today?
+...
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hello! 👋 How can I help you with EatNearBY today?...
+🤖 Chatbot incoming message: 4=4? (User: Mr. Lingson Tonga (Customer))
+Gemini attempt 1 failed: module 'google.generativeai' has no attribute 'http_utils'
+🤖 Response generated in 0.53s
+Chatbot response generated for '4=4?': I'm having trouble responding right now. Please try again....
+🤖 Chatbot incoming message: 3-3 (User: Mr. Lingson Tonga (Customer))
+Gemini attempt 1 failed: module 'google.generativeai' has no attribute 'http_utils'
+🤖 Response generated in 0.50s
+Chatbot response generated for '3-3': I'm having trouble responding right now. Please try again....
+🤖 Chatbot incoming message: he (User: Mr. Lingson Tonga (Customer))
+Gemini attempt 1 failed: module 'google.generativeai' has no attribute 'http_utils'
+🤖 Response generated in 0.50s
+Chatbot response generated for 'he': I'm having trouble responding right now. Please try again....
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hello! 👋 How can I help you with EatNearBY today?...
+🤖 Chatbot incoming message: what access so you have  in this system ?? (User: Mr. Lingson Tonga (Customer))
+Gemini attempt 1 failed: module 'google.generativeai' has no attribute 'http_utils'
+🤖 Response generated in 0.50s
+Chatbot response generated for 'what access so you have  in this system ??': I'm having trouble responding right now. Please try again....
+/home/surecode/Documents/Django/GitHub/eatnearby/community/views/gemini_client.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+🤖 Chatbot incoming message: hello (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'hello': Hello! How can I help you find something delicious today?
+...
+🤖 Chatbot incoming message: 4-4 (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for '4-4': I'm sorry, I don't understand. Can you please clarify what you're looking for?
+...
+🤖 Chatbot incoming message: recipes in this syse (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'recipes in this syse': Here are some recent recipes: Rice with Egg, African samp, and Vitumbuwa (Zambian Sweet Rice Fritter...
+🤖 Chatbot incoming message: can you list them well (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'can you list them well': Okay, here's that list of recipes again, presented more clearly:
+
+*   **Rice with Egg** (Medium Diff...
+🤖 Chatbot incoming message: good and what other things  can you help me with ? (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'good and what other things  can you help me with ?': I can help you find recipes, search for restaurants, and discover new food experiences. Just let me ...
+🤖 Chatbot incoming message: discover new food experiences (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'discover new food experiences': Okay! To help you discover new food experiences, could you tell me what you're in the mood for? For ...
+🤖 Chatbot incoming message: in this system ? (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'in this system ?': Within this system, I can help you discover new food experiences by suggesting recipes based on cuis...
+🤖 Chatbot incoming message: yes (User: Mr. Lingson Tonga (Customer))
+Chatbot response generated for 'yes': Okay! To clarify, are you interested in exploring recipes, or would you like me to check if restaura...
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/core/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0

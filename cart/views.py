@@ -32,6 +32,16 @@ def add_to_cart(request):
             messages.error(request, 'Product not found')
             return redirect('auths:orders')
 
+        # ✅ Check if requested quantity exceeds available stock
+        if quantity > product.quantity:
+            if is_ajax:
+                return JsonResponse({
+                    'success': False, 
+                    'error': f'Only {product.quantity} items available in stock'
+                })
+            messages.error(request, f'Only {product.quantity} items available in stock')
+            return redirect('auths:orders')
+
         model_name = product.__class__.__name__.lower()
         field_name = 'fast_food' if model_name == 'fastfood' else model_name
 
@@ -40,10 +50,29 @@ def add_to_cart(request):
         if not cart:
             cart = Cart.objects.create(user=request.user)
         
+        # ✅ Check existing cart quantity + new quantity doesn't exceed stock
+        existing_cart_item = CartItem.objects.filter(
+            cart=cart,
+            **{field_name: product}
+        ).first()
+        
+        total_quantity_after_add = quantity
+        if existing_cart_item:
+            total_quantity_after_add += existing_cart_item.quantity
+        
+        if total_quantity_after_add > product.quantity:
+            if is_ajax:
+                return JsonResponse({
+                    'success': False, 
+                    'error': f'Cannot add {quantity} more. Only {product.quantity - (existing_cart_item.quantity if existing_cart_item else 0)} available'
+                })
+            messages.error(request, f'Cannot add {quantity} more. Only {product.quantity - (existing_cart_item.quantity if existing_cart_item else 0)} available')
+            return redirect('auths:orders')
+
         cart_item, created = CartItem.objects.get_or_create(
             cart=cart,
             **{field_name: product},
-            defaults={'quantity': quantity, 'quality': 'standard'}  # Ensure quality is set
+            defaults={'quantity': quantity, 'quality': 'standard'}
         )
         
         if not created:
@@ -54,7 +83,8 @@ def add_to_cart(request):
             return JsonResponse({
                 'success': True,
                 'cart_count': cart.cartitem_set.count(),
-                'cart_total': float(cart.total())
+                'cart_total': float(cart.total()),
+                'message': 'Item added to your cart!'
             })
         
         messages.success(request, 'Item added to your cart!')
@@ -94,6 +124,19 @@ def update_cart(request):
 
         cart = get_object_or_404(Cart, user=request.user)
         cart_item = get_object_or_404(CartItem, id=item_id, cart=cart)
+
+        # ✅ Get the product and check stock
+        product = None
+        for field in ['fast_food', 'food', 'drink']:
+            product = getattr(cart_item, field, None)
+            if product:
+                break
+        
+        if product and quantity > product.quantity:
+            return JsonResponse({
+                'success': False, 
+                'error': f'Only {product.quantity} items available in stock'
+            })
 
         if quantity <= 0:
             cart_item.delete()

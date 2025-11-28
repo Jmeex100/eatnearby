@@ -8,28 +8,44 @@ from ..forms import CustomUserCreationForm
 import secrets
 import string
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+
+def redirect_user_by_role(user):
+    if user.user_type == 'admin':
+        return redirect('superadmin:dashboard')
+    elif user.user_type == 'staff':
+        return redirect('staffs:dashboard')
+    elif user.user_type == 'customer':
+        return redirect('index')
+    return redirect('index')
+
+
 # ✅ Login View
 def login_page(request):
-    """
-    Handle user login using Django's AuthenticationForm.
-    """
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
+
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+
             if user:
                 login(request, user)
                 messages.success(request, f"Welcome back, {user.username}!")
-                return redirect('index')
+                return redirect_user_by_role(user)
             else:
-                messages.error(request, 'Invalid username or password')
+                messages.error(request, "Invalid username or password")
+
         else:
-            messages.error(request, 'Invalid form submission. Please check your inputs.')
+            messages.error(request, "Invalid form submission")
+
     else:
         form = AuthenticationForm()
-    
+
     return render(request, 'auths/login_page.html', {'form': form})
 
 

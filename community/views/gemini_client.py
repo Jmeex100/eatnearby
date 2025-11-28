@@ -162,7 +162,7 @@ def query_gemini(prompt):
         api_key = get_current_api_key()
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-2.0-flash-exp")
+            model = genai.GenerativeModel("models/gemini-2.0-flash")
 
             safety_settings = [
                 {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},

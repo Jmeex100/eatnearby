@@ -12,7 +12,7 @@ from . import notification_views
 from . import reports_views
 
 app_name = 'superadmin'
-
+# superadmin/urls.py
 urlpatterns = [
     # General Views
     path('', views.dashboard, name='dashboard'),
