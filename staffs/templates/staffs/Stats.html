@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 md:p-6 mb-8 hidden md:block">
     <a href="{% url 'staffs:my_deliveries' %}" class="no-underline">
         <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition duration-200">My Deliveries</h1>
@@ -23,4 +23,4 @@
             <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-100">{{ my_deliveries.on_time_rate }}%</p>
         </div>
     </div>
-</div>
+</div> {% endcomment %}

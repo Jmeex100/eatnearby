@@ -36,10 +36,44 @@
             border-radius: 9999px;
             margin-left: 0.5rem;
         }
+
+        /* Low Stock Toast Styles */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .animate-slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        .low-stock-item {
+            background-color: rgba(254, 252, 232, 0.3) !important;
+        }
+        .dark .low-stock-item {
+            background-color: rgba(120, 53, 15, 0.2) !important;
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans tracking-tight overflow-x-hidden">
     {% include 'superadmin/superadmin_header.html' %}
+    
+    <!-- Low Stock Alert Toast -->
+    <div id="lowStockToast" class="hidden fixed top-20 right-4 z-50 max-w-sm w-full">
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg shadow-lg animate-slide-in dark:bg-yellow-900 dark:border-yellow-400 dark:text-yellow-200 cursor-pointer">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-yellow-500 dark:text-yellow-400"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium" id="lowStockMessage"></p>
+                    <p class="text-xs text-yellow-600 dark:text-yellow-300 mt-1">Click to view low stock items</p>
+                </div>
+                <button onclick="hideLowStockToast()" class="ml-auto text-yellow-500 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <main class="mt-16 min-h-screen pb-16 md:pb-0">
         <div class="max-w-7xl mx-auto px-0 md:px-4 py-0 md:py-6 flex flex-col md:flex-row gap-6">
             <aside class="desktop-sidebar w-full md:w-64">
@@ -227,8 +261,102 @@
             });
         }
 
-        // Automatically open dropdown if an item within it is active
-        document.addEventListener('DOMContentLoaded', () => {
+        // Low Stock Notification Functions
+        function checkLowStockProducts() {
+            const lowStockRows = document.querySelectorAll('.low-stock-item');
+            const lowStockCount = lowStockRows.length;
+            
+            if (lowStockCount > 0) {
+                showLowStockAlert(lowStockCount);
+            }
+        }
+
+        function showLowStockAlert(count) {
+            const toast = document.getElementById('lowStockToast');
+            const message = document.getElementById('lowStockMessage');
+            
+            message.textContent = `Warning: ${count} product${count > 1 ? 's' : ''} have low stock!`;
+            toast.classList.remove('hidden');
+            
+            // Make the toast clickable to filter low stock items
+            toast.onclick = function() {
+                filterLowStockItems();
+                hideLowStockToast();
+            };
+            
+            // Auto hide after 10 seconds
+            setTimeout(hideLowStockToast, 10000);
+        }
+
+        function hideLowStockToast() {
+            const toast = document.getElementById('lowStockToast');
+            toast.classList.add('hidden');
+        }
+
+        // Filter functionality
+        function filterLowStockItems() {
+            const rows = document.querySelectorAll('.low-stock-row');
+            let hasLowStock = false;
+            let showAll = false;
+            
+            // Check if we're already filtering
+            const firstRow = rows[0];
+            if (firstRow && firstRow.style.display === 'none') {
+                showAll = true;
+            }
+            
+            rows.forEach(row => {
+                const isLowStock = row.classList.contains('low-stock-item');
+                
+                if (showAll) {
+                    // Show all rows
+                    row.style.display = '';
+                } else {
+                    // Show only low stock rows
+                    if (isLowStock) {
+                        row.style.display = '';
+                        hasLowStock = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update filter button text if it exists
+            const filterButton = document.getElementById('lowStockFilter');
+            if (filterButton) {
+                if (showAll) {
+                    filterButton.innerHTML = '<i class="fas fa-filter mr-2"></i>Show Low Stock';
+                    filterButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    filterButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+                } else {
+                    filterButton.innerHTML = '<i class="fas fa-eye mr-2"></i>Show All';
+                    filterButton.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                    filterButton.classList.add('bg-green-600', 'hover:bg-green-700');
+                    
+                    if (!hasLowStock) {
+                        alert('No low stock products found!');
+                        // Show all rows again
+                        rows.forEach(row => row.style.display = '');
+                        filterButton.innerHTML = '<i class="fas fa-filter mr-2"></i>Show Low Stock';
+                        filterButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+                        filterButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+                    }
+                }
+            }
+        }
+
+        // Add event listener for filter button if it exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButton = document.getElementById('lowStockFilter');
+            if (filterButton) {
+                filterButton.addEventListener('click', filterLowStockItems);
+            }
+            
+            // Check for low stock on page load
+            setTimeout(checkLowStockProducts, 1000);
+
+            // Automatically open dropdown if an item within it is active
             const activeLink = document.querySelector('.nav-link.active');
             if (activeLink && activeLink.closest('.dropdown-menu')) {
                 const dropdownMenu = activeLink.closest('.dropdown-menu');
@@ -249,6 +377,14 @@
                 }, 1000);
                 const now = new Date();
                 currentTime.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+            }
+        });
+
+        // Also check when navigating between pages (for pagination)
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('a') && e.target.closest('a').href.includes('page=')) {
+                // Wait for page to load then check low stock
+                setTimeout(checkLowStockProducts, 500);
             }
         });
     </script>

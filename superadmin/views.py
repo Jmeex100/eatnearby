@@ -212,4 +212,69 @@ def system_settings(request):
         messages.success(request, "Settings updated successfully.")
         return redirect('superadmin:system_settings')
     return render(request, 'superadmin/settings/system_settings.html')
+import os
+from django.http import FileResponse, Http404
+from django.conf import settings
+from django.utils.timezone import now
+from .decorators import superadmin_required
+
+@superadmin_required
+def download_backup(request):
+    """
+    Allows the SuperAdmin to download a backup of the SQLite database.
+    """
+    db_path = settings.DATABASES['default']['NAME']
+
+    if not os.path.exists(db_path):
+        raise Http404("Database file not found.")
+
+    # Create backup filename with timestamp
+    timestamp = now().strftime("%Y-%m-%d_%H-%M-%S")
+    backup_name = f"backup_{timestamp}.sqlite3"
+
+    response = FileResponse(
+        open(db_path, 'rb'),
+        as_attachment=True,
+        filename=backup_name
+    )
+    return response
+import os
+import shutil
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import redirect
+from .decorators import superadmin_required
+
+@superadmin_required
+def import_backup(request):
+    if request.method == "POST" and request.FILES.get("backup_file"):
+        uploaded_file = request.FILES["backup_file"]
+
+        # Validate file extension
+        if not uploaded_file.name.endswith(".sqlite3"):
+            messages.error(request, "Invalid file format. Only .sqlite3 backups are allowed.")
+            return redirect("superadmin:system_settings")
+
+        db_path = settings.DATABASES['default']['NAME']
+
+        # Save uploaded file temporarily
+        temp_path = os.path.join(settings.BASE_DIR, "temp_backup.sqlite3")
+        with open(temp_path, "wb+") as temp:
+            for chunk in uploaded_file.chunks():
+                temp.write(chunk)
+
+        # Replace the database
+        try:
+            shutil.copy(temp_path, db_path)
+            messages.success(request, "System restored successfully from backup!")
+        except Exception as e:
+            messages.error(request, f"Failed to restore backup: {e}")
+        finally:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+
+        return redirect("superadmin:system_settings")
+
+    messages.error(request, "No file uploaded.")
+    return redirect("superadmin:system_settings")
 

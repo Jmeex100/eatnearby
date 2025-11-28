@@ -99190,3 +99190,1548 @@ Pending deliveries for user 1: 0
 History notifications for user 1: 0
 Availability notifications for user 1: 0
 Total notifications for user 1: 0
+Watching for file changes with StatReloader
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 586 with status pending
+Assigned delivery 586 to staff 7
+Created PaymentHistory 339 for cash order
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Internal Server Error: /superadmin/reports/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/reports_views.py", line 615, in reports
+    return render(request, 'superadmin/permission_denied.html', status=403)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: superadmin/permission_denied.html
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Not Found: /favicon.ico
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 110
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 110
+DeliveryInfo 586 status changed from pending to in_progress
+Delivery 586 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 28 Nov 2025 08:55:09 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ9099402e104c0edb34edf5eab1e76e11', 'Twilio-Request-Duration': '0.016', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 2dabd9d679490761d87acf52c604a99c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'Kvb8PN5VT8tlTakPD_h42YxHzeZ_WqkX-b8HpJoJxjGREuhAaBr5Eg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 109
+Availability notifications for user 7: 0
+Total notifications for user 7: 109
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 586 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 28 Nov 2025 08:56:49 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ5cd71126f81d85429b51f04b4b5b7559', 'Twilio-Request-Duration': '0.011', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 b6c20c2652eb66bf5f2b77f797891932.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'DhCjutwwggg_WwGHT0C6HC70UyeaNrjoLSJbGbyrSucrFSJLvUXPgQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 586 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Simulated Airtel payment initiated for 260973546375, Amount: 210.0 ZMW, Transaction ID: 6a0ac8fa-d9ec-4eaf-bd1c-dcf076200058
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 587 with status pending
+Assigned delivery 587 to staff 7
+Airtel payment for 260973546375, Amount: 210.00 ZMW, Delivery 587
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 111
+Availability notifications for user 7: 0
+Total notifications for user 7: 112
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+ MTN payment for 260973546375, Total: 217.0 ZMW, Transaction ID: MTN-PENDING-40
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status pending
+Created DeliveryInfo 588 with status pending
+Assigned delivery 588 to staff 7
+Mtn payment for 260973546375, Amount: 217.0 ZMW, Delivery 588
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 2
+History notifications for user 7: 111
+Availability notifications for user 7: 0
+Total notifications for user 7: 113
+DeliveryInfo 587 status changed from pending to in_progress
+Delivery 587 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 28 Nov 2025 08:59:20 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ9165eba24922e688d15507095dc6b0a9', 'Twilio-Request-Duration': '0.019', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 6e91a4dbb2a5af5c14e92162f8d0f414.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'xyqyHB4EuDsilsulCvGXBt0Mu6e6vEpgwA0_PgWxby0a-rNai8nXqQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 1
+History notifications for user 7: 111
+Availability notifications for user 7: 0
+Total notifications for user 7: 112
+DeliveryInfo 588 status changed from pending to in_progress
+Delivery 588 accepted by user 7
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 28 Nov 2025 08:59:22 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ6f5d6768fcb3a1d0af70b9e8bb052499', 'Twilio-Request-Duration': '0.012', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0d396afe4e84f9897988c687ae23e40c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'Fb1TZ9JtpdbP4P4pLArL_6w50jJWUf6v_7g5RoZbzR_xBdvjUz3Q5w==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 111
+Availability notifications for user 7: 0
+Total notifications for user 7: 111
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 588 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 28 Nov 2025 08:59:31 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ7f75c4302fd6080ca5603f322061f8a7', 'Twilio-Request-Duration': '0.010', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 89fef83988c94b39f58d14fb4db012e6.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'NNtluonCq0YGUbq-xZLZkOznhvGi8sQrCMntSMvHHq70DZMiTNKgxg==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 588 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 113
+Availability notifications for user 7: 0
+Total notifications for user 7: 113
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 113
+Availability notifications for user 7: 0
+Total notifications for user 7: 113
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+DeliveryInfo 587 status changed from in_progress to completed
+-- BEGIN Twilio API Request --
+POST Request: https://api.twilio.com/2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json
+Headers:
+Content-Type : application/x-www-form-urlencoded
+Accept : application/json
+User-Agent : twilio-python/9.6.1 (Linux x86_64) Python/3.11.2
+X-Twilio-Client : python-9.6.1
+Accept-Charset : utf-8
+-- END Twilio API Request --
+Starting new HTTPS connection (1): api.twilio.com:443
+https://api.twilio.com:443 "POST /2010-04-01/Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json HTTP/1.1" 401 107
+Response Status Code: 401
+Response Headers: {'Content-Type': 'application/json', 'Content-Length': '107', 'Connection': 'keep-alive', 'Date': 'Fri, 28 Nov 2025 09:00:23 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQaddfb2c6d267f2041a0f7b24efe23cac', 'Twilio-Request-Duration': '0.018', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0d396afe4e84f9897988c687ae23e40c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'JNB51-P2', 'X-Amz-Cf-Id': 'dNMqWS6ykRfgIY1NJrfSaUYvoWk7h5cbxsOP-dP_lqxoOPXbO-REDw==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+Twilio SMS failed: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC82fd9f51a19dc28febd379fe64fe4e57/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authenticate[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+Delivery 587 confirmed by user Lingson
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Notifications for user 7: [1503, 1502, 1501, 1500, 1499, 1498, 1497, 1496, 1495, 1494]
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Notifications for user 7: [1503, 1502, 1501, 1500, 1499, 1498, 1497, 1496, 1495, 1494]
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+Dashboard notifications for user 8: 0
+Pending deliveries for user 8: 0
+History notifications for user 8: 0
+Availability notifications for user 8: 0
+Total notifications for user 8: 0
+User not authenticated, returning zero notification counts
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/products/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 1016, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 1016, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/engine.py", line 163, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: superadmin/superadmin_base.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/products_views.py", line 30, in product_list
+    return render(request, 'superadmin/products/product_list.html', {'page_obj': page_obj})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 109, in render
+    reraise(exc, self.backend)
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 130, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: superadmin/superadmin_base.html
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/categories/6/update/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/category_views.py", line 33, in category_update
+    return redirect('category_list')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_list' not found. 'category_list' is not a valid view function or pattern name.
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/categories/10/update/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/category_views.py", line 33, in category_update
+    return redirect('category_list')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_list' not found. 'category_list' is not a valid view function or pattern name.
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Internal Server Error: /superadmin/categories/4/update/
+Traceback (most recent call last):
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/decorators.py", line 9, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/category_views.py", line 33, in category_update
+    return redirect('category_list')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/surecode/Documents/Django/GitHub/eatnearby/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'category_list' not found. 'category_list' is not a valid view function or pattern name.
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/category_views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/surecode/Documents/Django/GitHub/eatnearby/superadmin/views.py changed, reloading.
+Watching for file changes with StatReloader
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+New DeliveryInfo created with status completed
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Notifications for user 7: [1503, 1502, 1501, 1500, 1499, 1498, 1497, 1496, 1495, 1494]
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Not Found: /media/auths/images/empty.png
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 1: 0
+Pending deliveries for user 1: 0
+History notifications for user 1: 0
+Availability notifications for user 1: 0
+Total notifications for user 1: 0
+Dashboard notifications for user 7: 0
+Pending deliveries for user 7: 0
+History notifications for user 7: 115
+Availability notifications for user 7: 0
+Total notifications for user 7: 115

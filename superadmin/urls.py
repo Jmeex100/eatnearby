@@ -16,6 +16,8 @@ app_name = 'superadmin'
 urlpatterns = [
     # General Views
     path('', views.dashboard, name='dashboard'),
+    path('backup/download/', views.download_backup, name='download_backup'),
+    path('backup/import/', views.import_backup, name='import_backup'),
     path('settings/', views.system_settings, name='system_settings'),
 
     # User Management

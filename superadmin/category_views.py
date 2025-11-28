@@ -30,7 +30,7 @@ def category_update(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Category updated successfully!')
-            return redirect('category_list')
+            return redirect('superadmin:category_list')
     else:
         form = CategoryForm(instance=category)
     return render(request, 'superadmin/categories/category_form.html', {'form': form})
