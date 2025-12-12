@@ -34,7 +34,7 @@ class Product(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.name} (${self.price})"
+        return f"{self.name} (K{self.price})"
 
 
 # ✅ FastFood Model (inherits from Product)

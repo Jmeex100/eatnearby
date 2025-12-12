@@ -1,102 +1,61 @@
 [
   {
     "type": "user",
-    "content": "hello",
-    "time": "2025-11-27T16:59:57.710111"
+    "content": "all food",
+    "time": "2025-12-12T22:09:10.931308",
+    "user_type": "customer"
   },
   {
     "type": "assistant",
-    "content": "Hello! How can I help you find something delicious today?\n",
-    "time": "2025-11-27T16:59:57.710173"
+    "content": "Here are all the food items available according to the database:\n\n1. Beans - K7.00 (traditional)\n2. Beans - K45.00 (traditional)\n3. Chicken Drumsticks - K30.00 (Meats & Proteins)\n4. Goat Meat (Peppered Goat Meat) - K40.00 (Meats & Proteins)\n5. Smoked Whole Chicken - K150.00 (Meats & Proteins)\n6. Vinkubala (both types available) - K35.00 (traditional)\n7. Beef - K45.00 (Meats & Proteins)\n8. Chikanda (Nshima is a thick porridge made from maize meal) - K45.00 (traditional)\n9. Cow Liver and Nshima (Traditional Zambian Mundambi recipe) - K70.00 (Meats & Proteins)\n10. Fish (Nshima with Fish and Veggies) - K50.00 (Meats & Proteins)\n\nThe lowest priced item is Beans at K7.00, and the highest priced item is Smoked Whole Chicken at K150.00.",
+    "time": "2025-12-12T22:09:10.931368"
   },
   {
     "type": "user",
-    "content": "yes",
-    "time": "2025-11-27T17:00:08.362219"
+    "content": "k100 what can i buy in the system",
+    "time": "2025-12-12T22:10:16.674737",
+    "user_type": "customer"
   },
   {
     "type": "assistant",
-    "content": "Yes, how can I help you find something delicious today?\n",
-    "time": "2025-11-27T17:00:08.362283"
+    "content": "With K100, you have some tasty options! \ud83d\ude0a\n\nYou could get:\n- Cow liver and nshima for K70, and still have K30 left over.\n- Or grab some fish for K50 and beef for K45, totaling K95, leaving you with K5 change.\n- You can also choose chikanda or beans for K45 each and still have K55 to spend.\n\nIf you want to mix things up, though the exact drumsticks price isn't listed here, there's a combo suggestion of Beans + Chicken Drumsticks for K37, which is super affordable!\n\nWant me to help you pick a combo or specific meal? \ud83c\udf7d\ufe0f",
+    "time": "2025-12-12T22:10:16.674774",
+    "query_type": "budget_100"
   },
   {
     "type": "user",
-    "content": "hello",
-    "time": "2025-11-27T17:10:21.593825"
+    "content": "okay nay drinks",
+    "time": "2025-12-12T22:10:39.065885",
+    "user_type": "customer"
   },
   {
     "type": "assistant",
-    "content": "Hello! How can I help you find something delicious today?\n",
-    "time": "2025-11-27T17:10:21.593835"
+    "content": "Hey! \ud83d\ude0a I see you're interested in drinks. While I don\u2019t have specific drink options listed right now, a great way to enjoy your meal is with some refreshing beverages you can find nearby like chilled soft drinks, fresh juices, or maybe some local drinks like Maheu.\n\nIf you\u2019re ordering food through EatNearBY, many restaurants nearby usually have popular drinks on their menu too. Would you like me to help you find some meal and drink combos that fit your taste and budget? \ud83c\udf79\ud83c\udf54",
+    "time": "2025-12-12T22:10:39.065930",
+    "query_type": "general"
   },
   {
     "type": "user",
-    "content": "4-4",
-    "time": "2025-11-27T17:10:38.220837"
+    "content": "best food in the system",
+    "time": "2025-12-12T22:11:04.231033",
+    "user_type": "customer"
   },
   {
     "type": "assistant",
-    "content": "I'm sorry, I don't understand. Can you please clarify what you're looking for?\n",
-    "time": "2025-11-27T17:10:38.220881"
+    "content": "Hey there! \ud83c\udf1f Looking for the best food in the system? You can't go wrong with the **Smoked Whole Chicken** priced at K150.00 \u2013 it's super popular and a real treat! \ud83c\udf57\ud83d\udd25\n\nIf you want something tasty and value-packed, the **beef** at K45.00 or the traditional **Vinkubala** at K35.00 are fantastic choices too! \n\nCraving local flavors? Try the **chikanda** or **beans** for a truly Zambian experience. \ud83d\ude0a\n\nWant me to help you pick something based on your budget or preferences? Just let me know!",
+    "time": "2025-12-12T22:11:04.231079",
+    "query_type": "recommendations"
   },
   {
     "type": "user",
-    "content": "recipes in this syse",
-    "time": "2025-11-27T17:10:57.695740"
+    "content": "okay so  restaurants",
+    "time": "2025-12-12T22:11:25.941791",
+    "user_type": "customer"
   },
   {
     "type": "assistant",
-    "content": "Here are some recent recipes: Rice with Egg, African samp, and Vitumbuwa (Zambian Sweet Rice Fritters). All are rated as medium difficulty.\n",
-    "time": "2025-11-27T17:10:57.695790"
-  },
-  {
-    "type": "user",
-    "content": "can you list them well",
-    "time": "2025-11-27T17:11:23.684427"
-  },
-  {
-    "type": "assistant",
-    "content": "Okay, here's that list of recipes again, presented more clearly:\n\n*   **Rice with Egg** (Medium Difficulty)\n*   **African samp** (Medium Difficulty)\n*   **Vitumbuwa (Zambian Sweet Rice Fritters)** (Medium Difficulty)\n",
-    "time": "2025-11-27T17:11:23.684481"
-  },
-  {
-    "type": "user",
-    "content": "good and what other things  can you help me with ?",
-    "time": "2025-11-27T17:11:54.917976"
-  },
-  {
-    "type": "assistant",
-    "content": "I can help you find recipes, search for restaurants, and discover new food experiences. Just let me know what you're interested in!\n",
-    "time": "2025-11-27T17:11:54.918032"
-  },
-  {
-    "type": "user",
-    "content": "discover new food experiences",
-    "time": "2025-11-27T17:12:12.128928"
-  },
-  {
-    "type": "assistant",
-    "content": "Okay! To help you discover new food experiences, could you tell me what you're in the mood for? For example, are you interested in:\n\n*   **A specific type of cuisine?** (e.g., Italian, Mexican, Ethiopian)\n*   **A particular location?** (e.g., near me, a specific city)\n*   **A type of dining experience?** (e.g., fine dining, street food, family-friendly)\n*   **Something adventurous or unique?**\n\nThe more information you give me, the better I can tailor my suggestions!\n",
-    "time": "2025-11-27T17:12:12.128986"
-  },
-  {
-    "type": "user",
-    "content": "in this system ?",
-    "time": "2025-11-27T17:12:39.050400"
-  },
-  {
-    "type": "assistant",
-    "content": "Within this system, I can help you discover new food experiences by suggesting recipes based on cuisine, difficulty, or ingredients. I can also help you find restaurants if that functionality is available. Since I don't have location information from you, I can't tailor experiences to a specific area right now. Are you interested in exploring recipes or would you like me to check if restaurant search is available?\n",
-    "time": "2025-11-27T17:12:39.050447"
-  },
-  {
-    "type": "user",
-    "content": "yes",
-    "time": "2025-11-27T17:12:49.492614"
-  },
-  {
-    "type": "assistant",
-    "content": "Okay! To clarify, are you interested in exploring recipes, or would you like me to check if restaurant search is available? Please say \"recipes\" or \"restaurants\" so I know which you prefer.\n",
-    "time": "2025-11-27T17:12:49.492658"
+    "content": "Hey there! \ud83d\ude0a It looks like you\u2019re interested in restaurants near Evelyn Hone College. While I don't have exact restaurant names in the database right now, EatNearBY is your go-to place to discover tasty meals from local spots around you! \n\nIf you want, I can help you find dishes or suggest popular food options available near you. What kind of food are you craving today? \ud83c\udf54\ud83c\udf72\ud83c\udf55 Let me know, and I'll make some delicious suggestions!",
+    "time": "2025-12-12T22:11:25.941857",
+    "query_type": "general"
   }
 ]

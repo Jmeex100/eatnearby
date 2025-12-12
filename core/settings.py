@@ -222,5 +222,18 @@ GEMINI_KEYS = [
    
     # "AIzaSyAW0hNz5fVDORqfL21BLw8PSwDdqUesLP8",
     # "AIzaSyDsDJnTy7ZWGaCtLd84mt6b4mDu4tfNr34",
-     "AIzaSyCKqIBWGpTGX4yY5JU6JSKwwjYj05au6SQ",
+     "AIzaSyAIbUc8kmBVbyXTOtXDug6qxwktXl5P5ww",
+]
+
+
+GEMINI_KEYS = [
+   
+    # "AIzaSyAW0hNz5fVDORqfL21BLw8PSwDdqUesLP8",
+    # "AIzaSyDsDJnTy7ZWGaCtLd84mt6b4mDu4tfNr34",
+     "AIzaSyC3z1QK44KpUe4S3bPFzicty8sK5LWxGvk",
+]
+
+OPENROUTER_KEYS = [
+    "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",
+    "your-openrouter-api-key-2",  # Optional: multiple keys for rotation
 ]

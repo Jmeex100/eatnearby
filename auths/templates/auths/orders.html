@@ -147,45 +147,42 @@
         </section>
         {% endif %}
 
-
-        {% comment %} Drinks Section {% endcomment %}
-        {% if drinks %}
-        <section class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {% for item in drinks %}
-                {% if item.quantity > 0 %}
-                <div class="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden z-[1] hover:scale-105 transition-transform duration-300">
-                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition duration-300">
-                     
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">{{ item.name }}</h2>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ item.description }}</p>
-                        <p class="text-red-600 dark:text-red-400 font-semibold">Price: K{{ item.price }}</p>
-                        {% if request.user.is_authenticated and request.user.user_type in "customer,staff,admin" %}
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">In stock: {{ item.quantity }}</p>
-                        {% endif %}
-                        <div class="text-center mt-4">
-                            <a href="{% url 'order' item.product_id 'drink' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
-                        </div>
+{% comment %} Drinks Section {% endcomment %}
+{% if drinks %}
+<section class="mt-12" aria-labelledby="drinks-heading">
+    <h2 id="drinks-heading" class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Drinks</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6" role="list">
+        {% for item in drinks %}
+            {% if item.quantity > 0 %}
+            <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300" role="listitem">
+                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                <div class="p-5">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-1">{{ item.name }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2 text-sm">{{ item.description }}</p>
+                    <p class="text-red-600 dark:text-red-400 font-semibold mb-2">K{{ item.price }}</p>
+                    {% if request.user.is_authenticated and request.user.user_type in "customer,staff,admin" %}
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">In stock: {{ item.quantity }}</p>
+                    {% endif %}
+                    {% if request.user.is_authenticated and request.user.user_type == "customer" %}
+                    <div class="mt-3">
+                        <a href="{% url 'order' item.product_id 'drink' %}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition dark:hover:bg-red-400">Order Now</a>
                     </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-                {% endfor %}
             </div>
-        </section>
-        {% endif %}
-        <!-- Empty State -->
-        {% if not fast_foods and not foods and not drinks %}
-        <div class="mt-12 text-center">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">No items found</h2>
-            <p class="text-gray-600 dark:text-gray-400">Try adjusting your filters or search terms.</p>
-        </div>
-        {% endif %}
+            {% endif %}
+        {% endfor %}
     </div>
-</div>
+</section>
+{% endif %}
 
+<!-- Empty State -->
+{% if not fast_foods and not foods and not drinks %}
+<div class="mt-12 text-center">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">No items found</h2>
+    <p class="text-gray-600 dark:text-gray-400">Try adjusting your filters or search terms.</p>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block extra_js %}

@@ -28,6 +28,10 @@ sam
 # customers
 Lingson
 
+sb-gkoss48023113@business.example.com (Business)
+
+sb-xatzh47982322@personal.example.com (Personal)
+O1$p6_AS
 
 # kill port 8000
 lsof -i :8000
